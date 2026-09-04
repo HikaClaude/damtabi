@@ -15,7 +15,7 @@
  * CSS / JS / 画像 / アイコンのように古くても害のないものだけキャッシュ優先。
  */
 
-var VERSION = "v2";
+var VERSION = "v3";   // style.css / app.js を更新したら上げる（旧キャッシュを破棄させるため）
 var SHELL = "shell-" + VERSION;
 var PAGES = "pages-" + VERSION;
 var DATA = "data-" + VERSION;

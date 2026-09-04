@@ -110,6 +110,14 @@
     el.className = "dam-pin";
     el.title = dam.name;
     el.setAttribute("aria-label", dam.name);
+
+    // MapLibre はこの el の transform を毎フレーム書き換える。
+    // 見た目とアニメーションは内側の span に持たせ、el 側には一切
+    // transition を付けない（付けると地図の動きにピンが追従できなくなる）。
+    var body = document.createElement("span");
+    body.className = "dam-pin__body";
+    el.appendChild(body);
+
     paintPin(el, dam);
     el.addEventListener("click", function (ev) {
       ev.stopPropagation();
@@ -121,14 +129,15 @@
   function paintPin(el, dam) {
     var def = basisDef();
     var v = val(dam[def.field]);
+    var body = el.firstChild;
     el.style.setProperty("--pin", colorFor(dam));
     if (v === null) {
-      el.classList.add("is-nodata");
-      el.textContent = "—";
+      body.classList.add("is-nodata");
+      body.textContent = "—";
     } else {
-      el.classList.remove("is-nodata");
+      body.classList.remove("is-nodata");
       // 100 は "100"、それ以外は整数に丸めて表示（正確な値はパネルで出す）
-      el.textContent = String(Math.round(v));
+      body.textContent = String(Math.round(v));
     }
   }
 
@@ -444,6 +453,10 @@
       renderLegend();
 
       var map = buildMap();
+      // 地図を動かしている間は、指の下のピンが拡大して見えるのを防ぐ
+      map.on("movestart", function () { document.body.classList.add("is-moving"); });
+      map.on("moveend", function () { document.body.classList.remove("is-moving"); });
+
       map.on("error", function (ev) {
         // タイル取得失敗などは地図が白くなるだけで気づきにくいので記録する
         console.warn("[map]", (ev && ev.error && ev.error.message) || ev);

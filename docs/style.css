@@ -126,10 +126,27 @@ html, body {
 
 /* ---------------------------------------------------------- markers */
 
+/* 外側の要素は MapLibre が transform を毎フレーム書き換える。
+   ここに transition を付けると全ピンが地図から遅れて追従してしまう
+   （実測: 200px パンした瞬間に 179px 遅れ = 120ms かけて追いかける）。
+   そのため外側は「位置」だけを持ち、見た目とアニメーションは内側の
+   .dam-pin__body に分けている。内側は MapLibre が触らないので自由に動かせる。 */
 .dam-pin {
   --pin: var(--nodata);
   width: 38px;
   height: 38px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  will-change: transform;      /* 合成レイヤに載せて追従を軽くする */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dam-pin__body {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -141,39 +158,26 @@ html, body {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
-  cursor: pointer;
-  transition: transform .12s ease;
+  transition: transform .12s ease, box-shadow .12s ease;
 }
 
-.dam-pin:hover { transform: scale(1.12); }
-
-.dam-pin.is-nodata {
+.dam-pin__body.is-nodata {
   background: repeating-linear-gradient(
     -45deg, var(--nodata), var(--nodata) 4px, #b6c0cb 4px, #b6c0cb 8px);
   font-size: 16px;
 }
 
-.dam-pin.is-active {
+.dam-pin:hover .dam-pin__body { transform: scale(1.12); }
+.dam-pin:active .dam-pin__body { transform: scale(1.04); }
+
+.dam-pin.is-active .dam-pin__body {
   transform: scale(1.2);
   border-color: #ffd54a;
   box-shadow: 0 0 0 3px rgba(255, 213, 74, .55), 0 4px 12px rgba(0, 0, 0, .3);
 }
 
-/* オフラインでキャッシュを表示しているときの警告バー（sw.js が差し込む） */
-.stale-bar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 20;
-  margin: 0;
-  padding: 7px 14px;
-  background: #8a4b12;
-  color: #fff;
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.stale-bar ~ #app { top: 34px; }
+/* 地図を動かしている間はホバー拡大を止める（指が乗ったままの誤作動を防ぐ） */
+.is-moving .dam-pin:hover .dam-pin__body { transform: none; }
 
 /* ------------------------------------------------- 出典（常時表示） */
 
