@@ -38,8 +38,8 @@
 <p class="dam-sub">北陸その他水系 / 小川 / 県土木部</p>
 <div class="dam-illust" data-illust-slot="toyama-asahiogawa"><div class="placeholder">イラスト準備中<br>朝日小川ダム</div></div>
 <div class="rates">
-<div class="rate is-nodata"><span class="k">利水貯水率</span><span class="v">—</span><div class="why">欠測（観測所からデータが届いていない）</div></div>
-<div class="rate is-nodata"><span class="k">有効貯水率</span><span class="v">—</span><div class="why">欠測（観測所からデータが届いていない）</div></div>
+<div class="rate is-nodata"><div class="k"><span>利水貯水率</span><details class="help"><summary aria-label="利水貯水率とは"><span aria-hidden="true">?</span></summary><div class="help-body"><b>使える水がどれだけ残っているか</b>の割合です。ダムの容量のうち、水道・農業・工業などに使うために確保された分（利水容量）に対して、いま何%たまっているかを表します。渇水のときに注目される数字です。</div></details></div><span class="v">—</span><div class="why">欠測（観測所からデータが届いていない）</div></div>
+<div class="rate is-nodata"><div class="k"><span>有効貯水率</span><details class="help"><summary aria-label="有効貯水率とは"><span aria-hidden="true">?</span></summary><div class="help-body"><b>ダムの容量全体に対して、いまどれだけ水が入っているか</b>の割合です。利水容量に加えて、洪水にそなえて空けておく容量（洪水調節容量）も分母に含みます。洪水期は上側を意図的に空けて運用するため、低い値になるのが普通です。そのため利水貯水率が100%でも、有効貯水率は低いことがあります。</div></details></div><span class="v">—</span><div class="why">欠測（観測所からデータが届いていない）</div></div>
 </div>
 <p class="freshness" data-obs="2026-09-05T04:20:00+09:00" data-notice-days="7" data-warn-days="14" data-live="https://www.river.go.jp/kawabou/pcfull/tm?itmkndCd=7&amp;ofcCd=4102&amp;obsCd=1&amp;isCurrent=true&amp;fld=0"><strong>2026年9月5日 04:20</strong> 観測の値です<span class="gen">（このページの生成: 2026-09-05 04:34 JST）</span></p>
 <p class="nodata-note">このダムの貯水率は表示できません。理由：欠測（観測所からデータが届いていない）<br>値を推定して埋めることはしていません。</p>
@@ -69,6 +69,25 @@
 //      （JS が動かない環境でも、本文に観測日時とページ生成日時が書いてある）
 //   2) 通常の更新リズムを超えたときだけ、注意 → 警告と段階的に強める。
 //      毎回警告を出すと読み飛ばされるようになり、かえって危ない。
+// 用語ヘルプ: 1つ開いたら他は閉じる。外側をクリックしても閉じる。
+// （details なので JS が無くても開閉自体は動く）
+(function () {
+  var helps = document.querySelectorAll('details.help');
+  if (!helps.length) return;
+  helps.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      helps.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    helps.forEach(function (d) { if (d.open && !d.contains(ev.target)) d.open = false; });
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') helps.forEach(function (d) { d.open = false; });
+  });
+})();
+
 (function () {
   var el = document.querySelector('.freshness[data-obs]');
   if (!el) return;

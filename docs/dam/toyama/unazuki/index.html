@@ -38,8 +38,8 @@
 <p class="dam-sub">黒部川水系 / 黒部川 / 国交省</p>
 <div class="dam-illust" data-illust-slot="toyama-unazuki"><div class="placeholder">イラスト準備中<br>宇奈月ダム</div></div>
 <div class="rates">
-<div class="rate"><span class="k">利水貯水率</span><span class="v">89.7<span class="unit">%</span></span><div class="bar"><i style="width:89.7%;background:#0891b2"></i></div></div>
-<div class="rate"><span class="k">有効貯水率</span><span class="v">20.7<span class="unit">%</span></span><div class="bar"><i style="width:20.7%;background:#ea9a1a"></i></div></div>
+<div class="rate"><div class="k"><span>利水貯水率</span><details class="help"><summary aria-label="利水貯水率とは"><span aria-hidden="true">?</span></summary><div class="help-body"><b>使える水がどれだけ残っているか</b>の割合です。ダムの容量のうち、水道・農業・工業などに使うために確保された分（利水容量）に対して、いま何%たまっているかを表します。渇水のときに注目される数字です。</div></details></div><span class="v">89.7<span class="unit">%</span></span><div class="bar"><i style="width:89.7%;background:#0891b2"></i></div></div>
+<div class="rate"><div class="k"><span>有効貯水率</span><details class="help"><summary aria-label="有効貯水率とは"><span aria-hidden="true">?</span></summary><div class="help-body"><b>ダムの容量全体に対して、いまどれだけ水が入っているか</b>の割合です。利水容量に加えて、洪水にそなえて空けておく容量（洪水調節容量）も分母に含みます。洪水期は上側を意図的に空けて運用するため、低い値になるのが普通です。そのため利水貯水率が100%でも、有効貯水率は低いことがあります。</div></details></div><span class="v">20.7<span class="unit">%</span></span><div class="bar"><i style="width:20.7%;background:#ea9a1a"></i></div></div>
 </div>
 <p class="freshness" data-obs="2026-09-05T04:30:00+09:00" data-notice-days="7" data-warn-days="14" data-live="https://www.river.go.jp/kawabou/pcfull/tm?itmkndCd=7&amp;ofcCd=21556&amp;obsCd=6&amp;isCurrent=true&amp;fld=0"><strong>2026年9月5日 04:30</strong> 観測の値です<span class="gen">（このページの生成: 2026-09-05 04:34 JST）</span></p>
 <table class="facts">
@@ -69,6 +69,25 @@
 //      （JS が動かない環境でも、本文に観測日時とページ生成日時が書いてある）
 //   2) 通常の更新リズムを超えたときだけ、注意 → 警告と段階的に強める。
 //      毎回警告を出すと読み飛ばされるようになり、かえって危ない。
+// 用語ヘルプ: 1つ開いたら他は閉じる。外側をクリックしても閉じる。
+// （details なので JS が無くても開閉自体は動く）
+(function () {
+  var helps = document.querySelectorAll('details.help');
+  if (!helps.length) return;
+  helps.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      helps.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    helps.forEach(function (d) { if (d.open && !d.contains(ev.target)) d.open = false; });
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') helps.forEach(function (d) { d.open = false; });
+  });
+})();
+
 (function () {
   var el = document.querySelector('.freshness[data-obs]');
   if (!el) return;

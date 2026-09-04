@@ -72,6 +72,36 @@ CREDIT_GSI = (
 )
 
 
+# 用語のヘルプ。地図パネル（app.js）と同じ文言を使う。
+# 「利水」と「有効」の差はこのアプリの肝なので、用語だけで済ませない。
+HELP_TEXT = {
+    "irrigation": (
+        "<b>使える水がどれだけ残っているか</b>の割合です。"
+        "ダムの容量のうち、水道・農業・工業などに使うために確保された分（利水容量）に対して、"
+        "いま何%たまっているかを表します。渇水のときに注目される数字です。"
+    ),
+    "effective": (
+        "<b>ダムの容量全体に対して、いまどれだけ水が入っているか</b>の割合です。"
+        "利水容量に加えて、洪水にそなえて空けておく容量（洪水調節容量）も分母に含みます。"
+        "洪水期は上側を意図的に空けて運用するため、低い値になるのが普通です。"
+        "そのため利水貯水率が100%でも、有効貯水率は低いことがあります。"
+    ),
+}
+
+
+def help_toggle(key: str, label: str) -> str:
+    """ラベルの隣に置く「?」。JS なしでも開閉できるよう details/summary を使う。"""
+    body = HELP_TEXT.get(key)
+    if not body:
+        return ""
+    return (
+        '<details class="help">'
+        f'<summary aria-label="{e(label)}とは"><span aria-hidden="true">?</span></summary>'
+        f'<div class="help-body">{body}</div>'
+        "</details>"
+    )
+
+
 def e(s: Any) -> str:
     return html.escape("" if s is None else str(s), quote=True)
 
@@ -155,13 +185,15 @@ def credits_block() -> str:
     )
 
 
-def rate_card(label: str, item: dict | None, bins: list[dict]) -> str:
+def rate_card(label: str, item: dict | None, bins: list[dict], key: str = "") -> str:
+    # ラベルは details を内包するので span ではなく div
+    head = f'<div class="k"><span>{e(label)}</span>{help_toggle(key, label)}</div>'
     v = val(item)
     if v is None:
         return (
             '<div class="rate is-nodata">'
-            f'<span class="k">{e(label)}</span>'
-            '<span class="v">—</span>'
+            + head
+            + '<span class="v">—</span>'
             f'<div class="why">{e(reason(item))}</div>'
             "</div>"
         )
@@ -169,8 +201,8 @@ def rate_card(label: str, item: dict | None, bins: list[dict]) -> str:
     w = max(0.0, min(100.0, float(v)))
     return (
         '<div class="rate">'
-        f'<span class="k">{e(label)}</span>'
-        f'<span class="v">{fmt(v)}<span class="unit">%</span></span>'
+        + head
+        + f'<span class="v">{fmt(v)}<span class="unit">%</span></span>'
         f'<div class="bar"><i style="width:{w}%;background:{color}"></i></div>'
         "</div>"
     )
@@ -292,8 +324,10 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
         )
 
     body.append('<div class="rates">')
-    body.append(rate_card("利水貯水率", dam.get("rate_irrigation"), th["irrigation"]["bins"]))
-    body.append(rate_card("有効貯水率", dam.get("rate_effective"), th["effective"]["bins"]))
+    body.append(rate_card("利水貯水率", dam.get("rate_irrigation"),
+                          th["irrigation"]["bins"], "irrigation"))
+    body.append(rate_card("有効貯水率", dam.get("rate_effective"),
+                          th["effective"]["bins"], "effective"))
     body.append("</div>")
 
     # 貯水率は変わる値なので、「いつの値か」を数値のすぐ下に必ず出す。
@@ -389,6 +423,25 @@ FRESHNESS_JS = """
 //      （JS が動かない環境でも、本文に観測日時とページ生成日時が書いてある）
 //   2) 通常の更新リズムを超えたときだけ、注意 → 警告と段階的に強める。
 //      毎回警告を出すと読み飛ばされるようになり、かえって危ない。
+// 用語ヘルプ: 1つ開いたら他は閉じる。外側をクリックしても閉じる。
+// （details なので JS が無くても開閉自体は動く）
+(function () {
+  var helps = document.querySelectorAll('details.help');
+  if (!helps.length) return;
+  helps.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      helps.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    helps.forEach(function (d) { if (d.open && !d.contains(ev.target)) d.open = false; });
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') helps.forEach(function (d) { d.open = false; });
+  });
+})();
+
 (function () {
   var el = document.querySelector('.freshness[data-obs]');
   if (!el) return;

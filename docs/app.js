@@ -23,6 +23,29 @@
 
   var $ = function (sel) { return document.querySelector(sel); };
 
+  // 用語のヘルプ。静的ページ(build_site.py の HELP_TEXT)と同じ文言。
+  // 「利水」と「有効」の違いはこのアプリの肝なので、用語だけで済ませない。
+  var HELP_TEXT = {
+    irrigation:
+      "<b>使える水がどれだけ残っているか</b>の割合です。" +
+      "ダムの容量のうち、水道・農業・工業などに使うために確保された分（利水容量）に対して、" +
+      "いま何%たまっているかを表します。渇水のときに注目される数字です。",
+    effective:
+      "<b>ダムの容量全体に対して、いまどれだけ水が入っているか</b>の割合です。" +
+      "利水容量に加えて、洪水にそなえて空けておく容量（洪水調節容量）も分母に含みます。" +
+      "洪水期は上側を意図的に空けて運用するため、低い値になるのが普通です。" +
+      "そのため利水貯水率が100%でも、有効貯水率は低いことがあります。"
+  };
+
+  /** ラベルの隣に置く「?」。JS なしでも開閉できるよう details/summary を使う。 */
+  function helpToggle(key, label) {
+    if (!HELP_TEXT[key]) return "";
+    return '<details class="help">' +
+      '<summary aria-label="' + esc(label) + 'とは"><span aria-hidden="true">?</span></summary>' +
+      '<div class="help-body">' + HELP_TEXT[key] + "</div>" +
+      "</details>";
+  }
+
   // ------------------------------------------------------------ 値の扱い
 
   /** {value,status,reason} を安全に読む。value があるときだけ数値を返す。 */
@@ -192,11 +215,13 @@
   }
 
   function rateCard(label, item, basisKey) {
+    // ラベルは details を内包するので span ではなく div
+    var head = '<div class="k"><span>' + esc(label) + "</span>" +
+      helpToggle(basisKey, label) + "</div>";
     var v = val(item);
     if (v === null) {
       return (
-        '<div class="rate is-nodata">' +
-          '<span class="k">' + esc(label) + "</span>" +
+        '<div class="rate is-nodata">' + head +
           '<span class="v">—</span>' +
           '<div class="why">' + esc(reasonOf(item)) + "</div>" +
         "</div>"
@@ -207,8 +232,7 @@
     var color = b ? b.color : "#94a3b8";
     var w = Math.max(0, Math.min(100, v));
     return (
-      '<div class="rate">' +
-        '<span class="k">' + esc(label) + "</span>" +
+      '<div class="rate">' + head +
         '<span class="v">' + fmtNum(v, 1) + '<span class="unit">%</span></span>' +
         '<div class="bar"><i style="width:' + w + "%;background:" + color + '"></i></div>' +
       "</div>"
@@ -289,6 +313,20 @@
 
     $("#panel-body").innerHTML = html;
     $("#panel").classList.remove("is-hidden");
+    wireHelp();
+  }
+
+  /** 用語ヘルプ: 1つ開いたら他は閉じる。パネルを描き直すたびに呼ぶ。 */
+  function wireHelp() {
+    var helps = $("#panel-body").querySelectorAll("details.help");
+    Array.prototype.forEach.call(helps, function (d) {
+      d.addEventListener("toggle", function () {
+        if (!d.open) return;
+        Array.prototype.forEach.call(helps, function (o) { if (o !== d) o.open = false; });
+      });
+      // ヘルプ内のクリックでパネルが閉じたり地図が反応したりしないように
+      d.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    });
   }
 
   function select(id, updateHash) {

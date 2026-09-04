@@ -47,6 +47,25 @@
 //      （JS が動かない環境でも、本文に観測日時とページ生成日時が書いてある）
 //   2) 通常の更新リズムを超えたときだけ、注意 → 警告と段階的に強める。
 //      毎回警告を出すと読み飛ばされるようになり、かえって危ない。
+// 用語ヘルプ: 1つ開いたら他は閉じる。外側をクリックしても閉じる。
+// （details なので JS が無くても開閉自体は動く）
+(function () {
+  var helps = document.querySelectorAll('details.help');
+  if (!helps.length) return;
+  helps.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      helps.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+  document.addEventListener('click', function (ev) {
+    helps.forEach(function (d) { if (d.open && !d.contains(ev.target)) d.open = false; });
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') helps.forEach(function (d) { d.open = false; });
+  });
+})();
+
 (function () {
   var el = document.querySelector('.freshness[data-obs]');
   if (!el) return;
