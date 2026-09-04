@@ -1,8 +1,7 @@
 {
-  "name": "富山県 ダム貯水率マップ",
-  "short_name": "ダム貯水率",
-  "description": "富山県内23基のダムの利水貯水率・有効貯水率を地図で見る",
-  "lang": "ja",
+  "name": "ダム旅",
+  "short_name": "ダム旅",
+  "description": "ダムを地図から探して、知って、見に行く",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -14,6 +13,7 @@
     "utilities",
     "weather"
   ],
+  "lang": "ja",
   "icons": [
     {
       "src": "./img/icon-192.png",

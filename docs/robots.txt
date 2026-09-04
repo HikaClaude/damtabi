@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hikaclaude.github.io/dam-map/sitemap.xml
+Sitemap: https://hikaclaude.github.io/damtabi/sitemap.xml

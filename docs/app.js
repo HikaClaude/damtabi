@@ -1,4 +1,4 @@
-/* 富山県 ダム貯水率マップ
+/* ダム旅 / DAM TABI — 地図画面
  *
  * docs/data/dams.json（バッチ生成）を読んで MapLibre GL JS + 地理院タイルで表示する。
  * サーバレス。ビルド不要。fetch できる場所に置けば動く。

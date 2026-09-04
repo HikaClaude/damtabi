@@ -1,4 +1,4 @@
-/* 富山県 ダム貯水率マップ — Service Worker
+/* ダム旅 / DAM TABI — Service Worker
  *
  * 目的は 2 つ。
  *   1. ホーム画面に追加できるようにする（PWA のインストール要件）

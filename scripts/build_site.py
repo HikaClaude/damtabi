@@ -41,9 +41,10 @@ DEFAULT_BASE_URL = "https://example.github.io/dam-map"
 
 def load_site() -> dict:
     """公開URLやサイト名は site.json だけを見る。ここが唯一の情報源。"""
-    cfg = {"base_url": DEFAULT_BASE_URL, "site_name": "富山県 ダム貯水率マップ",
-           "short_name": "ダム貯水率", "tagline": "", "theme_color": "#14507d",
-           "background_color": "#f6f7f9",
+    cfg = {"base_url": DEFAULT_BASE_URL, "site_name": "ダム旅", "short_name": "ダム旅",
+           "name_en": "DAM TABI", "producer": "DAM TABI LAB",
+           "home_title": "ダム旅", "region": "富山県", "tagline": "",
+           "theme_color": "#14507d", "background_color": "#f6f7f9",
            "freshness": {"notice_days": 7, "warn_days": 14}}
     if SITE_JSON.exists():
         cfg.update({k: v for k, v in json.loads(SITE_JSON.read_text(encoding="utf-8")).items()
@@ -51,8 +52,10 @@ def load_site() -> dict:
     return cfg
 
 SITE = load_site()
-SITE_NAME = SITE["site_name"]
+SITE_NAME = SITE["site_name"]          # 「ダム旅」
 SITE_TAGLINE = SITE.get("tagline") or ""
+REGION = SITE.get("region") or ""      # 「富山県」（当面の対象範囲）
+PRODUCER = SITE.get("producer") or ""  # 「DAM TABI LAB」
 
 JST = dt.timezone(dt.timedelta(hours=9))
 
@@ -147,7 +150,8 @@ def credits_block() -> str:
         f"<p>{CREDIT_MLIT}</p>"
         f"<p>{CREDIT_GSI}</p>"
         "<p>貯水率は観測所の公表値をそのまま転記しています。欠測・未提供の値は推定していません。</p>"
-        "</footer>"
+        + (f'<p class="producer">{e(PRODUCER)}</p>' if PRODUCER else "")
+        + "</footer>"
     )
 
 
@@ -195,20 +199,33 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     when = obs_time_jp(dam.get("obs_time"))
 
     # --- title / description はダムごとに個別に組み立てる
-    title = f"{name}の貯水率｜{dam['water_system']}水系 {dam['river']}・{dam.get('address') or '富山県'}"
+    #
+    # 貯水率の「数値」は meta description に入れない。
+    # 検索結果のスニペットは長期間キャッシュされるため、数か月前の値が
+    # 「現在の値」のように表示されてしまう。これはこのアプリが最も避けたい失敗。
+    # 数値はページ本文に観測日時つきで載せる。
+    title = f"{name}｜{SITE_NAME}"
+    where = dam.get("address") or REGION
+    sub = f"{dam['water_system']}水系{dam['river']}"
+    manager = dam.get("manager_office") or dam.get("manager") or ""
+
     if dam["data_status"] == "no_source":
         desc = (
-            f"{name}（{dam['water_system']}水系{dam['river']}・{dam.get('manager') or ''}）の基本情報。"
-            f"発電専用ダムのため貯水位・貯水量は公開されておらず、貯水率は表示できません。"
-            f"所在地は{dam.get('address') or '富山県'}。"
+            f"{name}（{where}）。{sub}。{manager}が管理する発電専用ダムです。"
+            "貯水位・貯水量が公開されていないため貯水率は掲載していません。"
+            f"地図での位置とダムの基本情報をまとめています。"
+        )
+    elif dam["data_status"] in ("missing", "not_provided", "closed"):
+        desc = (
+            f"{name}（{where}）。{sub}、管理は{manager}。"
+            "地図での位置とダムの基本情報をまとめています。"
+            "貯水率は観測所から公表されていないため、理由を添えて「—」と表示しています。"
         )
     else:
         desc = (
-            f"{name}（{dam.get('address') or '富山県'}）の貯水率。"
-            f"利水貯水率 {irr}、有効貯水率 {eff}"
-            + (f"（{when} 観測）。" if when else "。")
-            + f"{dam['water_system']}水系{dam['river']}、管理は{dam.get('manager_office') or dam.get('manager') or '—'}。"
-            "出典は国土交通省 川の防災情報。"
+            f"{name}（{where}）。{sub}、管理は{manager}。"
+            "地図での位置、ダムの基本情報、公表されている貯水状況"
+            "（利水貯水率・有効貯水率）を観測日時とあわせて掲載しています。"
         )
     desc = desc[:300]
 
@@ -473,7 +490,7 @@ def index_page(data: dict, base: str) -> str:
     body = [
         '<nav class="crumbs" aria-label="パンくず">'
         f'<a href="{e(base)}/">{e(SITE_NAME)}</a> › <span>ダム一覧</span></nav>',
-        "<h1>富山県のダム一覧（全23基）</h1>",
+        f"<h1>{e(REGION)}のダム一覧（全{len(dams)}基）</h1>",
         f'<p class="lead">観測 {e(obs_time_jp(data["base_obs_time"]))} 時点。'
         f"{ok}基は数値を取得できています。残りは欠測・未提供・データ提供なしで、"
         "推定値では埋めず「—」と理由を表示しています。<br>"
@@ -485,11 +502,11 @@ def index_page(data: dict, base: str) -> str:
         "<tbody>" + "".join(rows) + "</tbody></table></div>",
     ]
 
-    title = "富山県のダム一覧｜貯水率（利水・有効）"
+    title = f"ダム一覧｜{SITE_NAME}"
     desc = (
-        f"富山県内23基のダムの利水貯水率・有効貯水率の一覧。"
-        f"{obs_time_jp(data['base_obs_time'])}時点、{ok}基を取得。"
-        "出典は国土交通省 川の防災情報。取得できないダムは理由を明記しています。"
+        f"{REGION}の{len(dams)}基のダムを一覧にしています。"
+        "水系・河川・管理者などの基本情報と、公表されている場合は貯水状況を掲載。"
+        "気になるダムのページから、地図での位置や見どころを確認できます。"
     )
     return page_shell(
         title=title, desc=desc, url=f"{base}/dam/", og_image=f"{base}/img/og/site.png",
@@ -528,14 +545,14 @@ def index_meta(base: str, data: dict) -> str:
     手で書いた index.html にも公開URLが必要だが、二重管理すると必ずズレるので
     マーカーで囲った範囲だけをここが生成する。
     """
-    title = f"{SITE_NAME}｜利水貯水率と有効貯水率を地図で見る"
-    ok = data["summary"]["by_status"].get("ok", 0)
+    # 情報鮮度を保証するように読める語（リアルタイム / 現在の / 今 など）は入れない。
+    title = SITE.get("home_title") or SITE_NAME
     total = data["summary"]["total"]
     desc = (
-        f"富山県内{total}基のダムの利水貯水率・有効貯水率を地図に表示します。"
-        "出典は国土交通省 川の防災情報。"
-        "取得できないダムは推定せず、理由を添えて「—」と表示します。"
-        f"（{obs_time_jp(data['base_obs_time'])}時点で{ok}基を取得）"
+        f"{REGION}の{total}基のダムを地図から探せます。"
+        "水系・河川・管理者といった基本情報に加えて、公表されている場合は"
+        "貯水状況（利水貯水率・有効貯水率）も観測日時つきで確認できます。"
+        "ダムを知って、旅の寄り道に見に行くきっかけに。"
     )
     og = f"{base}/img/og/site.png"
     return "\n".join([
@@ -558,6 +575,7 @@ def index_meta(base: str, data: dict) -> str:
         f'<meta name="twitter:image" content="{e(og)}">',
         f'<meta name="theme-color" content="{e(SITE["theme_color"])}">',
         f'<meta name="apple-mobile-web-app-title" content="{e(SITE["short_name"])}">',
+        f'<meta name="author" content="{e(PRODUCER)}">' if PRODUCER else "",
         INDEX_META_END,
     ])
 
@@ -581,7 +599,6 @@ def manifest(base: str) -> str:
         "name": SITE_NAME,
         "short_name": SITE["short_name"],
         "description": SITE_TAGLINE,
-        "lang": "ja",
         "start_url": "./",
         "scope": "./",
         "display": "standalone",
@@ -589,6 +606,7 @@ def manifest(base: str) -> str:
         "background_color": SITE["background_color"],
         "theme_color": SITE["theme_color"],
         "categories": ["travel", "utilities", "weather"],
+        "lang": "ja",
         "icons": [
             {"src": "./img/icon-192.png", "sizes": "192x192", "type": "image/png"},
             {"src": "./img/icon-512.png", "sizes": "512x512", "type": "image/png"},

@@ -1,4 +1,4 @@
-/* 富山県 ダム貯水率マップ */
+/* ダム旅 / DAM TABI — 地図画面のスタイル */
 
 :root {
   --bg: #f6f7f9;
@@ -46,10 +46,32 @@ html, body {
 
 #topbar h1 {
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: .01em;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: .03em;
   white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+/* 当面は富山県のみなので、対象範囲を控えめに添える */
+#topbar h1 .region {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--ink-faint);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+/* 制作名義は控えめに */
+#credits .producer {
+  margin-left: 10px;
+  letter-spacing: .08em;
+  font-weight: 700;
+  opacity: .55;
 }
 
 #meta {

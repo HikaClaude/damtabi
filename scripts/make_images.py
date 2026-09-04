@@ -35,6 +35,19 @@ IMG = DOCS / "img"
 OG = IMG / "og"
 DATA = DOCS / "data" / "dams.json"
 ILLUST = DOCS / "data" / "illustrations.json"
+SITE_JSON = ROOT / "site.json"
+
+
+def load_site() -> dict:
+    cfg = {"site_name": "ダム旅", "name_en": "DAM TABI",
+           "producer": "DAM TABI LAB", "tagline": "", "region": "富山県"}
+    if SITE_JSON.exists():
+        cfg.update({k: v for k, v in json.loads(SITE_JSON.read_text(encoding="utf-8")).items()
+                    if not k.startswith("_")})
+    return cfg
+
+
+SITE = load_site()
 
 CHROME_CANDIDATES = [
     r"C:\Program Files\Google\Chrome\Application\chrome.exe",
@@ -51,7 +64,7 @@ FONT_STACK = ('"Hiragino Kaku Gothic ProN","Yu Gothic UI","Yu Gothic",'
               '"Noto Sans JP","Meiryo",system-ui,sans-serif')
 
 # ダムの堤体と貯水池を思わせるマーク。
-ICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ダム貯水率マップ">
+ICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ダム旅">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#1c6ba8"/><stop offset="1" stop-color="#14507d"/>
@@ -152,7 +165,7 @@ def og_from_illust_html(title: str, subtitle: str, img_uri: str) -> str:
 </style>
 <div class="bg"><img src="{img_uri}" alt=""></div>
 <div class="veil"></div>
-<div class="tag">富山県 ダム貯水率マップ</div>
+<div class="tag">{SITE['site_name']}</div>
 <div class="inner"><h1>{title}</h1><p>{subtitle}</p></div>
 """
 
@@ -185,7 +198,7 @@ def og_html(title: str, subtitle: str, tag: str) -> str:
   <p>{subtitle}</p>
   <div class="rule"></div>
 </div>
-<div class="src">出典：「川の防災情報」（国土交通省）／地理院タイル</div>
+<div class="src">{SITE['producer']} ／ 出典：国土交通省 川の防災情報・地理院タイル</div>
 """
 
 
@@ -243,9 +256,9 @@ def main() -> int:
             print(f"[make_images] illustrations.json を読めません: {ex}", file=sys.stderr)
 
     OG.mkdir(parents=True, exist_ok=True)
-    ok = rasterize(chrome, og_html("富山県 ダム貯水率マップ",
-                                   "県内23基の利水貯水率・有効貯水率を地図で",
-                                   "TOYAMA DAM MAP"), OG / "site.png", 1200, 630, 1.0)
+    ok = rasterize(chrome, og_html(SITE["site_name"],
+                                   "旅の寄り道に、ダムはいかが？",
+                                   SITE["name_en"]), OG / "site.png", 1200, 630, 1.0)
     print(f"[make_images] {'ok ' if ok else 'NG '} docs/img/og/site.png")
 
     for dam in data["dams"]:
@@ -263,7 +276,7 @@ def main() -> int:
             html = og_from_illust_html(dam["name"], sub, path.as_uri())
             kind = "illust"
         else:
-            html = og_html(dam["name"], sub, "富山県 ダム貯水率マップ")
+            html = og_html(dam["name"], sub, SITE["site_name"])
             kind = "generic"
 
         ok = rasterize(chrome, html, OG / f"{dam['id']}.png", 1200, 630, 1.0)

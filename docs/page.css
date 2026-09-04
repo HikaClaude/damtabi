@@ -1,4 +1,4 @@
-/* ダムごとの静的ページ / 一覧ページ用。地図画面(style.css)とは独立。 */
+/* ダム旅 / DAM TABI — ダムごとの静的ページ・一覧ページ用（地図画面とは独立） */
 
 :root {
   --bg: #f6f7f9;
@@ -268,6 +268,14 @@ h1 .kana {
 }
 
 .credits p { margin: 0 0 2px; }
+
+.credits .producer {
+  margin-top: 8px;
+  letter-spacing: .1em;
+  font-weight: 700;
+  font-size: 11px;
+  opacity: .6;
+}
 .credits a { color: var(--ink-soft); }
 
 .updated { font-size: 11px; color: var(--ink-faint); margin-top: 12px; }

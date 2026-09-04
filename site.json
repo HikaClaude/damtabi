@@ -1,14 +1,19 @@
 {
-  "base_url": "https://hikaclaude.github.io/dam-map",
-  "site_name": "富山県 ダム貯水率マップ",
-  "short_name": "ダム貯水率",
-  "tagline": "富山県内23基のダムの利水貯水率・有効貯水率を地図で見る",
+  "base_url": "https://hikaclaude.github.io/damtabi",
+  "site_name": "ダム旅",
+  "short_name": "ダム旅",
+  "name_en": "DAM TABI",
+  "producer": "DAM TABI LAB",
+  "home_title": "ダム旅｜旅の寄り道に、ダムはいかが？",
+  "region": "富山県",
+  "tagline": "ダムを地図から探して、知って、見に行く",
   "theme_color": "#14507d",
   "background_color": "#f6f7f9",
-  "_note": "公開URLはここ1箇所だけ書き換えれば canonical / og:url / og:image / sitemap.xml / robots.txt / manifest.json すべてに反映されます。build_site.py が docs/index.html のメタ情報も書き換えます。",
   "freshness": {
     "notice_days": 7,
-    "warn_days": 14,
-    "_note": "貯水率が何日前の値になったら注意/警告を出すか。観測日時と経過日数は閾値に関係なく常時表示する。手動更新の間隔を変えたらここを直す（毎日自動更新に戻すなら notice_days:2 / warn_days:5 が目安）"
-  }
+    "warn_days": 14
+  },
+  "_note_base_url": "公開URLはここ1箇所。canonical / og:url / og:image / sitemap.xml / robots.txt / manifest.json / 地図画面のメタ がすべて追随します。独自ドメインへの移行手順は README「独自ドメインへの移行」を参照。",
+  "_note_freshness": "貯水率が何日前の値になったら注意/警告を出すか。観測日時と経過日数は閾値に関係なく常時表示する。手動更新の間隔を変えたらここを直す（毎日自動更新に戻すなら notice_days:2 / warn_days:5 が目安）",
+  "_note_title": "home_title は情報鮮度を保証する語（リアルタイム/現在の/今 など）を入れないこと。継続取得方式が確定するまでの方針。"
 }
