@@ -1,0 +1,64 @@
+name: fetch-dams  # 手動起動専用
+
+# ⚠ 定期実行（cron）は意図的に無効にしてあります。
+#
+# 「川の防災情報」の取り扱い上の注意に、
+#   「ツール等による定期的なデータ収集は…お控えいただきますようお願いいたします。
+#    商用・非商用を問わず、定期的・定常的なデータ収集を行われる場合は
+#    河川情報数値データ配信事業よりデータ配信を受けることができます」
+# と明記されているためです（README「データ取得の利用条件」参照）。
+#
+# 現在の運用方針は「更新は人が手で実行する」です（README「運用方針」参照）。
+# FRICS への照会結果が出て継続取得の可否が確認できたら、下の schedule を有効化してください。
+# その場合は site.json の freshness（notice_days / warn_days）も更新頻度に合わせて下げること。
+
+on:
+  # schedule:
+  #   - cron: "20 21 * * *"   # 毎日 06:20 JST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-dams
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 観測所マスタのキャッシュを残して取得回数を減らす
+      - name: マスタキャッシュを復元
+        uses: actions/cache@v4
+        with:
+          path: cache
+          key: obs-master-${{ github.run_id }}
+          restore-keys: obs-master-
+
+      # 依存ライブラリは無し（標準ライブラリのみ）
+      - name: 貯水率を取得
+        run: python scripts/fetch_dams.py
+
+      # 公開URLは site.json の base_url を見る（引数不要）
+      - name: 静的ページを生成
+        run: python scripts/build_site.py
+
+      - name: 差分があればコミット
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/dams.json docs/dam docs/index.html \
+                  docs/sitemap.xml docs/robots.txt docs/manifest.json
+          if git diff --cached --quiet; then
+            echo "変更なし"
+          else
+            git commit -m "data: $(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M') JST 時点の貯水率（手動更新）"
+            git push
+          fi

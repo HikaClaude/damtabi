@@ -1,0 +1,14 @@
+{
+  "base_url": "https://hikaclaude.github.io/dam-map",
+  "site_name": "富山県 ダム貯水率マップ",
+  "short_name": "ダム貯水率",
+  "tagline": "富山県内23基のダムの利水貯水率・有効貯水率を地図で見る",
+  "theme_color": "#14507d",
+  "background_color": "#f6f7f9",
+  "_note": "公開URLはここ1箇所だけ書き換えれば canonical / og:url / og:image / sitemap.xml / robots.txt / manifest.json すべてに反映されます。build_site.py が docs/index.html のメタ情報も書き換えます。",
+  "freshness": {
+    "notice_days": 7,
+    "warn_days": 14,
+    "_note": "貯水率が何日前の値になったら注意/警告を出すか。観測日時と経過日数は閾値に関係なく常時表示する。手動更新の間隔を変えたらここを直す（毎日自動更新に戻すなら notice_days:2 / warn_days:5 が目安）"
+  }
+}

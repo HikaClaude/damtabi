@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ダム貯水率マップ">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c6ba8"/><stop offset="1" stop-color="#14507d"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7fd3f0"/><stop offset="1" stop-color="#2f9fd4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#sky)"/>
+  <!-- 貯水池 -->
+  <path d="M96 214 C150 190 190 232 256 226 C322 220 362 186 416 208 L416 300 L96 300 Z" fill="url(#water)"/>
+  <!-- 堤体（アーチダムの断面） -->
+  <path d="M96 300 C160 300 176 340 256 340 C336 340 352 300 416 300 L416 336
+           C352 336 336 400 256 400 C176 400 160 336 96 336 Z" fill="#f4f7fa"/>
+  <!-- 放流 -->
+  <rect x="238" y="336" width="36" height="76" rx="18" fill="#bfe6f7"/>
+</svg>

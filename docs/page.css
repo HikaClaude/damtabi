@@ -1,0 +1,280 @@
+/* ダムごとの静的ページ / 一覧ページ用。地図画面(style.css)とは独立。 */
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #16202b;
+  --ink-soft: #5b6875;
+  --ink-faint: #8a95a1;
+  --line: #dde3ea;
+  --accent: #14507d;
+  --nodata: #94a3b8;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+body.doc {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic",
+               "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.75;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px 20px 56px;
+}
+
+a { color: var(--accent); }
+
+/* ---------------------------------------------------------- crumbs */
+
+.crumbs {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin-bottom: 18px;
+  overflow-wrap: anywhere;
+}
+
+.crumbs a { color: var(--ink-soft); text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------- article */
+
+.dam-page, .wrap > h1 { background: transparent; }
+
+h1 {
+  font-size: 28px;
+  line-height: 1.35;
+  margin: 0 0 4px;
+  letter-spacing: .01em;
+}
+
+h1 .kana {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  letter-spacing: .06em;
+  margin-top: 2px;
+}
+
+.dam-sub {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.lead { color: var(--ink-soft); font-size: 14px; margin: 0 0 18px; }
+
+/* --- イラスト差し込み領域（地図画面と同じくここを空けてある） --- */
+
+.dam-illust {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-height: 320px;
+  background: linear-gradient(160deg, #e8eef4 0%, #dbe6ef 100%);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.dam-illust img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dam-illust .placeholder { text-align: center; color: #93a5b6; font-size: 12px; }
+
+/* --- 貯水率 2 枚組 --- */
+
+.rates {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.rate {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+  background: var(--surface);
+  min-width: 0;
+}
+
+.rate .k {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.rate .v {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.rate .v .unit { font-size: 17px; font-weight: 600; color: var(--ink-soft); }
+.rate.is-nodata .v { color: var(--nodata); }
+
+.rate .why {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a3562a;
+  background: #fdf3e8;
+  border-radius: 6px;
+  padding: 6px 9px;
+}
+
+.rate .bar {
+  margin-top: 10px;
+  height: 6px;
+  border-radius: 3px;
+  background: #e6ebf0;
+  overflow: hidden;
+}
+
+.rate .bar > i { display: block; height: 100%; border-radius: 3px; }
+
+.nodata-note {
+  background: #fdf3e8;
+  border-left: 3px solid #d99a5b;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #7a4318;
+  margin: 0 0 20px;
+}
+
+/* --- 鮮度表示：貯水率のすぐ下に「いつの値か」を必ず出す --- */
+
+.freshness {
+  margin: -8px 0 20px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.freshness .gen { color: var(--ink-faint); font-size: 12px; }
+
+.freshness .age { color: var(--ink); font-weight: 600; }
+
+/* 注意（通常の更新間隔を超えた） */
+.freshness .stale {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #fdf3e8;
+  border-left: 3px solid #d99a5b;
+  color: #7a4318;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* 警告（かなり間隔が空いた） */
+.freshness .stale.warn {
+  background: #fbe9e7;
+  border-left-color: #c0392b;
+  color: #8a2b1c;
+}
+
+.freshness .stale a { color: inherit; font-weight: 700; }
+
+.stale-bar {
+  margin: 0 0 16px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: #8a4b12;
+  color: #fff;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* --- 表 --- */
+
+.facts, .list {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.facts th, .facts td, .list th, .list td {
+  text-align: left;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.facts tr:last-child th, .facts tr:last-child td,
+.list tbody tr:last-child td { border-bottom: 0; }
+
+.facts th { width: 34%; color: var(--ink-soft); font-weight: 600; }
+.facts td { font-variant-numeric: tabular-nums; }
+.facts td.muted, .list td.muted { color: var(--nodata); }
+
+.table-scroll { overflow-x: auto; }
+.list { min-width: 700px; }
+.list td:first-child, .list td:last-child { white-space: nowrap; }
+.list th:nth-child(3), .list th:nth-child(4),
+.list td:nth-child(3), .list td:nth-child(4) { width: 21%; }
+.list thead th { background: #eef2f6; font-size: 12px; color: var(--ink-soft); }
+.list td { font-variant-numeric: tabular-nums; }
+
+/* --- 注記 --- */
+
+.callout {
+  margin-top: 18px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.75;
+  background: #eef4fa;
+  color: #2a4f72;
+  border-left: 3px solid #7ba7cc;
+}
+
+.callout.note { background: #f1f3f5; color: var(--ink-soft); border-left-color: #c3cbd4; }
+
+.obs-src { font-size: 12px; color: var(--ink-faint); margin-top: 16px; }
+
+.backlink { margin-top: 24px; font-size: 15px; font-weight: 600; }
+
+/* --- 出典（常時表示） --- */
+
+.credits {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.credits p { margin: 0 0 2px; }
+.credits a { color: var(--ink-soft); }
+
+.updated { font-size: 11px; color: var(--ink-faint); margin-top: 12px; }
+
+@media (max-width: 560px) {
+  .wrap { padding: 16px 14px 44px; }
+  h1 { font-size: 22px; }
+  .rate .v { font-size: 32px; }
+  .facts th, .facts td { padding: 10px 12px; }
+}
