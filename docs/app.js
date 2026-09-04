@@ -53,6 +53,9 @@
     return item && item.status === "ok" && typeof item.value === "number" ? item.value : null;
   }
 
+  /** ダム本体の公式な水系・河川。表示に使うのは常にこちら。 */
+  function official(dam) { return dam.official || {}; }
+
   function reasonOf(item) {
     if (!item) return "データがありません";
     return item.reason || "データがありません";
@@ -249,7 +252,8 @@
   }
 
   function renderPanel(dam) {
-    var sub = [dam.water_system + "水系", dam.river, dam.manager]
+    var off = official(dam);
+    var sub = [(off.water_system || "") + "水系", off.river, dam.manager]
       .filter(Boolean)
       .map(esc)
       .join('<span class="sep">/</span>');
@@ -274,6 +278,7 @@
                     : "観測値の配信がありません") + "</p>";
 
     html += '<table class="facts">';
+    html += "<tr><th>水系 / 河川</th><td>" + esc(off.water_system) + "水系 " + esc(off.river) + "</td></tr>";
     html += "<tr><th>観測日時</th><td>" +
       (dam.obs_time ? esc(fmtObsTime(dam.obs_time)) : '<span class="muted">—<br><small>観測値の配信がありません</small></span>') +
       "</td></tr>";
@@ -300,14 +305,21 @@
       html += '<div class="callout note">' + esc(dam.note) + "</div>";
     }
 
+    // 出典は「ダムの基本情報」と「貯水率データ」を分けて書く。
+    // 貯水率が取れないことと、ダム本体の情報に出典が無いことは別の話。
     html += '<div class="src">';
+    html += "<b>ダムの基本情報</b>：" + esc(off.source || "—");
+    var ob = dam.observation;
     if (dam.data_status === "no_source") {
-      html += "出典: なし。" + esc(dam.name) +
-        "は発電専用ダムで、事業者が貯水位・貯水量を公開していません。" +
-        "確認先: " + esc((dam.source && dam.source.checked) || "—");
-    } else {
-      html += "出典: 国土交通省 川の防災情報（事務所コード " +
-        esc(String(dam.source.ofc_cd)) + " / 観測所コード " + esc(String(dam.source.obs_cd)) + "）";
+      html += "<br><b>貯水率データ</b>：現在、ダム旅が利用している公開情報源では取得できません。" +
+        "<br>確認した情報源: " + esc((dam.source && dam.source.checked) || "—");
+    } else if (ob) {
+      html += "<br><b>貯水率データ</b>：国土交通省 川の防災情報" +
+        "（事務所コード " + esc(String(ob.ofc_cd)) + " / 観測所コード " + esc(String(ob.obs_cd)) + "）";
+      if (ob.water_system !== off.water_system || ob.river !== off.river) {
+        html += "<br>この観測所での分類: " + esc(ob.water_system) + "水系 " + esc(ob.river) +
+          "（ダム本体の水系・河川とは分類が異なります）";
+      }
     }
     html += "</div></div>";
 

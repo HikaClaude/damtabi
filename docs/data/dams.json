@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-05T04:34:12+09:00",
-  "base_obs_time": "2026/09/05 04:30",
+  "generated_at": "2026-09-05T05:19:55+09:00",
+  "base_obs_time": "2026/09/05 05:15",
   "source": {
     "name": "国土交通省 川の防災情報",
     "url": "https://www.river.go.jp/kawabou/pcfull/tm",
@@ -115,8 +115,20 @@
       "name": "宇奈月ダム",
       "kana": "うなづきだむ",
       "address": "富山県黒部市宇奈月町音澤",
-      "water_system": "黒部川",
-      "river": "黒部川",
+      "official": {
+        "water_system": "黒部川",
+        "river": "黒部川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "黒部川",
+        "river": "黒部川",
+        "provider": "川の防災情報",
+        "ofc_cd": 21556,
+        "obs_cd": 6,
+        "obs_fcd": "2155600700006"
+      },
       "manager": "国交省",
       "lat": 36.8102778,
       "lon": 137.5902778,
@@ -135,9 +147,9 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:30",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
-        "value": 89.7,
+        "value": 89.9,
         "status": "ok",
         "reason": null
       },
@@ -147,17 +159,17 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 241.16,
+        "value": 241.18,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3232,
+        "value": 3241,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 27.89,
+        "value": 27.77,
         "status": "ok",
         "reason": null
       },
@@ -176,8 +188,20 @@
       "name": "室牧ダム",
       "kana": "むろまきだむ",
       "address": "富山県富山市蒲谷",
-      "water_system": "神通川",
-      "river": "井田川",
+      "official": {
+        "water_system": "神通川",
+        "river": "室牧川",
+        "source": "富山県「室牧ダムの概要」",
+        "note": "国土数値情報は上位河川の井田川で登録。実際は井田川支流の室牧川"
+      },
+      "observation": {
+        "water_system": "神通川",
+        "river": "井田川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4098,
+        "obs_cd": 63,
+        "obs_fcd": "0409800700063"
+      },
       "manager": "県土木部",
       "lat": 36.5383333,
       "lon": 137.0916667,
@@ -196,34 +220,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
-        "value": 60.6,
+        "value": 60.8,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 33.4,
+        "value": 33.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 243.24,
+        "value": 243.27,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 4050,
+        "value": 4063,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.5,
+        "value": 6.02,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0,
+        "value": 15.81,
         "status": "ok",
         "reason": null
       },
@@ -237,8 +261,20 @@
       "name": "熊野川ダム",
       "kana": "くまのがわだむ",
       "address": "富山県富山市手出12",
-      "water_system": "神通川",
-      "river": "熊野川",
+      "official": {
+        "water_system": "神通川",
+        "river": "熊野川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "神通川",
+        "river": "熊野川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4098,
+        "obs_cd": 61,
+        "obs_fcd": "0409800700061"
+      },
       "manager": "県土木部",
       "lat": 36.5597222,
       "lon": 137.3122222,
@@ -253,7 +289,7 @@
       "manager_office": "富山土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -265,7 +301,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 312.84,
+        "value": 312.81,
         "status": "ok",
         "reason": null
       },
@@ -275,7 +311,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 3.63,
+        "value": 3.62,
         "status": "ok",
         "reason": null
       },
@@ -294,8 +330,20 @@
       "name": "久婦須川ダム",
       "kana": "くぶすがわだむ",
       "address": "富山県富山市八尾町桐谷",
-      "water_system": "神通川",
-      "river": "久婦須川",
+      "official": {
+        "water_system": "神通川",
+        "river": "久婦須川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "神通川",
+        "river": "久婦須川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4098,
+        "obs_cd": 62,
+        "obs_fcd": "0409800700062"
+      },
       "manager": "県土木部",
       "lat": 36.5111111,
       "lon": 137.1886111,
@@ -314,7 +362,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -336,12 +384,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.82,
+        "value": 4.24,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 4.89,
+        "value": 4.82,
         "status": "ok",
         "reason": null
       },
@@ -355,8 +403,20 @@
       "name": "和田川ダム",
       "kana": "わだがわだむ",
       "address": "富山県砺波市増山",
-      "water_system": "庄川",
-      "river": "和田川",
+      "official": {
+        "water_system": "庄川",
+        "river": "和田川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "庄川",
+        "river": "和田川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4104,
+        "obs_cd": 104,
+        "obs_fcd": "0410400700104"
+      },
       "manager": "県土木部",
       "lat": 36.6547222,
       "lon": 137.0397222,
@@ -375,34 +435,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
-        "value": 59.8,
+        "value": 56.4,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 29.8,
+        "value": 28.1,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 40.24,
+        "value": 40.13,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 537,
+        "value": 507,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.05,
+        "value": 1.67,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 10.98,
+        "value": 11.25,
         "status": "ok",
         "reason": null
       },
@@ -416,8 +476,20 @@
       "name": "利賀川ダム",
       "kana": "とががわだむ",
       "address": "富山県南砺市利賀村水無",
-      "water_system": "庄川",
-      "river": "利賀川",
+      "official": {
+        "water_system": "庄川",
+        "river": "利賀川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "庄川",
+        "river": "利賀川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4104,
+        "obs_cd": 103,
+        "obs_fcd": "0410400700103"
+      },
       "manager": "県土木部",
       "lat": 36.3277778,
       "lon": 136.9986111,
@@ -436,7 +508,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 10.5,
         "status": "ok",
@@ -458,12 +530,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.6,
+        "value": 2.7,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 2.6,
+        "value": 2.7,
         "status": "ok",
         "reason": null
       },
@@ -477,8 +549,20 @@
       "name": "境川ダム",
       "kana": "さかいがわだむ",
       "address": "富山県南砺市桂字栃木平1-5",
-      "water_system": "庄川",
-      "river": "境川",
+      "official": {
+        "water_system": "庄川",
+        "river": "境川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "庄川",
+        "river": "境川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4104,
+        "obs_cd": 101,
+        "obs_fcd": "0410400700101"
+      },
       "manager": "県土木部",
       "lat": 36.3425,
       "lon": 136.8394444,
@@ -493,7 +577,7 @@
       "manager_office": "境川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 40.1,
         "status": "ok",
@@ -505,22 +589,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 546.8,
+        "value": 546.81,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 19544,
+        "value": 19553,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.9,
+        "value": 3.04,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.39,
+        "value": 0.38,
         "status": "ok",
         "reason": null
       },
@@ -534,8 +618,20 @@
       "name": "刀利ダム",
       "kana": "とうりだむ",
       "address": "富山県南砺市刀利字大平72-2",
-      "water_system": "小矢部川",
-      "river": "小矢部川",
+      "official": {
+        "water_system": "小矢部川",
+        "river": "小矢部川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "小矢部川",
+        "river": "小矢部川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4104,
+        "obs_cd": 122,
+        "obs_fcd": "0410400700122"
+      },
       "manager": "県農林",
       "lat": 36.4672222,
       "lon": 136.8102778,
@@ -550,7 +646,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -562,12 +658,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 339.49,
+        "value": 339.51,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 10293,
+        "value": 10307,
         "status": "ok",
         "reason": null
       },
@@ -591,8 +687,20 @@
       "name": "五位ダム",
       "kana": "ごいだむ",
       "address": "富山県高岡市福岡町五位字島崎1669番外",
-      "water_system": "小矢部川",
-      "river": "子撫川",
+      "official": {
+        "water_system": "小矢部川",
+        "river": "子撫川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "小矢部川",
+        "river": "子撫川",
+        "provider": "川の防災情報",
+        "ofc_cd": 20534,
+        "obs_cd": 51,
+        "obs_fcd": "2053400700051"
+      },
       "manager": "県農林",
       "lat": 36.7525,
       "lon": 136.8830556,
@@ -607,7 +715,7 @@
       "manager_office": "農林水産省北陸地整管内",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -619,7 +727,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 182.3,
+        "value": 182.29,
         "status": "ok",
         "reason": null
       },
@@ -634,7 +742,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "outflow_m3s": {
-        "value": 4.16,
+        "value": 4.12,
         "status": "ok",
         "reason": null
       },
@@ -648,8 +756,20 @@
       "name": "子撫川ダム",
       "kana": "こなでがわだむ",
       "address": "富山県小矢部市宮中字新村15",
-      "water_system": "小矢部川",
-      "river": "子撫川",
+      "official": {
+        "water_system": "小矢部川",
+        "river": "子撫川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "小矢部川",
+        "river": "子撫川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4105,
+        "obs_cd": 121,
+        "obs_fcd": "0410500700121"
+      },
       "manager": "県土木部",
       "lat": 36.725,
       "lon": 136.8541667,
@@ -664,7 +784,7 @@
       "manager_office": "子撫川統合ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -676,22 +796,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 100.21,
+        "value": 100.2,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3537,
+        "value": 3534,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.71,
+        "value": 6.43,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.83,
+        "value": 7.82,
         "status": "ok",
         "reason": null
       },
@@ -705,8 +825,20 @@
       "name": "城端ダム",
       "kana": "じょうはなだむ",
       "address": "富山県南砺市上田外26カ村入会地字山田郷真川19-1",
-      "water_system": "小矢部川",
-      "river": "山田川",
+      "official": {
+        "water_system": "小矢部川",
+        "river": "山田川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "小矢部川",
+        "river": "山田川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4104,
+        "obs_cd": 102,
+        "obs_fcd": "0410400700102"
+      },
       "manager": "県土木部",
       "lat": 36.4838889,
       "lon": 136.87,
@@ -725,9 +857,9 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
-        "value": 61.2,
+        "value": 61.3,
         "status": "ok",
         "reason": null
       },
@@ -737,12 +869,12 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 254.56,
+        "value": 254.57,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1132,
+        "value": 1133,
         "status": "ok",
         "reason": null
       },
@@ -766,8 +898,20 @@
       "name": "臼中ダム",
       "kana": "うすなかだむ",
       "address": "富山県南砺市臼中東島40",
-      "water_system": "小矢部川",
-      "river": "打尾川",
+      "official": {
+        "water_system": "小矢部川",
+        "river": "打尾川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "小矢部川",
+        "river": "打尾川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4104,
+        "obs_cd": 123,
+        "obs_fcd": "0410400700123"
+      },
       "manager": "県農林",
       "lat": 36.4669444,
       "lon": 136.8558333,
@@ -782,7 +926,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -823,8 +967,20 @@
       "name": "朝日小川ダム",
       "kana": "あさひおがわだむ",
       "address": "富山県下新川郡朝日町山崎字道口1-6",
-      "water_system": "北陸その他",
-      "river": "小川",
+      "official": {
+        "water_system": "小川",
+        "river": "小川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "小川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4102,
+        "obs_cd": 1,
+        "obs_fcd": "0410200700001"
+      },
       "manager": "県土木部",
       "lat": 36.8880556,
       "lon": 137.6177778,
@@ -839,7 +995,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -851,7 +1007,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 228.48,
+        "value": 228.52,
         "status": "ok",
         "reason": null
       },
@@ -861,12 +1017,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 10.97,
+        "value": 10.86,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 9.65,
+        "value": 9.75,
         "status": "ok",
         "reason": null
       },
@@ -880,8 +1036,20 @@
       "name": "角川ダム",
       "kana": "かどかわだむ",
       "address": "富山県魚津市大熊",
-      "water_system": "北陸その他",
-      "river": "角川",
+      "official": {
+        "water_system": "角川",
+        "river": "角川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "角川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4101,
+        "obs_cd": 21,
+        "obs_fcd": "0410100700021"
+      },
       "manager": "県土木部",
       "lat": 36.7536111,
       "lon": 137.4305556,
@@ -896,7 +1064,7 @@
       "manager_office": "新川土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 99.2,
         "status": "ok",
@@ -908,7 +1076,7 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 123.09,
+        "value": 123.1,
         "status": "ok",
         "reason": null
       },
@@ -918,7 +1086,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.2,
+        "value": 1.3,
         "status": "ok",
         "reason": null
       },
@@ -937,8 +1105,20 @@
       "name": "上市川ダム",
       "kana": "かみいちがわだむ",
       "address": "富山県中新川郡上市町東種",
-      "water_system": "北陸その他",
-      "river": "上市川",
+      "official": {
+        "water_system": "上市川",
+        "river": "上市川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "上市川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4100,
+        "obs_cd": 41,
+        "obs_fcd": "0410000700041"
+      },
       "manager": "県土木部",
       "lat": 36.6780556,
       "lon": 137.4152778,
@@ -957,34 +1137,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
-        "value": 54.2,
+        "value": 53.9,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 21.6,
+        "value": 21.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 184.93,
+        "value": 184.9,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 741,
+        "value": 737,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.25,
+        "value": 6.2,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.67,
+        "value": 7.7,
         "status": "ok",
         "reason": null
       },
@@ -998,8 +1178,20 @@
       "name": "上市川第二ダム",
       "kana": "かみいちがわだいにだむ",
       "address": "富山県中新川郡上市町東種",
-      "water_system": "北陸その他",
-      "river": "上市川",
+      "official": {
+        "water_system": "上市川",
+        "river": "上市川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": "国土数値情報の表記は「上市川第2」"
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "上市川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4100,
+        "obs_cd": 42,
+        "obs_fcd": "0410000700042"
+      },
       "manager": "県土木部",
       "lat": 36.6697222,
       "lon": 137.4344444,
@@ -1018,9 +1210,9 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
-        "value": 98,
+        "value": 97.9,
         "status": "ok",
         "reason": null
       },
@@ -1030,22 +1222,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 278.68,
+        "value": 278.67,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1626,
+        "value": 1624,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.78,
+        "value": 4.31,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 5.86,
+        "value": 5.83,
         "status": "ok",
         "reason": null
       },
@@ -1059,8 +1251,20 @@
       "name": "白岩川ダム",
       "kana": "しらいわがわだむ",
       "address": "富山県中新川郡立山町白岩",
-      "water_system": "北陸その他",
-      "river": "白岩川",
+      "official": {
+        "water_system": "白岩川",
+        "river": "白岩川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "白岩川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4100,
+        "obs_cd": 43,
+        "obs_fcd": "0410000700043"
+      },
       "manager": "県土木部",
       "lat": 36.6394444,
       "lon": 137.36,
@@ -1075,7 +1279,7 @@
       "manager_office": "白岩川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 90.1,
         "status": "ok",
@@ -1116,8 +1320,20 @@
       "name": "舟川ダム",
       "kana": "ふながわだむ",
       "address": "富山県下新川郡入善町舟見",
-      "water_system": "北陸その他",
-      "river": "舟川",
+      "official": {
+        "water_system": "小川",
+        "river": "舟川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "舟川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4102,
+        "obs_cd": 3,
+        "obs_fcd": "0410200700003"
+      },
       "manager": "県土木部",
       "lat": 36.8704972,
       "lon": 137.5850111,
@@ -1132,7 +1348,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1173,8 +1389,20 @@
       "name": "布施川ダム",
       "kana": "ふせがわだむ",
       "address": "富山県黒部市福平字大阪285",
-      "water_system": "北陸その他",
-      "river": "布施川",
+      "official": {
+        "water_system": "片貝川",
+        "river": "布施川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "布施川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4101,
+        "obs_cd": 22,
+        "obs_fcd": "0410100700022"
+      },
       "manager": "県土木部",
       "lat": 36.8041667,
       "lon": 137.5183333,
@@ -1193,7 +1421,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1234,8 +1462,20 @@
       "name": "大谷ダム",
       "kana": "おおたにだむ",
       "address": "富山県黒部市吉城寺",
-      "water_system": "北陸その他",
-      "river": "大谷川",
+      "official": {
+        "water_system": "黒瀬川",
+        "river": "大谷川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "大谷川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4102,
+        "obs_cd": 2,
+        "obs_fcd": "0410200700002"
+      },
       "manager": "県土木部",
       "lat": 36.8558333,
       "lon": 137.4863889,
@@ -1254,7 +1494,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 04:20",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1295,15 +1535,20 @@
       "name": "黒部ダム",
       "kana": null,
       "address": "富山県中新川郡立山町芦峅寺",
-      "water_system": "黒部川",
-      "river": "黒部川",
+      "official": {
+        "water_system": "黒部川",
+        "river": "黒部川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": null,
       "manager": "関西電力",
       "lat": 36.5663889,
       "lon": 137.6622222,
-      "note": "日本最大級の堤高186m。観光放水は6-10月",
+      "note": "堤高186mは日本一。観光放流は例年6〜10月",
       "source": {
         "provider": null,
-        "checked": "kepco.co.jp / kurobe-dam.com / river.go.jp"
+        "checked": "国土交通省 川の防災情報（観測所の登録なし）／関西電力サイト／黒部ダムオフィシャルサイト"
       },
       "manager_office": null,
       "flood_season": null,
@@ -1312,32 +1557,32 @@
       "rate_irrigation": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "rate_effective": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "storage_level_m": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "storage_capacity_1000m3": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "inflow_m3s": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "outflow_m3s": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "data_status": "no_source",
       "illustration": null
@@ -1349,15 +1594,20 @@
       "name": "有峰ダム",
       "kana": null,
       "address": "富山県富山市有峰",
-      "water_system": "常願寺川",
-      "river": "和田川",
+      "official": {
+        "water_system": "常願寺川",
+        "river": "和田川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": null,
       "manager": "北陸電力",
       "lat": 36.4894444,
       "lon": 137.4486111,
       "note": "有峰湖。ダム湖百選",
       "source": {
         "provider": null,
-        "checked": "rikuden.co.jp/arimine / river.go.jp"
+        "checked": "国土交通省 川の防災情報（観測所の登録なし）／北陸電力サイト"
       },
       "manager_office": null,
       "flood_season": null,
@@ -1366,32 +1616,32 @@
       "rate_irrigation": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "rate_effective": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "storage_level_m": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "storage_capacity_1000m3": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "inflow_m3s": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "outflow_m3s": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "data_status": "no_source",
       "illustration": null
@@ -1403,15 +1653,20 @@
       "name": "出し平ダム",
       "kana": null,
       "address": "富山県黒部市黒部奥山国有林",
-      "water_system": "黒部川",
-      "river": "黒部川",
+      "official": {
+        "water_system": "黒部川",
+        "river": "黒部川",
+        "source": "国土数値情報 W01-14（国土交通省）",
+        "note": null
+      },
+      "observation": null,
       "manager": "関西電力",
       "lat": 36.7699444,
       "lon": 137.6311944,
       "note": "宇奈月ダムとの連携排砂で知られる",
       "source": {
         "provider": null,
-        "checked": "kepco.co.jp / hrr.mlit.go.jp/kurobe / river.go.jp"
+        "checked": "国土交通省 川の防災情報（観測所の登録なし）／関西電力サイト／国土交通省 黒部河川事務所"
       },
       "manager_office": null,
       "flood_season": null,
@@ -1420,32 +1675,32 @@
       "rate_irrigation": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "rate_effective": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "storage_level_m": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "storage_capacity_1000m3": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "inflow_m3s": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "outflow_m3s": {
         "value": null,
         "status": "no_source",
-        "reason": "発電専用ダムで貯水位・貯水量の公開なし"
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "data_status": "no_source",
       "illustration": null

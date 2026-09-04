@@ -44,6 +44,7 @@ DAMS_CSV = ROOT / "toyama_dams.csv"
 NODATA_CSV = ROOT / "toyama_dams_nodata.csv"
 SLUGS_CSV = ROOT / "dam_slugs.csv"
 SITE_JSON = ROOT / "site.json"
+OFFICIAL_CSV = ROOT / "dam_official.csv"
 OUT_JSON = ROOT / "docs" / "data" / "dams.json"
 # 観測所マスタ（住所・読み・洪水期制限水位）はほぼ変わらないので、ローカルに持っておく。
 # 相手サーバへのリクエストを 1 回あたり約半分に減らすため。
@@ -212,12 +213,14 @@ def in_flood_season(fs: dict | None, when: dt.datetime) -> bool | None:
 
 # ---------------------------------------------------------------- 1 基分
 
-def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict) -> dict:
+def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict,
+              official: dict) -> dict:
     ofc = int(row["ofc_cd"])
     obs = int(row["obs_cd"])
     fcd = obs_fcd(ofc, obs)
 
     sl = slugs.get(row["dam_name"], {})
+    off = official.get(row["dam_name"], {})
     rec: dict[str, Any] = {
         # id は「都道府県 + ローマ字読み」で作る自前の安定キー。
         # 取得元の観測所コードに依存しないので、データ源を変えても URL と
@@ -228,8 +231,22 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
         "name": row["dam_name"],
         "kana": None,
         "address": None,
-        "water_system": row["water_system"],
-        "river": row["river"],
+        # --- ダム本体の基本情報（公式資料に基づく。表示はこちらを使う）
+        "official": {
+            "water_system": off.get("official_water_system") or row["water_system"],
+            "river": off.get("official_river") or row["river"],
+            "source": off.get("official_source") or "",
+            "note": (off.get("note") or "").strip() or None,
+        },
+        # --- 観測データ側の分類（川の防災情報の集計単位。ダムの所属水系とは別物）
+        "observation": {
+            "water_system": row["water_system"],
+            "river": row["river"],
+            "provider": "川の防災情報",
+            "ofc_cd": ofc,
+            "obs_cd": obs,
+            "obs_fcd": fcd,
+        },
         "manager": row["manager"],
         "lat": float(row["lat"]),
         "lon": float(row["lon"]),
@@ -264,6 +281,10 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
         rec["manager_office"] = master.get("jrsNm")
         rec["kana"] = master.get("obsKana")
         rec["address"] = master.get("obsAdr")
+        if master.get("rsysNm"):
+            rec["observation"]["water_system"] = master["rsysNm"]
+        if master.get("rvrNm"):
+            rec["observation"]["river"] = master["rvrNm"]
         rec["flood_season"] = flood_season(master)
 
     # --- 実測値。最新スロットが無ければ 10 分ずつ遡る
@@ -318,10 +339,11 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
     return rec
 
 
-def build_nodata_dam(row: dict, slugs: dict) -> dict:
+def build_nodata_dam(row: dict, slugs: dict, official: dict) -> dict:
     reason = row["reason"].strip()
     blank = {"value": None, "status": "no_source", "reason": reason}
     sl = slugs.get(row["dam_name"], {})
+    off = official.get(row["dam_name"], {})
     return {
         "id": f"{sl.get('pref', 'unknown')}-{sl.get('slug') or row['dam_name']}",
         "pref": sl.get("pref", ""),
@@ -329,8 +351,15 @@ def build_nodata_dam(row: dict, slugs: dict) -> dict:
         "name": row["dam_name"],
         "kana": None,
         "address": (row.get("address") or "").strip() or None,
-        "water_system": row["water_system"],
-        "river": row["river"],
+        # --- ダム本体の基本情報（公式資料に基づく。表示はこちらを使う）
+        "official": {
+            "water_system": off.get("official_water_system") or row["water_system"],
+            "river": off.get("official_river") or row["river"],
+            "source": off.get("official_source") or "",
+            "note": (off.get("note") or "").strip() or None,
+        },
+        # 観測所そのものが存在しないので、観測データ側の分類は無い
+        "observation": None,
         "manager": row["manager"],
         "lat": float(row["lat"]),
         "lon": float(row["lon"]),
@@ -408,10 +437,11 @@ def main() -> int:
 
     slugs = {r["dam_name"]: r for r in read_csv(SLUGS_CSV)}
     master_cache = load_master_cache(args.refresh_master)
+    official = {r["dam_name"]: r for r in read_csv(OFFICIAL_CSV)} if OFFICIAL_CSV.exists() else {}
 
     dams: list[dict] = []
     for row in read_csv(DAMS_CSV):
-        rec = build_dam(row, base_time, slugs, master_cache)
+        rec = build_dam(row, base_time, slugs, master_cache, official)
         irr = rec["rate_irrigation"]
         eff = rec["rate_effective"]
         print(
@@ -423,7 +453,7 @@ def main() -> int:
 
     if not args.skip_nodata and NODATA_CSV.exists():
         for row in read_csv(NODATA_CSV):
-            rec = build_nodata_dam(row, slugs)
+            rec = build_nodata_dam(row, slugs, official)
             print(f"  {rec['name']:<9} 利水=—          有効=—          [no_source]")
             dams.append(rec)
 

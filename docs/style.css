@@ -524,6 +524,7 @@ details.help > summary:focus-visible {
 }
 
 .src a { color: inherit; }
+.src b { color: var(--ink-soft); font-weight: 700; }
 
 .noscript { padding: 24px; font-size: 14px; }
 

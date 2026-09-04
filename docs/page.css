@@ -332,6 +332,33 @@ details.help > summary:focus-visible {
 
 .backlink { margin-top: 24px; font-size: 15px; font-weight: 600; }
 
+/* --- 出典セクション：基本情報とデータの出どころを分けて示す --- */
+
+.sources {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.sources h2 {
+  font-size: 15px;
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+}
+
+.src-item { margin-bottom: 14px; }
+
+.src-item h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin: 0 0 3px;
+  letter-spacing: .02em;
+}
+
+.src-item p { margin: 0; font-size: 13px; line-height: 1.75; }
+.src-item .src-note { color: var(--ink-faint); font-size: 12px; }
+
 /* --- 出典（常時表示） --- */
 
 .credits {

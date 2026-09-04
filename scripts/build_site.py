@@ -102,6 +102,16 @@ def help_toggle(key: str, label: str) -> str:
     )
 
 
+def ows(dam: dict) -> str:
+    """ダム本体の公式な水系名。表示に使うのは常にこちら。"""
+    return (dam.get("official") or {}).get("water_system") or ""
+
+
+def oriv(dam: dict) -> str:
+    """ダム本体の公式な河川名。"""
+    return (dam.get("official") or {}).get("river") or ""
+
+
 def e(s: Any) -> str:
     return html.escape("" if s is None else str(s), quote=True)
 
@@ -238,14 +248,17 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     # 数値はページ本文に観測日時つきで載せる。
     title = f"{name}｜{SITE_NAME}"
     where = dam.get("address") or REGION
-    sub = f"{dam['water_system']}水系{dam['river']}"
+    sub = f"{ows(dam)}水系{oriv(dam)}"
     manager = dam.get("manager_office") or dam.get("manager") or ""
 
     if dam["data_status"] == "no_source":
+        # 事業者が公開しない「理由」は確認できていないので断定しない。
+        # 書けるのは「ダム旅が取得できない」という自分側の事実だけ。
         desc = (
-            f"{name}（{where}）。{sub}。{manager}が管理する発電専用ダムです。"
-            "貯水位・貯水量が公開されていないため貯水率は掲載していません。"
-            f"地図での位置とダムの基本情報をまとめています。"
+            f"{name}（{where}）。{sub}"
+            + (f"、管理は{manager}" if manager else "")
+            + "。地図での位置とダムの基本情報をまとめています。"
+            "貯水率は、現在ダム旅が利用している公開情報源では取得できないため掲載していません。"
         )
     elif dam["data_status"] in ("missing", "not_provided", "closed"):
         desc = (
@@ -310,7 +323,7 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     body.append('<article class="dam-page">')
     body.append(f"<h1>{e(name)}" + (f'<span class="kana">{e(dam["kana"])}</span>' if dam.get("kana") else "") + "</h1>")
 
-    sub = " / ".join(filter(None, [dam["water_system"] + "水系", dam["river"], dam.get("manager")]))
+    sub = " / ".join(filter(None, [ows(dam) + "水系", oriv(dam), dam.get("manager")]))
     body.append(f'<p class="dam-sub">{e(sub)}</p>')
 
     # イラスト差し込み領域（地図画面と同じ場所を確保しておく）
@@ -356,9 +369,10 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
 
     if dam["data_status"] not in ("ok", "partial"):
         body.append(
-            '<p class="nodata-note">このダムの貯水率は表示できません。'
-            f"理由：{e(reason(dam.get('rate_irrigation')))}"
-            "<br>値を推定して埋めることはしていません。</p>"
+            '<p class="nodata-note">'
+            f"{e(reason(dam.get('rate_irrigation')))}。"
+            "<br>値を推定して埋めることはしていません。"
+            "下の「このページの情報について」に、確認した情報源を記載しています。</p>"
         )
 
     body.append('<table class="facts">')
@@ -368,7 +382,8 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     else:
         body.append('<tr><th>観測日時</th><td class="muted">—<br><small>観測値の配信がありません</small></td></tr>')
     body.append(f"<tr><th>所在地</th><td>{e(dam.get('address') or '—')}</td></tr>")
-    body.append(f"<tr><th>水系 / 河川</th><td>{e(dam['water_system'])}水系 {e(dam['river'])}</td></tr>")
+    off = dam.get("official") or {}
+    body.append(f"<tr><th>水系 / 河川</th><td>{e(ows(dam))}水系 {e(oriv(dam))}</td></tr>")
     body.append(f"<tr><th>管理者</th><td>{e(dam.get('manager_office') or dam.get('manager') or '—')}</td></tr>")
     body.append(fact_row("貯水位", dam.get("storage_level_m"), "m", 2))
     body.append(fact_row("貯水量", dam.get("storage_capacity_1000m3"), "千m³", 0))
@@ -388,18 +403,37 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     if dam.get("note"):
         body.append(f'<div class="callout note">{e(dam["note"])}</div>')
 
+    # --- 出典。ダム本体の基本情報と、貯水率データの出どころは別々に書く。
+    body.append('<section class="sources"><h2>このページの情報について</h2>')
+
+    body.append('<div class="src-item"><h3>ダムの基本情報</h3><p>'
+                + e(off.get("source") or "—")
+                + ("<br><span class=\"src-note\">" + e(off["note"]) + "</span>"
+                   if off.get("note") else "")
+                + "</p></div>")
+
+    ob = dam.get("observation")
     if dam["data_status"] == "no_source":
         body.append(
-            '<div class="callout note">出典：なし。' + e(name)
-            + "は発電専用ダムで、事業者が貯水位・貯水量を公開していません。確認先: "
-            + e((dam.get("source") or {}).get("checked") or "—") + "</div>"
+            '<div class="src-item"><h3>貯水率データ</h3>'
+            "<p>現在、ダム旅が利用している公開情報源では取得できません。<br>"
+            '<span class="src-note">確認した情報源：'
+            + e((dam.get("source") or {}).get("checked") or "—")
+            + "</span></p></div>"
         )
-    else:
-        src = dam.get("source") or {}
+    elif ob:
         body.append(
-            '<p class="obs-src">観測所：事務所コード ' + e(src.get("ofc_cd"))
-            + " / 観測所コード " + e(src.get("obs_cd")) + "（川の防災情報）</p>"
+            '<div class="src-item"><h3>貯水率データ</h3><p>'
+            f'{CREDIT_MLIT}<br>'
+            f'<span class="src-note">観測所：事務所コード {e(ob.get("ofc_cd"))}'
+            f' / 観測所コード {e(ob.get("obs_cd"))}'
+            f'（観測所ID {e(ob.get("obs_fcd"))}）<br>'
+            f'この観測所での分類：{e(ob.get("water_system"))}水系 {e(ob.get("river"))}'
+            + ("（ダム本体の水系・河川とは分類が異なります）"
+               if (ob.get("water_system"), ob.get("river")) != (ows(dam), oriv(dam)) else "")
+            + "</span></p></div>"
         )
+    body.append("</section>")
 
     body.append(f'<p class="backlink"><a href="{e(base)}/#dam={e(name)}">地図でこのダムの位置を見る →</a></p>')
     body.append("</article>")
@@ -529,13 +563,13 @@ def index_page(data: dict, base: str) -> str:
     dams = data["dams"]
     ok = data["summary"]["by_status"].get("ok", 0)
     rows = []
-    for d in sorted(dams, key=lambda x: (x["water_system"], x["name"])):
+    for d in sorted(dams, key=lambda x: (ows(x), oriv(x), x["name"])):
         irr = rate_text(d.get("rate_irrigation"))
         eff = rate_text(d.get("rate_effective"))
         cls = "" if val(d.get("rate_irrigation")) is not None else ' class="muted"'
         rows.append(
             f'<tr><td><a href="./{e(d["pref"])}/{e(d["slug"])}/">{e(d["name"])}</a></td>'
-            f'<td>{e(d["water_system"])}水系 {e(d["river"])}</td>'
+            f'<td>{e(ows(d))}水系 {e(oriv(d))}</td>'
             f"<td{cls}>{e(irr)}</td><td{cls}>{e(eff)}</td>"
             f"<td>{e(d.get('manager') or '—')}</td></tr>"
         )
@@ -543,11 +577,12 @@ def index_page(data: dict, base: str) -> str:
     body = [
         '<nav class="crumbs" aria-label="パンくず">'
         f'<a href="{e(base)}/">{e(SITE_NAME)}</a> › <span>ダム一覧</span></nav>',
-        f"<h1>{e(REGION)}のダム一覧（全{len(dams)}基）</h1>",
-        f'<p class="lead">観測 {e(obs_time_jp(data["base_obs_time"]))} 時点。'
-        f"{ok}基は数値を取得できています。残りは欠測・未提供・データ提供なしで、"
-        "推定値では埋めず「—」と理由を表示しています。<br>"
-        "<small>このサイトは自動更新ではありません。表示中の値がいつのものかは、"
+        f"<h1>{e(REGION)}のダム（現在{len(dams)}基を収録）</h1>",
+        f'<p class="lead">ダム旅が現在収録している{len(dams)}基です。'
+        f"{REGION}内にはこのほかにも未収録のダムがあります。<br>"
+        f"観測 {e(obs_time_jp(data['base_obs_time']))} 時点で{ok}基の数値を取得できています。"
+        "残りは欠測・未提供・データなしで、推定値では埋めず「—」と理由を表示しています。<br>"
+        "<small>このアプリは自動更新ではありません。表示中の値がいつのものかは、"
         "各ダムのページで確認できます。</small></p>",
         '<p class="backlink"><a href="' + e(base) + '/">地図で見る →</a></p>',
         '<div class="table-scroll"><table class="list">',
@@ -557,7 +592,7 @@ def index_page(data: dict, base: str) -> str:
 
     title = f"ダム一覧｜{SITE_NAME}"
     desc = (
-        f"{REGION}の{len(dams)}基のダムを一覧にしています。"
+        f"{REGION}のダム{len(dams)}基を収録した一覧です。"
         "水系・河川・管理者などの基本情報と、公表されている場合は貯水状況を掲載。"
         "気になるダムのページから、地図での位置や見どころを確認できます。"
     )
@@ -602,7 +637,7 @@ def index_meta(base: str, data: dict) -> str:
     title = SITE.get("home_title") or SITE_NAME
     total = data["summary"]["total"]
     desc = (
-        f"{REGION}の{total}基のダムを地図から探せます。"
+        f"{REGION}のダム{total}基を収録。地図から探せます。"
         "水系・河川・管理者といった基本情報に加えて、公表されている場合は"
         "貯水状況（利水貯水率・有効貯水率）も観測日時つきで確認できます。"
         "ダムを知って、旅の寄り道に見に行くきっかけに。"
