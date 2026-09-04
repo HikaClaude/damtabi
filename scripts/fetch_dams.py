@@ -237,6 +237,8 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
             "river": off.get("official_river") or row["river"],
             "source": off.get("official_source") or "",
             "note": (off.get("note") or "").strip() or None,
+            # 照合できなかった項目の記録。表示はしないが、根拠を追えるよう残す。
+            "unverified": (off.get("unverified") or "").strip() or None,
         },
         # --- 観測データ側の分類（川の防災情報の集計単位。ダムの所属水系とは別物）
         "observation": {
@@ -357,6 +359,8 @@ def build_nodata_dam(row: dict, slugs: dict, official: dict) -> dict:
             "river": off.get("official_river") or row["river"],
             "source": off.get("official_source") or "",
             "note": (off.get("note") or "").strip() or None,
+            # 照合できなかった項目の記録。表示はしないが、根拠を追えるよう残す。
+            "unverified": (off.get("unverified") or "").strip() or None,
         },
         # 観測所そのものが存在しないので、観測データ側の分類は無い
         "observation": None,

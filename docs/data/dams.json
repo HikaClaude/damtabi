@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-05T05:19:55+09:00",
-  "base_obs_time": "2026/09/05 05:15",
+  "generated_at": "2026-09-05T05:26:29+09:00",
+  "base_obs_time": "2026/09/05 05:20",
   "source": {
     "name": "国土交通省 川の防災情報",
     "url": "https://www.river.go.jp/kawabou/pcfull/tm",
@@ -118,8 +118,9 @@
       "official": {
         "water_system": "黒部川",
         "river": "黒部川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "黒部川",
@@ -147,7 +148,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 89.9,
         "status": "ok",
@@ -174,7 +175,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 25.6,
+        "value": 25.2,
         "status": "ok",
         "reason": null
       },
@@ -191,8 +192,9 @@
       "official": {
         "water_system": "神通川",
         "river": "室牧川",
-        "source": "富山県「室牧ダムの概要」",
-        "note": "国土数値情報は上位河川の井田川で登録。実際は井田川支流の室牧川"
+        "source": "富山県「室牧ダムの概要」（2026年9月5日閲覧）",
+        "note": "国土数値情報は上位河川の井田川で登録。実際は井田川支流の室牧川",
+        "unverified": null
       },
       "observation": {
         "water_system": "神通川",
@@ -264,8 +266,9 @@
       "official": {
         "water_system": "神通川",
         "river": "熊野川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "神通川",
@@ -333,8 +336,9 @@
       "official": {
         "water_system": "神通川",
         "river": "久婦須川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "神通川",
@@ -406,8 +410,9 @@
       "official": {
         "water_system": "庄川",
         "river": "和田川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "庄川",
@@ -435,34 +440,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
-        "value": 56.4,
+        "value": 55.9,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 28.1,
+        "value": 27.8,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 40.13,
+        "value": 40.11,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 507,
+        "value": 502,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.67,
+        "value": 1.25,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 11.25,
+        "value": 10.9,
         "status": "ok",
         "reason": null
       },
@@ -479,8 +484,9 @@
       "official": {
         "water_system": "庄川",
         "river": "利賀川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "庄川",
@@ -508,29 +514,29 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
-        "value": 10.5,
+        "value": 9.9,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 1.7,
+        "value": 1.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 887.25,
+        "value": 887.24,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 17,
+        "value": 16,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.7,
+        "value": 2,
         "status": "ok",
         "reason": null
       },
@@ -552,8 +558,9 @@
       "official": {
         "water_system": "庄川",
         "river": "境川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "庄川",
@@ -577,7 +584,7 @@
       "manager_office": "境川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 40.1,
         "status": "ok",
@@ -604,7 +611,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.38,
+        "value": 0.39,
         "status": "ok",
         "reason": null
       },
@@ -621,8 +628,9 @@
       "official": {
         "water_system": "小矢部川",
         "river": "小矢部川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": "管理者区分は未確認（国土数値情報の管理者コードと当方の「県農林」表記が整合しない。コード表を確認できていない）"
       },
       "observation": {
         "water_system": "小矢部川",
@@ -646,7 +654,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -658,17 +666,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 339.51,
+        "value": 339.52,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 10307,
+        "value": 10314,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4,
+        "value": 4.8,
         "status": "ok",
         "reason": null
       },
@@ -690,8 +698,9 @@
       "official": {
         "water_system": "小矢部川",
         "river": "子撫川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": "管理者区分は未確認（国土数値情報の管理者コードと当方の「県農林」表記が整合しない。コード表を確認できていない）"
       },
       "observation": {
         "water_system": "小矢部川",
@@ -715,7 +724,7 @@
       "manager_office": "農林水産省北陸地整管内",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:00",
+      "obs_time": "2026/09/05 05:10",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -742,7 +751,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "outflow_m3s": {
-        "value": 4.12,
+        "value": 4.14,
         "status": "ok",
         "reason": null
       },
@@ -759,8 +768,9 @@
       "official": {
         "water_system": "小矢部川",
         "river": "子撫川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "小矢部川",
@@ -784,7 +794,7 @@
       "manager_office": "子撫川統合ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -806,12 +816,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.43,
+        "value": 6.16,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.82,
+        "value": 7.81,
         "status": "ok",
         "reason": null
       },
@@ -828,8 +838,9 @@
       "official": {
         "water_system": "小矢部川",
         "river": "山田川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "小矢部川",
@@ -857,29 +868,29 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
-        "value": 61.3,
+        "value": 61.4,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 23.4,
+        "value": 23.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 254.57,
+        "value": 254.58,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1133,
+        "value": 1134,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.86,
+        "value": 0.84,
         "status": "ok",
         "reason": null
       },
@@ -901,8 +912,9 @@
       "official": {
         "water_system": "小矢部川",
         "river": "打尾川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": "管理者区分は未確認（国土数値情報の管理者コードと当方の「県農林」表記が整合しない。コード表を確認できていない）"
       },
       "observation": {
         "water_system": "小矢部川",
@@ -926,7 +938,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -970,8 +982,9 @@
       "official": {
         "water_system": "小川",
         "river": "小川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1039,8 +1052,9 @@
       "official": {
         "water_system": "角川",
         "river": "角川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1064,7 +1078,7 @@
       "manager_office": "新川土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 99.2,
         "status": "ok",
@@ -1086,7 +1100,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.3,
+        "value": 1.4,
         "status": "ok",
         "reason": null
       },
@@ -1108,8 +1122,9 @@
       "official": {
         "water_system": "上市川",
         "river": "上市川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1137,34 +1152,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
-        "value": 53.9,
+        "value": 53.7,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 21.5,
+        "value": 21.4,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 184.9,
+        "value": 184.89,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 737,
+        "value": 735,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.2,
+        "value": 6.41,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.7,
+        "value": 7.62,
         "status": "ok",
         "reason": null
       },
@@ -1181,8 +1196,9 @@
       "official": {
         "water_system": "上市川",
         "river": "上市川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": "国土数値情報の表記は「上市川第2」"
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": "国土数値情報の表記は「上市川第2」",
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1210,7 +1226,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 97.9,
         "status": "ok",
@@ -1232,12 +1248,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.31,
+        "value": 4.62,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 5.83,
+        "value": 5.84,
         "status": "ok",
         "reason": null
       },
@@ -1254,8 +1270,9 @@
       "official": {
         "water_system": "白岩川",
         "river": "白岩川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1279,7 +1296,7 @@
       "manager_office": "白岩川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 90.1,
         "status": "ok",
@@ -1323,8 +1340,9 @@
       "official": {
         "water_system": "小川",
         "river": "舟川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1392,8 +1410,9 @@
       "official": {
         "water_system": "片貝川",
         "river": "布施川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1421,7 +1440,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/05 05:10",
+      "obs_time": "2026/09/05 05:20",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1465,8 +1484,9 @@
       "official": {
         "water_system": "黒瀬川",
         "river": "大谷川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": {
         "water_system": "北陸その他",
@@ -1538,8 +1558,9 @@
       "official": {
         "water_system": "黒部川",
         "river": "黒部川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": null,
       "manager": "関西電力",
@@ -1597,8 +1618,9 @@
       "official": {
         "water_system": "常願寺川",
         "river": "和田川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": null,
       "manager": "北陸電力",
@@ -1656,8 +1678,9 @@
       "official": {
         "water_system": "黒部川",
         "river": "黒部川",
-        "source": "国土数値情報 W01-14（国土交通省）",
-        "note": null
+        "source": "国土数値情報 W01-14「ダム」（国土交通省、2014年公開）",
+        "note": null,
+        "unverified": null
       },
       "observation": null,
       "manager": "関西電力",
