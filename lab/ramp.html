@@ -1,0 +1,71 @@
+<!DOCTYPE html><meta charset="utf-8"><link rel="stylesheet" href="pins.css">
+<style>
+ body{margin:0;padding:22px 26px;background:#fff;font:13px/1.6 "Yu Gothic UI","Hiragino Kaku Gothic ProN",sans-serif;color:#16202b}
+ h1{font-size:19px;margin:0 0 4px} .sub{color:#5b6875;font-size:12px;margin-bottom:18px}
+ h2{font-size:14px;margin:22px 0 8px;padding-top:14px;border-top:1px solid #dde3ea}
+ table{border-collapse:collapse} th,td{padding:8px 10px;text-align:center}
+ th{font-size:11px;color:#5b6875} td.rh{text-align:left;font-weight:700;width:150px;font-size:12.5px}
+ td.rh small{display:block;font-weight:400;color:#8a95a1;font-size:10.5px}
+ .sw{display:flex;gap:0;margin:4px 0 10px;max-width:560px;border-radius:5px;overflow:hidden}
+ .sw div{flex:1;height:22px;display:grid;place-items:center;color:#fff;font-size:10.5px;font-weight:700}
+</style>
+<h1>E案（円弧ゲージ＋下部に数字）と配色</h1>
+<div class="sub">リングの<b>色</b>と<b>長さ</b>の両方で残量を示します。画像は潰しません。</div>
+
+<h2>1. E案のサイズ別（配色は現状のまま）</h2>
+<table id="t1"></table>
+
+<h2>2. 配色案の比較（同じE案・48px）</h2>
+<div id="ramps"></div>
+
+<script src="pins.js"></script>
+<script>
+const RAMPS={
+ "現状": [{min:95,max:null,color:"#1d4ed8",l:"95+"},{min:80,max:95,color:"#0891b2",l:"80-95"},
+          {min:60,max:80,color:"#15803d",l:"60-80"},{min:40,max:60,color:"#ea9a1a",l:"40-60"},
+          {min:null,max:40,color:"#dc2626",l:"<40"}],
+ "案1 緑を残し低域を赤寄せ": [{min:95,max:null,color:"#1d4ed8",l:"95+"},{min:80,max:95,color:"#2f8fd0",l:"80-95"},
+          {min:60,max:80,color:"#3f9e6a",l:"60-80"},{min:40,max:60,color:"#e2701c",l:"40-60"},
+          {min:null,max:40,color:"#c31616",l:"<40"}],
+ "案2 緑を外し青→赤の連続": [{min:95,max:null,color:"#1d4ed8",l:"95+"},{min:80,max:95,color:"#4b9fd6",l:"80-95"},
+          {min:60,max:80,color:"#e8b02a",l:"60-80"},{min:40,max:60,color:"#e2661c",l:"40-60"},
+          {min:null,max:40,color:"#b81414",l:"<40"}]
+};
+const ND="#94a3b8";
+const IL={u:"../docs/img/dams/toyama-unazuki.webp",k:"../docs/img/dams/toyama-kubusugawa.webp",
+          g:"../docs/img/dams/toyama-goi.webp"};
+function color(v,bins){if(v===null)return ND;
+ for(const b of bins) if((b.min===null||v>=b.min)&&(b.max===null||v<b.max)) return b.color; return ND;}
+
+// --- 表1
+const CASES=[{l:"イラストあり",s:"宇奈月 89.5%",il:IL.u,v:89.5},
+ {l:"イラストあり",s:"久婦須川 100%",il:IL.k,v:100},
+ {l:"イラストあり・値なし",s:"五位 未提供",il:IL.g,v:null},
+ {l:"イラストなし",s:"境川 40.2%",il:null,v:40.2},
+ {l:"イラストなし",s:"利賀川 13%",il:null,v:13},
+ {l:"イラストなし・値なし",s:"熊野川 欠測",il:null,v:null}];
+let h='<tr><th></th><th>40px</th><th>48px</th><th>60px</th><th style="padding-left:24px">参考: 現状D 48px</th></tr>';
+CASES.forEach((c,i)=>{h+=`<tr><td class="rh">${c.l}<small>${c.s}</small></td>`+
+ [40,48,60].map(s=>`<td data-e="${i}" data-s="${s}"></td>`).join('')+
+ `<td data-d="${i}" style="padding-left:24px"></td></tr>`;});
+document.getElementById('t1').innerHTML=h;
+const B0=RAMPS["現状"];
+document.querySelectorAll('[data-e]').forEach(td=>{const c=CASES[+td.dataset.e];
+ td.appendChild(PinLab.make("E",+td.dataset.s,c.il,c.v,color(c.v,B0)));});
+document.querySelectorAll('[data-d]').forEach(td=>{const c=CASES[+td.dataset.d];
+ td.appendChild(PinLab.make("D",48,c.il,c.v,color(c.v,B0)));});
+
+// --- 配色比較
+const VALS=[100,94,89,78,60,52,40,28,13];
+let r='';
+for(const [name,bins] of Object.entries(RAMPS)){
+ r+=`<h3 style="font-size:13px;margin:16px 0 4px">${name}</h3><div class="sw">`+
+   bins.map(b=>`<div style="background:${b.color}">${b.l}</div>`).join('')+`</div><div class="row" data-r="${name}"></div>`;
+}
+document.getElementById('ramps').innerHTML=r;
+document.querySelectorAll('[data-r]').forEach(div=>{
+ const bins=RAMPS[div.dataset.r];
+ VALS.forEach((v,i)=>{const p=PinLab.make("E",48,i%3===0?IL.u:null,v,color(v,bins));
+  p.style.margin="0 9px 0 0"; div.appendChild(p);});
+});
+</script>

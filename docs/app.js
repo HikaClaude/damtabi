@@ -130,19 +130,34 @@
     return map;
   }
 
+  var PIN_SIZE = 48;          // ゲージのぶん、塗りつぶし円より少し大きくする
+  var GAUGE_R = 43;           // viewBox 100 基準
+  var GAUGE_W = 11;
+
+  function hexA(hex, a) {
+    var n = parseInt(hex.slice(1), 16);
+    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+  }
+
+  function shade(hex, amt) {
+    var n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+    function f(c) { return Math.max(0, Math.min(255, Math.round(c + 255 * amt))); }
+    return "rgb(" + f(r) + "," + f(g) + "," + f(b) + ")";
+  }
+
   function makePin(dam) {
     var el = document.createElement("button");
     el.type = "button";
     el.className = "dam-pin";
+    el.style.width = el.style.height = PIN_SIZE + "px";
     el.title = dam.name;
     el.setAttribute("aria-label", dam.name);
 
     // MapLibre はこの el の transform を毎フレーム書き換える。
-    // 見た目とアニメーションは内側の span に持たせ、el 側には一切
-    // transition を付けない（付けると地図の動きにピンが追従できなくなる）。
-    var body = document.createElement("span");
-    body.className = "dam-pin__body";
-    el.appendChild(body);
+    // 見た目とアニメーションは内側に持たせ、el 側には transition を付けない。
+    var inner = document.createElement("span");
+    inner.className = "dam-pin__inner";
+    el.appendChild(inner);
 
     paintPin(el, dam);
     el.addEventListener("click", function (ev) {
@@ -152,19 +167,59 @@
     return el;
   }
 
+  /**
+   * ピンを描く。
+   *
+   * リングは「色」だけでなく「弧の長さ」でも残量を示す（二重符号化）。
+   * 色が見分けにくい環境でも量が読めるようにするため。
+   * 中身はイラストがあればイラスト、無ければ淡い同系色。
+   * 中を濃く塗るとリングの弧が読めなくなるので、あえて彩度を落としている。
+   */
   function paintPin(el, dam) {
     var def = basisDef();
     var v = val(dam[def.field]);
-    var body = el.firstChild;
-    el.style.setProperty("--pin", colorFor(dam));
-    if (v === null) {
-      body.classList.add("is-nodata");
-      body.textContent = "—";
+    var color = colorFor(dam);
+    var illust = illustFor(dam);
+    var C = 2 * Math.PI * GAUGE_R;
+    var pct = v === null ? 0 : Math.max(0, Math.min(100, v)) / 100;
+
+    var track = v === null ? "#ccd4dc" : hexA(color, 0.22);
+    var arc = v === null ? "" :
+      '<circle cx="50" cy="50" r="' + GAUGE_R + '" fill="none" stroke="' + color +
+      '" stroke-width="' + GAUGE_W + '" stroke-linecap="round" stroke-dasharray="' +
+      (pct * C).toFixed(1) + " " + C.toFixed(1) + '" transform="rotate(-90 50 50)"/>';
+
+    var svg =
+      '<svg class="dam-pin__gauge" viewBox="0 0 100 100" aria-hidden="true">' +
+        '<circle cx="50" cy="50" r="' + GAUGE_R + '" fill="none" stroke="#fff" stroke-width="' + (GAUGE_W + 4) + '"/>' +
+        '<circle cx="50" cy="50" r="' + GAUGE_R + '" fill="none" stroke="' + track + '" stroke-width="' + GAUGE_W + '"/>' +
+        arc +
+      "</svg>";
+
+    var body, numCls, numColor, fs;
+    if (illust) {
+      body = '<img src="' + esc(illust) + '" alt=""><span class="dam-pin__scrim"></span>';
+      numCls = "dam-pin__num";
+      numColor = "#fff";
+      fs = Math.round(PIN_SIZE * 0.27);
+    } else if (v === null) {
+      body = '<span class="dam-pin__fill is-nodata"></span>';
+      numCls = "dam-pin__num is-center";
+      numColor = "#5b6875";
+      fs = Math.round(PIN_SIZE * 0.34);
     } else {
-      body.classList.remove("is-nodata");
-      // 100 は "100"、それ以外は整数に丸めて表示（正確な値はパネルで出す）
-      body.textContent = String(Math.round(v));
+      body = '<span class="dam-pin__fill" style="background:' + hexA(color, 0.2) + '"></span>';
+      numCls = "dam-pin__num is-center";
+      numColor = shade(color, -0.28);
+      fs = Math.round(PIN_SIZE * 0.34);
     }
+
+    var num = v === null ? "—" : String(Math.round(v));
+    el.firstChild.innerHTML =
+      svg +
+      '<span class="dam-pin__disc" style="inset:' + (GAUGE_W * 0.6) + '%">' + body +
+      '<span class="' + numCls + '" style="font-size:' + fs + "px;color:" + numColor + '">' +
+      num + "</span></span>";
   }
 
   function repaintAll() {
@@ -190,6 +245,11 @@
     var li = document.createElement("li");
     li.innerHTML = '<span class="sw nodata"></span><span>データなし（理由を表示）</span>';
     ul.appendChild(li);
+
+    var note = document.createElement("li");
+    note.className = "legend-note";
+    note.textContent = "輪の色と長さが残量を表します";
+    ul.appendChild(note);
   }
 
   // ------------------------------------------------------------ パネル

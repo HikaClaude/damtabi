@@ -126,58 +126,103 @@ html, body {
 
 /* ---------------------------------------------------------- markers */
 
-/* 外側の要素は MapLibre が transform を毎フレーム書き換える。
-   ここに transition を付けると全ピンが地図から遅れて追従してしまう
-   （実測: 200px パンした瞬間に 179px 遅れ = 120ms かけて追いかける）。
-   そのため外側は「位置」だけを持ち、見た目とアニメーションは内側の
-   .dam-pin__body に分けている。内側は MapLibre が触らないので自由に動かせる。 */
+/* ピンは「リングの色 + 弧の長さ」で残量を示し、中身はイラスト（あれば）。
+   色が見分けにくくても弧の長さで量が読めるようにしている。
+
+   外側の .dam-pin は MapLibre が transform を毎フレーム書き換えるので、
+   ここに transition を付けてはいけない（付けると地図に追従できなくなる）。
+   見た目の変化はすべて内側の .dam-pin__inner 以下に持たせる。 */
 .dam-pin {
-  --pin: var(--nodata);
-  width: 38px;
-  height: 38px;
   padding: 0;
   border: 0;
   background: none;
   cursor: pointer;
-  will-change: transform;      /* 合成レイヤに載せて追従を軽くする */
+  will-change: transform;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-.dam-pin__body {
+.dam-pin__inner {
+  position: relative;
+  display: block;
   width: 100%;
   height: 100%;
+  transition: transform .12s ease, filter .12s ease;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3)) drop-shadow(0 3px 6px rgba(0, 0, 0, .18));
+}
+
+.dam-pin__gauge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dam-pin__disc {
+  position: absolute;
   border-radius: 50%;
+  overflow: hidden;
   display: grid;
   place-items: center;
-  background: var(--pin);
-  color: #fff;
-  border: 2.5px solid #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 3px 8px rgba(0, 0, 0, .22);
-  font-size: 12px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-  transition: transform .12s ease, box-shadow .12s ease;
 }
 
-.dam-pin__body.is-nodata {
+.dam-pin__disc img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dam-pin__fill { position: absolute; inset: 0; }
+
+.dam-pin__fill.is-nodata {
   background: repeating-linear-gradient(
-    -45deg, var(--nodata), var(--nodata) 4px, #b6c0cb 4px, #b6c0cb 8px);
-  font-size: 16px;
+    -45deg, #c3ccd5, #c3ccd5 3px, #dde3ea 3px, #dde3ea 6px);
 }
 
-.dam-pin:hover .dam-pin__body { transform: scale(1.12); }
-.dam-pin:active .dam-pin__body { transform: scale(1.04); }
-
-.dam-pin.is-active .dam-pin__body {
-  transform: scale(1.2);
-  border-color: #ffd54a;
-  box-shadow: 0 0 0 3px rgba(255, 213, 74, .55), 0 4px 12px rgba(0, 0, 0, .3);
+/* 数字の下だけ薄く落とす。イラストを帯で潰さない */
+.dam-pin__scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52%;
+  background: linear-gradient(180deg, rgba(8, 20, 32, 0) 0%, rgba(8, 20, 32, .72) 100%);
 }
 
-/* 地図を動かしている間はホバー拡大を止める（指が乗ったままの誤作動を防ぐ） */
-.is-moving .dam-pin:hover .dam-pin__body { transform: none; }
+.dam-pin__num {
+  position: relative;
+  align-self: end;
+  margin-bottom: 5%;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .55);
+}
+
+.dam-pin__num.is-center {
+  align-self: center;
+  margin-bottom: 0;
+  text-shadow: none;
+}
+
+.dam-pin:hover .dam-pin__inner { transform: scale(1.1); }
+.dam-pin:active .dam-pin__inner { transform: scale(1.03); }
+
+.dam-pin.is-active .dam-pin__inner {
+  transform: scale(1.16);
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0))
+          drop-shadow(0 2px 5px rgba(0, 0, 0, .35));
+}
+
+.dam-pin.is-active .dam-pin__disc {
+  box-shadow: 0 0 0 3px #ffd54a;
+}
+
+/* 地図を動かしている間はホバー拡大を止める */
+.is-moving .dam-pin:hover .dam-pin__inner { transform: none; }
 
 /* ------------------------------------------------- 出典（常時表示） */
 
@@ -241,6 +286,14 @@ html, body {
 }
 
 #legend li { display: flex; align-items: center; gap: 7px; color: var(--ink-soft); }
+
+#legend .legend-note {
+  margin-top: 3px;
+  padding-top: 5px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-size: 10.5px;
+}
 
 #legend .sw {
   width: 13px;

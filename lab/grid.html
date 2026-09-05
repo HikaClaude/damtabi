@@ -1,0 +1,63 @@
+<!DOCTYPE html><meta charset="utf-8">
+<link rel="stylesheet" href="pins.css">
+<style>
+ body{margin:0;padding:16px;background:#f6f7f9;font:13px "Yu Gothic UI","Hiragino Kaku Gothic ProN",sans-serif;color:#16202b}
+ h1{font-size:17px;margin:0 0 2px}
+ .sub{color:#5b6875;font-size:11.5px;margin-bottom:12px}
+ .grid{display:grid;grid-template-columns:620px 620px;gap:14px}
+ .panel{position:relative;width:620px;height:440px;background:url(bg.png) center/620px 440px no-repeat;
+        border:1px solid #dde3ea;border-radius:8px;overflow:hidden}
+ .cap{position:absolute;left:0;top:0;background:rgba(20,80,125,.92);color:#fff;
+      font-size:12px;font-weight:700;padding:5px 12px;border-bottom-right-radius:8px;z-index:9}
+ .pin{position:absolute;transform:translate(-50%,-50%)}
+</style>
+<h1>地図全体での見え方（実データ23基・イラストは5基のみ）</h1>
+<div class="sub">富山県全域。<span id="szlab"></span>イラストがあるのは宇奈月・室牧・上市川第二・久婦須川・五位の5基。</div>
+<div style="margin:-6px 0 12px;font-size:12px">ピンの大きさ： <a href="?size=40">40px</a> ｜ <a href="?size=48">48px</a> ｜ <a href="?size=60">60px</a></div><div class="grid" id="g"></div>
+<script src="pins.js"></script>
+<script>
+const W=620,H=440,Z=8.55,CLAT=36.62,CLON=137.21;
+const SIZE=+(new URLSearchParams(location.search).get("size")||48);
+const RAMPS={
+ cur:[{min:95,max:null,color:"#1d4ed8"},{min:80,max:95,color:"#0891b2"},
+      {min:60,max:80,color:"#15803d"},{min:40,max:60,color:"#ea9a1a"},{min:null,max:40,color:"#dc2626"}],
+ r1: [{min:95,max:null,color:"#1d4ed8"},{min:80,max:95,color:"#2f8fd0"},
+      {min:60,max:80,color:"#3f9e6a"},{min:40,max:60,color:"#e2701c"},{min:null,max:40,color:"#c31616"}],
+ r2: [{min:95,max:null,color:"#1d4ed8"},{min:80,max:95,color:"#4b9fd6"},
+      {min:60,max:80,color:"#e8b02a"},{min:40,max:60,color:"#e2661c"},{min:null,max:40,color:"#b81414"}]};
+const ND="#94a3b8";
+function merc(lat,lon,z){const ws=512*Math.pow(2,z);
+ const x=(lon+180)/360*ws;
+ const s=Math.sin(lat*Math.PI/180);
+ const y=(0.5-Math.log((1+s)/(1-s))/(4*Math.PI))*ws;return[x,y];}
+const [cx,cy]=merc(CLAT,CLON,Z);
+const MODE=new URLSearchParams(location.search).get("mode")||"abcd";
+const VARS = MODE==="e"
+ ? [["E","E案 × 現状配色","cur"],["E","E案 × 案1（緑を残し低域を赤寄せ）","r1"],
+    ["E","E案 × 案2（緑を外し青→赤）","r2"],["D","参考: 現状D × 現状配色","cur"]]
+ : [["A","A. 円形イラスト＋色リング","cur"],["B","B. イラスト＋色帯＋数字","cur"],
+    ["C","C. 色付き円＋小イラスト","cur"],["D","D. 現状（色付き円＋数字）","cur"]];
+Promise.all([
+  fetch("../docs/data/dams.json").then(r=>r.json()),
+  fetch("../docs/data/illustrations.json").then(r=>r.json())
+]).then(([data,il])=>{
+  const g=document.getElementById("g");
+  for(const [v,label,rk] of VARS){
+    const p=document.createElement("div"); p.className="panel";
+    p.innerHTML='<div class="cap">'+label+'</div>';
+    for(const d of data.dams){
+      const [x,y]=merc(d.lat,d.lon,Z);
+      const px=x-cx+W/2, py=y-cy+H/2;
+      if(px<-40||px>W+40||py<-40||py>H+40) continue;
+      const val=d.rate_irrigation.status==="ok"?d.rate_irrigation.value:null;
+      const src=il[d.id]?("../docs/"+il[d.id].replace(/^\.\//,"")):null;
+      const pin=PinLab.make(v,SIZE,src,val,PinLab.binColor(val,RAMPS[rk],ND));
+      pin.style.left=px+"px"; pin.style.top=py+"px";
+      p.appendChild(pin);
+    }
+    g.appendChild(p);
+  }
+  document.title="ready";
+  document.getElementById("szlab").textContent="ピン"+SIZE+"px。";
+});
+</script>

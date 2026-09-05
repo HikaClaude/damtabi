@@ -1,0 +1,47 @@
+<!DOCTYPE html><meta charset="utf-8">
+<link rel="stylesheet" href="pins.css">
+<style>
+ body{margin:0;padding:22px 26px;background:#fff;font:13px/1.6 "Yu Gothic UI","Hiragino Kaku Gothic ProN",sans-serif;color:#16202b}
+ h1{font-size:19px;margin:0 0 4px}
+ .sub{color:#5b6875;font-size:12px;margin-bottom:20px}
+ table{border-collapse:collapse}
+ th,td{padding:9px 12px;text-align:center;vertical-align:middle}
+ th{font-size:11.5px;color:#5b6875;font-weight:700}
+ td.rowh{text-align:left;font-weight:700;font-size:13px;width:230px}
+ td.rowh small{display:block;font-weight:400;color:#8a95a1;font-size:11px}
+ .grp{border-top:1px solid #dde3ea}
+ .cap{font-size:10.5px;color:#8a95a1;margin-top:3px}
+</style>
+<h1>ピン案の比較（実イラスト・実データ）</h1>
+<div class="sub">左=イラストあり／右=イラストなし。同じ貯水率で並べています。</div>
+<div id="out"></div>
+<script src="pins.js"></script>
+<script>
+const BINS=[{min:95,max:null,color:"#1d4ed8"},{min:80,max:95,color:"#0891b2"},
+{min:60,max:80,color:"#15803d"},{min:40,max:60,color:"#ea9a1a"},{min:null,max:40,color:"#dc2626"}];
+const ND="#94a3b8";
+const CASES=[
+ {label:"イラストあり・値あり",  sub:"宇奈月ダム 89.5%", il:"../docs/img/dams/toyama-unazuki.webp", v:89.5},
+ {label:"イラストあり・値あり",  sub:"久婦須川ダム 100%", il:"../docs/img/dams/toyama-kubusugawa.webp", v:100},
+ {label:"イラストあり・値なし",  sub:"五位ダム 未提供",   il:"../docs/img/dams/toyama-goi.webp", v:null},
+ {label:"イラストなし・値あり",  sub:"境川ダム 40.2%",   il:null, v:40.2},
+ {label:"イラストなし・値なし",  sub:"熊野川ダム 欠測",   il:null, v:null},
+];
+const SIZES=[40,48,60], VARS=[["A","円形イラスト＋色リング"],["B","イラスト＋色帯＋数字"],
+ ["C","色付き円＋小イラスト"],["D","現状（色付き円＋数字）"]];
+let html='<table><tr><th></th>';
+for(const [v,n] of VARS) html+=`<th colspan="3">${v}. ${n}</th>`;
+html+='</tr><tr><th></th>';
+for(const _ of VARS) for(const s of SIZES) html+=`<th>${s}px</th>`;
+html+='</tr>';
+for(const c of CASES){
+  html+=`<tr class="grp"><td class="rowh">${c.label}<small>${c.sub}</small></td>`;
+  for(const [v] of VARS) for(const s of SIZES) html+=`<td data-v="${v}" data-s="${s}" data-i="${CASES.indexOf(c)}"></td>`;
+  html+='</tr>';
+}
+document.getElementById('out').innerHTML=html+'</table>';
+document.querySelectorAll('td[data-v]').forEach(td=>{
+  const c=CASES[+td.dataset.i], s=+td.dataset.s;
+  td.appendChild(PinLab.make(td.dataset.v, s, c.il, c.v, PinLab.binColor(c.v,BINS,ND)));
+});
+</script>
