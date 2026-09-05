@@ -664,7 +664,9 @@ def index_meta(base: str, data: dict) -> str:
         "ダムを知って、旅の寄り道に見に行くきっかけに。"
     )
     og = f"{base}/img/og/site.png"
-    return "\n".join([
+    gsv = SITE.get("google_site_verification") or ""
+    # 空文字の要素は出力しない（余計な空行を作らないため）
+    return "\n".join(line for line in [
         INDEX_META_BEGIN,
         f"<title>{e(title)}</title>",
         f'<meta name="description" content="{e(desc)}">',
@@ -685,8 +687,10 @@ def index_meta(base: str, data: dict) -> str:
         f'<meta name="theme-color" content="{e(SITE["theme_color"])}">',
         f'<meta name="apple-mobile-web-app-title" content="{e(SITE["short_name"])}">',
         f'<meta name="author" content="{e(PRODUCER)}">' if PRODUCER else "",
+        # Search Console の所有権確認（metaタグ方式を使う場合のみ。既定は空で何も出さない）
+        f'<meta name="google-site-verification" content="{e(gsv)}">' if gsv else "",
         INDEX_META_END,
-    ])
+    ] if line)
 
 
 def write_index_meta(base: str, data: dict) -> bool:

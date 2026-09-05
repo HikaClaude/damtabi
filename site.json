@@ -13,7 +13,9 @@
     "notice_days": 7,
     "warn_days": 14
   },
+  "google_site_verification": "",
   "_note_base_url": "公開URLはここ1箇所。canonical / og:url / og:image / sitemap.xml / robots.txt / manifest.json / 地図画面のメタ がすべて追随します。独自ドメインへの移行手順は README「独自ドメインへの移行」を参照。",
   "_note_freshness": "貯水率が何日前の値になったら注意/警告を出すか。観測日時と経過日数は閾値に関係なく常時表示する。手動更新の間隔を変えたらここを直す（毎日自動更新に戻すなら notice_days:2 / warn_days:5 が目安）",
-  "_note_title": "home_title は情報鮮度を保証する語（リアルタイム/現在の/今 など）を入れないこと。継続取得方式が確定するまでの方針。"
+  "_note_title": "home_title は情報鮮度を保証する語（リアルタイム/現在の/今 など）を入れないこと。継続取得方式が確定するまでの方針。",
+  "_note_verification": "Search Console の所有権確認。HTMLファイル方式なら docs/googleXXXX.html を置くだけでよく、ここは空のまま。metaタグ方式を使う場合だけ content の値をここに入れる。"
 }
