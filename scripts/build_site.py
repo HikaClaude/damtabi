@@ -37,6 +37,7 @@ DOCS = ROOT / "docs"
 DATA = DOCS / "data" / "dams.json"
 
 SITE_JSON = ROOT / "site.json"
+ILLUST_JSON = DOCS / "data" / "illustrations.json"
 DEFAULT_BASE_URL = "https://example.github.io/dam-map"
 
 def load_site() -> dict:
@@ -51,7 +52,22 @@ def load_site() -> dict:
                     if not k.startswith("_")})
     return cfg
 
+def load_illust() -> dict:
+    """ダムID（またはダム名）→ イラストのパス。地図画面・OGP と同じファイルを見る。
+
+    バッチが上書きしないファイルなので、再取得してもイラストの割り当ては消えない。
+    """
+    if not ILLUST_JSON.exists():
+        return {}
+    try:
+        return json.loads(ILLUST_JSON.read_text(encoding="utf-8")) or {}
+    except json.JSONDecodeError as ex:
+        print(f"[build_site] illustrations.json を読めません: {ex}", file=sys.stderr)
+        return {}
+
+
 SITE = load_site()
+ILLUST = load_illust()
 SITE_NAME = SITE["site_name"]          # 「ダム旅」
 SITE_TAGLINE = SITE.get("tagline") or ""
 REGION = SITE.get("region") or ""      # 「富山県」（当面の対象範囲）
@@ -327,7 +343,12 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     body.append(f'<p class="dam-sub">{e(sub)}</p>')
 
     # イラスト差し込み領域（地図画面と同じ場所を確保しておく）
-    illust = dam.get("illustration")
+    # 登録は docs/data/illustrations.json の 1 箇所。ダムID優先、ダム名でも引ける。
+    # パスは docs/ ルート基準（"./img/..."）で書く約束なので、
+    # 3 階層下のダムページから見た相対パスに直す。
+    illust = ILLUST.get(dam["id"]) or ILLUST.get(dam["name"]) or dam.get("illustration")
+    if illust and illust.startswith("./"):
+        illust = "../../../" + illust[2:]
     if illust:
         body.append(f'<div class="dam-illust"><img src="{e(illust)}" alt="{e(name)}のイラスト"></div>')
     else:

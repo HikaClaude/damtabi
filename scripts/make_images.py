@@ -265,7 +265,8 @@ def main() -> int:
         slug = dam.get("slug")
         if not slug:
             continue
-        sub = f"{dam['water_system']}水系 {dam['river']}"
+        off = dam.get("official") or {}
+        sub = f"{off.get('water_system','')}水系 {off.get('river','')}"
         if dam.get("address"):
             sub += "　" + dam["address"]
 

@@ -1,14 +1,28 @@
-ダムのイラストはこのフォルダに置いてください。
+ダムのカードイラストはこのフォルダに置きます。
 
-  例)  docs/img/dams/unazuki.webp
+■ ファイル名
+  ダムID（dams.json の id）と同じ英数字にしてください。
+    toyama-unazuki.png
+    toyama-muromaki.png
+  日本語ファイル名でも動きますが、英数字を推奨します（理由は README.md）。
 
-置いたあと docs/data/illustrations.json に、
-ダムID（dams.json の id）またはダム名をキーにしてパスを書きます。
+■ 画像
+  3:2（推奨 900x600 以上）。png / jpg / webp。
+  OGP は 1200x630 に中央でトリミングされるので、
+  上下が少し切れても成立する構図にしてください。
 
-  {
-    "0215560700006": "./img/dams/unazuki.webp",
-    "有峰ダム":       "./img/dams/arimine.webp"
-  }
+■ 登録
+  docs/data/illustrations.json にダムIDとパスを書きます。
+  パスは docs/ ルート基準で "./img/dams/..." と書いてください。
 
-バッチ(fetch_dams.py)を再実行しても illustrations.json は上書きされません。
-推奨アスペクト比 16:10、幅 800px 程度。
+    {
+      "toyama-unazuki": "./img/dams/toyama-unazuki.png"
+    }
+
+■ 反映
+  python scripts/build_site.py    静的ページに反映
+  python scripts/make_images.py   OGP画像を作り直す
+  （地図画面は illustrations.json を直接読むので再ビルド不要）
+
+illustrations.json はバッチが上書きしません。
+貯水率を再取得してもイラストの割り当ては消えません。
