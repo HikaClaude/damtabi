@@ -9,13 +9,15 @@
   "use strict";
 
   var DATA_URL = "./data/dams.json";
-  var ILLUST_URL = "./data/illustrations.json"; // 後からイラストを足すための差分ファイル
+  var ILLUST_URL = "./data/illustrations.json"; // カード用イラスト（3:2）の差分ファイル
+  var ICON_URL = "./data/dam-icons.json";       // 地図ピン用イラスト（正方形）の差分ファイル
   var GSI_TILE = "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png";
   // 出典は #credits に常時表示している（MapLibre の attribution は畳まれる可能性があるので使わない）
 
   var state = {
     data: null,
     illust: {},
+    icons: {},
     basis: "irrigation",
     markers: {},   // id -> {marker, el, dam}
     activeId: null
@@ -179,7 +181,7 @@
     var def = basisDef();
     var v = val(dam[def.field]);
     var color = colorFor(dam);
-    var illust = illustFor(dam);
+    var illust = iconFor(dam);
     var C = 2 * Math.PI * GAUGE_R;
     var pct = v === null ? 0 : Math.max(0, Math.min(100, v)) / 100;
 
@@ -256,6 +258,14 @@
 
   function illustFor(dam) {
     return state.illust[dam.id] || state.illust[dam.name] || dam.illustration || null;
+  }
+
+  /* ピンの中身に使う正方形イラスト。
+   * カード（3:2）を丸に切ると左右が落ちて何のダムか分からなくなるので、
+   * ピンには正方形で描き起こしたアイコンを使う。
+   * 無いダムはカードで代用し、それも無ければ従来どおり数字だけになる。 */
+  function iconFor(dam) {
+    return state.icons[dam.id] || state.icons[dam.name] || illustFor(dam);
   }
 
   function illustBlock(dam) {
@@ -544,19 +554,25 @@
 
   function start() {
     // イラスト差分は無くても動く（任意）
-    var illustP = fetch(ILLUST_URL, { cache: "no-cache" })
-      .then(function (r) { return r.ok ? r.json() : {}; })
-      .catch(function () { return {}; });
+    var optional = function (url) {
+      return fetch(url, { cache: "no-cache" })
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .catch(function () { return {}; });
+    };
+    var illustP = optional(ILLUST_URL);
+    var iconP = optional(ICON_URL);
 
     Promise.all([
       fetch(DATA_URL, { cache: "no-cache" }).then(function (r) {
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       }),
-      illustP
+      illustP,
+      iconP
     ]).then(function (res) {
       state.data = res[0];
       state.illust = res[1] || {};
+      state.icons = res[2] || {};
 
       renderMeta();
       basisFromHash();

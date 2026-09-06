@@ -1,13 +1,16 @@
-ダムのカードイラストはこのフォルダに置きます。
+ダムの「カード」イラストはこのフォルダに置きます。
+地図の詳細パネル・静的ページ・OGP の元画像に使われます。
+地図ピン用の正方形イラストは ../dam-icons/ です。
 
 ■ ファイル名
   ダムID（dams.json の id）と同じ英数字にしてください。
-    toyama-unazuki.png
-    toyama-muromaki.png
+    toyama-unazuki.webp
+    toyama-muromaki.webp
   日本語ファイル名でも動きますが、英数字を推奨します（理由は README.md）。
 
 ■ 画像
-  3:2（推奨 900x600 以上）。png / jpg / webp。
+  3:2。Web配信用は 1200x800 / WebP に揃えています。
+  高解像度マスターはここに置きません（リポジトリを重くしないため）。
   OGP は 1200x630 に中央でトリミングされるので、
   上下が少し切れても成立する構図にしてください。
 
@@ -16,7 +19,7 @@
   パスは docs/ ルート基準で "./img/dams/..." と書いてください。
 
     {
-      "toyama-unazuki": "./img/dams/toyama-unazuki.png"
+      "toyama-unazuki": "./img/dams/toyama-unazuki.webp"
     }
 
 ■ 反映

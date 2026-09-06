@@ -1,7 +1,25 @@
 {
-  "toyama-unazuki": "./img/dams/toyama-unazuki.webp",
-  "toyama-muromaki": "./img/dams/toyama-muromaki.webp",
+  "toyama-arimine": "./img/dams/toyama-arimine.webp",
+  "toyama-asahiogawa": "./img/dams/toyama-asahiogawa.webp",
+  "toyama-dashidaira": "./img/dams/toyama-dashidaira.webp",
+  "toyama-funagawa": "./img/dams/toyama-funagawa.webp",
+  "toyama-fusegawa": "./img/dams/toyama-fusegawa.webp",
+  "toyama-goi": "./img/dams/toyama-goi.webp",
+  "toyama-johana": "./img/dams/toyama-johana.webp",
+  "toyama-kadokawa": "./img/dams/toyama-kadokawa.webp",
+  "toyama-kamiichigawa": "./img/dams/toyama-kamiichigawa.webp",
   "toyama-kamiichigawa-daini": "./img/dams/toyama-kamiichigawa-daini.webp",
+  "toyama-konadegawa": "./img/dams/toyama-konadegawa.webp",
   "toyama-kubusugawa": "./img/dams/toyama-kubusugawa.webp",
-  "toyama-goi": "./img/dams/toyama-goi.webp"
+  "toyama-kumanogawa": "./img/dams/toyama-kumanogawa.webp",
+  "toyama-kurobe": "./img/dams/toyama-kurobe.webp",
+  "toyama-muromaki": "./img/dams/toyama-muromaki.webp",
+  "toyama-otani": "./img/dams/toyama-otani.webp",
+  "toyama-sakaigawa": "./img/dams/toyama-sakaigawa.webp",
+  "toyama-shiraiwagawa": "./img/dams/toyama-shiraiwagawa.webp",
+  "toyama-togagawa": "./img/dams/toyama-togagawa.webp",
+  "toyama-tori": "./img/dams/toyama-tori.webp",
+  "toyama-unazuki": "./img/dams/toyama-unazuki.webp",
+  "toyama-usunaka": "./img/dams/toyama-usunaka.webp",
+  "toyama-wadagawa": "./img/dams/toyama-wadagawa.webp"
 }
