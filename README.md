@@ -11,7 +11,7 @@
 |---|---|
 | アプリ名 | ダム旅（DAM TABI） |
 | 制作名義 | DAM TABI LAB |
-| 公開URL | https://hikaclaude.github.io/damtabi/ |
+| 公開URL | https://damtabi.com |
 | 対象 | 富山県の23基（将来的に全国へ拡張予定） |
 
 > **名称について**：「ダム旅」は一般的な表現でもあります。名称の独占性ではなく
@@ -295,15 +295,24 @@ OGP 画像には**日々変わる数値を入れていません**。SNS 側は�
 アクセス把握は **Search Console だけ**にしている。サイトに計測コードを置かないので、
 利用者の端末から外部へ余計なリクエストが出ない。「追跡しない」方針と矛盾しない唯一の手段。
 
-**所有権確認は HTML ファイル方式**を使う。`github.io` は Public Suffix List に載っているため
-ドメインプロパティ（DNS認証）は作れず、URLプレフィックスプロパティで登録する。
+独自ドメインへ移行したので、**ドメインプロパティ（DNS の TXT レコード認証）が使える**。
+`damtabi.com` の DNS は Cloudflare にあるので、そこに TXT を 1 件足すだけで済む。
+（移行前は `github.io` が Public Suffix List に載っているためドメインプロパティを作れず、
+URLプレフィックス＋HTMLファイル方式しか選べなかった）
 
-1. Search Console で「URLプレフィックス」を選び `https://hikaclaude.github.io/damtabi/` を入力
-2. HTMLファイル方式の `googleXXXX.html` をダウンロード
-3. **`docs/` 直下に置いて** commit → push（`build_site.py` は `index.html` / `manifest.json` /
-   `sitemap.xml` / `robots.txt` しか書かないので消えない。`.gitignore` にも掛からない）
-4. Pages のビルド完了後に「確認」
-5. 「サイトマップ」に `sitemap.xml` を送信（25URL）
+1. Search Console で「ドメイン」を選び `damtabi.com` を入力
+2. 表示された TXT レコードを Cloudflare の DNS に追加（名前 `@`、値 `google-site-verification=...`）
+3. 「確認」を押す。DNS 反映は数分
+4. 「サイトマップ」に `https://damtabi.com/sitemap.xml` を送信（25URL）
+
+ドメインプロパティなら `www` も `http` も `https` もまとめて 1 つのプロパティで見られる。
+
+旧プロパティ（`https://hikaclaude.github.io/damtabi/`）を既に作ってある場合は**消さない**。
+301 リダイレクトが認識され評価が新ドメインへ移るまで数週間かかるため、両方残しておく。
+
+HTMLファイル方式を使う場合は、`googleXXXX.html` を **`docs/` 直下に置いて** commit → push する
+（`build_site.py` は `index.html` / `manifest.json` / `sitemap.xml` / `robots.txt` しか書かないので
+消えない。`.gitignore` にも掛からない）。
 
 metaタグ方式を使いたい場合は、`site.json` の `google_site_verification` に content の値を入れて
 `build_site.py` を実行すれば `docs/index.html` に出力される（空なら何も出さない）。
@@ -773,14 +782,17 @@ python scripts/make_images.py   # OGP画像を作り直す
 
 ## 独自ドメインへの移行
 
-将来 `damtabi.jp` などを取得したときの手順です。**手順どおりにやれば移行できます。**
-（2026-09-05 時点で damtabi.jp / .com / .net / .org / .app はいずれも未登録でした）
+**2026-09-06 に `damtabi.com`（Cloudflare Registrar で取得）へ移行済み。**
+以下は実施した手順で、別ドメインへ移す場合もそのまま使えます。
+
+公開URLは `https://damtabi.com`。旧URL `https://hikaclaude.github.io/damtabi/` は
+GitHub Pages が自動で 301 リダイレクトします。
 
 ### 手順
 
 **1. ドメインを取得し、DNS を設定する**
 
-apex ドメイン（`damtabi.jp`）で公開する場合、DNS に GitHub Pages の A / AAAA レコードを設定します。
+apex ドメイン（`damtabi.com`）で公開する場合、DNS に GitHub Pages の A / AAAA レコードを設定します。
 
 ```
 A     @   185.199.108.153
@@ -793,17 +805,17 @@ AAAA  @   2606:50c0:8002::153
 AAAA  @   2606:50c0:8003::153
 ```
 
-`www.damtabi.jp` を使う場合は CNAME を `hikaclaude.github.io.` に向けます。
+`www.damtabi.com` を使う場合は CNAME を `hikaclaude.github.io.` に向けます。
 （上記IPは GitHub の公式ドキュメントで最新を確認してください。変わることがあります）
 
 **2. `site.json` の `base_url` を書き換える** ← コード側の変更はここ 1 行だけ
 
 ```json
-{ "base_url": "https://damtabi.jp", ... }
+{ "base_url": "https://damtabi.com", ... }
 ```
 
 末尾スラッシュは付けません。サブディレクトリが無くなる点に注意
-（`https://hikaclaude.github.io/damtabi` → `https://damtabi.jp`）。
+（`https://hikaclaude.github.io/damtabi` → `https://damtabi.com`）。
 
 **3. CNAME ファイルを置く**
 
@@ -811,7 +823,7 @@ GitHub Pages はリポジトリ内の `CNAME` ファイルで独自ドメイン�
 公開ディレクトリが `docs/` なので、置き場所は **`docs/CNAME`** です。
 
 ```bash
-echo "damtabi.jp" > docs/CNAME
+echo "damtabi.com" > docs/CNAME
 ```
 
 改行以外は入れず、1行だけ。**サブドメインを含む完全なホスト名**を書きます（`https://` は不要）。
@@ -838,9 +850,9 @@ Settings → Pages → **Enforce HTTPS** にチェック。証明書の発行に
 **6. 確認**
 
 ```bash
-curl -sI https://damtabi.jp/ | head -1
-curl -s https://damtabi.jp/ | grep -o '<link rel="canonical"[^>]*>'
-curl -s https://damtabi.jp/robots.txt
+curl -sI https://damtabi.com/ | head -1
+curl -s https://damtabi.com/ | grep -o '<link rel="canonical"[^>]*>'
+curl -s https://damtabi.com/robots.txt
 ```
 
 canonical と sitemap が新ドメインになっていること、`/dam/toyama/unazuki/` が開くことを確認します。
@@ -849,7 +861,7 @@ canonical と sitemap が新ドメインになっていること、`/dam/toyama/
 
 **GitHub Pages が自動でリダイレクトします。** 独自ドメインを設定すると、
 `https://hikaclaude.github.io/damtabi/...` へのアクセスは
-対応するパスの `https://damtabi.jp/...` へ **301 リダイレクト**されます。
+対応するパスの `https://damtabi.com/...` へ **301 リダイレクト**されます。
 パス構造は変えないので、`/dam/toyama/unazuki/` のような個別ページもそのまま引き継がれます。
 
 **したがって、リダイレクト用のファイルを自分で用意する必要はありません。**
@@ -857,7 +869,7 @@ canonical と sitemap が新ドメインになっていること、`/dam/toyama/
 
 移行後にやること:
 
-1. **Search Console に新ドメインのプロパティを追加**し、`https://damtabi.jp/sitemap.xml` を送信
+1. **Search Console に新ドメインのプロパティを追加**し、`https://damtabi.com/sitemap.xml` を送信
 2. 旧プロパティ（`hikaclaude.github.io/damtabi`）は消さずに残す。301 が認識され、
    評価が新ドメインへ引き継がれるまで数週間かかります
 3. **OGP のキャッシュを更新**。SNS は URL 単位で画像をキャッシュするので、
@@ -872,23 +884,45 @@ canonical と sitemap が新ドメインになっていること、`/dam/toyama/
 - **URL 構造を同時に変える**。ドメイン移行とパス変更を一度にやると、
   何が原因で順位が落ちたか分からなくなります。分けて行ってください。
 
-### 独自ドメインにすると得られるもの（移行の判断材料）
+### アクセス把握と Cloudflare（訂正あり）
 
-URL が短くなるだけではない。**アクセス数の把握方法が変わる**のが実質的に大きい。
+GitHub Pages は**アクセスログを提供しない**。いま利用状況を知る手段は
+Google Search Console（＝Google検索経由の表示回数とクリック数）だけである。
 
-GitHub Pages は**アクセスログを提供しない**ので、いま利用状況を知る手段は
-Google Search Console（＝Google検索経由の表示回数とクリック数）だけになる。
-サイトに計測コードを置けば数えられるが、**利用者の端末から外部へリクエストを出す**ことになり、
-「追跡しない」という方針と合わないため採用していない（GoatCounter 等も同じ理由で見送り）。
+サイトに計測コードを置けば全アクセスを数えられるが、**利用者の端末から外部へ
+リクエストを出す**ことになり、「追跡しない」という方針と合わないため採用していない。
+GoatCounter も同じ理由で見送った。
 
-独自ドメインにして Cloudflare 経由で配信すると、**サーバ側で集計されるため
-計測コードも Cookie も不要**になる。利用者の端末からは追加のリクエストが一切出ない。
-これは方針と矛盾しない唯一の全アクセス把握手段なので、移行時に検討する。
+**訂正：Cloudflare Web Analytics は方針に合わない。**
+移行前のメモに「Cloudflare 経由なら計測コード不要」と書いていたが、これは不正確だった。
+Cloudflare には名前の似た別物が 2 つあり、性質がまったく違う。
+
+| 機能 | 仕組み | 方針との整合 |
+|---|---|---|
+| **Web Analytics** | `static.cloudflareinsights.com/beacon.min.js` を読み込む **JavaScript ビーコン方式**。Cookie は使わないが、**利用者の端末から外部へリクエストが出る** | **合わない。使わない** |
+| **Analytics & Logs（トラフィック分析）** | プロキシ経由の全リクエストを**エッジで集計**。JavaScript も Cookie も不要で、利用者の端末には何も追加されない | 合う |
+
+Web Analytics には特に注意すべき点がある。プロキシ経由のドメインで有効化すると、
+Cloudflare が**エッジで HTML に script タグを自動注入する**。リポジトリのファイルは
+一切変わらないのに、利用者に届く HTML にはビーコンが入っている状態になる。
+気づきにくい形で方針が破られるので、**有効化しない**。
+
+方針に合うのは Analytics & Logs のほうだけ。使うには DNS レコードを
+プロキシ（オレンジの雲）に切り替える必要があり、手順は次のとおり。
+
+1. ドメイン移行を完結させる（Enforce HTTPS まで。**済**）
+2. Cloudflare の SSL/TLS 暗号化モードを **Full (strict)** にする
+3. DNS レコードをオレンジ（プロキシ）に切り替える
+4. Analytics & Logs でトラフィックを見る
+5. **Web Analytics は有効化しない**
+
+証明書の発行前にプロキシを有効にすると Let's Encrypt の検証が失敗するため、
+**順序を入れ替えないこと**。
 
 ### Organization へ移す場合（将来の選択肢）
 
 `damtabi-lab` のような Organization に移管する場合も、**独自ドメインを先に当てておけば
-公開URLは変わりません**（`https://damtabi.jp` のまま）。
+公開URLは変わりません**（`https://damtabi.com` のまま）。
 リポジトリ移管時に GitHub Pages の設定と `docs/CNAME` を再確認するだけで済みます。
 **独自ドメインを先に取る方が、後の移管が楽になります。**
 
