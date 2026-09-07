@@ -257,7 +257,7 @@ def main() -> int:
 
     OG.mkdir(parents=True, exist_ok=True)
     ok = rasterize(chrome, og_html(SITE["site_name"],
-                                   "旅の寄り道に、ダムはいかが？",
+                                   "旅の寄り道に、ダムなんていかが？",
                                    SITE["name_en"]), OG / "site.png", 1200, 630, 1.0)
     print(f"[make_images] {'ok ' if ok else 'NG '} docs/img/og/site.png")
 
