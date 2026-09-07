@@ -1130,8 +1130,11 @@
         var curT = Date.parse(existing.visited_at);
         var incT = Date.parse(it.visited_at);
         if (isFinite(incT) && (!isFinite(curT) || incT < curT)) {
-          result[it.dam_id] = { visited_at: it.visited_at, seen: it.seen || existing.seen,
-                                distance_m: existing.distance_m, accuracy_m: existing.accuracy_m };
+          // 採用するのは常に「同じ訪問」の一式だけ。日付は新しい方（it）に決めた以上、
+          // そのとき見えていた値（seen）も必ず it から取る。existing の値と混ぜない。
+          // it.seen が無い（null）なら、この訪問には見えていた値が無かったということで、
+          // それが事実。existing の（別の日の）値で埋めない。
+          result[it.dam_id] = { visited_at: it.visited_at, seen: it.seen, distance_m: null, accuracy_m: null };
           updated++;
         } else {
           kept++;
