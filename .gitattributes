@@ -1,3 +1,2 @@
-# 生成物を毎回コミットするので、改行コードの差分ノイズが出ないよう固定する
-* text=auto eol=lf
-*.png binary
+# Windows のバッチファイルは CRLF でないと動かないことがある
+*.cmd text eol=crlf
