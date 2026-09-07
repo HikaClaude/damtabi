@@ -657,6 +657,14 @@
     var KEY = "damtabi.visits.v1";
     var TINT_KEY = "damtabi.trip-tint.v1";
 
+    // 旅の記録の書き出し形式。
+    // schema_version はこのファイルの中身の意味を表す番号で、UIの見た目とは無関係。
+    // 将来ダムカード記録やメモ等が増えても、古いバックアップを安全に読めるようにするため、
+    // このバージョンだけを見て判断する（他県対応や項目追加は version を上げずに済む形にしてある）。
+    var BACKUP_APP = "damtabi";
+    var BACKUP_KIND = "trip-backup";
+    var BACKUP_VERSION = 1;
+
     // 判定の半径。ダムの座標は堤体を指すので、駐車場や展望所からでも届く広さにする。
     // 「堤体の一点に立たないと記録できない」のは現地では危険で不便。
     var BASE_M = 600;
@@ -741,6 +749,27 @@
         rate_irrigation: dam.rate_irrigation,
         rate_effective: dam.rate_effective,
         storage_level_m: dam.storage_level_m
+      };
+    }
+
+    /** 「rate_irrigation」のような値付きの項目を安全な形にそろえる。おかしな形は捨てて null にする。 */
+    function sanitizeMetric(v) {
+      if (!v || typeof v !== "object") return null;
+      var value = typeof v.value === "number" && isFinite(v.value) ? v.value : null;
+      var status = typeof v.status === "string" ? v.status : null;
+      if (value === null && status === null) return null;
+      return { value: value, status: status, reason: typeof v.reason === "string" ? v.reason : null };
+    }
+
+    /** バックアップから読んだ seen を、想定した5項目だけに絞る。余計なキーは持ち込まない。 */
+    function sanitizeSeen(raw) {
+      if (!raw || typeof raw !== "object") return null;
+      return {
+        obs_time: typeof raw.obs_time === "string" ? raw.obs_time : null,
+        data_status: typeof raw.data_status === "string" ? raw.data_status : null,
+        rate_irrigation: sanitizeMetric(raw.rate_irrigation),
+        rate_effective: sanitizeMetric(raw.rate_effective),
+        storage_level_m: sanitizeMetric(raw.storage_level_m)
       };
     }
 
@@ -942,7 +971,21 @@
       }
       html += '<p class="trip-warn">記録はこの端末のブラウザにだけ保存されています。' +
         "ブラウザのデータを消したり、別の端末・別のブラウザで開いたりすると残りません。</p>";
+
+      // 旅の記録の保存／読み込み。機種変更やブラウザの変更でも記録を持ち歩けるようにする
+      html += '<div class="trip-backup">';
+      html += '<p class="trip-backup__lead">旅の記録をファイルに保存しておけば、' +
+        "スマートフォンを変えても記録を戻せます。</p>";
+      html += '<div class="trip-backup__btns">';
+      html += '<button type="button" class="trip-backup-btn" id="trip-save">旅の記録を保存</button>';
+      html += '<button type="button" class="trip-backup-btn is-ghost" id="trip-load">保存した記録を読み込む</button>';
+      html += "</div>";
+      html += '<input type="file" id="trip-file" accept="application/json,.json" hidden>';
+      html += '<p class="trip-backup-msg" id="trip-backup-msg"></p>';
+      html += "</div>";
+
       $("#trip-body").innerHTML = html;
+      trip.wireBackup($("#trip-body"));
     }
 
     // ---------------------------------------- 組み込み
@@ -970,6 +1013,224 @@
         } catch (e) { /* 保存できなくても表示は切り替わる */ }
         repaintAll();
       });
+    };
+
+    // ---------------------------------------- 旅の記録の保存／読み込み（バックアップ）
+    //
+    // 端末だけに記録が残る現状は、機種変更・ブラウザ変更・データ消去で
+    // 積み重ねた旅がまるごと消えうる。そこで「自分でファイルに保存し、
+    // あとで自分で読み込める」形を用意する。サーバーやアカウントは使わない。
+    //
+    // 保存するのは「どのダムに」「いつ」「その日どんな値が見えていたか」だけ。
+    // 緯度・経度そのものは元の記録にも保存していないので、ここにも入らない。
+    // 距離や取得精度（distance_m / accuracy_m）は現地判定の裏側の値なので、
+    // 持ち歩く価値が薄く、位置に近い情報でもあるためバックアップには含めない。
+
+    /** 今の記録から、書き出し用のファイルの中身（プレーンオブジェクト）を作る。 */
+    function buildBackup() {
+      var visits = [];
+      Object.keys(state.visits).forEach(function (id) {
+        var rec = state.visits[id];
+        if (!rec || typeof rec !== "object") return;
+        visits.push({
+          dam_id: id,
+          visited_at: rec.visited_at || null,
+          seen: sanitizeSeen(rec.seen)
+        });
+      });
+      return {
+        app: BACKUP_APP,
+        kind: BACKUP_KIND,
+        schema_version: BACKUP_VERSION,
+        generated_at: new Date().toISOString(),
+        region: "toyama",   // どの地域の記録かの印。将来 石川県 等が増えても読み分けに使える
+        visits: visits
+      };
+    }
+
+    /** "2026-09-07" 形式（ファイル名用）。 */
+    function todayStamp() {
+      var d = new Date(), p2 = function (n) { return String(n).padStart(2, "0"); };
+      return d.getFullYear() + "-" + p2(d.getMonth() + 1) + "-" + p2(d.getDate());
+    }
+
+    api.exportBackup = function () {
+      var payload = buildBackup();
+      var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "damtabi-trip-backup-" + todayStamp() + ".json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      return payload.visits.length;
+    };
+
+    // 禁止するキー名。オブジェクトへのブラケット代入で使うと、意図しない形で
+    // 内部の仕組みに触ってしまう名前なので、ダムIDとしては最初から受け付けない。
+    var FORBIDDEN_KEYS = { "__proto__": true, "constructor": true, "prototype": true };
+
+    /**
+     * バックアップの中身を検証する。1つでも致命的な問題があれば reason 付きで拒否する。
+     * ここを通らない限り、今の記録には一切触れない。
+     */
+    function validateBackup(data) {
+      if (!data || typeof data !== "object" || Array.isArray(data)) {
+        return { ok: false, reason: "ダム旅の旅の記録ファイルとして読み取れませんでした。" };
+      }
+      if (data.app !== BACKUP_APP || data.kind !== BACKUP_KIND) {
+        return { ok: false, reason: "これはダム旅の「旅の記録」ファイルではないようです。" };
+      }
+      if (typeof data.schema_version !== "number") {
+        return { ok: false, reason: "旅の記録ファイルの形式が読み取れませんでした。" };
+      }
+      if (data.schema_version > BACKUP_VERSION) {
+        return { ok: false, reason: "これは新しいダム旅で保存された記録のようです。" +
+          "このページを最新にしてから、もう一度お試しください。" };
+      }
+      if (data.schema_version < 1 || !Array.isArray(data.visits)) {
+        return { ok: false, reason: "旅の記録ファイルの中身が壊れているようです。" };
+      }
+
+      var items = [];
+      data.visits.forEach(function (v) {
+        if (!v || typeof v !== "object") return;
+        var id = v.dam_id;
+        if (typeof id !== "string" || !id || FORBIDDEN_KEYS[id]) return;
+        var t = Date.parse(v.visited_at);
+        if (!isFinite(t)) return;               // 訪問日が読めない記録は個別に見送る
+        items.push({ dam_id: id, visited_at: new Date(t).toISOString(), seen: sanitizeSeen(v.seen) });
+      });
+
+      if (!items.length && data.visits.length) {
+        // 項目はあったが、1件も有効な記録として読めなかった
+        return { ok: false, reason: "旅の記録ファイルの中身が壊れているようです。" };
+      }
+      return { ok: true, items: items };
+    }
+
+    /**
+     * 今の記録とバックアップを、ダムを失わない形で1つにする。
+     * 同じダムが両方にある場合は、より古い訪問日（＝最初に行った日）を残す。
+     * 新しい記録に上書きすることはしない。
+     */
+    function mergeVisits(current, items) {
+      var result = {}, added = 0, updated = 0, kept = 0;
+      Object.keys(current).forEach(function (id) { result[id] = current[id]; });
+
+      items.forEach(function (it) {
+        var existing = result[it.dam_id];
+        if (!existing) {
+          result[it.dam_id] = { visited_at: it.visited_at, seen: it.seen, distance_m: null, accuracy_m: null };
+          added++;
+          return;
+        }
+        var curT = Date.parse(existing.visited_at);
+        var incT = Date.parse(it.visited_at);
+        if (isFinite(incT) && (!isFinite(curT) || incT < curT)) {
+          result[it.dam_id] = { visited_at: it.visited_at, seen: it.seen || existing.seen,
+                                distance_m: existing.distance_m, accuracy_m: existing.accuracy_m };
+          updated++;
+        } else {
+          kept++;
+        }
+      });
+      return { result: result, added: added, updated: updated, kept: kept };
+    }
+
+    /** ファイルの中身（文字列）を検証し、問題なければ取り込む。結果を人が読める形で返す。 */
+    api.importBackupText = function (text) {
+      var data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        return { ok: false, message: "このファイルを読み取れませんでした。ダム旅で保存したファイルをお使いください。" };
+      }
+      var v = validateBackup(data);
+      if (!v.ok) {
+        return { ok: false, message: v.reason };
+      }
+      if (!v.items.length) {
+        return { ok: true, message: "このファイルには記録がありませんでした。今の記録は変わっていません。",
+                 added: 0, updated: 0 };
+      }
+
+      var before = api.count();
+      var m = mergeVisits(state.visits, v.items);
+      state.visits = m.result;
+      write();
+      repaintAll();
+      renderTripCount();
+
+      var lines = [];
+      lines.push("読み込んだ記録：" + v.items.length + "基分");
+      if (m.added) lines.push("新しく増えた記録：" + m.added + "基");
+      if (m.updated) lines.push("より古い訪問日に直った記録：" + m.updated + "基");
+      var unchanged = v.items.length - m.added - m.updated;
+      if (unchanged > 0) lines.push("すでに記録済みだった：" + unchanged + "基");
+      lines.push("今の記録：" + before + "基 → " + api.count() + "基");
+
+      return { ok: true, message: lines.join("\n"), added: m.added, updated: m.updated };
+    };
+
+    api.wireBackup = function (root) {
+      var saveBtn = root.querySelector("#trip-save");
+      var loadBtn = root.querySelector("#trip-load");
+      var fileInput = root.querySelector("#trip-file");
+      var msg = root.querySelector("#trip-backup-msg");
+
+      if (saveBtn) {
+        saveBtn.addEventListener("click", function () {
+          var n = api.exportBackup();
+          if (msg) {
+            msg.textContent = n
+              ? "旅の記録（" + n + "基分）を保存しました。ダウンロードフォルダをご確認ください。"
+              : "記録がまだ無いので、空の状態で保存しました。";
+            msg.className = "trip-backup-msg";
+          }
+        });
+      }
+
+      if (loadBtn && fileInput) {
+        loadBtn.addEventListener("click", function () { fileInput.click(); });
+        fileInput.addEventListener("change", function () {
+          var file = fileInput.files && fileInput.files[0];
+          fileInput.value = "";   // 同じファイルを選び直しても change が発火するように
+          if (!file) return;
+
+          var reader = new FileReader();
+          reader.onload = function () {
+            // 既存の記録があり、統合で中身が変わりうるときだけ、先に一言確認する。
+            // 記録が無いとき（失うものが無いとき）は確認なしでそのまま読み込む。
+            var hadVisits = api.count() > 0;
+            if (hadVisits) {
+              var proceed = confirm(
+                "今の旅の記録に、保存しておいたファイルの記録を合わせます。" +
+                "すでにある記録が消えることはありません。よろしいですか？"
+              );
+              if (!proceed) return;
+            }
+            var res = api.importBackupText(String(reader.result || ""));
+            // 成功時は一覧そのものを描き直すため、先に描き直してから
+            // （新しく作られる）メッセージ欄に結果を書く。順番を逆にすると消えてしまう。
+            if (res.ok) renderTripList();
+            var msgEl = res.ok ? root.querySelector("#trip-backup-msg") : msg;
+            if (msgEl) {
+              msgEl.textContent = res.message;
+              msgEl.className = "trip-backup-msg" + (res.ok ? "" : " is-warn");
+            }
+          };
+          reader.onerror = function () {
+            if (msg) {
+              msg.textContent = "ファイルを読み込めませんでした。もう一度お試しください。";
+              msg.className = "trip-backup-msg is-warn";
+            }
+          };
+          reader.readAsText(file);
+        });
+      }
     };
 
     return api;

@@ -945,3 +945,48 @@ details.help > summary:focus-visible {
   line-height: 1.75;
   color: var(--ink-faint);
 }
+
+/* ---------------------------------------------------------- 旅の記録：保存／読み込み */
+
+.trip-backup {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.trip-backup__lead {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.trip-backup__btns { display: flex; gap: 8px; }
+
+.trip-backup-btn {
+  flex: 1;
+  padding: 9px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.trip-backup-btn:hover { filter: brightness(1.08); }
+.trip-backup-btn.is-ghost { background: var(--surface); color: var(--accent); }
+.trip-backup-btn.is-ghost:hover { background: #eef3ff; filter: none; }
+
+.trip-backup-msg {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+  white-space: pre-line;
+}
+
+.trip-backup-msg:empty { display: none; }
+.trip-backup-msg.is-warn { color: #9a3b1c; }
