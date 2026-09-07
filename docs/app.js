@@ -11,6 +11,7 @@
   var DATA_URL = "./data/dams.json";
   var ILLUST_URL = "./data/illustrations.json"; // カード用イラスト（3:2）の差分ファイル
   var ICON_URL = "./data/dam-icons.json";       // 地図ピン用イラスト（正方形）の差分ファイル
+  var SPOTS_URL = "./data/spots.json";          // ダムごとの「行ったら何がある？」
   var GSI_TILE = "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png";
   // 出典は #credits に常時表示している（MapLibre の attribution は畳まれる可能性があるので使わない）
 
@@ -19,6 +20,7 @@
     illust: {},
     icons: {},
     visits: {},        // 訪れたダム（この端末にだけ残る）
+    spots: {},         // ダムごとの見どころ（無くても地図は動く）
     tripTint: true,    // 旅の色分け（訪問済みだけ色を残す）
     basis: "irrigation",
     markers: {},   // id -> {marker, el, dam}
@@ -358,6 +360,7 @@
                     : "観測値の配信がありません") + "</p>";
 
     html += '<div id="trip-slot" class="trip-slot"></div>';
+    html += spotsBlock(dam);
 
     html += '<table class="facts">';
     html += "<tr><th>水系 / 河川</th><td>" + esc(off.water_system) + "水系 " + esc(off.river) + "</td></tr>";
@@ -574,6 +577,8 @@
     };
     var illustP = optional(ILLUST_URL);
     var iconP = optional(ICON_URL);
+    // 見どころも任意。置いていなければ欄ごと出ない
+    var spotsP = optional(SPOTS_URL);
 
     Promise.all([
       fetch(DATA_URL, { cache: "no-cache" }).then(function (r) {
@@ -581,11 +586,13 @@
         return r.json();
       }),
       illustP,
-      iconP
+      iconP,
+      spotsP
     ]).then(function (res) {
       state.data = res[0];
       state.illust = res[1] || {};
       state.icons = res[2] || {};
+      state.spots = (res[3] && res[3].dams) || {};
       trip.load();
 
       renderMeta();
@@ -967,6 +974,91 @@
 
     return api;
   })();
+
+
+
+  // ------------------------------------------------------------ 行ったら何がある？
+
+  /**
+   * そのダムだからこそある寄り道を、事実だけで短く出す。
+   *
+   * 「行ってみようかな」と「実際に訪れた」の間を埋めるための欄。
+   * 貯水率とダムの基本情報の下に置き、訪問の記録欄のすぐ後に続ける。
+   *
+   * 書いてよいのは、公式が出している事実と、ダム旅が自分で書いた短い説明だけ。
+   * 他所の紹介文や写真は使わない。時間・期間・料金のように変わるものは、
+   * 必ず「どこの情報か」と「いつ確認したか」を添えて出す。
+   */
+
+  var SPOT_KINDS = {
+    collect: { label: "集める", icon: "◆" },
+    eat:     { label: "食べる", icon: "●" },
+    see:     { label: "見る",   icon: "■" },
+    buy:     { label: "買う",   icon: "▲" }
+  };
+
+  function spotsFor(dam) {
+    var list = state.spots[dam.id];
+    return (list && list.length) ? list : null;
+  }
+
+  /** 「確認日」を読める形に。2026-09-07 → 2026年9月7日 */
+  function fmtChecked(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || "");
+    return m ? m[1] + "年" + Number(m[2]) + "月" + Number(m[3]) + "日" : "";
+  }
+
+  function hostOf(url) {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch (e) {
+      return url;
+    }
+  }
+
+  function spotsBlock(dam) {
+    var list = spotsFor(dam);
+    if (!list) return "";
+
+    var html = '<section class="spots">';
+    html += '<h3 class="spots__head">行ったら、こんなのもあります</h3>';
+
+    list.forEach(function (sp) {
+      var kind = SPOT_KINDS[sp.kind] || { label: "", icon: "・" };
+      html += '<article class="spot">';
+      html += '<p class="spot__top"><span class="spot__kind is-' + esc(sp.kind) + '">' +
+        kind.icon + " " + esc(kind.label) + "</span>" +
+        '<span class="spot__title">' + esc(sp.title) + "</span></p>";
+      if (sp.summary) html += '<p class="spot__sum">' + esc(sp.summary) + "</p>";
+
+      if (sp.facts && sp.facts.length) {
+        html += '<dl class="spot__facts">';
+        sp.facts.forEach(function (f) {
+          html += "<dt>" + esc(f.label) + "</dt><dd>" + esc(f.value) + "</dd>";
+        });
+        html += "</dl>";
+      }
+      if (sp.note) html += '<p class="spot__note">' + esc(sp.note) + "</p>";
+
+      // 出典と確認日は必ず出す。ここを省くと「いつの情報か」が分からなくなる
+      html += '<p class="spot__src">';
+      if (sp.source) {
+        html += '<a href="' + esc(sp.source) + '" target="_blank" rel="noopener">' +
+          esc(sp.source_name || hostOf(sp.source)) + " →</a>";
+      } else if (sp.source_name) {
+        html += esc(sp.source_name);
+      }
+      if (sp.checked) html += "<span>" + esc(fmtChecked(sp.checked)) + " 確認</span>";
+      html += "</p>";
+      html += "</article>";
+    });
+
+    html += '<p class="spots__caution">' +
+      "時間・期間・料金は変わることがあります。出かける前に、上の公式ページでお確かめください。" +
+      "</p>";
+    html += "</section>";
+    return html;
+  }
 
 
   if (document.readyState === "loading") {

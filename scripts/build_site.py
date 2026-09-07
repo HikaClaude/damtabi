@@ -28,6 +28,7 @@ import html
 import io
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -68,6 +69,74 @@ def load_illust() -> dict:
 
 SITE = load_site()
 ILLUST = load_illust()
+
+
+def load_spots() -> dict:
+    """ダムごとの「行ったら何がある？」。無くてもページは作れる。"""
+    f = DOCS / "data" / "spots.json"
+    if not f.exists():
+        return {}
+    try:
+        return (json.loads(f.read_text(encoding="utf-8")) or {}).get("dams", {})
+    except json.JSONDecodeError as ex:
+        print(f"[build_site] spots.json を読めません: {ex}", file=sys.stderr)
+        return {}
+
+
+SPOTS = load_spots()
+
+SPOT_KINDS = {
+    "collect": ("集める", "◆"),
+    "eat": ("食べる", "●"),
+    "see": ("見る", "■"),
+    "buy": ("買う", "▲"),
+}
+
+
+def fmt_checked(v: str) -> str:
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})$", v or "")
+    return f"{m[1]}年{int(m[2])}月{int(m[3])}日" if m else ""
+
+
+def spots_html(dam: dict) -> list[str]:
+    """見どころ。地図の詳細パネルと同じ内容を、検索エンジンが読める形で置く。
+
+    出典と確認日を必ず添える。時間や期間は変わるものなので、
+    「いつの、誰の情報か」を落とすと事実でなくなる。
+    """
+    items = SPOTS.get(dam["id"]) or []
+    if not items:
+        return []
+    out = ['<section class="spots"><h2>行ったら、こんなのもあります</h2>']
+    for sp in items:
+        label, icon = SPOT_KINDS.get(sp.get("kind", ""), ("", "・"))
+        out.append('<article class="spot">')
+        out.append(f'<p class="spot__top"><span class="spot__kind is-{e(sp.get("kind"))}">'
+                   f'{icon} {e(label)}</span>'
+                   f'<span class="spot__title">{e(sp.get("title"))}</span></p>')
+        if sp.get("summary"):
+            out.append(f'<p class="spot__sum">{e(sp["summary"])}</p>')
+        if sp.get("facts"):
+            out.append('<dl class="spot__facts">')
+            for f in sp["facts"]:
+                out.append(f'<dt>{e(f["label"])}</dt><dd>{e(f["value"])}</dd>')
+            out.append("</dl>")
+        if sp.get("note"):
+            out.append(f'<p class="spot__note">{e(sp["note"])}</p>')
+        out.append('<p class="spot__src">')
+        if sp.get("source"):
+            out.append(f'<a href="{e(sp["source"])}" target="_blank" rel="noopener">'
+                       f'{e(sp.get("source_name") or sp["source"])} →</a>')
+        elif sp.get("source_name"):
+            out.append(e(sp["source_name"]))
+        if sp.get("checked"):
+            out.append(f'<span>{e(fmt_checked(sp["checked"]))} 確認</span>')
+        out.append("</p></article>")
+    out.append('<p class="spots__caution">時間・期間・料金は変わることがあります。'
+               "出かける前に、上の公式ページでお確かめください。</p>")
+    out.append("</section>")
+    return out
+
 SITE_NAME = SITE["site_name"]          # 「ダム旅」
 SITE_TAGLINE = SITE.get("tagline") or ""
 REGION = SITE.get("region") or ""      # 「富山県」（当面の対象範囲）
@@ -423,6 +492,8 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
         )
     if dam.get("note"):
         body.append(f'<div class="callout note">{e(dam["note"])}</div>')
+
+    body += spots_html(dam)
 
     # --- 出典。ダム本体の基本情報と、貯水率データの出どころは別々に書く。
     body.append('<section class="sources"><h2>このページの情報について</h2>')

@@ -389,3 +389,87 @@ details.help > summary:focus-visible {
   .rate .v { font-size: 32px; }
   .facts th, .facts td { padding: 10px 12px; }
 }
+
+/* ---------------------------------------------------------- 行ったら何がある？ */
+
+.spots { margin: 20px 0 4px; }
+
+.spots__head,
+.spots h2 {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.spot {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 11px 13px;
+  margin-bottom: 8px;
+}
+
+.spot__top { margin: 0 0 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+/* 何ができるかを一目で。色は控えめに、ダムのイラストより前に出ない */
+.spot__kind {
+  flex: 0 0 auto;
+  font-size: 10.5px;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 2px 7px;
+  letter-spacing: .04em;
+  background: #eef2f6;
+  color: var(--ink-soft);
+}
+
+.spot__kind.is-collect { background: #fff3d6; color: #8a5b00; }
+.spot__kind.is-eat     { background: #ffe9e3; color: #9a3b1c; }
+.spot__kind.is-see     { background: #e2f0fb; color: #17557f; }
+.spot__kind.is-buy     { background: #e8f2e8; color: #2f6b3c; }
+
+.spot__title { font-size: 14.5px; font-weight: 700; }
+.spot__sum { margin: 0 0 7px; font-size: 12.5px; line-height: 1.8; }
+
+.spot__facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 12px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.spot__facts dt { color: var(--ink-soft); white-space: nowrap; }
+.spot__facts dd { margin: 0; }
+
+.spot__note {
+  margin: 8px 0 0;
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #fff8e8;
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: #7a5200;
+}
+
+/* どこの情報を、いつ確認したか。省かない */
+.spot__src {
+  margin: 8px 0 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.spot__src a { color: var(--accent); }
+
+.spots__caution {
+  margin: 4px 0 0;
+  font-size: 11px;
+  line-height: 1.75;
+  color: var(--ink-faint);
+}

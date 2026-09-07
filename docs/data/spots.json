@@ -1,0 +1,129 @@
+{
+  "_note": "ダムごとの『行ったら何がある？』。公式の一次情報だけを、事実として短く書く。紹介文の転載・画像の転載はしない。変わりやすい情報（時間・期間・料金）は必ず source と checked をセットで持つ。",
+  "_schema": {
+    "kind": "collect（集める） / eat（食べる） / see（見る） / buy（買う）",
+    "title": "見出し。ダム旅が書く短い名前",
+    "summary": "ダム旅が書く1〜2文の説明。他サイトの文章は使わない",
+    "facts": "確認できた事実だけ。[{label, value}]",
+    "note": "現地判断に効く注意。季節・予約・在庫など",
+    "source": "一次情報のURL",
+    "source_name": "情報源の名前（誰が出している情報か）",
+    "checked": "その情報を確認した日（YYYY-MM-DD）"
+  },
+  "dams": {
+    "toyama-kurobe": [
+      {
+        "kind": "see",
+        "title": "観光放水",
+        "summary": "夏から秋にかけて、毎秒10トン以上が放たれます。ダムを見に行く時期を決める手がかりになります。",
+        "facts": [
+          { "label": "実施期間", "value": "6月26日〜10月15日" },
+          { "label": "時間", "value": "6/26〜7/31 6:00〜17:30 ／ 8/1〜9/10 6:30〜17:00 ／ 9/11〜10/15 7:00〜16:30" }
+        ],
+        "note": "天候などにより中止する場合があります。",
+        "source": "https://www.kurobe-dam.com/",
+        "source_name": "黒部ダムオフィシャルサイト（関西電力）",
+        "checked": "2026-09-07"
+      },
+      {
+        "kind": "eat",
+        "title": "黒部ダムカレー",
+        "summary": "ごはんが堤体、ルウがダム湖という形のカレー。黒部ダムレストハウスで食べられます。",
+        "facts": [
+          { "label": "場所", "value": "黒部ダムレストハウス" },
+          { "label": "種類", "value": "黒部ダムカレー ／ アーチダムカレー ／ 甘口ダムカレー" },
+          { "label": "レストラン営業時間", "value": "10:00〜15:00" }
+        ],
+        "note": "価格は公式ページに記載がありません。現地でご確認ください。",
+        "source": "https://www.kurobe-dam.com/kankou/mirutanoshimu09.html",
+        "source_name": "黒部ダムオフィシャルサイト（関西電力）",
+        "checked": "2026-09-07"
+      },
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "黒部ダムのダムカードは、レストハウス1階の案内所でもらえます。",
+        "facts": [
+          { "label": "配布場所", "value": "黒部ダムレストハウス 1F 黒部ダム案内所" },
+          { "label": "配布期間", "value": "4月15日〜11月30日" },
+          { "label": "時間", "value": "8:40〜17:30（12/1〜4/14 は 8:40〜16:40、土日祝休み）" }
+        ],
+        "note": "在庫切れの場合があります。",
+        "source": "https://www.kurobe-dam.com/event_info/damcard.html",
+        "source_name": "黒部ダムオフィシャルサイト（関西電力）",
+        "checked": "2026-09-07"
+      },
+      {
+        "kind": "buy",
+        "title": "売店・おみやげ",
+        "summary": "レストハウスの売店に、オリジナルグッズやソフトクリームなどがあります。",
+        "facts": [
+          { "label": "売店・ドリンクコーナー", "value": "9:00〜16:00（ドリンクコーナーは 4/15〜11月中旬）" }
+        ],
+        "note": null,
+        "source": "https://www.kurobe-dam.com/kankou/mirutanoshimu09.html",
+        "source_name": "黒部ダムオフィシャルサイト（関西電力）",
+        "checked": "2026-09-07"
+      }
+    ],
+    "toyama-unazuki": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "宇奈月ダムのダムカードは、ダム管理所でもらえます。",
+        "facts": [
+          { "label": "配布場所", "value": "宇奈月ダム管理所" },
+          { "label": "時間", "value": "9:00〜16:30" },
+          { "label": "休み", "value": "年末年始" }
+        ],
+        "note": null,
+        "source": "https://www.mlit.go.jp/river/kankyo/campaign/shunnkan/damcard84.html",
+        "source_name": "国土交通省 水管理・国土保全局",
+        "checked": "2026-09-07"
+      },
+      {
+        "kind": "see",
+        "title": "情報資料館「大夢来館」",
+        "summary": "ダムのしくみや黒部川の歴史を、パネルやシアターで紹介する施設です。ダムのすぐそばにあります。",
+        "facts": [
+          { "label": "場所", "value": "宇奈月ダム 情報資料館 大夢来館（だむこんかん）" },
+          { "label": "問い合わせ", "value": "宇奈月ダム管理所 0765-62-9071" }
+        ],
+        "note": "開館時間・休館日・料金は公式ページに明記がありません。訪れる前に問い合わせるのが確実です。",
+        "source": "https://www.hrr.mlit.go.jp/kurobe/press/160502b/160502b.html",
+        "source_name": "国土交通省 北陸地方整備局 黒部河川事務所",
+        "checked": "2026-09-07"
+      },
+      {
+        "kind": "see",
+        "title": "堤体内部の見学（要予約）",
+        "summary": "ふだん入れない監査廊や排砂ゲート室を、解説付きで見学できます。",
+        "facts": [
+          { "label": "時期", "value": "通年" },
+          { "label": "予約", "value": "必要（解説者あり）" },
+          { "label": "問い合わせ", "value": "宇奈月ダム管理所 0765-62-9071" }
+        ],
+        "note": "ダムの外観・ダム湖・大夢来館の見学に予約は要りません。",
+        "source": "https://www.mlit.go.jp/sogoseisaku/region/infratourism/tour/toyama/index01.html",
+        "source_name": "国土交通省 インフラツーリズム ポータルサイト",
+        "checked": "2026-09-07"
+      }
+    ],
+    "toyama-kumanogawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "熊野川ダムのダムカードは、ダム管理所でもらえます。",
+        "facts": [
+          { "label": "配布場所", "value": "熊野川ダム管理所" },
+          { "label": "時間", "value": "9:00〜17:00" },
+          { "label": "休み", "value": "土日祝日、年末年始" }
+        ],
+        "note": "12月上旬〜5月下旬は道路が通行止めのため配布していません。行く時期にご注意ください。",
+        "source": "https://www.mlit.go.jp/river/kankyo/campaign/shunnkan/damcard84.html",
+        "source_name": "国土交通省 水管理・国土保全局",
+        "checked": "2026-09-07"
+      }
+    ]
+  }
+}
