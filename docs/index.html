@@ -44,6 +44,7 @@
       <span id="obs-time">読み込み中…</span>
       <span id="status-summary"></span>
     </div>
+    <button id="trip-open" type="button">旅の記録</button>
     <a id="list-link" href="./dam/">ダム一覧</a>
     <!-- 出典は常時表示。パネルや凡例に隠れないようヘッダ内に置く -->
     <p id="credits">
@@ -62,11 +63,19 @@
       <label><input type="radio" name="basis" value="effective"> 有効貯水率</label>
     </fieldset>
     <ul id="legend"></ul>
+    <label id="tint-switch" hidden>
+      <input type="checkbox" id="tint-toggle" checked> 訪れた場所に色を残す
+    </label>
   </div>
 
   <aside id="panel" class="is-hidden" aria-live="polite">
     <button id="panel-close" type="button" aria-label="閉じる">×</button>
     <div id="panel-body"></div>
+  </aside>
+
+  <aside id="trip" class="is-hidden" aria-label="旅の記録">
+    <button id="trip-close" type="button" aria-label="閉じる">×</button>
+    <div id="trip-body"></div>
   </aside>
 </div>
 

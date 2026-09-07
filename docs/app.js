@@ -18,6 +18,8 @@
     data: null,
     illust: {},
     icons: {},
+    visits: {},        // 訪れたダム（この端末にだけ残る）
+    tripTint: true,    // 旅の色分け（訪問済みだけ色を残す）
     basis: "irrigation",
     markers: {},   // id -> {marker, el, dam}
     activeId: null
@@ -182,6 +184,14 @@
     var v = val(dam[def.field]);
     var color = colorFor(dam);
     var illust = iconFor(dam);
+
+    // 旅の記録による見え方。貯水率のリングと数字には一切影響させない。
+    var been = trip.has(dam.id);
+    var tint = trip.tinting();
+    el.classList.toggle("is-visited", been);
+    el.classList.toggle("is-unvisited", tint && !been);
+    // 訪問済みは外周の白い縁を琥珀に替える。大きさは変えないので地図は混まない
+    var rim = been ? "#e0a41c" : "#fff";
     var C = 2 * Math.PI * GAUGE_R;
     var pct = v === null ? 0 : Math.max(0, Math.min(100, v)) / 100;
 
@@ -193,7 +203,7 @@
 
     var svg =
       '<svg class="dam-pin__gauge" viewBox="0 0 100 100" aria-hidden="true">' +
-        '<circle cx="50" cy="50" r="' + GAUGE_R + '" fill="none" stroke="#fff" stroke-width="' + (GAUGE_W + 4) + '"/>' +
+        '<circle cx="50" cy="50" r="' + GAUGE_R + '" fill="none" stroke="' + rim + '" stroke-width="' + (GAUGE_W + 4) + '"/>' +
         '<circle cx="50" cy="50" r="' + GAUGE_R + '" fill="none" stroke="' + track + '" stroke-width="' + GAUGE_W + '"/>' +
         arc +
       "</svg>";
@@ -347,6 +357,8 @@
       (dam.obs_time ? "<strong>" + esc(fmtObsTime(dam.obs_time)) + "</strong> 観測の値です"
                     : "観測値の配信がありません") + "</p>";
 
+    html += '<div id="trip-slot" class="trip-slot"></div>';
+
     html += '<table class="facts">';
     html += "<tr><th>水系 / 河川</th><td>" + esc(off.water_system) + "水系 " + esc(off.river) + "</td></tr>";
     html += "<tr><th>観測日時</th><td>" +
@@ -396,6 +408,7 @@
     $("#panel-body").innerHTML = html;
     $("#panel").classList.remove("is-hidden");
     wireHelp();
+    trip.renderSlot(dam);
   }
 
   /** 用語ヘルプ: 1つ開いたら他は閉じる。パネルを描き直すたびに呼ぶ。 */
@@ -573,6 +586,7 @@
       state.data = res[0];
       state.illust = res[1] || {};
       state.icons = res[2] || {};
+      trip.load();
 
       renderMeta();
       basisFromHash();
@@ -608,6 +622,7 @@
           writeHash();
         });
       });
+      trip.wire();
       $("#panel-close").addEventListener("click", closePanel);
       document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") closePanel();
@@ -616,6 +631,343 @@
       fail("データを読み込めませんでした（" + e.message + "）");
     });
   }
+
+
+  // ------------------------------------------------------------ 旅の記録
+
+  /**
+   * 訪れたダムを、この端末にだけ残す。
+   *
+   * 考え方:
+   *   ダムを探す・貯水率を見るという本来の使い方は、訪問の有無で変わらない。
+   *   変わるのは地図の「色」だけ。1基でも訪れると、訪れた場所だけが色を保ち、
+   *   まだの場所は静かに色が引く。旅を重ねるほど自分の地図になっていく。
+   *   1基も訪れていない間は今までどおり全部が色つき（初めての人を損させない）。
+   *
+   * 記録は localStorage のみ。サーバへは何も送らない。位置情報も保存しない。
+   */
+  var trip = (function () {
+    var KEY = "damtabi.visits.v1";
+    var TINT_KEY = "damtabi.trip-tint.v1";
+
+    // 判定の半径。ダムの座標は堤体を指すので、駐車場や展望所からでも届く広さにする。
+    // 「堤体の一点に立たないと記録できない」のは現地では危険で不便。
+    var BASE_M = 600;
+    var ACC_ALLOW_M = 300;   // GPS 誤差ぶんの上乗せ（最大）
+    // 最も近い2基（上市川 / 上市川第二）でも 1,944m 離れているので、
+    // 最大 900m まで広げても取り違えは起きない。判定は常に「最も近い1基」だけ。
+
+    var api = {};
+    var busy = false;
+
+    // ---------------------------------------- 保存
+
+    function read() {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) || "{}") || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function write() {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state.visits));
+      } catch (e) {
+        console.warn("[trip] 保存できませんでした", e);
+      }
+    }
+
+    api.load = function () {
+      state.visits = read();
+      try {
+        state.tripTint = localStorage.getItem(TINT_KEY) !== "off";
+      } catch (e) {
+        state.tripTint = true;
+      }
+    };
+
+    api.has = function (id) { return !!state.visits[id]; };
+    api.count = function () { return Object.keys(state.visits).length; };
+
+    /** 色分けを効かせるか。1基も訪れていなければ今までどおり全部色つき。 */
+    api.tinting = function () { return state.tripTint && api.count() > 0; };
+
+    // ---------------------------------------- 距離
+
+    function distanceM(lat1, lon1, lat2, lon2) {
+      var R = 6371000, r = Math.PI / 180;
+      var dLat = (lat2 - lat1) * r, dLon = (lon2 - lon1) * r;
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * r) * Math.cos(lat2 * r) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      return 2 * R * Math.asin(Math.sqrt(a));
+    }
+
+    function nearest(lat, lon) {
+      var best = null;
+      state.data.dams.forEach(function (d) {
+        var m = distanceM(lat, lon, d.lat, d.lon);
+        if (!best || m < best.m) best = { dam: d, m: m };
+      });
+      return best;
+    }
+
+    function allowance(accuracy) {
+      var acc = (typeof accuracy === "number" && accuracy > 0) ? accuracy : 0;
+      return BASE_M + Math.min(acc, ACC_ALLOW_M);
+    }
+
+    function fmtM(m) {
+      if (m >= 1000) return (m / 1000).toFixed(1) + " km";
+      if (m < 50) return "50 m 以内";      // GPS の誤差以下を数字で言い切らない
+      return Math.round(m / 10) * 10 + " m";
+    }
+
+    // ---------------------------------------- 記録する
+
+    /** 訪問時に画面で見えていた観測値を、観測日時ごと控える。 */
+    function snapshot(dam) {
+      return {
+        obs_time: dam.obs_time || null,
+        data_status: dam.data_status,
+        rate_irrigation: dam.rate_irrigation,
+        rate_effective: dam.rate_effective,
+        storage_level_m: dam.storage_level_m
+      };
+    }
+
+    function save(dam, m, accuracy) {
+      state.visits[dam.id] = {
+        visited_at: new Date().toISOString(),
+        seen: snapshot(dam),
+        distance_m: Math.round(m),
+        accuracy_m: accuracy ? Math.round(accuracy) : null
+      };
+      write();
+      repaintAll();
+      renderTripCount();
+    }
+
+    api.forget = function (id) {
+      delete state.visits[id];
+      write();
+      repaintAll();
+      renderTripCount();
+    };
+
+    // ---------------------------------------- 表示
+
+    function fmtDate(iso) {
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      return d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
+    }
+
+    function seenLine(rec) {
+      var s = rec.seen || {};
+      if (!s.obs_time) return "";
+      var parts = [];
+      if (s.rate_irrigation && s.rate_irrigation.status === "ok") {
+        parts.push("利水 " + s.rate_irrigation.value + "%");
+      }
+      if (s.rate_effective && s.rate_effective.status === "ok") {
+        parts.push("有効 " + s.rate_effective.value + "%");
+      }
+      if (!parts.length) return "";
+      // 「訪問した瞬間の貯水率」ではない。画面に出ていた観測値だと分かるように書く
+      return '<p class="trip-seen">訪れた日にダム旅で見えていた値<br>' +
+        "<strong>" + esc(fmtObsTime(s.obs_time)) + "</strong> 観測 ／ " +
+        esc(parts.join(" ・ ")) + "</p>";
+    }
+
+    /** パネル内の「旅の記録」欄。 */
+    api.renderSlot = function (dam) {
+      var box = $("#trip-slot");
+      if (!box) return;
+      var rec = state.visits[dam.id];
+
+      if (rec) {
+        box.innerHTML =
+          '<div class="trip-card is-been">' +
+            '<p class="trip-been"><span class="trip-mark">訪</span>' +
+              esc(fmtDate(rec.visited_at)) + " に訪れました</p>" +
+            seenLine(rec) +
+            '<button type="button" class="trip-undo" id="trip-undo">この記録を消す</button>' +
+          "</div>";
+        $("#trip-undo").addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          api.forget(dam.id);
+          api.renderSlot(dam);
+        });
+      } else {
+        box.innerHTML =
+          '<div class="trip-card">' +
+            '<button type="button" class="trip-go" id="trip-go">現地で訪問を記録する' +
+              '<span class="trip-go__sub">ダムの近くにいるとき、現在地で確認します</span>' +
+            "</button>" +
+            '<p class="trip-note" id="trip-msg">記録はこの端末の中だけに残ります。' +
+              "位置情報はどこにも送信しません。</p>" +
+          "</div>";
+        $("#trip-go").addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          checkIn(dam);
+        });
+      }
+      box.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    };
+
+    function msg(html, kind) {
+      var el = $("#trip-msg");
+      if (el) {
+        el.innerHTML = html;
+        el.className = "trip-note" + (kind ? " is-" + kind : "");
+      }
+    }
+
+    // ---------------------------------------- 現在地の確認
+
+    function checkIn(dam) {
+      if (busy) return;
+      if (!navigator.geolocation) {
+        msg("このブラウザでは現在地を利用できません。", "warn");
+        return;
+      }
+      busy = true;
+      var btn = $("#trip-go");
+      if (btn) { btn.disabled = true; btn.classList.add("is-busy"); }
+      msg("現在地を確認しています…");
+
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        busy = false;
+        if (btn) { btn.disabled = false; btn.classList.remove("is-busy"); }
+
+        var lat = pos.coords.latitude, lon = pos.coords.longitude;
+        var acc = pos.coords.accuracy;
+        var here = distanceM(lat, lon, dam.lat, dam.lon);
+        var limit = allowance(acc);
+
+        if (here <= limit) {
+          save(dam, here, acc);
+          api.renderSlot(dam);
+          bloom(dam.id);
+          return;
+        }
+
+        // 別のダムの近くにいるなら、そちらを案内する（歩き回らせない）
+        var near = nearest(lat, lon);
+        if (near && near.dam.id !== dam.id && near.m <= allowance(acc)) {
+          msg("いまは <strong>" + esc(near.dam.name) + "</strong> の近くにいるようです（約 " +
+              fmtM(near.m) + "）。<br>そのダムを開いて記録できます。", "warn");
+          return;
+        }
+
+        var extra = acc > 500
+          ? "<br>位置の精度が粗いようです（誤差 約" + fmtM(acc) + "）。屋外でしばらく待つと安定します。"
+          : "";
+        msg("ここから <strong>" + esc(dam.name) + "</strong> まで約 " + fmtM(here) +
+            " あります。<br>現地に着いてからもう一度お試しください。" + extra, "warn");
+
+      }, function (err) {
+        busy = false;
+        if (btn) { btn.disabled = false; btn.classList.remove("is-busy"); }
+        if (err.code === 1) {
+          msg("位置情報の利用が許可されていません。<br>" +
+              "ブラウザの設定でこのサイトの位置情報を「許可」にしてから、もう一度お試しください。", "warn");
+        } else if (err.code === 3) {
+          msg("現在地を確認できませんでした（時間切れ）。<br>" +
+              "空の見える場所で、もう一度お試しください。", "warn");
+        } else {
+          msg("現在地を確認できませんでした。<br>" +
+              "電波や空の見え方の良い場所で、もう一度お試しください。", "warn");
+        }
+      }, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
+    }
+
+    /** 記録した瞬間、そのピンに静かに色が戻る。 */
+    function bloom(id) {
+      var m = state.markers[id];
+      if (!m) return;
+      var inner = m.el.querySelector(".dam-pin__inner");
+      if (!inner) return;
+      inner.classList.remove("is-bloom");
+      void inner.offsetWidth;          // アニメーションをやり直させる
+      inner.classList.add("is-bloom");
+      setTimeout(function () { inner.classList.remove("is-bloom"); }, 1600);
+    }
+
+    // ---------------------------------------- 旅の記録一覧
+
+    function renderTripCount() {
+      var b = $("#trip-open");
+      if (!b) return;
+      var n = api.count();
+      b.textContent = "旅の記録 " + n + "/" + state.data.dams.length;
+      b.classList.toggle("has-visits", n > 0);
+      var t = $("#tint-switch");
+      if (t) t.hidden = n === 0;
+    }
+
+    function renderTripList() {
+      var ids = Object.keys(state.visits).sort(function (a, b) {
+        return (state.visits[b].visited_at || "").localeCompare(state.visits[a].visited_at || "");
+      });
+      var html = '<h2 class="trip-title">旅の記録</h2>';
+      html += '<p class="trip-sub">' + ids.length + " / " + state.data.dams.length +
+              "基を訪れました</p>";
+      if (!ids.length) {
+        html += '<p class="trip-empty">まだ記録はありません。<br>' +
+          "ダムに着いたら、そのダムの画面から現在地で記録できます。</p>";
+      } else {
+        html += '<ul class="trip-list">';
+        ids.forEach(function (id) {
+          var dam = state.data.dams.filter(function (d) { return d.id === id; })[0];
+          if (!dam) return;
+          var rec = state.visits[id];
+          var icon = iconFor(dam);
+          html += "<li>" +
+            (icon ? '<img src="' + esc(icon) + '" alt="">' : '<span class="noimg"></span>') +
+            "<span class=\"trip-list__name\">" + esc(dam.name) + "</span>" +
+            '<span class="trip-list__date">' + esc(fmtDate(rec.visited_at)) + "</span>" +
+            "</li>";
+        });
+        html += "</ul>";
+      }
+      html += '<p class="trip-warn">記録はこの端末のブラウザにだけ保存されています。' +
+        "ブラウザのデータを消したり、別の端末・別のブラウザで開いたりすると残りません。</p>";
+      $("#trip-body").innerHTML = html;
+    }
+
+    // ---------------------------------------- 組み込み
+
+    api.wire = function () {
+      renderTripCount();
+
+      $("#trip-open").addEventListener("click", function () {
+        renderTripList();
+        $("#trip").classList.remove("is-hidden");
+      });
+      $("#trip-close").addEventListener("click", function () {
+        $("#trip").classList.add("is-hidden");
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") $("#trip").classList.add("is-hidden");
+      });
+
+      var tint = $("#tint-toggle");
+      tint.checked = state.tripTint;
+      tint.addEventListener("change", function () {
+        state.tripTint = tint.checked;
+        try {
+          localStorage.setItem(TINT_KEY, tint.checked ? "on" : "off");
+        } catch (e) { /* 保存できなくても表示は切り替わる */ }
+        repaintAll();
+      });
+    };
+
+    return api;
+  })();
+
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", start);
