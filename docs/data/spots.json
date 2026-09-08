@@ -703,6 +703,340 @@
         "source_name": "北陸電力（有峰ダム）",
         "checked": "2026-09-07"
       }
+    ],
+    "ishikawa-tedorigawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "手取川ダムのダムカードは、手取川総合開発記念館・道の駅瀬女・白山砂防科学館の3か所で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所1",
+            "value": "手取川総合開発記念館（白山市桑島9-24-30）9:00〜16:30（4月〜11月）"
+          },
+          {
+            "label": "配布場所2",
+            "value": "道の駅 瀬女（白山市瀬戸寅163-1）9:00〜17:00（冬季9:00〜16:00）"
+          },
+          {
+            "label": "配布場所3",
+            "value": "白山砂防科学館（白山市白峰ツ40-1）9:00〜17:00"
+          }
+        ],
+        "note": "3か所とも冬期は休止・営業時間短縮になる場合があります。積雪期は事前確認がおすすめです。",
+        "source": "https://www.mlit.go.jp/river/kankyo/campaign/shunnkan/damcard84.html",
+        "source_name": "国土交通省 水管理・国土保全局（ダムカード配布情報）",
+        "checked": "2026-09-08"
+      },
+      {
+        "kind": "see",
+        "title": "手取川総合開発記念館",
+        "summary": "手取川ダムのすぐそばにある展示施設です。手取川の総合開発の歴史を紹介しています。入館は無料です。",
+        "facts": [
+          {
+            "label": "開館時間",
+            "value": "9:00〜16:30"
+          },
+          {
+            "label": "休館日",
+            "value": "毎週木曜日・祝日の翌日・冬期間（12月、1月〜3月）"
+          },
+          {
+            "label": "入館料",
+            "value": "無料"
+          },
+          {
+            "label": "住所",
+            "value": "石川県白山市桑島9-24-30"
+          }
+        ],
+        "note": "冬期は閉館します。",
+        "source": "https://www.pref.ishikawa.lg.jp/tedori/kinenkan.html",
+        "source_name": "石川県（手取川総合開発記念館）",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-dainichigawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "大日川ダムのダムカードは、大日川ダム管理事務所で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "大日川ダム管理事務所"
+          }
+        ],
+        "note": "ダム堤体上の道路は通行止めですが、白山市側（国道360号線経由）からダム管理事務所へは通行できます。配布時間・休止日の詳細は公式ページに明記がないため、訪問前の確認がおすすめです。",
+        "source": "https://www.pref.ishikawa.lg.jp/dainichikawadamu/index.html",
+        "source_name": "石川県（大日川ダム管理事務所）",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-uchikawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "内川ダムのダムカードは、内川ダム管理事務所（ダムに隣接）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "内川ダム管理事務所（ダムに隣接）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": null,
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-shin-uchikawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "新内川ダムのダムカードは、内川ダム管理事務所（ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "内川ダム管理事務所（ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "現在、新内川ダムに立ち入ることができません。この状態のため、ダムカード受取時の訪問証明の写真提示は不要とされています。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-saigawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "犀川ダムのダムカードは、石川県土木部河川課（行政庁舎15階、ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "石川県土木部河川課（行政庁舎15階、ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "現在、犀川ダムへの道路が通行止めになっており、犀川ダムへは行けません。ダムカード受取には、代わりに辰巳ダムを訪れたことがわかる写真等の提示が必要です。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-tatsumi": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "辰巳ダムのダムカードは、石川県土木部河川課（行政庁舎15階、ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "石川県土木部河川課（行政庁舎15階、ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "ダムカード受取には、辰巳ダムを訪れたことがわかる写真等の提示が必要です（配布窓口に職員はいません）。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-kitakawachi": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "北河内ダムのダムカードは、奥能登土木総合事務所分室（能登空港ターミナルビル3階、ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "奥能登土木総合事務所分室（能登空港ターミナルビル3階、ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "ダムカード受取には、北河内ダムを訪れたことがわかる写真等の提示が必要です（配布窓口に職員はいません）。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      },
+      {
+        "kind": "see",
+        "title": "愛称は「やませみ湖」",
+        "summary": "北河内ダムがつくるダム湖は、地元で「やませみ湖」と呼ばれています。",
+        "facts": [
+          {
+            "label": "愛称",
+            "value": "やませみ湖"
+          }
+        ],
+        "note": null,
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/dams/kitakawachi.html",
+        "source_name": "石川県（北河内ダム）",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-akase": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "赤瀬ダムのダムカードは、赤瀬ダム管理事務所（ダムに隣接）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "赤瀬ダム管理事務所（ダムに隣接）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": null,
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-kutani": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "九谷ダムのダムカードは、大聖寺川ダム統合管理事務所（ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "大聖寺川ダム統合管理事務所（ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "ダムカード受取には、九谷ダムを訪れたことがわかる写真等の提示が必要です（配布窓口に職員はいません）。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-wagatani": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "我谷ダムのダムカードは、大聖寺川ダム統合管理事務所（ダムに隣接）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "大聖寺川ダム統合管理事務所（ダムに隣接）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": null,
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-hakkagawa": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "八ヶ川ダムのダムカードは、奥能登土木総合事務所分室（能登空港ターミナルビル3階、ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "奥能登土木総合事務所分室（能登空港ターミナルビル3階、ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "ダムカード受取には、八ヶ川ダムを訪れたことがわかる写真等の提示が必要です（配布窓口に職員はいません）。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
+    ],
+    "ishikawa-oya": [
+      {
+        "kind": "collect",
+        "title": "ダムカード",
+        "summary": "小屋ダムのダムカードは、珠洲土木事務所（ダムから離れた場所）で配布しています。",
+        "facts": [
+          {
+            "label": "配布場所",
+            "value": "珠洲土木事務所（ダムから離れた場所）"
+          },
+          {
+            "label": "時間",
+            "value": "9:00〜17:00"
+          },
+          {
+            "label": "休み",
+            "value": "土・日・祝日、年末年始を除く"
+          }
+        ],
+        "note": "ダムカード受取には、小屋ダムを訪れたことがわかる写真等の提示が必要です（配布窓口に職員はいません）。",
+        "source": "https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/damcard/documents/260205pdf.pdf",
+        "source_name": "石川県土木部河川課「県土木部管理ダムのダムカード配布について」",
+        "checked": "2026-09-08"
+      }
     ]
   }
 }
