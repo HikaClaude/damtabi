@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""富山県のダム貯水率を「川の防災情報」から取得し、静的 JSON に書き出すバッチ。
+"""収録県のダム貯水率を「川の防災情報」から取得し、静的 JSON に書き出すバッチ。
+
+対象の県は prefs/prefectures.json で決まる。県を足すときはそこに1行足し、
+prefs/<県>/dams.csv（現在値あり）か dams_nodata.csv（現在値なし）を置くだけでよい。
+このファイルを県ごとに書き換える必要はない。
 
 設計方針（最重要）
 ------------------
@@ -40,8 +44,8 @@ from typing import Any
 # ---------------------------------------------------------------- 定数
 
 ROOT = Path(__file__).resolve().parent.parent
-DAMS_CSV = ROOT / "toyama_dams.csv"
-NODATA_CSV = ROOT / "toyama_dams_nodata.csv"
+PREFS_DIR = ROOT / "prefs"
+PREFS_JSON = PREFS_DIR / "prefectures.json"
 SLUGS_CSV = ROOT / "dam_slugs.csv"
 SITE_JSON = ROOT / "site.json"
 OFFICIAL_CSV = ROOT / "dam_official.csv"
@@ -337,6 +341,9 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
         except ValueError:
             pass
 
+    rec["inclusion"] = (row.get("inclusion") or "core").strip() or "core"
+    rec["inclusion_reason"] = (row.get("inclusion_reason") or "").strip() or None
+
     time.sleep(REQUEST_INTERVAL_SEC)
     return rec
 
@@ -381,6 +388,10 @@ def build_nodata_dam(row: dict, slugs: dict, official: dict) -> dict:
         "outflow_m3s": dict(blank),
         "data_status": "no_source",
         "illustration": None,
+        # 「コア（公式一覧に載る）」か「例外（人が選んで足した）」か。
+        # 例外には理由を残す。将来ダムを増やすときの判断材料にする。
+        "inclusion": (row.get("inclusion") or "core").strip() or "core",
+        "inclusion_reason": (row.get("inclusion_reason") or "").strip() or None,
     }
 
 
@@ -420,8 +431,27 @@ def read_csv(path: Path) -> list[dict]:
         return list(csv.DictReader(f))
 
 
+def load_prefectures() -> list[dict]:
+    """収録している県の一覧。ここに無い県は取りに行かないし、出力にも出ない。"""
+    if not PREFS_JSON.exists():
+        print(f"[fetch_dams] {PREFS_JSON} がありません。", file=sys.stderr)
+        return []
+    try:
+        data = json.loads(PREFS_JSON.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as ex:
+        print(f"[fetch_dams] prefectures.json を読めません: {ex}", file=sys.stderr)
+        return []
+    out = []
+    for pref in data.get("prefectures", []):
+        key = pref.get("key")
+        if not key:
+            continue
+        out.append(pref)
+    return out
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="富山県ダム貯水率の日次取得バッチ")
+    ap = argparse.ArgumentParser(description="収録県のダム貯水率の取得バッチ（手動実行）")
     ap.add_argument("--out", type=Path, default=OUT_JSON, help="出力先 JSON")
     ap.add_argument("--refresh-master", action="store_true",
                     help="観測所マスタのキャッシュを無視して取り直す")
@@ -443,23 +473,40 @@ def main() -> int:
     master_cache = load_master_cache(args.refresh_master)
     official = {r["dam_name"]: r for r in read_csv(OFFICIAL_CSV)} if OFFICIAL_CSV.exists() else {}
 
-    dams: list[dict] = []
-    for row in read_csv(DAMS_CSV):
-        rec = build_dam(row, base_time, slugs, master_cache, official)
-        irr = rec["rate_irrigation"]
-        eff = rec["rate_effective"]
-        print(
-            f"  {rec['name']:<9} "
-            f"利水={_fmt(irr):<10} 有効={_fmt(eff):<10} "
-            f"[{rec['data_status']}] {rec['obs_time'] or '-'}"
-        )
-        dams.append(rec)
+    prefectures = load_prefectures()
+    if not prefectures:
+        print("[fetch_dams] 収録県がありません。", file=sys.stderr)
+        return 1
 
-    if not args.skip_nodata and NODATA_CSV.exists():
-        for row in read_csv(NODATA_CSV):
-            rec = build_nodata_dam(row, slugs, official)
-            print(f"  {rec['name']:<9} 利水=—          有効=—          [no_source]")
-            dams.append(rec)
+    dams: list[dict] = []
+    for pref in prefectures:
+        key = pref["key"]
+        pdir = PREFS_DIR / key
+        rate_csv = pdir / "dams.csv"
+        nodata_csv = pdir / "dams_nodata.csv"
+        print(f"\n[{pref.get('name', key)}]  取得元: {pref.get('rate_source', 'none')}")
+
+        # 現在値を取りに行くのは、その県に取得元があると登録されているときだけ。
+        # 取得元が確認できていない県で、他県と同じ方法が使える前提にはしない。
+        if pref.get("rate_source") == "kawabou" and rate_csv.exists():
+            for row in read_csv(rate_csv):
+                rec = build_dam(row, base_time, slugs, master_cache, official)
+                irr = rec["rate_irrigation"]
+                eff = rec["rate_effective"]
+                print(
+                    f"  {rec['name']:<9} "
+                    f"利水={_fmt(irr):<10} 有効={_fmt(eff):<10} "
+                    f"[{rec['data_status']}] {rec['obs_time'] or '-'}"
+                )
+                dams.append(rec)
+        elif rate_csv.exists():
+            print(f"  （{rate_csv.name} はあるが、この県の取得元が未確認のため取得しません）")
+
+        if not args.skip_nodata and nodata_csv.exists():
+            for row in read_csv(nodata_csv):
+                rec = build_nodata_dam(row, slugs, official)
+                print(f"  {rec['name']:<9} 利水=—          有効=—          [no_source]")
+                dams.append(rec)
 
     save_master_cache(master_cache)
 
@@ -486,6 +533,12 @@ def main() -> int:
             "fetch_failed": "取得失敗",
             "no_source": "データ提供なし",
         },
+        "prefectures": [
+            {"key": p["key"], "name": p.get("name", p["key"]),
+             "rate_source": p.get("rate_source", "none"),
+             "count": sum(1 for d in dams if d.get("pref") == p["key"])}
+            for p in prefectures
+        ],
         "summary": {"total": len(dams), "by_status": counts},
         "dams": dams,
     }
