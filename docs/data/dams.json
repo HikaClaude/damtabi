@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-08T22:20:13+09:00",
-  "base_obs_time": "2026/09/08 22:15",
+  "generated_at": "2026-09-08T23:48:48+09:00",
+  "base_obs_time": "2026/09/08 23:40",
   "source": {
     "name": "国土交通省 川の防災情報",
     "url": "https://www.river.go.jp/kawabou/pcfull/tm",
@@ -108,17 +108,17 @@
     {
       "key": "ishikawa",
       "name": "石川県",
-      "rate_source": "none",
+      "rate_source": "kawabou",
       "count": 12
     }
   ],
   "summary": {
     "total": 35,
     "by_status": {
-      "ok": 15,
+      "ok": 16,
       "missing": 2,
-      "not_provided": 3,
-      "no_source": 15
+      "not_provided": 14,
+      "no_source": 3
     }
   },
   "dams": [
@@ -162,34 +162,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 79,
+        "value": 78.6,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 18.2,
+        "value": 18.1,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 240.22,
+        "value": 240.18,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2849,
+        "value": 2833,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 41.16,
+        "value": 40.51,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 43.2,
+        "value": 43.6,
         "status": "ok",
         "reason": null
       },
@@ -238,34 +238,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
-        "value": 56.6,
+        "value": 56.7,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 31.2,
+        "value": 31.3,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 242.59,
+        "value": 242.6,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3786,
+        "value": 3790,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.62,
+        "value": 4.33,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 17.61,
+        "value": 0,
         "status": "ok",
         "reason": null
       },
@@ -310,7 +310,7 @@
       "manager_office": "富山土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -322,7 +322,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 307.85,
+        "value": 307.76,
         "status": "ok",
         "reason": null
       },
@@ -332,7 +332,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 2.68,
+        "value": 3,
         "status": "ok",
         "reason": null
       },
@@ -386,7 +386,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -408,12 +408,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.28,
+        "value": 4.04,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.63,
+        "value": 4.32,
         "status": "ok",
         "reason": null
       },
@@ -462,34 +462,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 47,
+        "value": 46.4,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 23.4,
+        "value": 23.1,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 39.8,
+        "value": 39.78,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 422,
+        "value": 417,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 24.17,
+        "value": 24.6,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 24.82,
+        "value": 25.12,
         "status": "ok",
         "reason": null
       },
@@ -538,34 +538,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 15.4,
+        "value": 16,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 2.5,
+        "value": 2.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 887.37,
+        "value": 887.38,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 25,
+        "value": 26,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.9,
+        "value": 2.3,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 2.2,
+        "value": 2.4,
         "status": "ok",
         "reason": null
       },
@@ -610,9 +610,9 @@
       "manager_office": "境川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 42,
+        "value": 42.1,
         "status": "ok",
         "reason": null
       },
@@ -622,22 +622,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 547.76,
+        "value": 547.78,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 20475,
+        "value": 20494,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.1,
+        "value": 2.83,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.39,
+        "value": 0.4,
         "status": "ok",
         "reason": null
       },
@@ -682,7 +682,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -694,22 +694,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 338.66,
+        "value": 338.58,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 9702,
+        "value": 9646,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.63,
+        "value": 1.56,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 11.9,
+        "value": 12.2,
         "status": "ok",
         "reason": null
       },
@@ -754,7 +754,7 @@
       "manager_office": "農林水産省北陸地整管内",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:00",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -766,7 +766,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 180.19,
+        "value": 180.14,
         "status": "ok",
         "reason": null
       },
@@ -781,7 +781,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "outflow_m3s": {
-        "value": 4.05,
+        "value": 4.02,
         "status": "ok",
         "reason": null
       },
@@ -826,7 +826,7 @@
       "manager_office": "子撫川統合ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -848,7 +848,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.41,
+        "value": 5.33,
         "status": "ok",
         "reason": null
       },
@@ -902,34 +902,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 71.8,
+        "value": 72.1,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 27.5,
+        "value": 27.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 255.51,
+        "value": 255.53,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1225,
+        "value": 1227,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.54,
+        "value": 0.51,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.29,
+        "value": 0.28,
         "status": "ok",
         "reason": null
       },
@@ -974,7 +974,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -1046,7 +1046,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -1058,7 +1058,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 228.47,
+        "value": 228.28,
         "status": "ok",
         "reason": null
       },
@@ -1068,12 +1068,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 2.58,
+        "value": 2.78,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.02,
+        "value": 7.11,
         "status": "ok",
         "reason": null
       },
@@ -1118,34 +1118,34 @@
       "manager_office": "新川土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 90.7,
+        "value": 89.2,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 19.7,
+        "value": 19.4,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 122.6,
+        "value": 122.51,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 243,
+        "value": 239,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.1,
+        "value": 1,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.8,
+        "value": 1.5,
         "status": "ok",
         "reason": null
       },
@@ -1194,34 +1194,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 44.1,
+        "value": 44,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 17.6,
+        "value": 17.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 183.94,
+        "value": 183.93,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 603,
+        "value": 602,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.08,
+        "value": 6.09,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 6.48,
+        "value": 6.52,
         "status": "ok",
         "reason": null
       },
@@ -1270,34 +1270,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 53.2,
+        "value": 52.5,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 22.8,
+        "value": 22.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 275.53,
+        "value": 275.47,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 883,
+        "value": 871,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.41,
+        "value": 3.12,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 5.77,
+        "value": 5.75,
         "status": "ok",
         "reason": null
       },
@@ -1342,29 +1342,29 @@
       "manager_office": "白岩川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": 80.9,
+        "value": 81.4,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 21.3,
+        "value": 21.4,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 128.58,
+        "value": 128.6,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 325,
+        "value": 327,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.99,
+        "value": 1.91,
         "status": "ok",
         "reason": null
       },
@@ -1414,7 +1414,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1426,7 +1426,7 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 295.49,
+        "value": 295.48,
         "status": "ok",
         "reason": null
       },
@@ -1436,12 +1436,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.33,
+        "value": 0.32,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.33,
+        "value": 0.32,
         "status": "ok",
         "reason": null
       },
@@ -1490,7 +1490,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1512,7 +1512,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.92,
+        "value": 1.8,
         "status": "ok",
         "reason": null
       },
@@ -1566,24 +1566,24 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/08 22:10",
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 5.2,
+        "value": 4.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 143.7,
+        "value": 143.69,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 11,
+        "value": 10,
         "status": "ok",
         "reason": null
       },
@@ -1593,7 +1593,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.14,
+        "value": 0.13,
         "status": "ok",
         "reason": null
       },
@@ -1793,8 +1793,8 @@
       "pref": "ishikawa",
       "slug": "tedorigawa",
       "name": "手取川ダム",
-      "kana": null,
-      "address": "石川県白山市東二口・女原",
+      "kana": "てどりがわだむ",
+      "address": "石川県白山市字女原ソ18-1",
       "official": {
         "water_system": "手取川",
         "river": "手取川",
@@ -1802,61 +1802,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "手取川",
+        "river": "手取川",
+        "provider": "川の防災情報",
+        "ofc_cd": 21565,
+        "obs_cd": 1,
+        "obs_fcd": "2156500700001"
+      },
       "manager": "国交省",
       "lat": 36.266975,
       "lon": 136.637478,
-      "note": "白山手取川ジオパーク内。ダムカードは手取川総合開発記念館・道の駅瀬女で配布",
+      "note": "白山手取川ジオパーク内。ダムカードは手取川総合開発記念館・道の駅瀬女・白山砂防科学館で配布",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 21565,
+        "obs_cd": 1,
+        "obs_fcd": "2156500700001"
       },
-      "manager_office": null,
+      "obs_fcd": "2156500700001",
+      "manager_office": "金沢河川国道事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:40",
       "rate_irrigation": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 59,
+        "status": "ok",
+        "reason": null
       },
       "rate_effective": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 52.7,
+        "status": "ok",
+        "reason": null
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 445.05,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 99893,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 33.94,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.48,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "ok",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-dainichigawa",
       "pref": "ishikawa",
       "slug": "dainichigawa",
       "name": "大日川ダム",
-      "kana": null,
-      "address": "石川県白山市阿手町",
+      "kana": "だいにちがわだむ",
+      "address": "石川県白山市阿手町乙2-7",
       "official": {
         "water_system": "手取川",
         "river": "大日川",
@@ -1864,61 +1874,75 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "手取川",
+        "river": "大日川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 21,
+        "obs_fcd": "0435300700021"
+      },
       "manager": "石川県",
       "lat": 36.28967,
       "lon": 136.579456,
-      "note": null,
+      "note": "貯水率は未提供。堤体上の道路は通行止め（白山市側からは通行可）",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 21,
+        "obs_fcd": "0435300700021"
       },
-      "manager_office": null,
-      "flood_season": null,
-      "in_flood_season": null,
-      "obs_time": null,
+      "obs_fcd": "0435300700021",
+      "manager_office": "大日川ダム管理事務所",
+      "flood_season": {
+        "limit_level_m": 324.7,
+        "start_md": "06-15",
+        "end_md": "10-15"
+      },
+      "in_flood_season": true,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 320.26,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 11801,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 4.35,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 12.88,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-uchikawa",
       "pref": "ishikawa",
       "slug": "uchikawa",
       "name": "内川ダム",
-      "kana": null,
-      "address": "石川県金沢市小原町",
+      "kana": "うちかわだむ",
+      "address": "石川県金沢市小原町ス-42",
       "official": {
         "water_system": "犀川",
         "river": "内川",
@@ -1926,60 +1950,70 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "犀川",
+        "river": "内川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 62,
+        "obs_fcd": "0435300700062"
+      },
       "manager": "石川県",
       "lat": 36.472926,
       "lon": 136.669922,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 62,
+        "obs_fcd": "0435300700062"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700062",
+      "manager_office": "内川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 223.63,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 4270,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 2,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 7.94,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-shin-uchikawa",
       "pref": "ishikawa",
       "slug": "shin-uchikawa",
       "name": "新内川ダム",
-      "kana": null,
+      "kana": "しんうちかわだむ",
       "address": "石川県金沢市小原町",
       "official": {
         "water_system": "犀川",
@@ -1988,61 +2022,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "犀川",
+        "river": "内川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 63,
+        "obs_fcd": "0435300700063"
+      },
       "manager": "石川県",
       "lat": 36.488611,
       "lon": 136.680833,
-      "note": "石川県公式ページの地図リンクは犀川ダムと同一座標になっており誤りと判断。国交省 川の防災情報の該当観測所ページの座標を採用",
+      "note": "貯水率は未提供。貯水量・全流入量も欠測（現在ダムに立ち入ることができないため）",
       "source": {
-        "provider": null,
-        "checked": "国土交通省 川の防災情報（新内川ダム観測所ページの地図中心座標）"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 63,
+        "obs_fcd": "0435300700063"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700063",
+      "manager_office": "内川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 107.6,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "inflow_m3s": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 7.2,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-saigawa",
       "pref": "ishikawa",
       "slug": "saigawa",
       "name": "犀川ダム",
-      "kana": null,
-      "address": "石川県金沢市二又新町",
+      "kana": "さいがわだむ",
+      "address": "石川県金沢市二又新町リ10",
       "official": {
         "water_system": "犀川",
         "river": "犀川",
@@ -2050,61 +2094,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "犀川",
+        "river": "犀川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 61,
+        "obs_fcd": "0435300700061"
+      },
       "manager": "石川県",
       "lat": 36.43178,
       "lon": 136.747513,
-      "note": "ダムに通じる道路が落石の危険等で閉鎖されており、当分の間行くことができません（国交省ダムカード配布情報より）",
+      "note": "貯水率は未提供。ダムに通じる道路が落石の危険等で閉鎖されており、当分の間行くことができません（国交省ダムカード配布情報より）",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 61,
+        "obs_fcd": "0435300700061"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700061",
+      "manager_office": "犀川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 334.32,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 3726,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 3.83,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 11.97,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-tatsumi",
       "pref": "ishikawa",
       "slug": "tatsumi",
       "name": "辰巳ダム",
-      "kana": null,
-      "address": "石川県金沢市相合谷町・上辰巳町",
+      "kana": "たつみだむ",
+      "address": "石川県金沢市相合谷町タ7番地２",
       "official": {
         "water_system": "犀川",
         "river": "犀川",
@@ -2112,61 +2166,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "犀川",
+        "river": "犀川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 65,
+        "obs_fcd": "0435300700065"
+      },
       "manager": "石川県",
       "lat": 36.498356,
       "lon": 136.712837,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 65,
+        "obs_fcd": "0435300700065"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700065",
+      "manager_office": "犀川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 97.86,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 7,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 3.63,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 3.63,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-kitakawachi",
       "pref": "ishikawa",
       "slug": "kitakawachi",
       "name": "北河内ダム",
-      "kana": null,
-      "address": "石川県鳳珠郡能登町五十里",
+      "kana": "きたかわちだむ",
+      "address": "石川県鳳珠郡能登町字五十里メ部２７－５",
       "official": {
         "water_system": "町野川",
         "river": "河内川",
@@ -2174,61 +2238,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "町野川",
+        "river": "河内川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 31,
+        "obs_fcd": "0435300700031"
+      },
       "manager": "石川県",
       "lat": 37.37824,
       "lon": 137.043285,
-      "note": "通称やませみ湖",
+      "note": "貯水率は未提供。通称やませみ湖",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 31,
+        "obs_fcd": "0435300700031"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700031",
+      "manager_office": "奥能登土木総合事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 129.15,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 1369,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.51,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.51,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-akase",
       "pref": "ishikawa",
       "slug": "akase",
       "name": "赤瀬ダム",
-      "kana": null,
-      "address": "石川県小松市赤瀬町",
+      "kana": "あかぜだむ",
+      "address": "石川県小松市赤瀬町ﾊ16-4",
       "official": {
         "water_system": "梯川",
         "river": "梯川",
@@ -2236,61 +2310,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "梯川",
+        "river": "梯川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 64,
+        "obs_fcd": "0435300700064"
+      },
       "manager": "石川県",
       "lat": 36.296726,
       "lon": 136.485043,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 64,
+        "obs_fcd": "0435300700064"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700064",
+      "manager_office": "赤瀬ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 104.57,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 1.01,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.6,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-kutani",
       "pref": "ishikawa",
       "slug": "kutani",
       "name": "九谷ダム",
-      "kana": null,
-      "address": "石川県加賀市山中温泉枯渕町",
+      "kana": "くたにだむ",
+      "address": "石川県加賀市山中温泉枯淵町ヌ1-62",
       "official": {
         "water_system": "大聖寺川",
         "river": "大聖寺川",
@@ -2298,61 +2382,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "大聖寺川",
+        "river": "大聖寺川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 2,
+        "obs_fcd": "0435300700002"
+      },
       "manager": "石川県",
       "lat": 36.207473,
       "lon": 136.385651,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 2,
+        "obs_fcd": "0435300700002"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700002",
+      "manager_office": "大聖寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 181.94,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 2344,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 4.25,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 7.53,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-wagatani",
       "pref": "ishikawa",
       "slug": "wagatani",
       "name": "我谷ダム",
-      "kana": null,
-      "address": "石川県加賀市山中温泉我谷町",
+      "kana": "わがたにだむ",
+      "address": "石川県加賀市山中温泉我谷町ロ-1",
       "official": {
         "water_system": "大聖寺川",
         "river": "大聖寺川",
@@ -2360,61 +2454,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "大聖寺川",
+        "river": "大聖寺川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 1,
+        "obs_fcd": "0435300700001"
+      },
       "manager": "石川県",
       "lat": 36.211005,
       "lon": 136.349387,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 1,
+        "obs_fcd": "0435300700001"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700001",
+      "manager_office": "大聖寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 137.45,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 2787,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 8.53,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 10.56,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-hakkagawa",
       "pref": "ishikawa",
       "slug": "hakkagawa",
       "name": "八ヶ川ダム",
-      "kana": null,
-      "address": "石川県輪島市門前町定広・地原",
+      "kana": "はっかがわだむ",
+      "address": "石川県輪島市門前町地原9-5-3",
       "official": {
         "water_system": "八ケ川",
         "river": "八ケ川",
@@ -2422,61 +2526,71 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "八ヶ川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 41,
+        "obs_fcd": "0435300700041"
+      },
       "manager": "石川県",
       "lat": 37.262509,
       "lon": 136.832056,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 41,
+        "obs_fcd": "0435300700041"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700041",
+      "manager_office": "奥能登土木総合事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 130.66,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 965,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.26,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.26,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     },
     {
       "id": "ishikawa-oya",
       "pref": "ishikawa",
       "slug": "oya",
       "name": "小屋ダム",
-      "kana": null,
-      "address": "石川県珠洲市宝立町柏原",
+      "kana": "おやだむ",
+      "address": "石川県珠洲市宝立町柏原109-4-2",
       "official": {
         "water_system": "鵜飼川",
         "river": "鵜飼川",
@@ -2484,53 +2598,63 @@
         "note": null,
         "unverified": null
       },
-      "observation": null,
+      "observation": {
+        "water_system": "北陸その他",
+        "river": "鵜飼川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 51,
+        "obs_fcd": "0435300700051"
+      },
       "manager": "石川県",
       "lat": 37.392562,
       "lon": 137.177567,
-      "note": null,
+      "note": "貯水率は未提供",
       "source": {
-        "provider": null,
-        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+        "provider": "川の防災情報",
+        "ofc_cd": 4353,
+        "obs_cd": 51,
+        "obs_fcd": "0435300700051"
       },
-      "manager_office": null,
+      "obs_fcd": "0435300700051",
+      "manager_office": "珠洲土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": null,
+      "obs_time": "2026/09/08 23:30",
       "rate_irrigation": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_effective": {
         "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 85.44,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 866,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.48,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "no_source",
-        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+        "value": 0.2,
+        "status": "ok",
+        "reason": null
       },
-      "data_status": "no_source",
+      "data_status": "not_provided",
       "illustration": null,
       "inclusion": "core",
-      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+      "inclusion_reason": null
     }
   ]
 }
