@@ -106,6 +106,22 @@
 
   // ------------------------------------------------------------ 地図
 
+  /** 収録しているダム全部が入る範囲。1基も無いときは日本の中ほどを返す。 */
+  function damsBounds() {
+    var dams = (state.data && state.data.dams) || [];
+    if (!dams.length) return [[136.0, 36.0], [138.0, 37.0]];
+    var w = 999, s2 = 999, e2 = -999, n = -999;
+    dams.forEach(function (d) {
+      if (typeof d.lon !== "number" || typeof d.lat !== "number") return;
+      if (d.lon < w) w = d.lon;
+      if (d.lon > e2) e2 = d.lon;
+      if (d.lat < s2) s2 = d.lat;
+      if (d.lat > n) n = d.lat;
+    });
+    if (w > e2 || s2 > n) return [[136.0, 36.0], [138.0, 37.0]];
+    return [[w, s2], [e2, n]];
+  }
+
   function buildMap() {
     var map = new maplibregl.Map({
       container: "map",
@@ -122,9 +138,11 @@
         },
         layers: [{ id: "gsi", type: "raster", source: "gsi" }]
       },
-      center: [137.21, 36.62],
-      zoom: 9.1,
-      minZoom: 7,
+      // 初期表示は「収録しているダムが全部入る範囲」。
+      // 県を足すと自動で広がるので、県ごとに数字を書き足す必要はない。
+      bounds: damsBounds(),
+      fitBoundsOptions: { padding: 48, maxZoom: 10 },
+      minZoom: 6,
       maxZoom: 16,
       // attributionControl:false にすると MapLibre 4.7.1 で load が発火しないため
       // コントロール自体は残し、CSS で隠して #credits を常時表示に使う
@@ -517,8 +535,19 @@
     el.appendChild(w);
   }
 
+  /** ヘッダの「富山県」の部分。収録県が増えたらそのぶん増える。 */
+  function renderRegions() {
+    var el = document.querySelector("#topbar h1 .region");
+    if (!el) return;
+    var prefs = (state.data && state.data.prefectures) || [];
+    var names = prefs.filter(function (p) { return p.count > 0; })
+                     .map(function (p) { return p.name; });
+    if (names.length) el.textContent = names.join("・");
+  }
+
   function renderMeta() {
     var d = state.data;
+    renderRegions();
     $("#obs-time").textContent = "観測 " + (fmtObsTime(d.base_obs_time) || d.base_obs_time) + " 時点";
     renderAge(d);
 
@@ -1043,7 +1072,10 @@
         kind: BACKUP_KIND,
         schema_version: BACKUP_VERSION,
         generated_at: new Date().toISOString(),
-        region: "toyama",   // どの地域の記録かの印。将来 石川県 等が増えても読み分けに使える
+        // どの地域の記録かの印。収録県が増えたらそのぶん並ぶ。
+        // 読み込み側はこれを見ずにダムIDだけで復元するので、県が増えても古い控えは読める。
+        regions: ((state.data && state.data.prefectures) || [])
+          .map(function (p) { return p.key; }),
         visits: visits
       };
     }

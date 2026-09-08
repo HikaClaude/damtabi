@@ -1,0 +1,25 @@
+{
+  "_note": "収録している都道府県の登録簿。ここに1件足せば県が増える。ダムIDの接頭辞・表示名・地図の初期範囲・貯水率の取得元は、すべて県ごとにここで決める。",
+  "_howto": [
+    "3県目を足すとき:",
+    "  1. この配列に1件足す（key / name / rate_source）",
+    "  2. prefs/<key>/dams.csv（現在値あり）か dams_nodata.csv（現在値なし）を置く",
+    "  3. dam_slugs.csv に <ダム名,key,slug> を足す",
+    "  4. python scripts/fetch_dams.py && python scripts/build_site.py",
+    "イラストは docs/img/dams/<key>-<slug>.webp を置けば自動でつながる（無くても動く）"
+  ],
+  "prefectures": [
+    {
+      "key": "toyama",
+      "name": "富山県",
+      "rate_source": "kawabou",
+      "rate_note": "国土交通省 川の防災情報から取得（手動運用）"
+    },
+    {
+      "key": "ishikawa",
+      "name": "石川県",
+      "rate_source": "none",
+      "rate_note": "現時点でダム旅が使える公開の貯水率取得元を確認できていない。確認できるまで現在値は載せない（推測しない）"
+    }
+  ]
+}

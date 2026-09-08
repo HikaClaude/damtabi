@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-07T09:56:55+09:00",
-  "base_obs_time": "2026/09/07 09:50",
+  "generated_at": "2026-09-08T15:27:09+09:00",
+  "base_obs_time": "2026/09/08 15:20",
   "source": {
     "name": "国土交通省 川の防災情報",
     "url": "https://www.river.go.jp/kawabou/pcfull/tm",
@@ -98,13 +98,27 @@
     "fetch_failed": "取得失敗",
     "no_source": "データ提供なし"
   },
+  "prefectures": [
+    {
+      "key": "toyama",
+      "name": "富山県",
+      "rate_source": "kawabou",
+      "count": 23
+    },
+    {
+      "key": "ishikawa",
+      "name": "石川県",
+      "rate_source": "none",
+      "count": 12
+    }
+  ],
   "summary": {
-    "total": 23,
+    "total": 35,
     "by_status": {
-      "ok": 15,
-      "missing": 2,
+      "ok": 14,
+      "missing": 3,
       "not_provided": 3,
-      "no_source": 3
+      "no_source": 15
     }
   },
   "dams": [
@@ -148,39 +162,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 85.2,
+        "value": 81.2,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 19.6,
+        "value": 18.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 240.78,
+        "value": 240.42,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3072,
+        "value": 2926,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 40.3,
+        "value": 40.27,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 40.3,
+        "value": 42.4,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-muromaki",
@@ -222,39 +238,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
-        "value": 59.3,
+        "value": 57.8,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 32.7,
+        "value": 31.9,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 243.04,
+        "value": 242.78,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3968,
+        "value": 3862,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.32,
+        "value": 3.64,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0,
+        "value": 17.35,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-kumanogawa",
@@ -292,7 +310,7 @@
       "manager_office": "富山土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -304,7 +322,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 310.12,
+        "value": 308.26,
         "status": "ok",
         "reason": null
       },
@@ -314,17 +332,19 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 2.4,
+        "value": 3.22,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.2,
+        "value": 0.19,
         "status": "ok",
         "reason": null
       },
       "data_status": "missing",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-kubusugawa",
@@ -366,39 +386,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 30.8,
+        "value": 30.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 329.89,
+        "value": 329.88,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1989,
+        "value": 1987,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.81,
+        "value": 3.65,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.82,
+        "value": 3.65,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-wadagawa",
@@ -440,39 +462,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 82.5,
+        "value": 44.6,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 41.1,
+        "value": 22.2,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 40.97,
+        "value": 39.72,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 741,
+        "value": 401,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 26.72,
+        "value": 0.12,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 14.57,
+        "value": 16.27,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-togagawa",
@@ -514,39 +538,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 16,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "rate_effective": {
-        "value": 2.6,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 887.38,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_capacity_1000m3": {
-        "value": 26,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "inflow_m3s": {
-        "value": 3.1,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "outflow_m3s": {
-        "value": 3.2,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
-      "data_status": "ok",
-      "illustration": null
+      "data_status": "missing",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-sakaigawa",
@@ -584,24 +610,24 @@
       "manager_office": "境川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 41.3,
+        "value": 41.9,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 37.3,
+        "value": 37.8,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 547.41,
+        "value": 547.69,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 20134,
+        "value": 20406,
         "status": "ok",
         "reason": null
       },
@@ -616,7 +642,9 @@
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-tori",
@@ -654,7 +682,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -666,27 +694,29 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 339.09,
+        "value": 338.76,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 10005,
+        "value": 9772,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.77,
+        "value": 3.89,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 11.6,
+        "value": 0,
         "status": "ok",
         "reason": null
       },
       "data_status": "not_provided",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-goi",
@@ -724,7 +754,7 @@
       "manager_office": "農林水産省北陸地整管内",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -736,7 +766,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 181.16,
+        "value": 180.38,
         "status": "ok",
         "reason": null
       },
@@ -751,12 +781,14 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "outflow_m3s": {
-        "value": 4.06,
+        "value": 4.04,
         "status": "ok",
         "reason": null
       },
       "data_status": "not_provided",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-konadegawa",
@@ -794,39 +826,41 @@
       "manager_office": "子撫川統合ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 51.5,
+        "value": 50,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 100.27,
+        "value": 100,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3557,
+        "value": 3469,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.46,
+        "value": 5.78,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 4.46,
+        "value": 7.81,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-johana",
@@ -868,24 +902,24 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 68.6,
+        "value": 71.1,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 26.2,
+        "value": 27.2,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 255.23,
+        "value": 255.45,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1197,
+        "value": 1219,
         "status": "ok",
         "reason": null
       },
@@ -900,7 +934,9 @@
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-usunaka",
@@ -938,7 +974,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -970,7 +1006,9 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "data_status": "not_provided",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-asahiogawa",
@@ -1008,7 +1046,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -1020,7 +1058,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 228.55,
+        "value": 227.81,
         "status": "ok",
         "reason": null
       },
@@ -1030,17 +1068,19 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 11.04,
+        "value": 9.91,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.09,
+        "value": 5.69,
         "status": "ok",
         "reason": null
       },
       "data_status": "missing",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-kadokawa",
@@ -1078,39 +1118,41 @@
       "manager_office": "新川土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 98.5,
+        "value": 95.9,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 21.4,
+        "value": 20.8,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 123.05,
+        "value": 122.91,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 264,
+        "value": 257,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.9,
+        "value": 1,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.9,
+        "value": 1.4,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-kamiichigawa",
@@ -1152,39 +1194,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 46.6,
+        "value": 44.5,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 18.6,
+        "value": 17.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 184.19,
+        "value": 183.98,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 638,
+        "value": 609,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.08,
+        "value": 6.09,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 6.46,
+        "value": 6.47,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-kamiichigawa-daini",
@@ -1226,39 +1270,41 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 73.7,
+        "value": 56.4,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 31.6,
+        "value": 24.2,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 277.11,
+        "value": 275.79,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1223,
+        "value": 935,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.14,
+        "value": 3.6,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 5.71,
+        "value": 5.75,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-shiraiwagawa",
@@ -1296,39 +1342,41 @@
       "manager_office": "白岩川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
-        "value": 74.9,
+        "value": 78.7,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 19.7,
+        "value": 20.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 128.34,
+        "value": 128.49,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 301,
+        "value": 316,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.51,
+        "value": 2,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.55,
+        "value": 2,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-funagawa",
@@ -1366,7 +1414,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1378,7 +1426,7 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 295.48,
+        "value": 295.49,
         "status": "ok",
         "reason": null
       },
@@ -1388,17 +1436,19 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.32,
+        "value": 0.33,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.32,
+        "value": 0.33,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-fusegawa",
@@ -1440,7 +1490,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:50",
+      "obs_time": "2026/09/08 15:20",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1462,17 +1512,19 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.8,
+        "value": 1.88,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.8,
+        "value": 1.79,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-otani",
@@ -1514,39 +1566,41 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/07 09:40",
+      "obs_time": "2026/09/08 15:10",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 4.7,
+        "value": 5.2,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 143.68,
+        "value": 143.7,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 10,
+        "value": 11,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.12,
+        "value": 0.16,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.12,
+        "value": 0.14,
         "status": "ok",
         "reason": null
       },
       "data_status": "ok",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
     },
     {
       "id": "toyama-kurobe",
@@ -1606,7 +1660,9 @@
         "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "data_status": "no_source",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "exception",
+      "inclusion_reason": "公的な管理ダム一覧（川の防災情報 obsDam 等）には現在値の公開が無く収録されないが、著名な観光地・ダムであり、当初からダム旅の収録対象として選定した。水位・貯水量の公開情報源は確認できていない（no_source）。"
     },
     {
       "id": "toyama-arimine",
@@ -1666,7 +1722,9 @@
         "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "data_status": "no_source",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "exception",
+      "inclusion_reason": "公的な管理ダム一覧（川の防災情報 obsDam 等）には現在値の公開が無く収録されないが、著名な観光地・ダムであり、当初からダム旅の収録対象として選定した。水位・貯水量の公開情報源は確認できていない（no_source）。"
     },
     {
       "id": "toyama-dashidaira",
@@ -1726,7 +1784,753 @@
         "reason": "現在、ダム旅が利用している公開情報源では取得できません"
       },
       "data_status": "no_source",
-      "illustration": null
+      "illustration": null,
+      "inclusion": "exception",
+      "inclusion_reason": "公的な管理ダム一覧（川の防災情報 obsDam 等）には現在値の公開が無く収録されないが、著名な観光地・ダムであり、当初からダム旅の収録対象として選定した。水位・貯水量の公開情報源は確認できていない（no_source）。"
+    },
+    {
+      "id": "ishikawa-tedorigawa",
+      "pref": "ishikawa",
+      "slug": "tedorigawa",
+      "name": "手取川ダム",
+      "kana": null,
+      "address": "石川県白山市東二口・女原",
+      "official": {
+        "water_system": "手取川",
+        "river": "手取川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "国交省",
+      "lat": 36.266975,
+      "lon": 136.637478,
+      "note": "白山手取川ジオパーク内。ダムカードは手取川総合開発記念館・道の駅瀬女で配布",
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-dainichigawa",
+      "pref": "ishikawa",
+      "slug": "dainichigawa",
+      "name": "大日川ダム",
+      "kana": null,
+      "address": "石川県白山市阿手町",
+      "official": {
+        "water_system": "手取川",
+        "river": "大日川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.28967,
+      "lon": 136.579456,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-uchikawa",
+      "pref": "ishikawa",
+      "slug": "uchikawa",
+      "name": "内川ダム",
+      "kana": null,
+      "address": "石川県金沢市小原町",
+      "official": {
+        "water_system": "犀川",
+        "river": "内川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.472926,
+      "lon": 136.669922,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-shin-uchikawa",
+      "pref": "ishikawa",
+      "slug": "shin-uchikawa",
+      "name": "新内川ダム",
+      "kana": null,
+      "address": "石川県金沢市小原町",
+      "official": {
+        "water_system": "犀川",
+        "river": "内川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.488611,
+      "lon": 136.680833,
+      "note": "石川県公式ページの地図リンクは犀川ダムと同一座標になっており誤りと判断。国交省 川の防災情報の該当観測所ページの座標を採用",
+      "source": {
+        "provider": null,
+        "checked": "国土交通省 川の防災情報（新内川ダム観測所ページの地図中心座標）"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-saigawa",
+      "pref": "ishikawa",
+      "slug": "saigawa",
+      "name": "犀川ダム",
+      "kana": null,
+      "address": "石川県金沢市二又新町",
+      "official": {
+        "water_system": "犀川",
+        "river": "犀川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.43178,
+      "lon": 136.747513,
+      "note": "ダムに通じる道路が落石の危険等で閉鎖されており、当分の間行くことができません（国交省ダムカード配布情報より）",
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-tatsumi",
+      "pref": "ishikawa",
+      "slug": "tatsumi",
+      "name": "辰巳ダム",
+      "kana": null,
+      "address": "石川県金沢市相合谷町・上辰巳町",
+      "official": {
+        "water_system": "犀川",
+        "river": "犀川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.498356,
+      "lon": 136.712837,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-kitakawachi",
+      "pref": "ishikawa",
+      "slug": "kitakawachi",
+      "name": "北河内ダム",
+      "kana": null,
+      "address": "石川県鳳珠郡能登町五十里",
+      "official": {
+        "water_system": "町野川",
+        "river": "河内川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 37.37824,
+      "lon": 137.043285,
+      "note": "通称やませみ湖",
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-akase",
+      "pref": "ishikawa",
+      "slug": "akase",
+      "name": "赤瀬ダム",
+      "kana": null,
+      "address": "石川県小松市赤瀬町",
+      "official": {
+        "water_system": "梯川",
+        "river": "梯川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.296726,
+      "lon": 136.485043,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-kutani",
+      "pref": "ishikawa",
+      "slug": "kutani",
+      "name": "九谷ダム",
+      "kana": null,
+      "address": "石川県加賀市山中温泉枯渕町",
+      "official": {
+        "water_system": "大聖寺川",
+        "river": "大聖寺川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.207473,
+      "lon": 136.385651,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-wagatani",
+      "pref": "ishikawa",
+      "slug": "wagatani",
+      "name": "我谷ダム",
+      "kana": null,
+      "address": "石川県加賀市山中温泉我谷町",
+      "official": {
+        "water_system": "大聖寺川",
+        "river": "大聖寺川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 36.211005,
+      "lon": 136.349387,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-hakkagawa",
+      "pref": "ishikawa",
+      "slug": "hakkagawa",
+      "name": "八ヶ川ダム",
+      "kana": null,
+      "address": "石川県輪島市門前町定広・地原",
+      "official": {
+        "water_system": "八ケ川",
+        "river": "八ケ川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 37.262509,
+      "lon": 136.832056,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
+    },
+    {
+      "id": "ishikawa-koya",
+      "pref": "ishikawa",
+      "slug": "koya",
+      "name": "小屋ダム",
+      "kana": null,
+      "address": "石川県珠洲市宝立町柏原",
+      "official": {
+        "water_system": "鵜飼川",
+        "river": "鵜飼川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "石川県",
+      "lat": 37.392562,
+      "lon": 137.177567,
+      "note": null,
+      "source": {
+        "provider": null,
+        "checked": "石川県公式（石川のダム／各ダム詳細ページの地図リンク）／国土交通省 ダムカード配布情報"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "石川県「石川のダム」が完成・管理中として掲載し、かつ国土交通省 川の防災情報の石川県ダムカード配布情報（obsDam相当）にも掲載される12基と完全一致。"
     }
   ]
 }

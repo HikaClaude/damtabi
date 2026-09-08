@@ -139,7 +139,36 @@ def spots_html(dam: dict) -> list[str]:
 
 SITE_NAME = SITE["site_name"]          # 「ダム旅」
 SITE_TAGLINE = SITE.get("tagline") or ""
-REGION = SITE.get("region") or ""      # 「富山県」（当面の対象範囲）
+def load_prefectures() -> dict:
+    """収録県の登録簿。ダムIDの接頭辞（key）→ 表示名（name）。"""
+    f = ROOT / "prefs" / "prefectures.json"
+    if not f.exists():
+        return {}
+    try:
+        data = json.loads(f.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return {p["key"]: p for p in data.get("prefectures", []) if p.get("key")}
+
+
+PREFS = load_prefectures()
+
+
+def pref_name(key: str) -> str:
+    """"toyama" → 「富山県」。登録が無ければキーをそのまま返す。"""
+    return (PREFS.get(key) or {}).get("name") or key
+
+
+def covered_regions(data: dict) -> list[str]:
+    """実際にダムが1基でもある県の名前を、登録簿の順で返す。"""
+    have = {d.get("pref") for d in data.get("dams", [])}
+    return [p["name"] for k, p in PREFS.items() if k in have]
+
+
+def region_label(data: dict) -> str:
+    """収録範囲の呼び名。「富山県・石川県」のように県が増えるほど伸びる。"""
+    names = covered_regions(data)
+    return "・".join(names) if names else (SITE.get("region") or "")
 PRODUCER = SITE.get("producer") or ""  # 「DAM TABI LAB」
 
 JST = dt.timezone(dt.timedelta(hours=9))
@@ -332,7 +361,7 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     # 「現在の値」のように表示されてしまう。これはこのアプリが最も避けたい失敗。
     # 数値はページ本文に観測日時つきで載せる。
     title = f"{name}｜{SITE_NAME}"
-    where = dam.get("address") or REGION
+    where = dam.get("address") or pref_name(dam.get("pref", ""))
     sub = f"{ows(dam)}水系{oriv(dam)}"
     manager = dam.get("manager_office") or dam.get("manager") or ""
 
@@ -369,7 +398,8 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
         "url": url,
         "additionalType": "https://www.wikidata.org/wiki/Q12323",
         "geo": {"@type": "GeoCoordinates", "latitude": dam["lat"], "longitude": dam["lon"]},
-        "address": {"@type": "PostalAddress", "addressRegion": "富山県",
+        "address": {"@type": "PostalAddress",
+                    "addressRegion": pref_name(dam.get("pref", "")),
                     "addressCountry": "JP", "streetAddress": dam.get("address") or ""},
         "image": og_img,
     }
@@ -654,37 +684,51 @@ def page_shell(title, desc, url, og_image, rel_root, body, base, extra_head="", 
 def index_page(data: dict, base: str) -> str:
     dams = data["dams"]
     ok = data["summary"]["by_status"].get("ok", 0)
-    rows = []
-    for d in sorted(dams, key=lambda x: (ows(x), oriv(x), x["name"])):
-        irr = rate_text(d.get("rate_irrigation"))
-        eff = rate_text(d.get("rate_effective"))
-        cls = "" if val(d.get("rate_irrigation")) is not None else ' class="muted"'
-        rows.append(
-            f'<tr><td><a href="./{e(d["pref"])}/{e(d["slug"])}/">{e(d["name"])}</a></td>'
-            f'<td>{e(ows(d))}水系 {e(oriv(d))}</td>'
-            f"<td{cls}>{e(irr)}</td><td{cls}>{e(eff)}</td>"
-            f"<td>{e(d.get('manager') or '—')}</td></tr>"
-        )
+    region = region_label(data)
 
     body = [
         '<nav class="crumbs" aria-label="パンくず">'
         f'<a href="{e(base)}/">{e(SITE_NAME)}</a> › <span>ダム一覧</span></nav>',
-        f"<h1>{e(REGION)}のダム（現在{len(dams)}基を収録）</h1>",
-        f'<p class="lead">ダム旅が現在収録している{len(dams)}基です。'
-        f"{REGION}内にはこのほかにも未収録のダムがあります。<br>"
+        f"<h1>ダム一覧（現在{len(dams)}基を収録）</h1>",
+        f'<p class="lead">ダム旅が現在収録している{e(region)}の{len(dams)}基です。'
+        "このほかにも未収録のダムがあります。<br>"
         f"観測 {e(obs_time_jp(data['base_obs_time']))} 時点で{ok}基の数値を取得できています。"
         "残りは欠測・未提供・データなしで、推定値では埋めず「—」と理由を表示しています。<br>"
         "<small>このアプリは自動更新ではありません。表示中の値がいつのものかは、"
         "各ダムのページで確認できます。</small></p>",
         '<p class="backlink"><a href="' + e(base) + '/">地図で見る →</a></p>',
-        '<div class="table-scroll"><table class="list">',
-        "<thead><tr><th>ダム名</th><th>水系 / 河川</th><th>利水貯水率</th><th>有効貯水率</th><th>管理者</th></tr></thead>",
-        "<tbody>" + "".join(rows) + "</tbody></table></div>",
     ]
+
+    # 県ごとに区切って並べる。県が増えても、この一覧の作りは変わらない。
+    for key in PREFS:
+        group = [d for d in dams if d.get("pref") == key]
+        if not group:
+            continue
+        rows = []
+        for d in sorted(group, key=lambda x: (ows(x), oriv(x), x["name"])):
+            irr = rate_text(d.get("rate_irrigation"))
+            eff = rate_text(d.get("rate_effective"))
+            cls = "" if val(d.get("rate_irrigation")) is not None else ' class="muted"'
+            rows.append(
+                f'<tr><td><a href="./{e(d["pref"])}/{e(d["slug"])}/">{e(d["name"])}</a></td>'
+                f'<td>{e(ows(d))}水系 {e(oriv(d))}</td>'
+                f"<td{cls}>{e(irr)}</td><td{cls}>{e(eff)}</td>"
+                f"<td>{e(d.get('manager') or '—')}</td></tr>"
+            )
+        body.append(f'<h2 class="pref-head">{e(pref_name(key))}（{len(group)}基）</h2>')
+        # 現在値の取得元が無い県は、なぜ「—」が並ぶのかをその場で書く
+        if (PREFS.get(key) or {}).get("rate_source") == "none":
+            body.append('<p class="pref-note">この県は、ダム旅が使える公開の貯水率の取得元を'
+                        "まだ確認できていません。現在の水位・貯水率は表示していません"
+                        "（推定では埋めません）。</p>")
+        body.append('<div class="table-scroll"><table class="list">')
+        body.append("<thead><tr><th>ダム名</th><th>水系 / 河川</th>"
+                    "<th>利水貯水率</th><th>有効貯水率</th><th>管理者</th></tr></thead>")
+        body.append("<tbody>" + "".join(rows) + "</tbody></table></div>")
 
     title = f"ダム一覧｜{SITE_NAME}"
     desc = (
-        f"{REGION}のダム{len(dams)}基を収録した一覧です。"
+        f"{region}のダム{len(dams)}基を収録した一覧です。"
         "水系・河川・管理者などの基本情報と、公表されている場合は貯水状況を掲載。"
         "気になるダムのページから、地図での位置や見どころを確認できます。"
     )
@@ -729,7 +773,7 @@ def index_meta(base: str, data: dict) -> str:
     title = SITE.get("home_title") or SITE_NAME
     total = data["summary"]["total"]
     desc = (
-        f"{REGION}のダム{total}基を収録。地図から探せます。"
+        f"{region_label(data)}のダム{total}基を収録。地図から探せます。"
         "水系・河川・管理者といった基本情報に加えて、公表されている場合は"
         "貯水状況（利水貯水率・有効貯水率）も観測日時つきで確認できます。"
         "ダムを知って、旅の寄り道に見に行くきっかけに。"

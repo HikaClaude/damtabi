@@ -473,3 +473,23 @@ details.help > summary:focus-visible {
   line-height: 1.75;
   color: var(--ink-faint);
 }
+
+/* ---------------------------------------------------------- 一覧の県区切り */
+
+.pref-head {
+  margin: 28px 0 6px;
+  font-size: 17px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--line);
+}
+
+/* 現在値の取得元が無い県で、なぜ「—」が並ぶのかをその場に書く */
+.pref-note {
+  margin: 0 0 10px;
+  padding: 8px 11px;
+  border-radius: 8px;
+  background: #f4f7fa;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
