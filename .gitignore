@@ -14,4 +14,9 @@ cache/dem/
 # 集水域の計算結果。第2段階で表示すると決まるまで docs/ には出さない
 data/basins/*.log
 
+# watershed 試作の D8 流向格子など（地理院標高タイル由来の派生物）。
+# 地理院への照会が済むまで公開しない。ローカル生成物が誤って追跡・公開
+# されるのを防ぐ（.git/info/exclude だけに頼らない二重の防止）。
+docs/watershed/
+
 __pycache__/
