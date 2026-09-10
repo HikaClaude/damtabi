@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T23:21:27+09:00",
-  "base_obs_time": "2026/09/10 23:15",
+  "generated_at": "2026-09-11T00:09:02+09:00",
+  "base_obs_time": "2026/09/11 00:00",
   "source": {
     "name": "国土交通省 川の防災情報",
     "url": "https://www.river.go.jp/kawabou/pcfull/tm",
@@ -116,15 +116,21 @@
       "name": "岐阜県",
       "rate_source": "kawabou",
       "count": 11
+    },
+    {
+      "key": "fukui",
+      "name": "福井県",
+      "rate_source": "kawabou",
+      "count": 13
     }
   ],
   "summary": {
-    "total": 46,
+    "total": 59,
     "by_status": {
-      "ok": 21,
+      "ok": 23,
       "missing": 2,
-      "not_provided": 19,
-      "no_source": 3,
+      "not_provided": 27,
+      "no_source": 6,
       "partial": 1
     }
   },
@@ -169,7 +175,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 88.2,
         "status": "ok",
@@ -196,7 +202,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 42.4,
+        "value": 42.6,
         "status": "ok",
         "reason": null
       },
@@ -245,29 +251,29 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
-        "value": 80.2,
+        "value": 80.7,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 44.3,
+        "value": 44.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 246.25,
+        "value": 246.32,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 5365,
+        "value": 5397,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 9.62,
+        "value": 10.23,
         "status": "ok",
         "reason": null
       },
@@ -317,7 +323,7 @@
       "manager_office": "富山土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -393,7 +399,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -405,22 +411,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 330.03,
+        "value": 330.02,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2025,
+        "value": 2023,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.54,
+        "value": 6.47,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.16,
+        "value": 7.05,
         "status": "ok",
         "reason": null
       },
@@ -469,34 +475,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
-        "value": 62.5,
+        "value": 61,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 31.1,
+        "value": 30.4,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 40.33,
+        "value": 40.28,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 561,
+        "value": 548,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 27.67,
+        "value": 28.15,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 31.81,
+        "value": 32.75,
         "status": "ok",
         "reason": null
       },
@@ -545,7 +551,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 13.6,
         "status": "ok",
@@ -572,7 +578,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.3,
+        "value": 3.1,
         "status": "ok",
         "reason": null
       },
@@ -617,29 +623,29 @@
       "manager_office": "境川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
-        "value": 44.7,
+        "value": 44.8,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 40.3,
+        "value": 40.4,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 549.08,
+        "value": 549.09,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 21791,
+        "value": 21801,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.09,
+        "value": 3.24,
         "status": "ok",
         "reason": null
       },
@@ -689,7 +695,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -701,22 +707,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 340,
+        "value": 339.97,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 10660,
+        "value": 10638,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 5.49,
+        "value": 5.32,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 11.7,
+        "value": 11.9,
         "status": "ok",
         "reason": null
       },
@@ -761,7 +767,7 @@
       "manager_office": "農林水産省北陸地整管内",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:00",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -773,7 +779,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 179.03,
+        "value": 179.01,
         "status": "ok",
         "reason": null
       },
@@ -788,7 +794,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "outflow_m3s": {
-        "value": 3.98,
+        "value": 3.99,
         "status": "ok",
         "reason": null
       },
@@ -833,24 +839,24 @@
       "manager_office": "子撫川統合ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 52.8,
+        "value": 52.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 100.49,
+        "value": 100.47,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3630,
+        "value": 3623,
         "status": "ok",
         "reason": null
       },
@@ -860,7 +866,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.81,
+        "value": 7.89,
         "status": "ok",
         "reason": null
       },
@@ -909,34 +915,34 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
-        "value": 94.1,
+        "value": 93.8,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 36,
+        "value": 35.8,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 257.57,
+        "value": 257.55,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1419,
+        "value": 1416,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.12,
+        "value": 1.06,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 2,
+        "value": 1.98,
         "status": "ok",
         "reason": null
       },
@@ -981,7 +987,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -993,24 +999,24 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": null,
-        "status": "missing",
-        "reason": "欠測（観測所からデータが届いていない）"
+        "value": 327.64,
+        "status": "ok",
+        "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": null,
-        "status": "missing",
-        "reason": "欠測（観測所からデータが届いていない）"
+        "value": 2964,
+        "status": "ok",
+        "reason": null
       },
       "inflow_m3s": {
-        "value": null,
-        "status": "missing",
-        "reason": "欠測（観測所からデータが届いていない）"
+        "value": 1.7,
+        "status": "ok",
+        "reason": null
       },
       "outflow_m3s": {
-        "value": null,
-        "status": "missing",
-        "reason": "欠測（観測所からデータが届いていない）"
+        "value": 1.7,
+        "status": "ok",
+        "reason": null
       },
       "data_status": "not_provided",
       "illustration": null,
@@ -1053,7 +1059,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -1065,7 +1071,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 228.59,
+        "value": 228.54,
         "status": "ok",
         "reason": null
       },
@@ -1075,12 +1081,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 3.99,
+        "value": 4.22,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 6.62,
+        "value": 6.64,
         "status": "ok",
         "reason": null
       },
@@ -1125,7 +1131,7 @@
       "manager_office": "新川土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 99.6,
         "status": "ok",
@@ -1201,7 +1207,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 53.9,
         "status": "ok",
@@ -1213,22 +1219,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 184.9,
+        "value": 184.91,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 737,
+        "value": 738,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 6.38,
+        "value": 6.79,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 6.39,
+        "value": 6.34,
         "status": "ok",
         "reason": null
       },
@@ -1277,9 +1283,9 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
-        "value": 85.1,
+        "value": 85,
         "status": "ok",
         "reason": null
       },
@@ -1289,17 +1295,17 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 277.87,
+        "value": 277.86,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1412,
+        "value": 1410,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 5.88,
+        "value": 5.16,
         "status": "ok",
         "reason": null
       },
@@ -1349,34 +1355,34 @@
       "manager_office": "白岩川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 26.8,
+        "value": 26.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 129.38,
+        "value": 129.37,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 408,
+        "value": 407,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.49,
+        "value": 3.46,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.74,
+        "value": 3.72,
         "status": "ok",
         "reason": null
       },
@@ -1421,7 +1427,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1497,7 +1503,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1573,7 +1579,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1831,29 +1837,29 @@
       "manager_office": "金沢河川国道事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
-        "value": 64.5,
+        "value": 64.6,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 57.6,
+        "value": 57.7,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 447.44,
+        "value": 447.47,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 109131,
+        "value": 109250,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 29.05,
+        "value": 39.13,
         "status": "ok",
         "reason": null
       },
@@ -1907,7 +1913,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -1919,22 +1925,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 321.42,
+        "value": 321.4,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 12921,
+        "value": 12901,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 10.18,
+        "value": 9.08,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 12.75,
+        "value": 12.92,
         "status": "ok",
         "reason": null
       },
@@ -1979,7 +1985,7 @@
       "manager_office": "内川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -1991,17 +1997,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 223.84,
+        "value": 223.87,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 4332,
+        "value": 4341,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.72,
+        "value": 3.1,
         "status": "ok",
         "reason": null
       },
@@ -2051,7 +2057,7 @@
       "manager_office": "内川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2063,7 +2069,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 107.21,
+        "value": 107.02,
         "status": "ok",
         "reason": null
       },
@@ -2078,7 +2084,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "outflow_m3s": {
-        "value": 2.35,
+        "value": 1.96,
         "status": "ok",
         "reason": null
       },
@@ -2123,7 +2129,7 @@
       "manager_office": "犀川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2145,7 +2151,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 7.02,
+        "value": 8.17,
         "status": "ok",
         "reason": null
       },
@@ -2195,7 +2201,7 @@
       "manager_office": "犀川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2267,7 +2273,7 @@
       "manager_office": "奥能登土木総合事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2289,12 +2295,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.77,
+        "value": 0.79,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.77,
+        "value": 0.79,
         "status": "ok",
         "reason": null
       },
@@ -2339,7 +2345,7 @@
       "manager_office": "赤瀬ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2351,7 +2357,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 105.14,
+        "value": 105.13,
         "status": "ok",
         "reason": null
       },
@@ -2411,7 +2417,7 @@
       "manager_office": "大聖寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2423,22 +2429,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 184.43,
+        "value": 184.41,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3493,
+        "value": 3483,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 8.61,
+        "value": 8.48,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 13.23,
+        "value": 13.14,
         "status": "ok",
         "reason": null
       },
@@ -2483,7 +2489,7 @@
       "manager_office": "大聖寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2495,22 +2501,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 137.98,
+        "value": 137.97,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2980,
+        "value": 2976,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 13.75,
+        "value": 13.76,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 15.78,
+        "value": 15.8,
         "status": "ok",
         "reason": null
       },
@@ -2555,7 +2561,7 @@
       "manager_office": "奥能登土木総合事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2567,22 +2573,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 130.97,
+        "value": 130.96,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1003,
+        "value": 1002,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.4,
+        "value": 0.39,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.67,
+        "value": 0.61,
         "status": "ok",
         "reason": null
       },
@@ -2627,7 +2633,7 @@
       "manager_office": "珠洲土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2649,7 +2655,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.72,
+        "value": 0.69,
         "status": "ok",
         "reason": null
       },
@@ -2703,7 +2709,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 65.2,
         "status": "ok",
@@ -2779,7 +2785,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
         "value": null,
         "status": "closed",
@@ -2851,9 +2857,9 @@
       "manager_office": "水資源機構　木曽川上流ダム総合管理所（岩屋ダム管理所）",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
-        "value": 82.3,
+        "value": 82.2,
         "status": "ok",
         "reason": null
       },
@@ -2863,22 +2869,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 405.61,
+        "value": 405.6,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 82257,
+        "value": 82227,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 75.87,
+        "value": 66.9,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 82.98,
+        "value": 83.62,
         "status": "ok",
         "reason": null
       },
@@ -2923,34 +2929,34 @@
       "manager_office": "木曽川水系ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
-        "value": 74.6,
+        "value": 74.3,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 32.3,
+        "value": 32.2,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 177.9,
+        "value": 177.88,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 11952,
+        "value": 11910,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 498.79,
+        "value": 499.43,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 508.6,
+        "value": 507.9,
         "status": "ok",
         "reason": null
       },
@@ -2999,34 +3005,34 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/10 23:50",
       "rate_irrigation": {
-        "value": 53.5,
+        "value": 52.8,
         "status": "ok",
         "reason": null
       },
       "rate_effective": {
-        "value": 5.1,
+        "value": 5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 184.97,
+        "value": 184.93,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1534,
+        "value": 1515,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 19.29,
+        "value": 12.71,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 27.18,
+        "value": 20.01,
         "status": "ok",
         "reason": null
       },
@@ -3075,7 +3081,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": 0,
         "status": "ok",
@@ -3087,22 +3093,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 353.95,
+        "value": 353.93,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 117,
+        "value": 115,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 7.82,
+        "value": 6.58,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.85,
+        "value": 7.74,
         "status": "ok",
         "reason": null
       },
@@ -3147,7 +3153,7 @@
       "manager_office": "郡上土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3219,7 +3225,7 @@
       "manager_office": "恵那土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3291,7 +3297,7 @@
       "manager_office": "下呂土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3303,7 +3309,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 687.56,
+        "value": 687.55,
         "status": "ok",
         "reason": null
       },
@@ -3313,12 +3319,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.27,
+        "value": 1.24,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.3,
+        "value": 1.26,
         "status": "ok",
         "reason": null
       },
@@ -3363,7 +3369,7 @@
       "manager_office": "恵那土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3435,7 +3441,7 @@
       "manager_office": "高山土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/10 23:10",
+      "obs_time": "2026/09/11 00:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3447,22 +3453,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 858.05,
+        "value": 858.03,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2732,
+        "value": 2728,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.65,
+        "value": 4.48,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 6.02,
+        "value": 5.85,
         "status": "ok",
         "reason": null
       },
@@ -3470,6 +3476,928 @@
       "illustration": null,
       "inclusion": "core",
       "inclusion_reason": null
+    },
+    {
+      "id": "fukui-ryugahana",
+      "pref": "fukui",
+      "slug": "ryugahana",
+      "name": "龍ヶ鼻ダム",
+      "kana": "りゅうがはなだむ",
+      "address": "福井県坂井市丸岡町上竹田50-56-2",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "竹田川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "竹田川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 3,
+        "obs_fcd": "0460900700003"
+      },
+      "manager": "福井県",
+      "lat": 36.152371,
+      "lon": 136.346721,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 3,
+        "obs_fcd": "0460900700003"
+      },
+      "obs_fcd": "0460900700003",
+      "manager_office": "龍ヶ鼻・永平寺ダム統合管理事務所",
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 173.03,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 4026,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 3.02,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 3.06,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-eiheiji",
+      "pref": "fukui",
+      "slug": "eiheiji",
+      "name": "永平寺ダム",
+      "kana": "えいへいじだむ",
+      "address": "福井県吉田郡永平寺町志比",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "永平寺川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "永平寺川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 4,
+        "obs_fcd": "0460900700004"
+      },
+      "manager": "福井県",
+      "lat": 36.048659,
+      "lon": 136.363216,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 4,
+        "obs_fcd": "0460900700004"
+      },
+      "obs_fcd": "0460900700004",
+      "manager_office": "龍ヶ鼻・永平寺ダム統合管理事務所",
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 319.9,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 444,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 0.38,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 0.4,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-sasogawa",
+      "pref": "fukui",
+      "slug": "sasogawa",
+      "name": "笹生川ダム",
+      "kana": "さそうがわだむ",
+      "address": "福井県大野市本戸地先",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "真名川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "真名川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 1,
+        "obs_fcd": "0460900700001"
+      },
+      "manager": "福井県",
+      "lat": 35.843174,
+      "lon": 136.546511,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 1,
+        "obs_fcd": "0460900700001"
+      },
+      "obs_fcd": "0460900700001",
+      "manager_office": "笹生川・浄土寺川ダム統合管理事務所",
+      "flood_season": {
+        "limit_level_m": 524.5,
+        "start_md": "07-01",
+        "end_md": "09-30"
+      },
+      "in_flood_season": true,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 515,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 23638,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 7.27,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 3.01,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-jodojigawa",
+      "pref": "fukui",
+      "slug": "jodojigawa",
+      "name": "浄土寺川ダム",
+      "kana": "じょうどじがわだむ",
+      "address": "福井県勝山市170字奥山",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "浄土寺川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "浄土寺川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 5,
+        "obs_fcd": "0460900700005"
+      },
+      "manager": "福井県",
+      "lat": 36.063526,
+      "lon": 136.542479,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 5,
+        "obs_fcd": "0460900700005"
+      },
+      "obs_fcd": "0460900700005",
+      "manager_office": "笹生川・浄土寺川ダム統合管理事務所",
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 344.58,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 773,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 0.86,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 0.69,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-hirono",
+      "pref": "fukui",
+      "slug": "hirono",
+      "name": "広野ダム",
+      "kana": "ひろのだむ",
+      "address": "福井県南条郡南越前町広野46-1-8",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "日野川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "日野川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 2,
+        "obs_fcd": "0460900700002"
+      },
+      "manager": "福井県",
+      "lat": 35.713934,
+      "lon": 136.257443,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 2,
+        "obs_fcd": "0460900700002"
+      },
+      "obs_fcd": "0460900700002",
+      "manager_office": "広野・桝谷ダム統合管理事務所",
+      "flood_season": {
+        "limit_level_m": 303.5,
+        "start_md": "07-01",
+        "end_md": "09-30"
+      },
+      "in_flood_season": true,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 294.37,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 1368,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 2.2,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 1.61,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-masutani",
+      "pref": "fukui",
+      "slug": "masutani",
+      "name": "桝谷ダム",
+      "kana": "ますたにだむ",
+      "address": "福井県南条郡南越前町宇津尾95-17-5",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "桝谷川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "桝谷川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 6,
+        "obs_fcd": "0460900700006"
+      },
+      "manager": "福井県",
+      "lat": 35.740912,
+      "lon": 136.248706,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 6,
+        "obs_fcd": "0460900700006"
+      },
+      "obs_fcd": "0460900700006",
+      "manager_office": "広野・桝谷ダム統合管理事務所",
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 299.18,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 3493,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 0.12,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 0.12,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-otsuro",
+      "pref": "fukui",
+      "slug": "otsuro",
+      "name": "大津呂ダム",
+      "kana": "おおつろだむ",
+      "address": "福井県大飯郡おおい町本郷162-1-18",
+      "official": {
+        "water_system": "佐分利川",
+        "river": "大津呂川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "佐分利川",
+        "river": "大津呂川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 7,
+        "obs_fcd": "0460900700007"
+      },
+      "manager": "福井県",
+      "lat": 35.454173,
+      "lon": 135.630591,
+      "note": "貯水率・貯水量は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 7,
+        "obs_fcd": "0460900700007"
+      },
+      "obs_fcd": "0460900700007",
+      "manager_office": "河内川・大津呂ダム統合管理事務所",
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 84.15,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "inflow_m3s": {
+        "value": 0.03,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 0.03,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-kochigawa",
+      "pref": "fukui",
+      "slug": "kochigawa",
+      "name": "河内川ダム",
+      "kana": "こうちがわだむ",
+      "address": "福井県三方上中郡若狭町熊川",
+      "official": {
+        "water_system": "北川",
+        "river": "河内川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "北川",
+        "river": "河内川",
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 10,
+        "obs_fcd": "0460900700010"
+      },
+      "manager": "福井県",
+      "lat": 35.4325,
+      "lon": 135.895278,
+      "note": "貯水率は未提供",
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 4609,
+        "obs_cd": 10,
+        "obs_fcd": "0460900700010"
+      },
+      "obs_fcd": "0460900700010",
+      "manager_office": "河内川・大津呂ダム統合管理事務所",
+      "flood_season": {
+        "limit_level_m": 344.5,
+        "start_md": "06-01",
+        "end_md": "10-31"
+      },
+      "in_flood_season": true,
+      "obs_time": "2026/09/10 23:50",
+      "rate_irrigation": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "not_provided",
+        "reason": "未提供（この観測所では公表されていない項目）"
+      },
+      "storage_level_m": {
+        "value": 183.95,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 3649,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 0.88,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 0.32,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "not_provided",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-kuzuryu",
+      "pref": "fukui",
+      "slug": "kuzuryu",
+      "name": "九頭竜ダム",
+      "kana": "くずりゅうだむ",
+      "address": "福井県大野市長野第33号4番地の1",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "九頭竜川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "九頭竜川",
+        "provider": "川の防災情報",
+        "ofc_cd": 22099,
+        "obs_cd": 1,
+        "obs_fcd": "2209900700001"
+      },
+      "manager": "国交省",
+      "lat": 35.889527,
+      "lon": 136.688168,
+      "note": null,
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 22099,
+        "obs_cd": 1,
+        "obs_fcd": "2209900700001"
+      },
+      "obs_fcd": "2209900700001",
+      "manager_office": "九頭竜川ダム統合管理事務所",
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": "2026/09/11 00:00",
+      "rate_irrigation": {
+        "value": 31.6,
+        "status": "ok",
+        "reason": null
+      },
+      "rate_effective": {
+        "value": 26.9,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_level_m": {
+        "value": 541.19,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 60041,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 23.58,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 0.01,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "ok",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-managawa",
+      "pref": "fukui",
+      "slug": "managawa",
+      "name": "真名川ダム",
+      "kana": "まながわだむ",
+      "address": "福井県大野市下若生子26字",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "真名川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": {
+        "water_system": "九頭竜川",
+        "river": "真名川",
+        "provider": "川の防災情報",
+        "ofc_cd": 22099,
+        "obs_cd": 2,
+        "obs_fcd": "2209900700002"
+      },
+      "manager": "国交省",
+      "lat": 35.918083,
+      "lon": 136.541918,
+      "note": null,
+      "source": {
+        "provider": "川の防災情報",
+        "ofc_cd": 22099,
+        "obs_cd": 2,
+        "obs_fcd": "2209900700002"
+      },
+      "obs_fcd": "2209900700002",
+      "manager_office": "九頭竜川ダム統合管理事務所",
+      "flood_season": {
+        "limit_level_m": 365,
+        "start_md": "06-16",
+        "end_md": "07-01"
+      },
+      "in_flood_season": false,
+      "obs_time": "2026/09/11 00:00",
+      "rate_irrigation": {
+        "value": 78.1,
+        "status": "ok",
+        "reason": null
+      },
+      "rate_effective": {
+        "value": 4.9,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_level_m": {
+        "value": 336.1,
+        "status": "ok",
+        "reason": null
+      },
+      "storage_capacity_1000m3": {
+        "value": 4899,
+        "status": "ok",
+        "reason": null
+      },
+      "inflow_m3s": {
+        "value": 9.41,
+        "status": "ok",
+        "reason": null
+      },
+      "outflow_m3s": {
+        "value": 3.64,
+        "status": "ok",
+        "reason": null
+      },
+      "data_status": "ok",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": null
+    },
+    {
+      "id": "fukui-takinami",
+      "pref": "fukui",
+      "slug": "takinami",
+      "name": "滝波ダム",
+      "kana": null,
+      "address": "福井県福井市滝波町",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "滝波川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "福井市",
+      "lat": 36.022487,
+      "lon": 136.092159,
+      "note": "ロックフィルダム。滝波川の農業用ダム",
+      "source": {
+        "provider": null,
+        "checked": "国土交通省 川の防災情報（滝波ダム観測所は登録されているが現在値の配信がない）"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "福井のダム防災上のコアだが、川の防災情報にダム観測所が登録されていても現在値が配信されておらず、水位・貯水量等の公開情報源を確認できていない（no_source）。"
+    },
+    {
+      "id": "fukui-kaitani",
+      "pref": "fukui",
+      "slug": "kaitani",
+      "name": "開谷ダム",
+      "kana": null,
+      "address": "福井県丹生郡越前町八田",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "開谷川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "福井県",
+      "lat": 35.920303,
+      "lon": 136.100633,
+      "note": "ロックフィルダム。堤高24.5m・1977年竣工。福井県所管の防災ダムで、観測・地域運用に越前町が関与",
+      "source": {
+        "provider": null,
+        "checked": "国土交通省 川の防災情報（ダム観測所の登録を確認できず）"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "福井coreの一員だが、川の防災情報にダム観測所を確認できず、水位・貯水量等の公開情報源を確認できていない（no_source）。"
+    },
+    {
+      "id": "fukui-yoshinosegawa",
+      "pref": "fukui",
+      "slug": "yoshinosegawa",
+      "name": "吉野瀬川ダム",
+      "kana": null,
+      "address": "福井県越前市広瀬町",
+      "official": {
+        "water_system": "九頭竜川",
+        "river": "吉野瀬川",
+        "source": "",
+        "note": null,
+        "unverified": null
+      },
+      "observation": null,
+      "manager": "福井県",
+      "lat": 35.886111,
+      "lon": 136.112222,
+      "note": "重力式コンクリートダム。堤高58.0m。2026年6月竣工の新しいダム",
+      "source": {
+        "provider": null,
+        "checked": "国土交通省 川の防災情報（ダム観測所の登録なし）"
+      },
+      "manager_office": null,
+      "flood_season": null,
+      "in_flood_season": null,
+      "obs_time": null,
+      "rate_irrigation": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "rate_effective": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_level_m": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "storage_capacity_1000m3": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "inflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "outflow_m3s": {
+        "value": null,
+        "status": "no_source",
+        "reason": "現在、ダム旅が利用している公開情報源では取得できません"
+      },
+      "data_status": "no_source",
+      "illustration": null,
+      "inclusion": "core",
+      "inclusion_reason": "2026年6月竣工の新しいダムで、川の防災情報にまだダム観測所が登録されておらず、現在値の公開情報源を確認できていない（no_source）。"
     }
   ]
 }
