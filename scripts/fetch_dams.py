@@ -181,7 +181,9 @@ def read_value(values: dict, key: str) -> dict:
     if ccd == CCD_MISSING:
         return {"value": None, "status": "missing", "reason": "欠測（観測所からデータが届いていない）"}
     if ccd == CCD_CLOSED:
-        return {"value": None, "status": "closed", "reason": "閉局（観測を行っていない）"}
+        # 川の防災情報の公式画面が品質コード 140 に付ける表示は「閉局」。
+        # その語だけを転記し、根拠のない意味づけ（「観測を行っていない」等）は足さない。
+        return {"value": None, "status": "closed", "reason": "閉局"}
     if ccd is None or ccd >= CCD_NOT_PROVIDED_MIN:
         return {"value": None, "status": "not_provided", "reason": "未提供（この観測所では公表されていない項目）"}
     if raw is None:
@@ -292,6 +294,12 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
         if master.get("rvrNm"):
             rec["observation"]["river"] = master["rvrNm"]
         rec["flood_season"] = flood_season(master)
+
+    # 川の防災情報の管理者名（jrsNm）は 24 全角文字で頭が切れることがある
+    # （例: 徳山ダムが「…総合管理所（徳山ダム管」で途切れる）。
+    # CSV に manager_office 列があればそれを正とする。列が無い県は従来どおり。
+    if (row.get("manager_office") or "").strip():
+        rec["manager_office"] = row["manager_office"].strip()
 
     # --- 実測値。最新スロットが無ければ 10 分ずつ遡る
     tm = None
