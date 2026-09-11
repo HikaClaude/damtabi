@@ -200,6 +200,13 @@ HELP_TEXT = {
         "洪水期は上側を意図的に空けて運用するため、低い値になるのが普通です。"
         "そのため利水貯水率が100%でも、有効貯水率は低いことがあります。"
     ),
+    "irrigation_calculated": (
+        "<b>石川県が公表している値ではありません。</b>"
+        "観測所が公表している貯水量（storCap）と、石川県の公式ダムページで確認した利水容量"
+        "（有効貯水容量－洪水調節容量）から、DAM TABIが独自に計算した参考値です。"
+        "計算方法（貯水量÷利水容量×100）は石川県河川課に確認済みですが、"
+        "数値そのものは石川県が発表・保証したものではありません。"
+    ),
 }
 
 
@@ -332,6 +339,41 @@ def rate_card(label: str, item: dict | None, bins: list[dict], key: str = "") ->
     )
 
 
+def calc_rate_card(item: dict | None, bins: list[dict]) -> str:
+    """「参考貯水率（DAM TABI算出）」カード。公式値のカードとは別枠で、常にバッジ付きで出す。
+
+    石川県が発表した値ではないことが一目で分かるよう、ラベル・バッジ・出典を
+    毎回セットで表示する。100%を超える計算結果も数値はそのまま出し、
+    バー（ゲージ）の幅だけ100%で止める。
+    """
+    if not item or item.get("value") is None:
+        return ""
+    v = float(item["value"])
+    color = bin_color(v, bins)
+    w = round(max(0.0, min(100.0, v)), 1)
+    src = item.get("source_url")
+    confirmed = item.get("confirmed_date")
+    src_html = (
+        f'<a href="{e(src)}" target="_blank" rel="noopener">石川県の公式ページ</a>'
+        if src else "石川県の公式ページ"
+    )
+    when = f"（{e(confirmed)}確認）" if confirmed else ""
+    return (
+        '<div class="rate rate-calculated">'
+        '<div class="k"><span>参考貯水率</span>'
+        '<span class="calc-badge">DAM TABI算出</span>'
+        f'{help_toggle("irrigation_calculated", "参考貯水率")}</div>'
+        f'<span class="v">{fmt(v)}<span class="unit">%</span></span>'
+        f'<div class="bar"><i style="width:{w}%;background:{color}"></i></div>'
+        '<div class="why calc-why">'
+        "公開されている貯水量と、利水容量（有効貯水容量－洪水調節容量）からDAM TABIが算出。"
+        f"計算方法は石川県河川課確認済み。利水容量は{src_html}{when}で確認。"
+        "石川県が発表した数値ではありません。"
+        "</div>"
+        "</div>"
+    )
+
+
 def fact_row(label: str, item: dict | None, unit: str, digits: int) -> str:
     v = val(item)
     if v is None:
@@ -375,11 +417,19 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
             "貯水率は、現在ダム旅が利用している公開情報源では取得できないため掲載していません。"
         )
     elif dam["data_status"] in ("missing", "not_provided", "closed"):
-        desc = (
-            f"{name}（{where}）。{sub}、管理は{manager}。"
-            "地図での位置とダムの基本情報をまとめています。"
-            "貯水率は観測所から公表されていないため、理由を添えて「—」と表示しています。"
-        )
+        if val(dam.get("rate_irrigation_calculated")) is not None:
+            desc = (
+                f"{name}（{where}）。{sub}、管理は{manager}。"
+                "地図での位置とダムの基本情報をまとめています。"
+                "石川県は利水貯水率を公表していませんが、公開されている貯水量と"
+                "利水容量からDAM TABIが算出した参考貯水率を掲載しています。"
+            )
+        else:
+            desc = (
+                f"{name}（{where}）。{sub}、管理は{manager}。"
+                "地図での位置とダムの基本情報をまとめています。"
+                "貯水率は観測所から公表されていないため、理由を添えて「—」と表示しています。"
+            )
     else:
         desc = (
             f"{name}（{where}）。{sub}、管理は{manager}。"
@@ -459,6 +509,9 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
     body.append('<div class="rates">')
     body.append(rate_card("利水貯水率", dam.get("rate_irrigation"),
                           th["irrigation"]["bins"], "irrigation"))
+    calc_card = calc_rate_card(dam.get("rate_irrigation_calculated"), th["irrigation"]["bins"])
+    if calc_card:
+        body.append(calc_card)
     body.append(rate_card("有効貯水率", dam.get("rate_effective"),
                           th["effective"]["bins"], "effective"))
     body.append("</div>")
@@ -488,12 +541,21 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
         )
 
     if dam["data_status"] not in ("ok", "partial"):
-        body.append(
-            '<p class="nodata-note">'
-            f"{e(reason(dam.get('rate_irrigation')))}。"
-            "<br>値を推定して埋めることはしていません。"
-            "下の「このページの情報について」に、確認した情報源を記載しています。</p>"
-        )
+        if val(dam.get("rate_irrigation_calculated")) is not None:
+            body.append(
+                '<p class="nodata-note">'
+                f"利水貯水率について、{e(reason(dam.get('rate_irrigation')))}。"
+                "<br>石川県発表の値を推定で埋めることはしていません。"
+                "上に表示している「参考貯水率」は、公表値ではなくDAM TABIが独自に計算した値です。"
+                "下の「このページの情報について」に、確認した情報源を記載しています。</p>"
+            )
+        else:
+            body.append(
+                '<p class="nodata-note">'
+                f"{e(reason(dam.get('rate_irrigation')))}。"
+                "<br>値を推定して埋めることはしていません。"
+                "下の「このページの情報について」に、確認した情報源を記載しています。</p>"
+            )
 
     body.append('<table class="facts">')
     if when:
