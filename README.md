@@ -1186,7 +1186,9 @@ dam-map/
 ├─ scripts/
 │   ├─ fetch_dams.py          日次バッチ（取得 → dams.json）。依存なし
 │   ├─ build_site.py          日次バッチ（dams.json → 静的ページ）。依存なし
-│   └─ make_images.py         単発。アイコンと OGP 画像を作る
+│   └─ make_images.py         単発。OGP画像とicon.svg・icon-maskable-512.pngを作る
+│                             （icon-192/512/180・favicon.ico・favicon-96.pngは
+│                             damtabi-favicon-kitの確定デザインで手動管理。生成しない）
 ├─ docs/                      ← このフォルダを丸ごと配信すれば動く
 │   ├─ index.html             地図画面
 │   ├─ style.css / app.js

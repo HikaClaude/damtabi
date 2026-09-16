@@ -15,7 +15,7 @@
  * CSS / JS / 画像 / アイコンのように古くても害のないものだけキャッシュ優先。
  */
 
-var VERSION = "v12";   // style.css / app.js を更新したら上げる（旧キャッシュを破棄させるため）
+var VERSION = "v13";   // style.css / app.js を更新したら上げる（旧キャッシュを破棄させるため）
 var SHELL = "shell-" + VERSION;
 var PAGES = "pages-" + VERSION;
 var DATA = "data-" + VERSION;
@@ -26,7 +26,8 @@ var SHELL_FILES = [
   "./app.js",
   "./page.css",
   "./manifest.json",
-  "./img/icon.svg"
+  "./favicon.ico",
+  "./img/favicon-96.png"
 ];
 
 var STALE_MARKER = "<!--STALE-SLOT-->";

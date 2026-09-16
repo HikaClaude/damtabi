@@ -6,12 +6,17 @@
 生成物は日々変わる数値を含まないので、リポジトリにコミットしたまま使えます。
 
   docs/img/icon.svg               （このスクリプトが書き出す。他は SVG からラスタ化）
-  docs/img/icon-192.png
-  docs/img/icon-512.png
-  docs/img/icon-maskable-512.png
-  docs/img/icon-180.png           （apple-touch-icon）
+  docs/img/icon-maskable-512.png  （SVGからラスタ化）
   docs/img/og/site.png            （1200x630・トップ用）
   docs/img/og/{slug}.png          （1200x630・ダムごと）
+
+  docs/img/icon-192.png・icon-512.png・icon-180.png（apple-touch-icon）は
+  2026-09-15 に damtabi-favicon-kit の確定デザインへ差し替え済みのため、
+  このスクリプトでは**生成しない**（ここでSVGから再ラスタライズすると、
+  次回このスクリプトを実行しただけで確定デザインが古い自動生成デザインへ
+  静かに戻ってしまうため）。favicon.ico・favicon-96.png も同キット由来で、
+  このスクリプトの対象外。差し替えるときは新しいキットのファイルを
+  docs/img/ へ直接上書きすること。
 
 ラスタ化にはローカルの Chrome / Edge のヘッドレスを使います（Python の画像ライブラリ不要）。
 Chrome が無い環境ではスキップし、SVG だけ書き出して終わります。
@@ -228,11 +233,11 @@ def main() -> int:
         return 0
     print(f"[make_images] renderer = {chrome}")
 
-    # 常に 512x512 の CSS で描き、scale で 192/180 に落とす（正方形を保つため）
+    # icon-192/512/180 は damtabi-favicon-kit の確定デザインへ差し替え済みのため
+    # ここでは生成しない（上のモジュール docstring 参照）。maskable 版だけ、
+    # 代替の確定デザインが無いため引き続きSVGからラスタ化する。
+    # 常に 512x512 の CSS で描き、scale で必要サイズに落とす（正方形を保つため）
     for name, size, maskable in (
-        ("icon-192.png", 192, False),
-        ("icon-512.png", 512, False),
-        ("icon-180.png", 180, False),
         ("icon-maskable-512.png", 512, True),
     ):
         ok = rasterize(chrome, icon_html(MIN_W, maskable), IMG / name,
