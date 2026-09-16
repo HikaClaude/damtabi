@@ -102,11 +102,28 @@
     return null;
   }
 
+  /** 地図ピンで使う値を1本化する。
+   *  利水貯水率の表示中は、公式値（rate_irrigation）を必ず優先し、
+   *  公式値が無いときだけ石川県5基の参考貯水率（rate_irrigation_calculated）を使う。
+   *  有効貯水率の表示中は従来どおり rate_effective のみ。
+   *  colorFor / paintPin の両方がここを通ることで、数字と色判定のズレを防ぐ。 */
+  function pinValueInfo(dam) {
+    var def = basisDef();
+    if (def.field !== "rate_irrigation") {
+      return { value: val(dam[def.field]), calculated: false };
+    }
+    var official = val(dam.rate_irrigation);
+    if (official !== null) return { value: official, calculated: false };
+    var calc = val(dam.rate_irrigation_calculated);
+    if (calc !== null) return { value: calc, calculated: true };
+    return { value: null, calculated: false };
+  }
+
   function colorFor(dam) {
     var def = basisDef();
-    var v = val(dam[def.field]);
-    if (v === null) return state.data.thresholds.no_data_color;
-    var b = binFor(v, def.bins);
+    var info = pinValueInfo(dam);
+    if (info.value === null) return state.data.thresholds.no_data_color;
+    var b = binFor(info.value, def.bins);
     return b ? b.color : state.data.thresholds.no_data_color;
   }
 
@@ -207,9 +224,18 @@
    */
   function paintPin(el, dam) {
     var def = basisDef();
-    var v = val(dam[def.field]);
+    var info = pinValueInfo(dam);
+    var v = info.value;
     var color = colorFor(dam);
     var illust = iconFor(dam);
+
+    if (info.calculated) {
+      el.title = dam.name + " 参考貯水率 " + Math.round(v) + "%（DAM TABI算出）";
+      el.setAttribute("aria-label", el.title);
+    } else {
+      el.title = dam.name;
+      el.setAttribute("aria-label", dam.name);
+    }
 
     // 旅の記録による見え方。貯水率のリングと数字には一切影響させない。
     var been = trip.has(dam.id);
@@ -252,7 +278,8 @@
       fs = Math.round(PIN_SIZE * 0.34);
     }
 
-    var num = v === null ? "—" : String(Math.round(v));
+    var num = v === null ? "—" : String(Math.round(v)) +
+      (info.calculated ? '<span class="dam-pin__calc-mark">*</span>' : "");
     el.firstChild.innerHTML =
       svg +
       '<span class="dam-pin__disc" style="inset:' + (GAUGE_W * 0.6) + '%">' + body +
@@ -288,6 +315,23 @@
     note.className = "legend-note";
     note.textContent = "輪の色と長さが残量を表します";
     ul.appendChild(note);
+
+    if (def.field === "rate_irrigation" && anyCalculatedInUse()) {
+      var calcNote = document.createElement("li");
+      calcNote.className = "legend-note";
+      calcNote.textContent = "* DAM TABI算出の参考貯水率（石川県の一部）";
+      ul.appendChild(calcNote);
+    }
+  }
+
+  /** 現在表示中のピンのうち、1基でも参考貯水率（rate_irrigation_calculated）を
+   *  使っているかどうか。凡例の注記を出すかどうかの判定にだけ使う。 */
+  function anyCalculatedInUse() {
+    var dams = (state.data && state.data.dams) || [];
+    for (var i = 0; i < dams.length; i++) {
+      if (pinValueInfo(dams[i]).calculated) return true;
+    }
+    return false;
   }
 
   // ------------------------------------------------------------ パネル

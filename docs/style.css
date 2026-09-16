@@ -208,6 +208,13 @@ html, body {
   text-shadow: none;
 }
 
+/* 参考貯水率（DAM TABI算出）を使っているピンにだけ付く小さな印。
+   数字の可読性を保つため、本体より小さく・上寄りにする。 */
+.dam-pin__calc-mark {
+  font-size: .6em;
+  vertical-align: super;
+}
+
 .dam-pin:hover .dam-pin__inner { transform: scale(1.1); }
 .dam-pin:active .dam-pin__inner { transform: scale(1.03); }
 
