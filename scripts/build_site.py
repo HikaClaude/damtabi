@@ -297,7 +297,8 @@ def head_common(base: str, rel_root: str) -> str:
     return f"""<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="manifest" href="{rel_root}manifest.json">
-<link rel="icon" href="{rel_root}img/icon.svg" type="image/svg+xml">
+<link rel="icon" href="{rel_root}favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="{rel_root}img/favicon-96.png">
 <link rel="apple-touch-icon" href="{rel_root}img/icon-180.png">
 <meta name="theme-color" content="{SITE["theme_color"]}">
 <meta property="og:site_name" content="{e(SITE_NAME)}">
@@ -902,7 +903,6 @@ def manifest(base: str) -> str:
             {"src": "./img/icon-512.png", "sizes": "512x512", "type": "image/png"},
             {"src": "./img/icon-maskable-512.png", "sizes": "512x512",
              "type": "image/png", "purpose": "maskable"},
-            {"src": "./img/icon.svg", "sizes": "any", "type": "image/svg+xml"},
         ],
         "shortcuts": [
             {"name": "ダム一覧", "url": "./dam/"},
