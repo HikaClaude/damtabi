@@ -40,7 +40,13 @@
       "<b>ダムの容量全体に対して、いまどれだけ水が入っているか</b>の割合です。" +
       "利水容量に加えて、洪水にそなえて空けておく容量（洪水調節容量）も分母に含みます。" +
       "洪水期は上側を意図的に空けて運用するため、低い値になるのが普通です。" +
-      "そのため利水貯水率が100%でも、有効貯水率は低いことがあります。"
+      "そのため利水貯水率が100%でも、有効貯水率は低いことがあります。",
+    irrigation_calculated:
+      "<b>石川県が公表している値ではありません。</b>" +
+      "観測所が公表している貯水量（storCap）と、石川県の公式ダムページで確認した利水容量" +
+      "（有効貯水容量－洪水調節容量）から、DAM TABIが独自に計算した参考値です。" +
+      "計算方法（貯水量÷利水容量×100）は石川県河川課に確認済みですが、" +
+      "数値そのものは石川県が発表・保証したものではありません。"
   };
 
   /** ラベルの隣に置く「?」。JS なしでも開閉できるよう details/summary を使う。 */
@@ -342,6 +348,39 @@
     );
   }
 
+  /** 「参考貯水率（DAM TABI算出）」カード。公式値のカードとは別枠で、常にバッジ付きで出す。
+   *  scripts/build_site.py の calc_rate_card() と同じ内容・同じ判断基準。
+   *  石川県が発表した値ではないことが一目で分かるよう、ラベル・バッジ・出典を毎回セットで表示する。
+   *  100%を超える計算結果も数値はそのまま出し、バー（ゲージ）の幅だけ100%で止める。 */
+  function calcRateCard(item) {
+    if (!item || item.value == null) return "";
+    var v = item.value;
+    var bins = state.data.thresholds.bases.irrigation.bins;
+    var b = binFor(v, bins);
+    var color = b ? b.color : "#94a3b8";
+    var w = Math.max(0, Math.min(100, v));
+    var src = item.source_url;
+    var confirmed = item.confirmed_date;
+    var srcHtml = src
+      ? '<a href="' + esc(src) + '" target="_blank" rel="noopener">石川県の公式ページ</a>'
+      : "石川県の公式ページ";
+    var when = confirmed ? "（" + esc(confirmed) + "確認）" : "";
+    return (
+      '<div class="rate rate-calculated">' +
+        '<div class="k"><span>参考貯水率</span>' +
+        '<span class="calc-badge">DAM TABI算出</span>' +
+        helpToggle("irrigation_calculated", "参考貯水率") + "</div>" +
+        '<span class="v">' + fmtNum(v, 1) + '<span class="unit">%</span></span>' +
+        '<div class="bar"><i style="width:' + w + "%;background:" + color + '"></i></div>' +
+        '<div class="why calc-why">' +
+        "公開されている貯水量と、利水容量（有効貯水容量－洪水調節容量）からDAM TABIが算出。" +
+        "計算方法は石川県河川課確認済み。利水容量は" + srcHtml + when + "で確認。" +
+        "石川県が発表した数値ではありません。" +
+        "</div>" +
+      "</div>"
+    );
+  }
+
   function factRow(label, item, unit, digits) {
     var v = val(item);
     if (v === null) {
@@ -369,6 +408,7 @@
 
     html += '<div class="rates">';
     html += rateCard("利水貯水率", dam.rate_irrigation, "irrigation");
+    html += calcRateCard(dam.rate_irrigation_calculated);
     html += rateCard("有効貯水率", dam.rate_effective, "effective");
     html += "</div>";
 

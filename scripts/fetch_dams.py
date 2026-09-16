@@ -217,10 +217,64 @@ def in_flood_season(fs: dict | None, when: dt.datetime) -> bool | None:
     return s <= md <= e if s <= e else (md >= s or md <= e)
 
 
+# ---------------------------------------------------------------- 参考貯水率（DAM TABI算出）
+#
+# 石川県の一部ダムは貯水率（storPcntIrr）が観測所側で未提供（Ccd=160）だが、
+# kawabou の storCap（貯水量、実測値）は取得できている。
+# 「有効貯水容量 − 洪水調節容量（＝利水容量）」を石川県の公式ダムページから
+# 個別に確認できたダムに限り、storCap ÷ 利水容量 × 100 で参考値を計算する。
+# 算出方法は石川県河川課に確認済み（利用者からの申し送り）。
+#
+# 分母を dam ごとに静的 CSV（prefs/<pref>/rate_calc_basis.csv）で持つ。
+# これは新しい自動取得先ではなく、人が公式ページを読んで書き写した静的参照値。
+# 季節で洪水調節容量が変わるダムは、kawabou 自身が持つ洪水期情報
+# （flood_season / in_flood_season）で「いま洪水期かどうか」を判定できる
+# ダムだけを対象にする。判定できないダムは基準CSVに載せない（＝算出しない）。
+def calc_reference_rate(rec: dict, basis: dict) -> dict | None:
+    stor_cap = rec.get("storage_capacity_1000m3") or {}
+    if stor_cap.get("status") != "ok" or stor_cap.get("value") is None:
+        return None
+    try:
+        eff = float(basis["effective_capacity_1000m3"])
+        fc_flood = float(basis["flood_control_flood_1000m3"])
+        fc_nonflood = float(basis["flood_control_nonflood_1000m3"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+    if fc_flood == fc_nonflood:
+        # 季節で変わらないダム。洪水期判定は不要。
+        fc = fc_flood
+        season_used = None
+    else:
+        in_flood = rec.get("in_flood_season")
+        if in_flood is None:
+            # 季節で分母が変わるのに、いま洪水期かどうかを判定できない。算出しない。
+            return None
+        fc = fc_flood if in_flood else fc_nonflood
+        season_used = "洪水期" if in_flood else "非洪水期"
+
+    denom = eff - fc
+    if denom <= 0:
+        return None
+
+    value = stor_cap["value"] / denom * 100.0  # 100%超をクランプしない（表示側でバーだけ丸める）
+    return {
+        "value": value,
+        "status": "ok",
+        "reason": None,
+        "denominator_1000m3": denom,
+        "denominator_label": "有効貯水容量－洪水調節容量（＝利水容量相当）",
+        "season_used": season_used,
+        "source_url": basis.get("source_url") or None,
+        "confirmed_date": basis.get("confirmed_date") or None,
+        "note": basis.get("note") or None,
+    }
+
+
 # ---------------------------------------------------------------- 1 基分
 
 def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict,
-              official: dict) -> dict:
+              official: dict, rate_calc_basis: dict | None = None) -> dict:
     ofc = int(row["ofc_cd"])
     obs = int(row["obs_cd"])
     fcd = obs_fcd(ofc, obs)
@@ -266,6 +320,7 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
         "in_flood_season": None,
         "obs_time": None,
         "rate_irrigation": None,
+        "rate_irrigation_calculated": None,
         "rate_effective": None,
         "storage_level_m": None,
         "storage_capacity_1000m3": None,
@@ -349,6 +404,13 @@ def build_dam(row: dict, base_time: dt.datetime, slugs: dict, master_cache: dict
         except ValueError:
             pass
 
+    # 公式値（storPcntIrr）が既に取れているダムは、参考値で上書きしない。
+    # 未提供・欠測・閉局のときだけ、静的に確認済みの利水容量があれば参考値を出す。
+    if rec["rate_irrigation"]["status"] != "ok" and rate_calc_basis:
+        basis = rate_calc_basis.get(row["dam_name"])
+        if basis:
+            rec["rate_irrigation_calculated"] = calc_reference_rate(rec, basis)
+
     rec["inclusion"] = (row.get("inclusion") or "core").strip() or "core"
     rec["inclusion_reason"] = (row.get("inclusion_reason") or "").strip() or None
 
@@ -389,6 +451,7 @@ def build_nodata_dam(row: dict, slugs: dict, official: dict) -> dict:
         "in_flood_season": None,
         "obs_time": None,
         "rate_irrigation": dict(blank),
+        "rate_irrigation_calculated": None,
         "rate_effective": dict(blank),
         "storage_level_m": dict(blank),
         "storage_capacity_1000m3": dict(blank),
@@ -492,19 +555,26 @@ def main() -> int:
         pdir = PREFS_DIR / key
         rate_csv = pdir / "dams.csv"
         nodata_csv = pdir / "dams_nodata.csv"
+        calc_basis_csv = pdir / "rate_calc_basis.csv"
+        rate_calc_basis = (
+            {r["dam_name"]: r for r in read_csv(calc_basis_csv)}
+            if calc_basis_csv.exists() else {}
+        )
         print(f"\n[{pref.get('name', key)}]  取得元: {pref.get('rate_source', 'none')}")
 
         # 現在値を取りに行くのは、その県に取得元があると登録されているときだけ。
         # 取得元が確認できていない県で、他県と同じ方法が使える前提にはしない。
         if pref.get("rate_source") == "kawabou" and rate_csv.exists():
             for row in read_csv(rate_csv):
-                rec = build_dam(row, base_time, slugs, master_cache, official)
+                rec = build_dam(row, base_time, slugs, master_cache, official, rate_calc_basis)
                 irr = rec["rate_irrigation"]
                 eff = rec["rate_effective"]
+                calc = rec.get("rate_irrigation_calculated")
+                calc_s = f"参考={calc['value']:.1f}%" if calc and calc.get("value") is not None else ""
                 print(
                     f"  {rec['name']:<9} "
                     f"利水={_fmt(irr):<10} 有効={_fmt(eff):<10} "
-                    f"[{rec['data_status']}] {rec['obs_time'] or '-'}"
+                    f"[{rec['data_status']}] {rec['obs_time'] or '-'} {calc_s}"
                 )
                 dams.append(rec)
         elif rate_csv.exists():

@@ -1,0 +1,6 @@
+dam_name,effective_capacity_1000m3,flood_control_flood_1000m3,flood_control_nonflood_1000m3,source_url,confirmed_date,note
+大日川ダム,23900,7400,0,https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/dams/dainichi.html,2026-09-11,洪水期(6/15-10/15)は洪水調節容量7400千m3を確保。非洪水期は洪水調節容量の記載なし（0として扱う）。kawabouのlmtStg1(324.7m/06-15~10-15)が本ページの洪水期常時満水位・期間と一致することを確認済み
+内川ダム,8100,1900,1900,https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/dams/uchikawa.html,2026-09-11,洪水期・非洪水期の別記載なし（通年同一の洪水調節容量として扱う）
+北河内ダム,2590,1150,1150,https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/dams/kitakawachi.html,2026-09-11,洪水期・非洪水期の別記載なし（通年同一の洪水調節容量として扱う）
+八ヶ川ダム,2870,1850,1850,https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/dams/hakka.html,2026-09-11,洪水期・非洪水期の別記載なし（通年同一の洪水調節容量として扱う）
+小屋ダム,2700,1500,1500,https://www.pref.ishikawa.lg.jp/kasen/ishikawa-dam/dams/oya.html,2026-09-11,洪水期・非洪水期の別記載なし（通年同一の洪水調節容量として扱う）

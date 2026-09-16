@@ -148,6 +148,31 @@ h1 .kana {
 
 .rate .bar > i { display: block; height: 100%; border-radius: 3px; }
 
+/* --- 参考貯水率（DAM TABI算出）: 公式値のカードと混同されないよう
+   枠線を破線にし、バッジを必ず添える。色数は増やさず、既存の .rate を
+   ベースに差分だけ当てる。 */
+.rate.rate-calculated {
+  border: 1px dashed #7c6ae0;
+  background: #f6f4ff;
+}
+.rate.rate-calculated .k { flex-wrap: wrap; }
+.calc-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #5b3fd6;
+  background: #eae5ff;
+  border: 1px solid #c9bdf5;
+  border-radius: 999px;
+  padding: 1px 7px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.rate .why.calc-why {
+  color: #4d3d99;
+  background: #eeeafe;
+}
+
 .nodata-note {
   background: #fdf3e8;
   border-left: 3px solid #d99a5b;
