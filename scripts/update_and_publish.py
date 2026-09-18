@@ -14,6 +14,11 @@
 **自動実行はしません。** 人が実行したときに 1 回だけ取得します
 （川の防災情報の利用条件により、定期的な収集はしない方針のため）。
 
+**実行するブランチが公開元（site.json の publish.branch。既定 main）と違うと、
+何も取得・変更せずにその場で止まります。** 開発中のブランチで実行して観測値の
+更新が"公開されないまま積み上がる"事故（2026-09 に発生）を防ぐためです。
+自動でブランチを切り替えたり、開発ブランチから直接 push したりはしません。
+
 途中で少しでもおかしければ公開へ進まず、日本語で理由を出して止まります。
 その場合 docs/data/dams.json は実行前の状態に戻します。
 
@@ -117,6 +122,28 @@ def git_ok(*args: str) -> str:
         stop("Git の操作に失敗しました。",
              f"git {' '.join(args)}\n{(r.stderr or r.stdout).strip()}")
     return r.stdout.strip()
+
+
+def current_branch() -> str | None:
+    """いまのブランチ名。ブランチにいない（detached HEAD など）ときは None。"""
+    r = git("rev-parse", "--abbrev-ref", "HEAD")
+    if r.returncode != 0:
+        return None
+    name = r.stdout.strip()
+    return None if (not name or name == "HEAD") else name
+
+
+def publish_branch() -> str:
+    """公開してよいブランチの名前。site.json の publish.branch で決める
+    （GitHub の Settings → Pages → Branch と一致させること。既定値は "main"）。"""
+    try:
+        cfg = json.loads(SITE_JSON.read_text(encoding="utf-8"))
+        b = (cfg.get("publish") or {}).get("branch")
+        if isinstance(b, str) and b.strip():
+            return b.strip()
+    except Exception:
+        pass
+    return "main"
 
 
 def dirty_files() -> set[str]:
@@ -260,6 +287,27 @@ def main() -> int:
     if not (ROOT / ".git").exists():
         stop("リポジトリの場所が正しくありません。", str(ROOT))
 
+    # ---- 0. 公開元ブランチの確認
+    #
+    # 観測元への通信や dams.json の書き換えより先に確認する。
+    # ここでブランチが違っていても、対象を自動で公開ブランチへ切り替えたり、
+    # 開発ブランチから直接 push したりはしない。何もせず、ここで止まるだけ。
+    want = publish_branch()
+    have = current_branch()
+    if have != want:
+        if have is None:
+            where = ("いまはどのブランチにもいません"
+                     "（コミット直後の中途半端な状態か、detached HEAD の可能性があります）。")
+        else:
+            where = f"いまのブランチは「{have}」です。"
+        stop(f"ここは公開元のブランチ（{want}）ではありません。",
+             f"{where}\n"
+             "観測元への通信もファイルの変更も行っていません。\n\n"
+             f"公開中のサイトは GitHub の {want} ブランチ（/docs）から配信されています。\n"
+             f"観測値の更新は、{want} をチェックアウトした作業フォルダから実行してください。\n"
+             "  git worktree list  で場所を確認できます。\n\n"
+             "開発中のブランチを自動で切り替えたり、ここから直接 push したりはしません。")
+
     # 実行前の状態を控えておく
     old = load_json(DAMS_JSON, "docs/data/dams.json") if DAMS_JSON.exists() else None
     backup = None
@@ -374,22 +422,23 @@ def main() -> int:
     if c.returncode != 0 and "nothing to commit" not in (c.stdout + c.stderr):
         stop("記録（commit）に失敗しました。", (c.stderr or c.stdout).strip())
 
-    p = git("push", "origin", "HEAD")
+    p = git("push", "origin", want)
     if p.returncode != 0:
         stop("GitHub へ送れませんでした。",
              "手元には記録済みなので、通信が戻ってからもう一度実行すれば送られます。\n\n"
              + (p.stderr or p.stdout).strip()[-600:])
-    say("    GitHub へ送りました。")
+    say(f"    GitHub の {want} ブランチへ送りました（push 成功。公開されたかはまだ別）。")
 
     # ---- 6. 公開の反映を確認
-    step(6, total_steps, "damtabi.com に出るまで待ちます（数分かかります）")
     base_url = "https://damtabi.com"
     try:
         base_url = json.loads(SITE_JSON.read_text(encoding="utf-8")).get("base_url", base_url)
     except Exception:
         pass
+    WAIT_MINUTES = 6
+    step(6, total_steps, f"{base_url} に出るまで待ちます（最大 {WAIT_MINUTES} 分）")
 
-    live = wait_until_live(new.get("base_obs_time", ""), base_url)
+    live = wait_until_live(new.get("base_obs_time", ""), base_url, minutes=WAIT_MINUTES)
     drop_backup()
 
     say()
@@ -401,12 +450,22 @@ def main() -> int:
         say(f"    {base_url} に {new.get('base_obs_time')} 観測の値が出ています。")
         say(f"    {n_total}基のうち {n_ok}基に値があり、{n_nodata}基は値なしです。")
     else:
-        say("  公開の反映がまだ確認できていません")
+        # push の成功と、実際に公開サイトへ反映されたことは別。
+        # ここは反映を確認できていないだけで、原因（GitHub Pages 側の遅延なのか、
+        # ビルドが失敗しているのか、公開元の設定が変わっているのか）は分かっていない。
+        # 「待てば必ず出ます」とは書かない。
+        say("  送信済み・公開未確認")
         say(LINE)
         say()
-        say("    GitHub へは送れています。公開まで数分かかることがあります。")
-        say(f"    しばらくしてから {base_url} を開いて、観測時刻が")
-        say(f"    {new.get('base_obs_time')} になっていれば成功です。")
+        say(f"    GitHub の {want} ブランチへは送れています。")
+        say(f"    ただし {WAIT_MINUTES}分待っても {base_url} 側の観測時刻が")
+        say(f"    {new.get('base_obs_time')} に変わったことを確認できませんでした。")
+        say("    原因はここでは分かりません（反映が単に遅いだけか、GitHub Pages の")
+        say("    ビルドが失敗しているか、公開元の設定が変わっているか、など）。")
+        say()
+        say("    確認する場所:")
+        say("      - GitHub の Settings → Pages（ビルドが成功しているか）")
+        say(f"      - {base_url}/data/dams.json を直接開いて観測時刻を見る")
     say()
     return 0
 
