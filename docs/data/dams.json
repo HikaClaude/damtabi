@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-19T03:27:33+09:00",
-  "base_obs_time": "2026/09/19 03:20",
+  "generated_at": "2026-09-19T07:44:34+09:00",
+  "base_obs_time": "2026/09/19 07:40",
   "source": {
     "name": "国土交通省 川の防災情報",
     "url": "https://www.river.go.jp/kawabou/pcfull/tm",
@@ -181,35 +181,35 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:40",
       "rate_irrigation": {
-        "value": 82.8,
+        "value": 82.5,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 19.1,
+        "value": 19,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 240.57,
+        "value": 240.54,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2986,
+        "value": 2974,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 29.92,
+        "value": 29.81,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 29.5,
+        "value": 30,
         "status": "ok",
         "reason": null
       },
@@ -258,30 +258,30 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 60.3,
+        "value": 59.6,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 33.2,
+        "value": 32.9,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 243.19,
+        "value": 243.08,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 4030,
+        "value": 3985,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 5.17,
+        "value": 3.83,
         "status": "ok",
         "reason": null
       },
@@ -331,7 +331,7 @@
       "manager_office": "富山土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -344,7 +344,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_level_m": {
-        "value": 307.85,
+        "value": 307.78,
         "status": "ok",
         "reason": null
       },
@@ -354,7 +354,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 2.95,
+        "value": 2.9,
         "status": "ok",
         "reason": null
       },
@@ -408,7 +408,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -436,7 +436,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 4.11,
+        "value": 4.07,
         "status": "ok",
         "reason": null
       },
@@ -485,35 +485,35 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 63.7,
+        "value": 66.8,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 31.7,
+        "value": 33.2,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 40.37,
+        "value": 40.47,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 572,
+        "value": 600,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 5.59,
+        "value": 5.57,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.63,
+        "value": 3.8,
         "status": "ok",
         "reason": null
       },
@@ -562,35 +562,35 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 8.6,
+        "value": 9.2,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 1.4,
+        "value": 1.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 887.21,
+        "value": 887.22,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 14,
+        "value": 15,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.9,
+        "value": 2.3,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 2.4,
+        "value": 2.3,
         "status": "ok",
         "reason": null
       },
@@ -635,7 +635,7 @@
       "manager_office": "境川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 45.7,
         "status": "ok",
@@ -648,12 +648,12 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 549.52,
+        "value": 549.55,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 22242,
+        "value": 22273,
         "status": "ok",
         "reason": null
       },
@@ -663,7 +663,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.39,
+        "value": 0.4,
         "status": "ok",
         "reason": null
       },
@@ -708,7 +708,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -721,17 +721,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 335.37,
+        "value": 335.29,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 7481,
+        "value": 7429,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.54,
+        "value": 2.08,
         "status": "ok",
         "reason": null
       },
@@ -781,7 +781,7 @@
       "manager_office": "農林水産省北陸地整管内",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:20",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -794,7 +794,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 173.87,
+        "value": 173.77,
         "status": "ok",
         "reason": null
       },
@@ -809,7 +809,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "outflow_m3s": {
-        "value": 2.75,
+        "value": 2.73,
         "status": "ok",
         "reason": null
       },
@@ -854,7 +854,7 @@
       "manager_office": "子撫川統合ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -862,27 +862,27 @@
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 48.2,
+        "value": 48.1,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 99.69,
+        "value": 99.68,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3368,
+        "value": 3364,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.79,
+        "value": 3.71,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.73,
+        "value": 3.74,
         "status": "ok",
         "reason": null
       },
@@ -931,35 +931,35 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 18.6,
+        "value": 18.1,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 7.1,
+        "value": 6.9,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 250.05,
+        "value": 249.99,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 762,
+        "value": 758,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.56,
+        "value": 0.51,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.83,
+        "value": 0.82,
         "status": "ok",
         "reason": null
       },
@@ -1004,7 +1004,7 @@
       "manager_office": "砺波土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -1077,7 +1077,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "missing",
@@ -1100,7 +1100,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 2.22,
+        "value": 2.41,
         "status": "ok",
         "reason": null
       },
@@ -1150,7 +1150,7 @@
       "manager_office": "新川土木センター",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 98.1,
         "status": "ok",
@@ -1178,7 +1178,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.7,
+        "value": 0.6,
         "status": "ok",
         "reason": null
       },
@@ -1227,35 +1227,35 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 51.4,
+        "value": 48.8,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 20.5,
+        "value": 19.4,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 184.66,
+        "value": 184.4,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 703,
+        "value": 667,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.3,
+        "value": 1.54,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.11,
+        "value": 3.12,
         "status": "ok",
         "reason": null
       },
@@ -1304,25 +1304,25 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 64.7,
+        "value": 66.6,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 27.8,
+        "value": 28.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 276.46,
+        "value": 276.6,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1073,
+        "value": 1105,
         "status": "ok",
         "reason": null
       },
@@ -1332,7 +1332,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0,
+        "value": 5.31,
         "status": "ok",
         "reason": null
       },
@@ -1377,35 +1377,35 @@
       "manager_office": "白岩川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 92.2,
+        "value": 93.4,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 24.3,
+        "value": 24.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 129.02,
+        "value": 129.07,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 370,
+        "value": 376,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.6,
+        "value": 1.57,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.19,
+        "value": 1.2,
         "status": "ok",
         "reason": null
       },
@@ -1450,7 +1450,7 @@
       "manager_office": "入善土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1527,7 +1527,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1604,7 +1604,7 @@
         "end_md": "11-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -1866,35 +1866,35 @@
       "manager_office": "金沢河川国道事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:40",
       "rate_irrigation": {
-        "value": 71.4,
+        "value": 71.1,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 63.8,
+        "value": 63.5,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 450.34,
+        "value": 450.2,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 120812,
+        "value": 120234,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 27.62,
+        "value": 13.53,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 30.59,
+        "value": 82.12,
         "status": "ok",
         "reason": null
       },
@@ -1943,14 +1943,14 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_irrigation_calculated": {
-        "value": 43.769696969696966,
+        "value": 42.97575757575758,
         "status": "ok",
         "reason": null,
         "denominator_1000m3": 16500.0,
@@ -1966,22 +1966,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 314.89,
+        "value": 314.72,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 7222,
+        "value": 7091,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.29,
+        "value": 3.12,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 11.5,
+        "value": 11.39,
         "status": "ok",
         "reason": null
       },
@@ -2026,14 +2026,14 @@
       "manager_office": "内川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_irrigation_calculated": {
-        "value": 59.74193548387097,
+        "value": 59.46774193548387,
         "status": "ok",
         "reason": null,
         "denominator_1000m3": 6200.0,
@@ -2049,12 +2049,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 221.67,
+        "value": 221.61,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3704,
+        "value": 3687,
         "status": "ok",
         "reason": null
       },
@@ -2064,7 +2064,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0,
+        "value": 5.23,
         "status": "ok",
         "reason": null
       },
@@ -2109,7 +2109,7 @@
       "manager_office": "内川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2122,7 +2122,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 105.79,
+        "value": 106.58,
         "status": "ok",
         "reason": null
       },
@@ -2137,7 +2137,7 @@
         "reason": "欠測（観測所からデータが届いていない）"
       },
       "outflow_m3s": {
-        "value": 1.73,
+        "value": 4.76,
         "status": "ok",
         "reason": null
       },
@@ -2182,7 +2182,7 @@
       "manager_office": "犀川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2195,17 +2195,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 334.11,
+        "value": 334.1,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3645,
+        "value": 3642,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.61,
+        "value": 3.36,
         "status": "ok",
         "reason": null
       },
@@ -2255,7 +2255,7 @@
       "manager_office": "犀川ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2328,7 +2328,7 @@
       "manager_office": "奥能登土木総合事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2411,7 +2411,7 @@
       "manager_office": "赤瀬ダム管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2424,7 +2424,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 102.31,
+        "value": 102.32,
         "status": "ok",
         "reason": null
       },
@@ -2484,7 +2484,7 @@
       "manager_office": "大聖寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2497,17 +2497,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 181.39,
+        "value": 181.41,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2139,
+        "value": 2147,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.31,
+        "value": 3.24,
         "status": "ok",
         "reason": null
       },
@@ -2557,7 +2557,7 @@
       "manager_office": "大聖寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -2570,17 +2570,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 135.95,
+        "value": 135.85,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2244,
+        "value": 2209,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.38,
+        "value": 3.43,
         "status": "ok",
         "reason": null
       },
@@ -2630,14 +2630,14 @@
       "manager_office": "奥能登土木総合事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_irrigation_calculated": {
-        "value": 97.05882352941177,
+        "value": 96.96078431372548,
         "status": "ok",
         "reason": null,
         "denominator_1000m3": 1020.0,
@@ -2653,22 +2653,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 130.86,
+        "value": 130.85,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 990,
+        "value": 989,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.37,
+        "value": 0.43,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.44,
+        "value": 0.43,
         "status": "ok",
         "reason": null
       },
@@ -2713,14 +2713,14 @@
       "manager_office": "珠洲土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "rate_irrigation_calculated": {
-        "value": 86.58333333333333,
+        "value": 85.91666666666666,
         "status": "ok",
         "reason": null,
         "denominator_1000m3": 1200.0,
@@ -2736,22 +2736,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 87.02,
+        "value": 86.95,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1039,
+        "value": 1031,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.63,
+        "value": 0.54,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.96,
+        "value": 0.95,
         "status": "ok",
         "reason": null
       },
@@ -2800,7 +2800,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 64.8,
         "status": "ok",
@@ -2823,7 +2823,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 11.15,
+        "value": 12.12,
         "status": "ok",
         "reason": null
       },
@@ -2877,7 +2877,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "closed",
@@ -2885,22 +2885,22 @@
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 61.7,
+        "value": 61.8,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 399.8,
+        "value": 399.82,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 27166,
+        "value": 27189,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 5.26,
+        "value": 5.05,
         "status": "ok",
         "reason": null
       },
@@ -2950,30 +2950,30 @@
       "manager_office": "水資源機構　木曽川上流ダム総合管理所（岩屋ダム管理所）",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 85,
+        "value": 85.5,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 56.6,
+        "value": 57,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 406.47,
+        "value": 406.64,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 84964,
+        "value": 85510,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 37.44,
+        "value": 34.77,
         "status": "ok",
         "reason": null
       },
@@ -3023,35 +3023,35 @@
       "manager_office": "木曽川水系ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 86.5,
+        "value": 85.7,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 37.5,
+        "value": 37.1,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 178.81,
+        "value": 178.75,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 13865,
+        "value": 13738,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 297.44,
+        "value": 261.11,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 307.9,
+        "value": 276.3,
         "status": "ok",
         "reason": null
       },
@@ -3100,25 +3100,25 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 59,
+        "value": 64.6,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 5.6,
+        "value": 6.1,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 185.24,
+        "value": 185.51,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1691,
+        "value": 1852,
         "status": "ok",
         "reason": null
       },
@@ -3177,7 +3177,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 0,
         "status": "ok",
@@ -3190,22 +3190,22 @@
         "reason": null
       },
       "storage_level_m": {
-        "value": 353.04,
+        "value": 353,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 5,
+        "value": 0,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 2.39,
+        "value": 2.24,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 2.98,
+        "value": 2.83,
         "status": "ok",
         "reason": null
       },
@@ -3250,7 +3250,7 @@
       "manager_office": "郡上土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3263,22 +3263,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 571.7,
+        "value": 571.68,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 516,
+        "value": 514,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.4,
+        "value": 1.27,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.39,
+        "value": 1.3,
         "status": "ok",
         "reason": null
       },
@@ -3323,7 +3323,7 @@
       "manager_office": "恵那土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3346,7 +3346,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.18,
+        "value": 0.16,
         "status": "ok",
         "reason": null
       },
@@ -3396,7 +3396,7 @@
       "manager_office": "下呂土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3409,22 +3409,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 687.41,
+        "value": 687.4,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 127,
+        "value": 126,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.75,
+        "value": 0.71,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.74,
+        "value": 0.71,
         "status": "ok",
         "reason": null
       },
@@ -3469,7 +3469,7 @@
       "manager_office": "恵那土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3482,7 +3482,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 567.74,
+        "value": 567.73,
         "status": "ok",
         "reason": null
       },
@@ -3492,12 +3492,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.2,
+        "value": 0.19,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.2,
+        "value": 0.19,
         "status": "ok",
         "reason": null
       },
@@ -3542,7 +3542,7 @@
       "manager_office": "高山土木事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3555,22 +3555,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 857.44,
+        "value": 857.41,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2601,
+        "value": 2595,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.06,
+        "value": 2.95,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.46,
+        "value": 3.3,
         "status": "ok",
         "reason": null
       },
@@ -3615,7 +3615,7 @@
       "manager_office": "龍ヶ鼻・永平寺ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3628,22 +3628,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 171.15,
+        "value": 171.13,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3525,
+        "value": 3520,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.79,
+        "value": 0.49,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.21,
+        "value": 1.24,
         "status": "ok",
         "reason": null
       },
@@ -3688,7 +3688,7 @@
       "manager_office": "龍ヶ鼻・永平寺ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3765,7 +3765,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3778,22 +3778,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 515.65,
+        "value": 515.63,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 24657,
+        "value": 24626,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.73,
+        "value": 3.76,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.73,
+        "value": 3.76,
         "status": "ok",
         "reason": null
       },
@@ -3838,7 +3838,7 @@
       "manager_office": "笹生川・浄土寺川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3851,22 +3851,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 344.52,
+        "value": 344.56,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 769,
+        "value": 772,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.47,
+        "value": 0.46,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.49,
+        "value": 0.4,
         "status": "ok",
         "reason": null
       },
@@ -3915,7 +3915,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -3928,17 +3928,17 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 294.15,
+        "value": 294.12,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 1318,
+        "value": 1314,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.59,
+        "value": 1.27,
         "status": "ok",
         "reason": null
       },
@@ -3988,7 +3988,7 @@
       "manager_office": "広野・桝谷ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -4061,7 +4061,7 @@
       "manager_office": "河内川・大津呂ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -4074,7 +4074,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 87.02,
+        "value": 87.04,
         "status": "ok",
         "reason": null
       },
@@ -4089,7 +4089,7 @@
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.03,
+        "value": 0.02,
         "status": "ok",
         "reason": null
       },
@@ -4138,7 +4138,7 @@
         "end_md": "10-31"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -4211,25 +4211,25 @@
       "manager_office": "九頭竜川ダム統合管理事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 37.4,
+        "value": 37.6,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 31.9,
+        "value": 32,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 543.11,
+        "value": 543.16,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 71058,
+        "value": 71354,
         "status": "ok",
         "reason": null
       },
@@ -4288,7 +4288,7 @@
         "end_md": "07-01"
       },
       "in_flood_season": false,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 82.9,
         "status": "ok",
@@ -4311,7 +4311,7 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.59,
+        "value": 3.51,
         "status": "ok",
         "reason": null
       },
@@ -4554,7 +4554,7 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 100,
         "status": "ok",
@@ -4562,27 +4562,27 @@
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 27.2,
+        "value": 27.8,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 879.17,
+        "value": 879.44,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 7669,
+        "value": 7829,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 32.9,
+        "value": 32.93,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 22.94,
+        "value": 23.04,
         "status": "ok",
         "reason": null
       },
@@ -4631,35 +4631,35 @@
         "end_md": "09-30"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 75.8,
+        "value": 74.5,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 21.3,
+        "value": 20.9,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 805.14,
+        "value": 805.09,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3842,
+        "value": 3779,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 26.7,
+        "value": 26.07,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 29.67,
+        "value": 29.9,
         "status": "ok",
         "reason": null
       },
@@ -4708,35 +4708,35 @@
         "end_md": "07-20"
       },
       "in_flood_season": false,
-      "obs_time": "2026/09/19 03:20",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 98.8,
+        "value": 98.5,
         "status": "ok",
         "reason": null
       },
       "rate_irrigation_calculated": null,
       "rate_effective": {
-        "value": 39.7,
+        "value": 39.6,
         "status": "ok",
         "reason": null
       },
       "storage_level_m": {
-        "value": 604.67,
+        "value": 604.64,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 12595,
+        "value": 12559,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 25.5,
+        "value": 24.93,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 27.51,
+        "value": 27.5,
         "status": "ok",
         "reason": null
       },
@@ -4785,7 +4785,7 @@
         "end_md": "10-15"
       },
       "in_flood_season": true,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 99.1,
         "status": "ok",
@@ -4808,12 +4808,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 7.16,
+        "value": 7.19,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 7.16,
+        "value": 7.19,
         "status": "ok",
         "reason": null
       },
@@ -4858,7 +4858,7 @@
       "manager_office": "長野建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -4871,7 +4871,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 544.19,
+        "value": 544.09,
         "status": "ok",
         "reason": null
       },
@@ -4881,12 +4881,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 10.63,
+        "value": 10.05,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 12.01,
+        "value": 11.96,
         "status": "ok",
         "reason": null
       },
@@ -4931,7 +4931,7 @@
       "manager_office": "飯田建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:00",
+      "obs_time": "2026/09/19 07:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -4944,7 +4944,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 676.96,
+        "value": 677.07,
         "status": "ok",
         "reason": null
       },
@@ -4954,7 +4954,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 3.92,
+        "value": 4.09,
         "status": "ok",
         "reason": null
       },
@@ -5004,9 +5004,9 @@
       "manager_office": "佐久建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 93.6,
+        "value": 93.2,
         "status": "ok",
         "reason": null
       },
@@ -5017,22 +5017,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 798.26,
+        "value": 798.25,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 222,
+        "value": 221,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 5.88,
+        "value": 5.68,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 5.72,
+        "value": 5.54,
         "status": "ok",
         "reason": null
       },
@@ -5077,7 +5077,7 @@
       "manager_office": "長野建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5090,7 +5090,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 860.29,
+        "value": 860.32,
         "status": "ok",
         "reason": null
       },
@@ -5100,12 +5100,12 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "inflow_m3s": {
-        "value": 3.26,
+        "value": 3.24,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.06,
+        "value": 2.95,
         "status": "ok",
         "reason": null
       },
@@ -5150,7 +5150,7 @@
       "manager_office": "松本建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5163,22 +5163,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 1053.7,
+        "value": 1053.69,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 2972,
+        "value": 2969,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 4.32,
+        "value": 4.23,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 4.32,
+        "value": 4.24,
         "status": "ok",
         "reason": null
       },
@@ -5223,7 +5223,7 @@
       "manager_office": "佐久建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 12.8,
         "status": "ok",
@@ -5236,7 +5236,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 981.37,
+        "value": 981.36,
         "status": "ok",
         "reason": null
       },
@@ -5246,12 +5246,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.17,
+        "value": 1.14,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.17,
+        "value": 1.14,
         "status": "ok",
         "reason": null
       },
@@ -5296,7 +5296,7 @@
       "manager_office": "上田建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5309,24 +5309,24 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 823.18,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "storage_capacity_1000m3": {
-        "value": 269,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "inflow_m3s": {
-        "value": 0.77,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "outflow_m3s": {
-        "value": 0.98,
-        "status": "ok",
-        "reason": null
+        "value": null,
+        "status": "missing",
+        "reason": "欠測（観測所からデータが届いていない）"
       },
       "data_status": "not_provided",
       "illustration": null,
@@ -5369,7 +5369,7 @@
       "manager_office": "伊那建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:00",
+      "obs_time": "2026/09/19 07:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5382,22 +5382,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 903.41,
+        "value": 903.39,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 468,
+        "value": 467,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 3.2,
+        "value": 2.97,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 3.26,
+        "value": 3.12,
         "status": "ok",
         "reason": null
       },
@@ -5442,7 +5442,7 @@
       "manager_office": "飯田建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:00",
+      "obs_time": "2026/09/19 07:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5455,7 +5455,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 897,
+        "value": 896.99,
         "status": "ok",
         "reason": null
       },
@@ -5465,12 +5465,12 @@
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.22,
+        "value": 1.15,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.22,
+        "value": 1.15,
         "status": "ok",
         "reason": null
       },
@@ -5515,7 +5515,7 @@
       "manager_office": "伊那建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5528,22 +5528,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 846.88,
+        "value": 846.87,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 3908,
+        "value": 3905,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 1.15,
+        "value": 1.23,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 1.78,
+        "value": 1.75,
         "status": "ok",
         "reason": null
       },
@@ -5588,7 +5588,7 @@
       "manager_office": "須坂建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:00",
+      "obs_time": "2026/09/19 07:00",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5661,7 +5661,7 @@
       "manager_office": "上田建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5734,7 +5734,7 @@
       "manager_office": "松本建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 49.3,
         "status": "ok",
@@ -5807,7 +5807,7 @@
       "manager_office": "松本建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": 26.7,
         "status": "ok",
@@ -5880,9 +5880,9 @@
       "manager_office": "松本建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
-        "value": 35.7,
+        "value": 35.6,
         "status": "ok",
         "reason": null
       },
@@ -5893,22 +5893,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 619.35,
+        "value": 619.34,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 567,
+        "value": 565,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.58,
+        "value": 0.59,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.71,
+        "value": 0.68,
         "status": "ok",
         "reason": null
       },
@@ -5953,7 +5953,7 @@
       "manager_office": "佐久建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -5966,22 +5966,22 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 1055.15,
+        "value": 1055.14,
         "status": "ok",
         "reason": null
       },
       "storage_capacity_1000m3": {
-        "value": 253,
+        "value": 252,
         "status": "ok",
         "reason": null
       },
       "inflow_m3s": {
-        "value": 0.27,
+        "value": 0.25,
         "status": "ok",
         "reason": null
       },
       "outflow_m3s": {
-        "value": 0.27,
+        "value": 0.25,
         "status": "ok",
         "reason": null
       },
@@ -6026,7 +6026,7 @@
       "manager_office": "長野建設事務所",
       "flood_season": null,
       "in_flood_season": null,
-      "obs_time": "2026/09/19 03:10",
+      "obs_time": "2026/09/19 07:30",
       "rate_irrigation": {
         "value": null,
         "status": "not_provided",
@@ -6039,7 +6039,7 @@
         "reason": "未提供（この観測所では公表されていない項目）"
       },
       "storage_level_m": {
-        "value": 520.34,
+        "value": 520.33,
         "status": "ok",
         "reason": null
       },
