@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 rem ダム旅 — 貯水率を更新して damtabi.com に反映する
 rem このファイルをダブルクリックするだけで済むようにしてあります。
 chcp 65001 > nul
