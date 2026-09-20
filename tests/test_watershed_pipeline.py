@@ -803,5 +803,133 @@ class TestBuildBasinsFailureKeepsExisting(unittest.TestCase):
         self.assertEqual(gj1, (self.out / "basins.geojson").read_bytes())
 
 
+class TestBuildFlowgridsCli(unittest.TestCase):
+    """build_flowgrids.main を一時ディレクトリで実行し、失敗しても既存の配信物・レポートを壊さないことを確かめる。"""
+
+    def setUp(self):
+        import build_flowgrids as bf
+        self.bf = bf
+        self.tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
+        self.dams = [fake_dam("t-a1"), fake_dam("t-b2")]
+        (self.tmp / "docs/data").mkdir(parents=True)
+        (self.tmp / "docs/data/dams.json").write_text(json.dumps({"dams": self.dams}), encoding="utf-8")
+        (self.tmp / "data/basins").mkdir(parents=True)
+        feats = [{"type": "Feature", "properties": {"id": d["id"]}, "geometry": {"type": "Polygon",
+                  "coordinates": [[[0, 0], [1, 0], [1, 1], [0, 0]]]}} for d in self.dams]
+        (self.tmp / "data/basins/basins.geojson").write_text(json.dumps({"features": feats}), encoding="utf-8")
+        (self.tmp / "data/basins/basins_meta.json").write_text(json.dumps(
+            [{"id": d["id"], "computed_area_km2": 1.0, "zoom": 14, "tiles": 9} for d in self.dams]), encoding="utf-8")
+        (self.tmp / "spec.csv").write_text(
+            "dam_id,dam_name,binran_no,binran_name,basin_raw,total_km2,direct_km2,indirect_km2,all_direct,note"
+            + chr(10), encoding="utf-8")
+        self.saved = (bf.ROOT, bf.REPORT_DEFAULT, bb.SPEC_CSV)
+        bf.ROOT, bf.REPORT_DEFAULT, bb.SPEC_CSV = self.tmp, self.tmp / "data/watershed/qa_report.json", self.tmp / "spec.csv"
+        self.addCleanup(self.restore)
+        store = wp.Store(self.tmp)
+        for d in self.dams:                                       # 2基を配信済みにしておく
+            gen = fake_gen(d)
+            ring = ring_of(gen["rec"])
+            wp.apply_result(store, d, wp.judge(gen, ring, d["id"]), gen, ring, {"id": d["id"]})
+        wp.assemble(store, self.dams)
+        self.run_cli("--assemble-only")
+        (self.tmp / "data/watershed/qa_report.json").write_text("{}", encoding="utf-8")   # 置き換わるかを見る
+
+    def restore(self):
+        self.bf.ROOT, self.bf.REPORT_DEFAULT, bb.SPEC_CSV = self.saved
+
+    def snapshot(self):
+        return {p.relative_to(self.tmp).as_posix(): p.read_bytes()
+                for p in sorted(self.tmp.rglob("*")) if p.is_file() and p.name != "qa_report.json"}
+
+    def run_cli(self, *argv):
+        so, sys.stdout = sys.stdout, io.StringIO()
+        try:
+            return self.bf.main(list(argv))
+        finally:
+            sys.stdout = so
+
+    def test_failed_run_keeps_deliverables_and_report_covers_all_dams(self):
+        before = self.snapshot()
+        rc = self.run_cli("--id", "t-a1", "--offline", "--cache-root", str(self.tmp / "nocache"))
+        self.assertEqual(rc, 1)                                          # 生成失敗 → 終了コード1
+        self.assertEqual(before, self.snapshot())                        # 配信物・状態は1バイトも変わらない
+        rep = json.loads((self.tmp / "data/watershed/qa_report.json").read_text(encoding="utf-8"))
+        self.assertEqual([r["id"] for r in rep["dams"]], ["t-a1", "t-b2"])   # 失敗した回でも全基分が残る
+        self.assertTrue(all(r["published"] for r in rep["dams"]))
+
+    def test_evaluate_writes_nothing_except_report(self):
+        before = self.snapshot()
+        out = self.tmp / "rep.json"
+        rc = self.run_cli("--id", "t-a1", "--offline", "--evaluate", "--report", str(out),
+                          "--cache-root", str(self.tmp / "nocache"))
+        self.assertEqual(rc, 1)
+        after = {k: v for k, v in self.snapshot().items() if k != "rep.json"}      # 書いてよいのは --report だけ
+        self.assertEqual(before, after)
+        self.assertEqual(json.loads(out.read_text(encoding="utf-8"))["failures"][0]["kind"], "dem_fetch")
+
+    def test_unknown_id_and_no_target_are_usage_errors(self):
+        self.assertEqual(self.run_cli("--id", "t-typo", "--offline"), 2)
+        self.assertEqual(self.run_cli("--offline"), 2)
+
+
+# ------------------------------------------------------------------ app.js（実コード）との一致
+
+def _run_jscript(js: str) -> str:
+    """Windows 標準の JScript（cscript）で app.js から切り出した実コードを動かす。"""
+    import re
+    import subprocess
+    js = re.sub(r"/\*.*?\*/", "", js, flags=re.S)
+    js = re.sub(r"(?m)^\s*//[^\r\n]*$", "", js)
+    with tempfile.TemporaryDirectory() as d:
+        p = Path(d) / "t.js"
+        p.write_text(js, encoding="ascii", errors="replace")
+        r = subprocess.run(["cscript", "//nologo", str(p)], capture_output=True, text=True)
+    if r.returncode != 0:
+        raise RuntimeError(r.stdout + r.stderr)
+    return r.stdout
+
+
+@unittest.skipUnless(os.name == "nt" and shutil.which("cscript"), "Windows の cscript がある環境のみ")
+class TestAppJsParity(unittest.TestCase):
+    src = (ROOT / "docs" / "app.js").read_text(encoding="utf-8")
+
+    def cut(self, start, end):
+        a = self.src.index(start)
+        return self.src[a:self.src.index(end, a)]
+
+    def test_python_smooth_ring_matches_appjs_smoothRing(self):
+        fn = self.cut("function smoothRing(ring, iters) {", "function ringBounds(ring)")
+        n = 60
+        rings = {
+            "circle": [[137 + 0.01 * math.cos(2 * math.pi * k / n), 36 + 0.01 * math.sin(2 * math.pi * k / n)] for k in range(n)],
+            "star": [[137 + (0.01 if k % 2 else 0.004) * math.cos(2 * math.pi * k / n),
+                      36 + (0.01 if k % 2 else 0.004) * math.sin(2 * math.pi * k / n)] for k in range(n)],
+        }
+        for v in rings.values():
+            v.append(v[0])
+        prog = fn + chr(10) + "var R=" + json.dumps(rings) + ";" + chr(10) + (
+            'var out=[];for(var k in R){var r=smoothRing(R[k],2);var s=k+"|"+r.length;'
+            'for(var i=0;i<r.length;i+=1){s+="|"+r[i][0].toFixed(9)+","+r[i][1].toFixed(9);}out.push(s);}'
+            "WScript.Echo(out.join(String.fromCharCode(10)));")
+        got = _run_jscript(prog).strip().splitlines()
+        self.assertEqual(len(got), 2)
+        for line in got:
+            parts = line.split("|")
+            js_pts = [tuple(map(float, x.split(","))) for x in parts[2:]]
+            py = wc.smooth_ring(rings[parts[0]], 2)
+            self.assertEqual(len(js_pts), len(py), parts[0])
+            self.assertLess(max(max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(js_pts, py)), 1e-8, parts[0])
+
+    def test_appjs_version_check_is_per_part(self):
+        fn = self.cut("function sameVersion(got, want) {", "function loadGrid(id)")
+        prog = (fn + chr(10)
+                + "var r=[sameVersion('a','a'),sameVersion('a','b'),sameVersion(null,'b'),"
+                  "sameVersion('a',null),sameVersion('a','')];"
+                + "WScript.Echo(r.join(','));")
+        # 期待版と一致 / 不一致（止める）/ 版なしのデータ・期待版なしの索引は比較しない
+        self.assertEqual(_run_jscript(prog).strip(), "true,false,true,true,true")
+
+
 if __name__ == "__main__":
     unittest.main()

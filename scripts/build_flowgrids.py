@@ -92,9 +92,11 @@ def print_table(rows):
               f"{s.get('unreached_pct', nan):>8.1f}  {','.join(r['block_codes'])}")
 
 
-def write_report(path: Path, rows, mode: str, extra=None):
+def write_report(path: Path, rows, mode: str, extra=None, stamp: bool = True):
+    """判定レポート。stamp=False なら時刻を入れない（内容が同じなら同じバイト列＝無関係な差分を出さない）。"""
     doc = {
-        "generated": time.strftime("%Y-%m-%dT%H:%M:%S+09:00"), "pipeline": wp.PIPELINE, "mode": mode,
+        **({"generated": time.strftime("%Y-%m-%dT%H:%M:%S+09:00")} if stamp else {}),
+        "pipeline": wp.PIPELINE, "mode": mode,
         "thresholds": wq.THRESHOLDS,
         "counts": {"pass": sum(1 for r in rows if r["status"] == "pass"),
                    "hold": sum(1 for r in rows if r["status"] == "hold"),
@@ -103,7 +105,10 @@ def write_report(path: Path, rows, mode: str, extra=None):
     }
     if extra:
         doc.update(extra)
-    dem_tiles.atomic_write_bytes(path, (json.dumps(doc, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
+    text = (json.dumps(doc, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
+    if path.exists() and path.read_bytes() == text:
+        return
+    dem_tiles.atomic_write_bytes(path, text)
 
 
 def main(argv=None) -> int:
@@ -251,11 +256,20 @@ def main(argv=None) -> int:
         except wp.PipelineError as e:
             print(f"\n組み立てを中止しました（索引・ポリゴンは書いていません）: {e}")
             rc = 3
-    report_path = args.report or (None if args.evaluate else REPORT_DEFAULT)
-    if report_path:
-        write_report(report_path, rows, "evaluate" if args.evaluate else "publish",
-                     {"failures": [{"id": i, "kind": k, "message": m} for i, k, m in failures]})
-        print(f"判定レポート: {report_path}")
+    fails = [{"id": i, "kind": k, "message": m} for i, k, m in failures]
+    if args.evaluate:
+        # 今回評価した基だけの報告（状態・既定のレポートには触れない）
+        if args.report:
+            write_report(args.report, rows, "evaluate", {"failures": fails})
+            print(f"判定レポート: {args.report}")
+    else:
+        # 既定のレポートは「全ダムの直近の判定」。失敗した回でも、他のダムの記録を消さない
+        order = {d["id"]: i for i, d in enumerate(dams)}
+        rows_all = [report_row(i, s.get("name"), s.get("latest"), bool(s.get("published")))
+                    for i, s in sorted(store.all_states().items(), key=lambda kv: order.get(kv[0], 1 << 30))]
+        path = args.report or REPORT_DEFAULT
+        write_report(path, rows_all, "state", stamp=False)
+        print(f"判定レポート（全{len(rows_all)}基の直近の判定）: {path}")
     print(f"完了 {(time.time()-t_all)/60:.1f} 分 / 合格 {sum(1 for r in rows if r['status']=='pass')} / "
           f"保留 {sum(1 for r in rows if r['status']=='hold')} / 失敗 {len(failures)}")
     if failures:

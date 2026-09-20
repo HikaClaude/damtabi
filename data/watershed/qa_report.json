@@ -1,7 +1,6 @@
 {
- "generated": "2026-09-21T00:45:23+09:00",
  "pipeline": "ws-pipeline/2",
- "mode": "publish",
+ "mode": "state",
  "thresholds": {
   "area_error_pct": 15.0,
   "grid_drift_pct": 15.0,
@@ -14,9 +13,9 @@
   "mask_min_largest_pct": 95.0
  },
  "counts": {
-  "pass": 6,
-  "hold": 0,
-  "total": 6
+  "pass": 21,
+  "hold": 2,
+  "total": 23
  },
  "dams": [
   {
@@ -153,6 +152,634 @@
     "outlet_method": "snap-fixed",
     "fine_recompute_pct": -0.01,
     "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-kumanogawa",
+   "name": "熊野川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "eecec879de82",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.0,
+    "mask_cells": 18743,
+    "ring_cells": 18579,
+    "mask_area_km2": 39.66,
+    "ring_area_km2": 39.31,
+    "ring_vs_mask_area_pct": -0.87,
+    "raw_ring_vs_drawn_ring_pct": 0.16,
+    "iou": 0.9747,
+    "mask_outside_pct": 1.71,
+    "ring_only_pct": 0.85,
+    "mask_far_outside_pct": 0.3,
+    "ring_far_only_pct": 0.02,
+    "unreached_pct": 0.26,
+    "path_outside_pct": 0.27,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": -0.1,
+    "grid_drift_pct": -0.018681089068139922,
+    "official_area_km2": 39.8,
+    "diversion_status": "none",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-kubusugawa",
+   "name": "久婦須川ダム",
+   "status": "hold",
+   "published": false,
+   "block_codes": [
+    "rain_outside_ring",
+    "path_leaves_ring"
+   ],
+   "warn_codes": [],
+   "reasons": [
+    {
+     "code": "rain_outside_ring",
+     "severity": "block",
+     "message": "雨マスクの 3.1% が描画される輪の外（境界から2セル超）にある",
+     "value": 3.12,
+     "limit": 2.0
+    },
+    {
+     "code": "path_leaves_ring",
+     "severity": "block",
+     "message": "雨の経路の 3.5% が輪の外へ流れ出る",
+     "value": 3.54,
+     "limit": 2.0
+    }
+   ],
+   "flow_version": "825a18c3dd73",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 61.4,
+    "mask_cells": 15670,
+    "ring_cells": 14850,
+    "mask_area_km2": 59.08,
+    "ring_area_km2": 55.98,
+    "ring_vs_mask_area_pct": -5.23,
+    "raw_ring_vs_drawn_ring_pct": 1.22,
+    "iou": 0.9225,
+    "mask_outside_pct": 6.54,
+    "ring_only_pct": 1.38,
+    "mask_far_outside_pct": 3.12,
+    "ring_far_only_pct": 0.05,
+    "unreached_pct": 1.58,
+    "path_outside_pct": 3.54,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 55,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": 0.5,
+    "grid_drift_pct": 0.22677361671117335,
+    "official_area_km2": 58.7,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-wadagawa",
+   "name": "和田川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [],
+   "reasons": [],
+   "flow_version": "a33cbe453e6e",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.0,
+    "mask_cells": 15205,
+    "ring_cells": 15095,
+    "mask_area_km2": 32.17,
+    "ring_area_km2": 31.94,
+    "ring_vs_mask_area_pct": -0.72,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9834,
+    "mask_outside_pct": 1.2,
+    "ring_only_pct": 0.48,
+    "mask_far_outside_pct": 0.08,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.71,
+    "path_outside_pct": 0.05,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 173,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.22
+   },
+   "facts": {
+    "area_error_pct": -5.4,
+    "grid_drift_pct": 0.0351173787855652,
+    "official_area_km2": 34.0,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-togagawa",
+   "name": "利賀川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "c027e2748313",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.2,
+    "mask_cells": 18057,
+    "ring_cells": 17738,
+    "mask_area_km2": 38.54,
+    "ring_area_km2": 37.86,
+    "ring_vs_mask_area_pct": -1.77,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9631,
+    "mask_outside_pct": 2.75,
+    "ring_only_pct": 1.0,
+    "mask_far_outside_pct": 0.63,
+    "ring_far_only_pct": 0.07,
+    "unreached_pct": 0.46,
+    "path_outside_pct": 0.6,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": 1.4,
+    "grid_drift_pct": -0.05816772267432935,
+    "official_area_km2": 38.0,
+    "diversion_status": "none",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-sakaigawa",
+   "name": "境川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [],
+   "reasons": [],
+   "flow_version": "0bca111bfadf",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.2,
+    "mask_cells": 17637,
+    "ring_cells": 17576,
+    "mask_area_km2": 37.65,
+    "ring_area_km2": 37.51,
+    "ring_vs_mask_area_pct": -0.35,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.988,
+    "mask_outside_pct": 0.78,
+    "ring_only_pct": 0.43,
+    "mask_far_outside_pct": 0.12,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.15,
+    "path_outside_pct": 0.11,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 550,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": -0.3,
+    "grid_drift_pct": 0.019834884180802703,
+    "official_area_km2": 37.7,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-tori",
+   "name": "刀利ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "06178bc0eefd",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.1,
+    "mask_cells": 21472,
+    "ring_cells": 21351,
+    "mask_area_km2": 45.63,
+    "ring_area_km2": 45.38,
+    "ring_vs_mask_area_pct": -0.56,
+    "raw_ring_vs_drawn_ring_pct": -0.01,
+    "iou": 0.9855,
+    "mask_outside_pct": 1.01,
+    "ring_only_pct": 0.45,
+    "mask_far_outside_pct": 0.09,
+    "ring_far_only_pct": 0.01,
+    "unreached_pct": 0.41,
+    "path_outside_pct": 0.15,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": -0.5,
+    "grid_drift_pct": -0.026074288196920037,
+    "official_area_km2": 45.9,
+    "diversion_status": "none",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-goi",
+   "name": "五位ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "e51785c2c718",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.6,
+    "mask_cells": 14136,
+    "ring_cells": 14037,
+    "mask_area_km2": 13.24,
+    "ring_area_km2": 13.14,
+    "ring_vs_mask_area_pct": -0.7,
+    "raw_ring_vs_drawn_ring_pct": 0.14,
+    "iou": 0.9815,
+    "mask_outside_pct": 1.28,
+    "ring_only_pct": 0.58,
+    "mask_far_outside_pct": 0.01,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.66,
+    "path_outside_pct": 0.01,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": -4.1,
+    "grid_drift_pct": 0.11474940503060083,
+    "official_area_km2": 13.8,
+    "diversion_status": "none",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-konadegawa",
+   "name": "子撫川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "b9e9c167ec5a",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 45.9,
+    "mask_cells": 15196,
+    "ring_cells": 15085,
+    "mask_area_km2": 32.02,
+    "ring_area_km2": 31.78,
+    "ring_vs_mask_area_pct": -0.73,
+    "raw_ring_vs_drawn_ring_pct": -0.03,
+    "iou": 0.9843,
+    "mask_outside_pct": 1.15,
+    "ring_only_pct": 0.42,
+    "mask_far_outside_pct": 0.05,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.73,
+    "path_outside_pct": 0.03,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 2.17
+   },
+   "facts": {
+    "area_error_pct": 0.9,
+    "grid_drift_pct": 0.011084738494027135,
+    "official_area_km2": 31.8,
+    "diversion_status": "none",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-johana",
+   "name": "城端ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [],
+   "reasons": [],
+   "flow_version": "d60ae78f6ffa",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.0,
+    "mask_cells": 19402,
+    "ring_cells": 19098,
+    "mask_area_km2": 10.26,
+    "ring_area_km2": 10.1,
+    "ring_vs_mask_area_pct": -1.57,
+    "raw_ring_vs_drawn_ring_pct": 0.11,
+    "iou": 0.9569,
+    "mask_outside_pct": 2.97,
+    "ring_only_pct": 1.42,
+    "mask_far_outside_pct": 0.94,
+    "ring_far_only_pct": 0.17,
+    "unreached_pct": 0.23,
+    "path_outside_pct": 0.98,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 293,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": -4.5,
+    "grid_drift_pct": -0.046943479894479,
+    "official_area_km2": 10.8,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.03,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-usunaka",
+   "name": "臼中ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [],
+   "reasons": [],
+   "flow_version": "853436252b77",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.7,
+    "mask_cells": 13915,
+    "ring_cells": 13812,
+    "mask_area_km2": 13.11,
+    "ring_area_km2": 13.02,
+    "ring_vs_mask_area_pct": -0.74,
+    "raw_ring_vs_drawn_ring_pct": -0.09,
+    "iou": 0.985,
+    "mask_outside_pct": 1.12,
+    "ring_only_pct": 0.38,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.22,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 200,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": -2.8,
+    "grid_drift_pct": 0.19014368801713033,
+    "official_area_km2": 13.5,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.02,
+    "method_here": "reservoir"
    }
   },
   {
@@ -414,7 +1041,493 @@
     "fine_recompute_pct": 0.01,
     "method_here": "snap"
    }
+  },
+  {
+   "id": "toyama-shiraiwagawa",
+   "name": "白岩川ダム",
+   "status": "hold",
+   "published": false,
+   "block_codes": [
+    "manual_hold",
+    "area_error",
+    "path_leaves_ring"
+   ],
+   "warn_codes": [],
+   "reasons": [
+    {
+     "code": "manual_hold",
+     "severity": "block",
+     "message": "原因が特定できていないため保留: 貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、この1基だけ逆に動いている。**原因は特定できていない。** 「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。"
+    },
+    {
+     "code": "area_error",
+     "severity": "block",
+     "message": "便覧の直接流域と +16.5%（許容 ±15%）",
+     "value": 16.5,
+     "limit": 15.0
+    },
+    {
+     "code": "path_leaves_ring",
+     "severity": "block",
+     "message": "雨の経路の 80.5% が輪の外へ流れ出る",
+     "value": 80.46,
+     "limit": 2.0
+    }
+   ],
+   "flow_version": "16902b3218e6",
+   "spatial": {
+    "grid": [
+     563,
+     563
+    ],
+    "cell_m": 38.3,
+    "mask_cells": 19029,
+    "ring_cells": 18660,
+    "mask_area_km2": 27.91,
+    "ring_area_km2": 27.37,
+    "ring_vs_mask_area_pct": -1.94,
+    "raw_ring_vs_drawn_ring_pct": 0.14,
+    "iou": 0.9591,
+    "mask_outside_pct": 3.04,
+    "ring_only_pct": 1.12,
+    "mask_far_outside_pct": 1.18,
+    "ring_far_only_pct": 0.11,
+    "unreached_pct": 0.46,
+    "path_outside_pct": 80.46,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 59,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 121,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": 16.5,
+    "grid_drift_pct": 0.043989735691396525,
+    "official_area_km2": 24.0,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-funagawa",
+   "name": "舟川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "1b0d5abe15ad",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 22.9,
+    "mask_cells": 6689,
+    "ring_cells": 6598,
+    "mask_area_km2": 3.51,
+    "ring_area_km2": 3.46,
+    "ring_vs_mask_area_pct": -1.36,
+    "raw_ring_vs_drawn_ring_pct": 0.17,
+    "iou": 0.974,
+    "mask_outside_pct": 1.99,
+    "ring_only_pct": 0.64,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.49,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.20683850848912666,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.13,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-fusegawa",
+   "name": "布施川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [],
+   "reasons": [],
+   "flow_version": "24f25f846b49",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.6,
+    "mask_cells": 14137,
+    "ring_cells": 14038,
+    "mask_area_km2": 13.24,
+    "ring_area_km2": 13.14,
+    "ring_vs_mask_area_pct": -0.7,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9835,
+    "mask_outside_pct": 1.18,
+    "ring_only_pct": 0.48,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.37,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 114,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.05
+   },
+   "facts": {
+    "area_error_pct": 1.6,
+    "grid_drift_pct": 0.21401607449169635,
+    "official_area_km2": 13.0,
+    "diversion_status": "none",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.04,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "ad0cde7174d5",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 22.9,
+    "mask_cells": 2813,
+    "ring_cells": 2735,
+    "mask_area_km2": 1.48,
+    "ring_area_km2": 1.43,
+    "ring_vs_mask_area_pct": -2.77,
+    "raw_ring_vs_drawn_ring_pct": 0.07,
+    "iou": 0.9521,
+    "mask_outside_pct": 3.8,
+    "ring_only_pct": 1.06,
+    "mask_far_outside_pct": 0.07,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.14,
+    "path_outside_pct": 0.07,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.018883413550185857,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.05,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "toyama-kurobe",
+   "name": "黒部ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "diversion_yes"
+   ],
+   "reasons": [
+    {
+     "code": "diversion_yes",
+     "severity": "warn",
+     "message": "導水あり（地形上の集水域と実際の集水範囲は一致しない）"
+    }
+   ],
+   "flow_version": "050798c308ba",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 92.1,
+    "mask_cells": 21356,
+    "ring_cells": 21310,
+    "mask_area_km2": 181.15,
+    "ring_area_km2": 180.76,
+    "ring_vs_mask_area_pct": -0.22,
+    "raw_ring_vs_drawn_ring_pct": -0.56,
+    "iou": 0.982,
+    "mask_outside_pct": 1.02,
+    "ring_only_pct": 0.8,
+    "mask_far_outside_pct": 0.13,
+    "ring_far_only_pct": 0.29,
+    "unreached_pct": 0.37,
+    "path_outside_pct": 0.12,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 173,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.06
+   },
+   "facts": {
+    "area_error_pct": -1.8,
+    "grid_drift_pct": 0.006301759167848253,
+    "official_area_km2": 184.5,
+    "diversion_status": "yes",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-arimine",
+   "name": "有峰ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "diversion_yes"
+   ],
+   "reasons": [
+    {
+     "code": "diversion_yes",
+     "severity": "warn",
+     "message": "導水あり（地形上の集水域と実際の集水範囲は一致しない）"
+    }
+   ],
+   "flow_version": "9fa5afd5df96",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 92.2,
+    "mask_cells": 5940,
+    "ring_cells": 5839,
+    "mask_area_km2": 50.49,
+    "ring_area_km2": 49.64,
+    "ring_vs_mask_area_pct": -1.7,
+    "raw_ring_vs_drawn_ring_pct": 0.27,
+    "iou": 0.9727,
+    "mask_outside_pct": 2.22,
+    "ring_only_pct": 0.53,
+    "mask_far_outside_pct": 0.45,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.54,
+    "path_outside_pct": 0.45,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 220,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": 1.1,
+    "grid_drift_pct": 0.06387218447956311,
+    "official_area_km2": 49.9,
+    "diversion_status": "yes",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "toyama-dashidaira",
+   "name": "出し平ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "22589471dfa4",
+   "spatial": {
+    "grid": [
+     554,
+     554
+    ],
+    "cell_m": 183.7,
+    "mask_cells": 13638,
+    "ring_cells": 13497,
+    "mask_area_km2": 460.22,
+    "ring_area_km2": 455.47,
+    "ring_vs_mask_area_pct": -1.03,
+    "raw_ring_vs_drawn_ring_pct": -1.54,
+    "iou": 0.9524,
+    "mask_outside_pct": 2.94,
+    "ring_only_pct": 1.93,
+    "mask_far_outside_pct": 0.87,
+    "ring_far_only_pct": 0.45,
+    "unreached_pct": 0.72,
+    "path_outside_pct": 0.87,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 132,
+     "missing": 37,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 30.26
+   },
+   "facts": {
+    "area_error_pct": -0.3,
+    "grid_drift_pct": 0.07538884595321704,
+    "official_area_km2": 461.2,
+    "diversion_status": "none",
+    "outlet_method": "snap-fixed",
+    "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
   }
- ],
- "failures": []
+ ]
 }
