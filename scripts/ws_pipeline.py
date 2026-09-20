@@ -1,0 +1,467 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""集水域「雨の行き先」の生成・判定・配信物の組み立て（1基単位）。
+
+build_flowgrids.py（CLI）から使う。標高タイルの取得は build_basins 側にあり、
+ここは「標高配列を受け取って配信物を作る」部分だけを持つ。だから合成データで試験できる。
+
+設計（旧実装の問題との対応）
+----------------------------
+1. **1基単位の差分**: 対象のダムだけを作り直し、他のダムの配信物・状態には触れない。
+   旧実装は対象だけで索引とポリゴンを作り直したため、`--id X` で実行すると他のダムが
+   索引から消え、版のずれで画面が「再読み込みしてください」になった。
+2. **QA不合格は配信しない**: watershed_qa.evaluate が block を返した新しい結果は
+   docs/watershed/flow/ に置かない（`_local/` へ退避）。既に配信中の版があればそれを残す。
+3. **版は内容から**: 格子ファイルの版 = 格子レコード全体のハッシュ、ポリゴンの版 = 全
+   ポリゴンのハッシュ、索引の版 = 索引全体のハッシュ。索引が各部の期待版を持つ。
+4. **ID で処理**: 便覧・川の防災情報・保留・状態ファイルはすべて dam_id で引く。
+5. **失敗しても壊さない**: 生成に失敗したダムは何も書かない。書き出しは一時ファイル経由。
+
+状態ファイル data/watershed/dams/<dam_id>.json
+  published: 今配信している版（索引の項目・輪・格子の版・その時のQA）。無ければ null
+  latest   : 直近に生成した結果とQA判定（hold でも残す）
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import build_basins as bb  # noqa: E402
+import dem_tiles  # noqa: E402
+import watershed_qa as wq  # noqa: E402
+import ws_common as wc  # noqa: E402
+
+ROOT = Path(__file__).resolve().parent.parent
+PIPELINE = "ws-pipeline/2"
+MAX_SIDE = 620              # 粗格子の最大一辺。これを超えない最小の間引き係数を選ぶ
+FINE_RECOMPUTE_LIMIT_PCT = 1.0   # build_basins の面積と、ここで作り直した面積の許容差 %
+
+# 人が「原因不明のため保留」と決めたダム（id → 理由）。QA の合否とは別の理由で止める。
+# 「注記を出しているから公開してよい」とはしない。原因が分からないものは載せない。
+EXCLUDED: dict[str, str] = {
+    # 2026-09-18: 境川は原因（出口が貯水池の水面に乗って上流を取りこぼす）が判明し、
+    # 貯水池シード方式で −38.7% → −0.3% に収まったため除外を解除した。
+    #
+    # 2026-09-19: 臼中も除外を解除した。いったん「堤体で切ると水面が2つに割れる」ことを
+    # 理由に保留したが、割れた小さい方は 117セル・標高 336.6〜337.5m で、水面（336.0m）や
+    # 堤体（337.3m）とほぼ同じ高さだった。下流の川（393m先で 286.8m）ではない。
+    # **「2つに割れた」ことは下流の水面を巻き込んだ証拠にならない**（軸平行 161m 四方で
+    # 切るため、曲がった細い貯水池では腕が切り落とされる）。この検査は手がかりであって
+    # 判定ではない、と check_reservoirs.py 側の文言も直した。
+    "toyama-shiraiwagawa":
+        "貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、"
+        "誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、"
+        "この1基だけ逆に動いている。**原因は特定できていない。** "
+        "「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、"
+        "前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる"
+        "（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。"
+        "どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。",
+}
+
+HEADER_SOURCE = ("国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）を"
+                 "DAM TABI が加工して作成")
+HEADER_NOTE = "地形から計算した概略の集水域。公式に確定した集水区域や実測の流域界ではない。"
+
+
+class PipelineError(Exception):
+    """配信物の整合が取れない（書き出しを中止する）。"""
+
+
+# ---------------------------------------------------------------- 粗格子
+
+def coarsen(dem: np.ndarray, c: int) -> np.ndarray:
+    """c×c ブロック平均（NaN は無視。全 NaN のブロックは NaN のまま）。"""
+    h, w = dem.shape
+    H, W = h // c, w // c
+    d = dem[:H * c, :W * c].reshape(H, c, W, c)
+    with np.errstate(invalid="ignore"):
+        s = np.nansum(d, axis=(1, 3))
+        n = np.isfinite(d).sum(axis=(1, 3))
+        out = np.where(n > 0, s / np.maximum(n, 1), np.nan)
+    return out.astype(np.float32)
+
+
+def _num(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+# ---------------------------------------------------------------- 1基の生成
+
+def generate(dam: dict, meta: dict, spec_row: dict | None, dem: np.ndarray,
+             x0: int, y0: int, tiles: list[dict] | None = None) -> dict:
+    """標高配列から、配信用の流向格子レコードと索引項目・QA用の事実を作る。
+
+    返り値: {"rec": 格子レコード（version なし）, "index": 索引項目（下流・file・v を除く）,
+             "facts": QA 用の事実, "routing": 粗格子の D8 と出口}
+    輪と雨を同じ解析結果から作る（細格子の集水域を粗格子へ間引いて雨の範囲にする）。
+    """
+    z = meta["zoom"]
+    mppf = bb.meters_per_px(dam["lat"], z)
+    px, py = bb.tile_xy(dam["lat"], dam["lon"], z)
+    fi0, fj0 = int((py - y0) * 256), int((px - x0) * 256)
+
+    sp0 = spec_row or {}
+    official = _num(sp0.get("direct_km2") or sp0.get("total_km2")) or None
+
+    ffd = bb.flow_dir(bb.fill_sinks(dem))
+    facc = bb.flow_accum(ffd)
+    # build_basins とまったく同じ起点の選び方を使う（別の実装を持たない）
+    lake, (li, lj), method, _r = bb.pick_outlet(dem, ffd, facc, fi0, fj0, mppf, official)
+    wf = (bb.upstream_of_set(ffd, lake) if lake is not None
+          else bb.upstream_of(ffd, int(li), int(lj)))
+    del ffd, facc
+
+    # 標高欠損（通信障害ではなく、データ自体の欠け）に関する事実
+    touches_edge = bool(wf[0, :].any() or wf[-1, :].any() or wf[:, 0].any() or wf[:, -1].any())
+    nodata_adj = int((wc.dilate(wf, 1) & ~wf & ~np.isfinite(dem)).sum())
+    dem_facts = {
+        "touches_edge": touches_edge,
+        "nodata_adjacent_cells": nodata_adj,
+        "tiles_touching_catchment": dem_tiles.tiles_touching(wf, tiles or [], dem),
+        "tile_counts": _counts(tiles),
+        "grid_nan_pct": round(float((~np.isfinite(dem)).mean()) * 100, 2),
+    }
+
+    c = 1
+    while max(dem.shape) // c > MAX_SIDE:
+        c += 1
+    cd = coarsen(dem, c) if c > 1 else dem
+    fd = bb.flow_dir(bb.fill_sinks(cd))
+    acc = bb.flow_accum(fd)
+    mpp = mppf * c
+    h, w = fd.shape
+
+    # 細格子の集水域を粗格子へ。ブロックの過半が入っていれば「内側」。
+    if c > 1:
+        blk = wf[:h * c, :w * c].reshape(h, c, w, c)
+        ws = blk.sum(axis=(1, 3)) * 2 >= c * c
+    else:
+        ws = wf.copy()
+    area = float(ws.sum()) * mpp * mpp / 1e6
+
+    # 到着点は「点」ではなく「貯水池の水面」にする（粗格子では水面が平らで、1点だと
+    # 集水域の何割かが「出口へ届かない」ことになる。境川で 36.2%）。
+    if lake is not None and c > 1:
+        lb = lake[:h * c, :w * c].reshape(h, c, w, c)
+        outs = lb.any(axis=(1, 3)) & ws
+    elif lake is not None:
+        outs = lake & ws
+    else:
+        outs = np.zeros_like(ws)
+    if not outs.any():
+        # 水面が無い（スナップ方式）ダムは、集水域のうち集水量が最大のセル
+        masked = np.where(ws, acc, -1)
+        oi_, oj_ = np.unravel_index(int(np.argmax(masked)), masked.shape)
+        outs = np.zeros_like(ws)
+        outs[oi_, oj_] = True
+    oc = np.argwhere(outs)
+    ci, cj = oc[int(np.argmax([acc[a, b] for a, b in oc]))]
+
+    fine = meta["computed_area_km2"]
+    fine_here = float(wf.sum()) * mppf * mppf / 1e6
+    drift = (area / fine - 1) * 100 if fine else None
+    codes = np.where(fd < 0, 15, fd).astype(np.uint8)
+    rec = {
+        "id": dam["id"], "name": dam["name"],
+        "zoom": z, "x0": x0, "y0": y0, "coarse": c,
+        "w": w, "h": h, "cell_m": round(mpp, 1),
+        "outlet": [int(ci), int(cj)],
+        # 到着点の集合（貯水池の水面）。ここへ入れば「ダムに着いた」とみなす。
+        "outlets": [[int(a), int(b)] for a, b in oc],
+        "area_km2": round(area, 2),
+        "fine_area_km2": fine,
+        "d8": wc.pack4(codes),
+        "mask": wc.pack1(ws),
+    }
+
+    div = meta.get("diversion") or {}
+    direct = _num(sp0.get("direct_km2"))
+    ref = meta.get("kawabou_area_km2")
+    err = round((fine / direct - 1) * 100, 1) if direct else None
+    index = {
+        "id": dam["id"], "name": dam["name"], "lat": dam["lat"], "lon": dam["lon"],
+        "area_km2": round(area, 2), "fine_area_km2": fine,
+        # official_area_km2 は「直接流域」。合計は official_total_km2 に分ける。
+        "official_area_km2": direct,
+        "official_total_km2": _num(sp0.get("total_km2")),
+        "official_indirect_km2": _num(sp0.get("indirect_km2")),
+        "official_source": "ダム便覧" if direct is not None else None,
+        "reference_area_km2": ref,
+        "reference_source": "川の防災情報" if ref is not None else None,
+        "area_error_pct": err,
+        "grid_drift_pct": round(drift, 1) if drift is not None else None,
+        "lake_km2": meta.get("lake_km2"),
+        "lake_inside_pct": meta.get("lake_inside_pct"),
+        "outlet_method": meta.get("outlet_method"),
+        "cell_m": round(mpp, 1),
+        "diversion": div,
+    }
+    facts = {
+        "area_error_pct": err, "grid_drift_pct": drift,
+        "official_area_km2": direct,
+        "diversion_status": div.get("status"),
+        "outlet_method": meta.get("outlet_method"),
+        "dem": dem_facts,
+        "fine_recompute_pct": (round((fine_here / fine - 1) * 100, 2) if fine else None),
+        "method_here": method,
+    }
+    return {"rec": rec, "index": index, "facts": facts, "routing": (fd, int(ci), int(cj))}
+
+
+def _counts(tiles):
+    c = {"ok": 0, "missing": 0, "legacy_empty": 0}
+    for t in tiles or []:
+        c[t["kind"]] += 1
+    return c
+
+
+def judge(gen: dict, ring, dam_id: str, thresholds: dict | None = None) -> dict:
+    """生成結果を、**書き出す文字列と同じ形**（版を付けた格子レコード）で検査して判定する。"""
+    rec = dict(gen["rec"])
+    rec["version"] = wc.content_version(rec)
+    spatial = wq.spatial_metrics(rec, ring)
+    facts = dict(gen["facts"])
+    res = wq.evaluate(spatial, facts, thresholds, manual_hold=EXCLUDED.get(dam_id))
+    # 生成時の作り直しと build_basins の面積が食い違うなら、輪と雨の元が別物
+    fr = facts.get("fine_recompute_pct")
+    if fr is not None and abs(fr) > FINE_RECOMPUTE_LIMIT_PCT:
+        res["reasons"].append(wq._reason(
+            "fine_recompute_mismatch", wq.BLOCK,
+            f"build_basins の集水域面積と、ここで作り直した面積が {fr:+.2f}% 食い違う",
+            fr, FINE_RECOMPUTE_LIMIT_PCT))
+        res["status"] = "hold"
+        res["block_codes"].append("fine_recompute_mismatch")
+    return {"rec": rec, "spatial": spatial, "gate": res}
+
+
+# ---------------------------------------------------------------- 状態と配信物
+
+class Store:
+    """docs/watershed と data/watershed/dams の読み書き。1ダムずつアトミックに書く。"""
+
+    def __init__(self, root: Path = ROOT):
+        self.root = Path(root)
+        self.out = self.root / "docs" / "watershed"
+        self.flow = self.out / "flow"
+        self.local = self.flow / "_local"
+        self.state = self.root / "data" / "watershed" / "dams"
+
+    # ---- 状態
+    def state_path(self, dam_id: str) -> Path:
+        return self.state / f"{dam_id}.json"
+
+    def load_state(self, dam_id: str) -> dict | None:
+        p = self.state_path(dam_id)
+        if not p.exists():
+            return None
+        return json.loads(p.read_text(encoding="utf-8"))
+
+    def all_states(self) -> dict:
+        if not self.state.exists():
+            return {}
+        return {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted(self.state.glob("*.json"))}
+
+    @staticmethod
+    def _dump(obj, indent=None) -> str:
+        return json.dumps(obj, ensure_ascii=False, indent=indent,
+                          separators=(",", ":") if indent is None else None) + "\n"
+
+    def write_state(self, dam_id: str, st: dict) -> None:
+        dem_tiles.atomic_write_bytes(self.state_path(dam_id), self._dump(st, indent=1).encode("utf-8"))
+
+    # ---- 格子
+    def flow_path(self, dam_id: str, published: bool) -> Path:
+        return (self.flow if published else self.local) / f"{dam_id}.json"
+
+    def write_flow(self, dam_id: str, rec: dict, published: bool) -> None:
+        text = json.dumps(rec, separators=(",", ":"), ensure_ascii=False)
+        dem_tiles.atomic_write_bytes(self.flow_path(dam_id, published), text.encode("utf-8"))
+
+    def read_flow(self, dam_id: str, published: bool = True) -> dict | None:
+        p = self.flow_path(dam_id, published)
+        return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
+
+
+def apply_result(store: Store, dam: dict, judged: dict, gen: dict, ring, feature_props: dict) -> dict:
+    """1基分の結果を書き出す。返り値は報告用の要約。**他のダムには触れない。**
+
+    pass : flow/<id>.json を置き換え、published を更新する
+    hold : 新しい結果は flow/_local/<id>.json へ。published はそのまま（あれば残す）
+    """
+    did = dam["id"]
+    now = time.strftime("%Y-%m-%dT%H:%M:%S+09:00")
+    st = store.load_state(did) or {"id": did, "name": dam["name"], "published": None}
+    rec = judged["rec"]
+    gate = judged["gate"]
+    latest = {
+        "status": gate["status"], "block_codes": gate["block_codes"], "reasons": gate["reasons"],
+        "flow_version": rec["version"], "spatial": judged["spatial"],
+        "dem": gen["facts"]["dem"], "generated": now, "pipeline": PIPELINE,
+        "facts": {k: v for k, v in gen["facts"].items() if k != "dem"},
+    }
+    st["name"] = dam["name"]
+    st["latest"] = latest
+    if gate["status"] == "pass":
+        store.write_flow(did, rec, published=True)
+        lp = store.flow_path(did, published=False)
+        if lp.exists():
+            lp.unlink()                      # 合格したので、保留時の退避は要らない
+        st["published"] = {
+            "flow_version": rec["version"],
+            "index": gen["index"],
+            "ring": ring,
+            "feature_properties": feature_props,
+            "qa": {"warn_codes": [r["code"] for r in gate["reasons"] if r["severity"] == wq.WARN],
+                   "spatial": judged["spatial"]},
+            "generated": now, "pipeline": PIPELINE,
+        }
+        outcome = "published"
+    else:
+        store.write_flow(did, rec, published=False)
+        prev = st.get("published")
+        outcome = ("held (previous published version kept: %s)" % prev["flow_version"]) if prev \
+            else "held (not published)"
+    store.write_state(did, st)
+    return {"id": did, "status": gate["status"], "outcome": outcome,
+            "block_codes": gate["block_codes"], "flow_version": rec["version"]}
+
+
+# ---------------------------------------------------------------- 組み立て
+
+def _routing_reaches(fd, goal_cells, i, j) -> bool:
+    goals = set(map(tuple, goal_cells))
+    h, w = fd.shape
+    for _ in range(400000):
+        if (i, j) in goals:
+            return True
+        k = int(fd[i, j])
+        if k == 15 or k < 0 or k > 7:
+            return False
+        i += wc.D8[k][0]
+        j += wc.D8[k][1]
+        if not (0 <= i < h and 0 <= j < w):
+            return False
+    return False
+
+
+def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: bool = False) -> dict:
+    """状態（published）から、配信する索引・ポリゴンを作り直す。標高データは使わない。
+
+    - 配信する = 状態の published が非 null のダム。
+    - flow/<id>.json の版が published.flow_version と一致しなければ PipelineError（書かない）。
+    - 状態の無い flow ファイル（旧実装の配信物）は孤児として報告する。prune_orphans なら消す。
+    - 内容が変わらなければ書き換えない（無関係な差分と版の変動を出さない）。
+    """
+    order = {d["id"]: i for i, d in enumerate(dams)}
+    states = store.all_states()
+    pub = {i: s["published"] for i, s in states.items() if s.get("published")}
+    unknown = [i for i in states if i not in order]
+    if unknown:
+        raise PipelineError("dams.json に無い dam_id の状態があります: " + ", ".join(unknown))
+    ids = sorted(pub, key=lambda i: order[i])
+
+    # 格子ファイルの整合
+    flows = {}
+    for i in ids:
+        rec = store.read_flow(i, published=True)
+        if rec is None:
+            raise PipelineError(f"{i}: 配信するはずの flow/{i}.json がありません")
+        if rec.get("version") != pub[i]["flow_version"] or wc.content_version(rec) != rec.get("version"):
+            raise PipelineError(f"{i}: flow/{i}.json の版が状態と一致しません（内容が書き換わっている）")
+        flows[i] = rec
+    on_disk = sorted(p.stem for p in store.flow.glob("*.json")) if store.flow.exists() else []
+    orphans = [i for i in on_disk if i not in pub]
+    if orphans and prune_orphans and write:
+        for i in orphans:
+            store.flow_path(i, True).unlink()
+    elif orphans and write:
+        # 配信物なのに状態が無い（または published でない）。黙って残すと索引と食い違う
+        raise PipelineError("状態の無い（または配信対象でない）flow ファイルがあります: "
+                            + ", ".join(orphans) + "  → --prune-orphans で消せます")
+
+    # 下流の案内: 「包含」は候補。実際に流向格子をたどって出口に届いたものだけ確定
+    areas = {i: pub[i]["index"]["fine_area_km2"] for i in ids}
+    rings = {i: pub[i]["ring"] for i in ids}
+    routing = {}
+    for i in ids:
+        r = flows[i]
+        h, w = r["h"], r["w"]
+        routing[i] = (wc.unpack4(r["d8"], h, w), r["outlets"], r["x0"], r["y0"], r["zoom"], r["coarse"])
+    dams_out = []
+    for i in ids:
+        rec = dict(pub[i]["index"])
+        cands = [k for _, k in sorted((areas[k], k) for k in ids
+                                      if k != i and wc.point_in_poly(rec["lon"], rec["lat"], rings[k]))]
+        ok, un = [], []
+        for cid in cands:
+            fd, goals, x0, y0, z, c = routing[cid]
+            cx, cy = bb.tile_xy(rec["lat"], rec["lon"], z)
+            ii, jj = int((cy - y0) * 256 / c), int((cx - x0) * 256 / c)
+            reach = (0 <= ii < fd.shape[0] and 0 <= jj < fd.shape[1]
+                     and _routing_reaches(fd, goals, ii, jj))
+            (ok if reach else un).append(cid)
+        rec["downstream_candidates"] = cands
+        rec["downstream_reaches"] = ok
+        rec["downstream_unverified"] = un
+        rec["v"] = pub[i]["flow_version"]
+        rec["file"] = f"flow/{i}.json?v={pub[i]['flow_version']}"
+        dams_out.append(rec)
+
+    # ポリゴン: 配信するダムの輪だけ。版は features 全体の内容ハッシュ
+    features = [{"type": "Feature", "properties": pub[i]["feature_properties"],
+                 "geometry": {"type": "Polygon", "coordinates": [pub[i]["ring"]]}} for i in ids]
+    basins_version = wc.content_version({"features": features}, exclude=())
+
+    excluded = {k: v for k, v in EXCLUDED.items() if k in states}
+    index = {
+        "version": None, "generated": time.strftime("%Y-%m-%d"),
+        "source": HEADER_SOURCE, "note": HEADER_NOTE,
+        "pipeline": PIPELINE, "basins_version": basins_version,
+        "excluded": excluded, "dams": dams_out,
+    }
+    index["version"] = wc.content_version(index, exclude=("version", "generated"))
+
+    plan = {"published_ids": ids, "orphans": orphans, "index_version": index["version"],
+            "basins_version": basins_version, "written": []}
+    if not write:
+        plan["index"], plan["features"] = index, features
+        return plan
+
+    def unchanged(path: Path, key: str, value: str) -> bool:
+        if not path.exists():
+            return False
+        try:
+            return json.loads(path.read_text(encoding="utf-8")).get(key) == value
+        except Exception:
+            return False
+
+    bp = store.out / "basins.geojson"
+    if not unchanged(bp, "version", basins_version):
+        gj = {"type": "FeatureCollection", "features": features, "version": basins_version}
+        dem_tiles.atomic_write_bytes(bp, (json.dumps(gj, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8"))
+        plan["written"].append("basins.geojson")
+    ip = store.out / "index.json"
+    if not unchanged(ip, "version", index["version"]):
+        dem_tiles.atomic_write_bytes(ip, (json.dumps(index, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
+        plan["written"].append("index.json")
+
+    # ローカル評価用（配信しない）: 直近の判定も含めて全ダム
+    local = dict(index, dams=[])
+    for i, s in sorted(states.items(), key=lambda kv: order[kv[0]]):
+        lat = s.get("latest") or {}
+        entry = {"id": i, "name": s.get("name"), "published": bool(s.get("published")),
+                 "latest_status": lat.get("status"), "latest_flow_version": lat.get("flow_version"),
+                 "block_codes": lat.get("block_codes"), "excluded_reason": EXCLUDED.get(i)}
+        local["dams"].append(entry)
+    dem_tiles.atomic_write_bytes(store.out / "index.local.json",
+                                 (json.dumps(local, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
+    return plan

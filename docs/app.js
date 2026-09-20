@@ -1491,7 +1491,8 @@
     var epoch = 0;
     var MAX_DROPS = 80;      // 連打しても雨つぶが溜まり続けないようにする上限
     var index = null;        // ダムID -> 索引レコード
-    var version = null;      // 索引・ポリゴン・格子が同じ生成であることの目印
+    var version = null;      // 索引の版（旧形式との互換と、エラー表示用）
+    var basinsVersion = null; // 索引が期待するポリゴンの版（部品ごとの版。無ければ version）
     var basins = null;       // 集水域ポリゴン（初回利用時に読む）
     var basinsP = null;
     var grids = {};          // ダムID -> 流向格子
@@ -1575,15 +1576,17 @@
      * そこで全ファイルに同じ生成版（内容ハッシュ）を書き込み、食い違ったら
      * **黙って混ぜずに** ここで止めて、利用者に再読み込みしてもらう。
      */
-    function StaleVersion(got) {
-      var e = new Error("版が違います（索引 " + version + " / 取得 " + (got || "不明") + "）");
+    function StaleVersion(got, want) {
+      var e = new Error("版が違います（索引が期待 " + (want || version) + " / 取得 " + (got || "不明") + "）");
       e.stale = true;
       return e;
     }
 
-    function sameVersion(got) {
-      // 版を持たないデータ（旧形式）は比較しない
-      return !version || !got || got === version;
+    /** 部品（格子・ポリゴン）の版が、索引が期待する版と同じか。
+     *  版は「内容のハッシュ」で、部品ごとに違う。1基だけ作り直しても他の格子の版は変わらない。
+     *  版を持たないデータ（旧形式）は比較しない。 */
+    function sameVersion(got, want) {
+      return !want || !got || got === want;
     }
 
     function loadGrid(id) {
@@ -1592,21 +1595,23 @@
         if (!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       }).then(function (rec) {
-        if (!sameVersion(rec.version)) throw StaleVersion(rec.version);
+        var want = index[id].v || version;      // 索引が期待するこのダムの格子の版
+        if (!sameVersion(rec.version, want)) throw StaleVersion(rec.version, want);
         return (grids[id] = new Grid(rec));
       });
     }
 
     function loadBasins() {
       if (basinsP) return basinsP;
-      basinsP = fetch(BASIN_URL + (version ? "?v=" + encodeURIComponent(version) : ""))
+      var wantB = basinsVersion || version;
+      basinsP = fetch(BASIN_URL + (wantB ? "?v=" + encodeURIComponent(wantB) : ""))
         .then(function (r) {
           if (!r.ok) throw new Error("HTTP " + r.status);
           return r.json();
         }).then(function (gj) {
-          if (!sameVersion(gj.version)) {
+          if (!sameVersion(gj.version, wantB)) {
             basinsP = null;               // 次の操作で取り直せるようにする
-            throw StaleVersion(gj.version);
+            throw StaleVersion(gj.version, wantB);
           }
           return (basins = gj);
         });
@@ -1719,6 +1724,7 @@
       index = {};
       idx.dams.forEach(function (d) { index[d.id] = d; });
       version = idx.version || null;
+      basinsVersion = idx.basins_version || null;
       api.enabled = true;
       // 標高タイルの出典と、DAM TABI による加工である旨。データがある環境でだけ出す。
       var cr = $("#ws-credit");

@@ -31,28 +31,27 @@ import argparse
 import io
 import json
 import math
+import os
 import sys
 import time
-import urllib.request
 from collections import deque
 from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dem_tiles  # noqa: E402  標高タイルの取得（通信障害と本当の欠損を分ける）
+from dem_tiles import DemFetchError  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 DAMS_JSON = ROOT / "docs" / "data" / "dams.json"
-SPEC_CSV = ROOT / "dam_basin_spec.csv"          # ダム便覧由来の流域面積（直接/間接）
+SPEC_CSV = ROOT / "dam_basin_spec.csv"          # ダム便覧由来の流域面積（直接/間接）。dam_id で引く
 OUT_DIR = ROOT / "data" / "basins"
 CACHE = ROOT / "cache" / "dem"
-
-UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
-      "Referer": "https://maps.gsi.go.jp/"}
 
 TILE = "dem"                 # 10m メッシュ標高（z14）。低ズームは間引き済みの同系列
 SIMPLIFY_M = 30.0            # ポリゴンの簡略化許容誤差
 MAX_TILES = 361              # 1基あたりの標高タイル数の上限（窪地埋めが純Pythonのため）
-REQUEST_INTERVAL = 0.05      # 相手サーバへの礼儀
 # 河道へのスナップ探索半径。狭いと河道に届かず、広いと隣の大きな川へ飛ぶ。
 # 小さい方から試し、公式流域面積と桁が合った時点で採用する。
 SNAP_CANDIDATES_M = (150.0, 250.0, 400.0, 700.0)
@@ -81,31 +80,33 @@ def meters_per_px(lat: float, z: int) -> float:
     return 2 * math.pi * 6378137 * math.cos(math.radians(lat)) / (256 * 2 ** z)
 
 
+SOURCE: dem_tiles.TileSource | None = None
+
+
+def configure_source(cache_dir: Path | None = None, **kw) -> dem_tiles.TileSource:
+    """標高タイルの取得元を設定する。offline / fallback_dirs / revalidate_empty など。"""
+    global SOURCE
+    SOURCE = dem_tiles.TileSource(cache_dir or CACHE, **kw)
+    return SOURCE
+
+
+def source() -> dem_tiles.TileSource:
+    return SOURCE if SOURCE is not None else configure_source()
+
+
 def get_tile(z: int, x: int, y: int) -> np.ndarray:
-    f = CACHE / f"{TILE}_{z}_{x}_{y}.txt"
-    if not f.exists():
-        f.parent.mkdir(parents=True, exist_ok=True)
-        url = f"https://cyberjapandata.gsi.go.jp/xyz/{TILE}/{z}/{x}/{y}.txt"
-        try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
-                f.write_bytes(r.read())
-        except Exception:
-            f.write_text("")          # 海域などは空。次回も取りに行かない
-        time.sleep(REQUEST_INTERVAL)
-    txt = f.read_text()
-    if not txt.strip():
-        return np.full((256, 256), np.nan)
-    return np.array([[np.nan if v == "e" else float(v) for v in line.split(",")]
-                     for line in txt.strip().splitlines()], dtype=np.float32)
+    """1枚の標高タイル。通信障害は DemFetchError（空タイルとして固めない）。"""
+    return source().get(z, x, y)[0]
 
 
-def build_grid(lat: float, lon: float, z: int, pad: int):
-    cx, cy = tile_xy(lat, lon, z)
-    tx, ty = int(cx), int(cy)
-    xs = range(tx - pad, tx + pad + 1)
-    ys = range(ty - pad, ty + pad + 1)
-    rows = [np.hstack([get_tile(z, X, Y) for X in xs]) for Y in ys]
-    return np.vstack(rows), tx - pad, ty - pad
+def build_grid(lat: float, lon: float, z: int, pad: int, report: dict | None = None):
+    """ダム周辺の標高格子。report を渡すとタイルごとの種別（ok/missing/legacy_empty）が入る。"""
+    return source().build_grid(tile_xy, lat, lon, z, pad, report)
+
+
+def atomic_write_text(path: Path, text: str) -> None:
+    """一時ファイルへ書いてから置き換える。途中で落ちても既存の成果物を壊さない。"""
+    dem_tiles.atomic_write_bytes(path, text.encode("utf-8"))
 
 
 # ---------------------------------------------------------------- 地形解析
@@ -412,14 +413,17 @@ def pick_zoom(area_km2: float | None) -> tuple[int, int]:
 
 def delineate(name: str, lat: float, lon: float, official: float | None,
               verbose=True, sizing_area: float | None = None):
+    """1基の集水域。失敗は (None, {"error", "error_kind"}) か DemFetchError（通信障害）。"""
     z, pad = pick_zoom(sizing_area if sizing_area else official)
     outlet_ll = None      # 1回目で決めた出口を緯度経度で固定し、拡大後も同じ点を使う
     for attempt in range(4):
         n_tiles = (2 * pad + 1) ** 2
         t0 = time.time()
-        dem, x0, y0 = build_grid(lat, lon, z, pad)
+        rep: dict = {}
+        dem, x0, y0 = build_grid(lat, lon, z, pad, report=rep)
         if not np.isfinite(dem).any():
-            return None, {"error": "標高データが取得できませんでした"}
+            return None, {"error": "標高データが取得できませんでした（全タイルに実データが無い）",
+                          "error_kind": "dem_nodata", "dem_tiles": rep.get("counts")}
 
         filled = fill_sinks(dem)
         fd = flow_dir(filled)
@@ -524,26 +528,43 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
             "snap_distance_m": round(math.hypot(si - oi, sj - oj) * mpp),
             "snap_radius_m": snap_used,
             "touches_edge": bool(touches),
+            "dem_tiles": rep.get("counts"),
             "seconds": round(time.time() - t0, 1),
         }
         if official:
             meta["official_area_km2"] = official
             meta["area_error_pct"] = round((area / official - 1) * 100, 1)
         return coords, meta
-    return None, {"error": "範囲を広げても収まりませんでした"}
+    return None, {"error": "範囲を広げても収まりませんでした", "error_kind": "no_fit"}
 
 
 # ---------------------------------------------------------------- main
 
-def load_spec() -> dict:
-    """ダム便覧由来の流域面積（直接/間接）。導水の有無の判定に使う。"""
+class SpecError(ValueError):
+    pass
+
+
+def load_spec(dam_ids=None) -> dict:
+    """ダム便覧由来の流域面積（直接/間接）。**dam_id をキーにする**（名前では引かない）。
+
+    旧実装は dam_name で引いていた。全国に広げると同名のダムが現れる（例: 別の県の
+    「大谷ダム」）ため、名前一致では別のダムの流域面積を黙って当ててしまう。
+    dam_id が空・重複・dams.json に無い行は SpecError にして止める。
+    """
     import csv
     if not SPEC_CSV.exists():
         return {}
     out = {}
     with SPEC_CSV.open(encoding="utf-8-sig", newline="") as f:
-        for r in csv.DictReader(f):
-            out[r["dam_name"]] = r
+        for n, r in enumerate(csv.DictReader(f), 2):
+            did = (r.get("dam_id") or "").strip()
+            if not did:
+                raise SpecError(f"{SPEC_CSV.name} {n}行目（{r.get('dam_name')}）に dam_id がありません")
+            if did in out:
+                raise SpecError(f"{SPEC_CSV.name} {n}行目: dam_id {did} が重複しています")
+            if dam_ids is not None and did not in dam_ids:
+                raise SpecError(f"{SPEC_CSV.name} {n}行目: dam_id {did} は dams.json にありません")
+            out[did] = r
     return out
 
 
@@ -570,6 +591,9 @@ def select_targets(dams: list, args) -> list:
     2026-09-18 に、対象未指定のまま実行して 80 基すべてを計算してしまい、
     地理院から **2,869 タイル（1.2GB）を意図せず追加取得**した。
     標高タイルは1基あたり数百枚を取りに行くので、既定を「全件」にしてはいけない。
+
+    --id は dam_id の完全一致。存在しない id は黙って捨てず、UnknownTarget で止める
+    （打ち間違いで「何も起きない」「別のダムが処理される」を防ぐ）。
     """
     if args.all:
         return list(dams)
@@ -588,15 +612,61 @@ def select_targets(dams: list, args) -> list:
             if d["id"].split("-")[0] in want:
                 add(d)
     if args.id:
-        want = {i.strip() for i in args.id.split(",") if i.strip()}
+        want = [i.strip() for i in args.id.split(",") if i.strip()]
+        known = {d["id"] for d in dams}
+        bad = [i for i in want if i not in known]
+        if bad:
+            raise UnknownTarget("dams.json に無い dam_id: " + ", ".join(bad))
+        wanted = set(want)
         for d in dams:
-            if d["id"] in want:
+            if d["id"] in wanted:
                 add(d)
     if args.only:
+        # 名前の部分一致は便宜用。同名が複数あり得るので、必ず id を表示して確認できるようにする
         for d in dams:
             if args.only in d["name"]:
                 add(d)
     return picked
+
+
+class UnknownTarget(ValueError):
+    pass
+
+
+def load_kawabou(data: dict, cache_root: Path) -> dict:
+    """川の防災情報の観測所マスタにある流域面積。**dam_id で引く**。"""
+    out = {}
+    mc = cache_root / "obs_master.json"
+    if not mc.exists():
+        return out
+    obs = json.loads(mc.read_text(encoding="utf-8")).get("obs", {})
+    for d in data["dams"]:
+        fcd = (d.get("observation") or {}).get("obs_fcd")
+        if fcd and fcd in obs and obs[fcd].get("bsnArea") is not None:
+            out[d["id"]] = float(obs[fcd]["bsnArea"])
+    return out
+
+
+def add_source_args(ap: argparse.ArgumentParser) -> None:
+    """標高タイルの取得元に関する共通の引数（build_flowgrids と共有）。"""
+    ap.add_argument("--cache-root", type=Path, default=ROOT / "cache",
+                    help="キャッシュの置き場（dem/ と obs_master.json）。書き込み先")
+    ap.add_argument("--dem-fallback", type=Path, action="append", default=[],
+                    help="読み取り専用の追加の標高タイル置き場（複数可）。書き換えない")
+    ap.add_argument("--offline", action="store_true",
+                    help="ネットワークを使わない。キャッシュに無いタイルは DemUnavailable で止める")
+    ap.add_argument("--revalidate-empty", action="store_true",
+                    help="由来不明の空タイル（旧実装が書いたもの）を地理院で取り直して 404 かどうか確定させる")
+
+
+def setup_source(args) -> dem_tiles.TileSource:
+    return configure_source(args.cache_root / "dem", offline=args.offline,
+                            revalidate_empty=args.revalidate_empty,
+                            fallback_dirs=list(args.dem_fallback))
+
+
+def _ordered(d: dict, order: dict) -> list:
+    return [d[k] for k in sorted(d, key=lambda i: order.get(i, 1 << 30))]
 
 
 def main() -> int:
@@ -605,26 +675,24 @@ def main() -> int:
                     "対象の指定は必須（--pref / --id / --only / --all のいずれか）。")
     ap.add_argument("--pref", help="県で絞る。dam_id の接頭辞（例: toyama,ishikawa）")
     ap.add_argument("--id", help="dam_id で絞る。カンマ区切り（例: toyama-usunaka）")
-    ap.add_argument("--only", help="ダム名の部分一致で絞る")
+    ap.add_argument("--only", help="ダム名の部分一致で絞る（同名に注意。id を確認すること）")
     ap.add_argument("--all", action="store_true",
                     help="dams.json の全基を対象にする（標高タイルを大量に取得するので明示が必要）")
     ap.add_argument("--yes", action="store_true", help="確認を省く")
     ap.add_argument("--out", type=Path, default=OUT_DIR)
+    add_source_args(ap)
     args = ap.parse_args()
 
     data = json.loads(DAMS_JSON.read_text(encoding="utf-8"))
-    spec = load_spec()
+    spec = load_spec({d["id"] for d in data["dams"]})
     # 川の防災情報の観測所マスタにも流域面積がある。出典が違うので別枠で記録し、
     # 便覧に記載が無いダムでは格子の大きさを決めるのに使う。
-    kawabou = {}
-    mc = ROOT / "cache" / "obs_master.json"
-    if mc.exists():
-        obs = json.loads(mc.read_text(encoding="utf-8")).get("obs", {})
-        for d in data["dams"]:
-            fcd = (d.get("observation") or {}).get("obs_fcd")
-            if fcd and fcd in obs and obs[fcd].get("bsnArea") is not None:
-                kawabou[d["name"]] = float(obs[fcd]["bsnArea"])
-    dams = select_targets(data["dams"], args)
+    kawabou = load_kawabou(data, args.cache_root)
+    try:
+        dams = select_targets(data["dams"], args)
+    except UnknownTarget as e:
+        print(f"対象を決められません: {e}")
+        return 2
 
     # 対象が決まらないときは何もしない。**全件へ落とさない。**
     if not dams:
@@ -637,7 +705,9 @@ def main() -> int:
             print(f"  指定: pref={args.pref!r} id={args.id!r} only={args.only!r}")
         return 2
 
-    print(f"対象 {len(dams)} 基 / dams.json の全 {len(data['dams'])} 基中")
+    setup_source(args)
+    print(f"対象 {len(dams)} 基 / dams.json の全 {len(data['dams'])} 基中"
+          + ("  [offline]" if args.offline else ""))
     for d in dams[:12]:
         print(f"  - {d['id']}  {d['name']}")
     if len(dams) > 12:
@@ -649,28 +719,29 @@ def main() -> int:
         return 2
 
     args.out.mkdir(parents=True, exist_ok=True)
-    # 一部だけを作り直すときに、対象外の結果を消さないよう既存を読み込んでおく
     prev_geo = args.out / "basins.geojson"
     prev_meta = args.out / "basins_meta.json"
-    keep_features, keep_metas = [], []
-    target_ids = {d["id"] for d in dams}
+    # 既存の結果（対象外はそのまま残す。対象でも「失敗したら」既存を残す）
+    prev_features: dict = {}
+    prev_metas: dict = {}
     if prev_geo.exists() and prev_meta.exists():
         try:
-            keep_features = [f for f in json.loads(prev_geo.read_text(encoding="utf-8"))["features"]
-                             if f["properties"]["id"] not in target_ids]
-            keep_metas = [m for m in json.loads(prev_meta.read_text(encoding="utf-8"))
-                          if m.get("id") not in target_ids]
-            if keep_metas:
-                print(f"  （対象外の {len(keep_metas)} 基は既存の結果をそのまま残します）")
+            gj0 = json.loads(prev_geo.read_text(encoding="utf-8"))
+            prev_features = {f["properties"]["id"]: f for f in gj0["features"]}
+            prev_metas = {m["id"]: m for m in json.loads(prev_meta.read_text(encoding="utf-8"))
+                          if m.get("id")}
         except Exception as e:
-            print(f"  ※既存の出力を読めませんでした（{e}）。対象分だけを書き出します。")
-            keep_features, keep_metas = [], []
+            # 読めない既存は「無かったこと」にせず止める。黙って上書きすると成果を失う
+            print(f"既存の出力を読めませんでした（{e}）。壊れている可能性があるので中止します。")
+            return 3
 
-    features, metas = [], []
+    new_features: dict = {}
+    new_metas: dict = {}
+    failures: list = []
     t_all = time.time()
 
     for n, d in enumerate(dams, 1):
-        sp = spec.get(d["name"])
+        sp = spec.get(d["id"])
         # 河道選びの目安には「直接流域」を使う。合計（直接＋間接）を渡すと、
         # 導水で水が来る分まで地形から探そうとして出口が遠くへ飛ぶ。
         # 有峰ダムで実測: 合計219.9を目安にすると候補が全て外れ、最後に試した
@@ -689,68 +760,95 @@ def main() -> int:
                 total = v
         if official is None:
             official = total
-        kw = kawabou.get(d["name"])
+        kw = kawabou.get(d["id"])
         # 格子の大きさ（＝解像度）は便覧の値で決める。川の防災情報の値を優先すると、
         # 出典間で食い違うダムで解像度が粗くなり、貯水池の水面を見失う。
         # 臼中で実測: 川防 48.2 を採ると z13（15.4m/セル）になり水面を検出できず、
         # 便覧 13.5 なら z14（7.7m/セル）で検出できる。狭すぎた場合は端に達した
         # 時点で自動的に広げるので、小さめに始めて構わない。
         sizing = total or official or kw
-        print(f"[{n}/{len(dams)}] {d['name']}（便覧 直接 {official if official else '—'} / "
+        print(f"[{n}/{len(dams)}] {d['id']} {d['name']}（便覧 直接 {official if official else '—'} / "
               f"合計 {total if total else '—'} / 川防 {kw if kw else '—'} km2）")
 
-        coords, meta = delineate(d["name"], d["lat"], d["lon"], official, sizing_area=sizing)
+        try:
+            coords, meta = delineate(d["name"], d["lat"], d["lon"], official, sizing_area=sizing)
+        except DemFetchError as e:
+            coords, meta = None, {"error": str(e), "error_kind": "dem_fetch"}
+        if not coords:
+            failures.append((d["id"], meta.get("error_kind"), meta.get("error")))
+            kept = "既存の結果を残します" if d["id"] in prev_features else "既存の結果はありません"
+            print(f"    失敗（{meta.get('error_kind')}）: {meta.get('error')}  → {kept}")
+            continue
+
         if total is not None:
             meta["official_total_km2"] = total
         if kw:
             meta["kawabou_area_km2"] = kw
-            meta["kawabou_error_pct"] = round((meta["computed_area_km2"] / kw - 1) * 100, 1)                 if meta.get("computed_area_km2") else None
-        meta["id"] = d["id"]; meta["name"] = d["name"]
+            meta["kawabou_error_pct"] = (round((meta["computed_area_km2"] / kw - 1) * 100, 1)
+                                         if meta.get("computed_area_km2") else None)
+        meta["id"] = d["id"]
+        meta["name"] = d["name"]
         meta["diversion"] = diversion_flag(sp)
-        metas.append(meta)
+        new_metas[d["id"]] = meta
+        new_features[d["id"]] = {
+            "type": "Feature",
+            "properties": {
+                "id": d["id"], "name": d["name"],
+                "computed_area_km2": meta["computed_area_km2"],
+                "official_area_km2": meta.get("official_area_km2"),
+                "area_error_pct": meta.get("area_error_pct"),
+                "resolution_m": meta["resolution_m"],
+                "diversion": meta["diversion"]["status"],
+            },
+            "geometry": {"type": "Polygon", "coordinates": [coords]},
+        }
+        e = meta.get("area_error_pct")
+        print(f"    算出 {meta['computed_area_km2']:.2f} km2"
+              + (f" / 誤差 {e:+.1f}%" if e is not None else "")
+              + f" / {meta['vertices']}頂点 / {meta['resolution_m']}m / {meta['seconds']}秒")
 
-        if coords:
-            features.append({
-                "type": "Feature",
-                "properties": {
-                    "id": d["id"], "name": d["name"],
-                    "computed_area_km2": meta["computed_area_km2"],
-                    "official_area_km2": meta.get("official_area_km2"),
-                    "area_error_pct": meta.get("area_error_pct"),
-                    "resolution_m": meta["resolution_m"],
-                    "diversion": meta["diversion"]["status"],
-                },
-                "geometry": {"type": "Polygon", "coordinates": [coords]},
-            })
-            e = meta.get("area_error_pct")
-            print(f"    算出 {meta['computed_area_km2']:.2f} km2"
-                  + (f" / 誤差 {e:+.1f}%" if e is not None else "")
-                  + f" / {meta['vertices']}頂点 / {meta['resolution_m']}m / {meta['seconds']}秒")
-        else:
-            print(f"    失敗: {meta.get('error')}")
-
-    gj = {"type": "FeatureCollection",
-          "properties": {
-              "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S+09:00"),
-              "method": "国土地理院 標高タイル（DEM10B系）からの地形解析（D8）",
-              "accuracy_note": "地形から計算した概略の集水域。実測の流域界ではない。",
-              "simplify_m": SIMPLIFY_M,
-              "source": "国土地理院 地理院タイル（標高タイル）を加工して作成",
-          },
-          # 対象外の既存結果は消さずに残す（少数だけ作り直しても他が消えないように）
-          "features": keep_features + features}
+    # ---- 書き出し: 既存 + 今回成功分。失敗した基は既存のまま
+    feats = dict(prev_features)
+    feats.update(new_features)
+    metas = dict(prev_metas)
+    metas.update(new_metas)
     order = {d["id"]: i for i, d in enumerate(data["dams"])}
-    gj["features"].sort(key=lambda f: order.get(f["properties"]["id"], 1 << 30))
-    all_metas = sorted(keep_metas + metas, key=lambda m: order.get(m.get("id"), 1 << 30))
-    (args.out / "basins.geojson").write_text(
-        json.dumps(gj, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
-    (args.out / "basins_meta.json").write_text(
-        json.dumps(all_metas, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    features = _ordered(feats, order)
+    all_metas = _ordered(metas, order)
 
-    size = (args.out / "basins.geojson").stat().st_size
-    print(f"\n出力 {args.out/'basins.geojson'}  {size/1024:.1f} KB / "
-          f"今回 {len(features)} 基・据え置き {len(keep_features)} 基 = 計 {len(gj['features'])} 基")
+    # 計算時間（seconds）は毎回変わるので、内容の比較からは外す
+    def _stable(ms):
+        return [{k: v for k, v in m.items() if k != "seconds"} for m in ms]
+
+    changed = (features != _ordered(prev_features, order)
+               or _stable(all_metas) != _stable(_ordered(prev_metas, order)))
+    if not new_features:
+        print("\n成功した基がないので、出力は書き換えません。")
+    elif not changed:
+        print("\n結果は既存と同一でした。出力は書き換えません。")
+    else:
+        props = {
+            "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S+09:00"),
+            "method": "国土地理院 標高タイル（DEM10B系）からの地形解析（D8）",
+            "accuracy_note": "地形から計算した概略の集水域。実測の流域界ではない。",
+            "simplify_m": SIMPLIFY_M,
+            "source": "国土地理院 地理院タイル（標高タイル）を加工して作成",
+        }
+        gj = {"type": "FeatureCollection", "properties": props, "features": features}
+        # 2ファイルを一時ファイルに書き終えてから置き換える（片方だけ新しい状態を作らない）
+        geo_text = json.dumps(gj, ensure_ascii=False, separators=(",", ":")) + "\n"
+        meta_text = json.dumps(all_metas, ensure_ascii=False, indent=1) + "\n"
+        atomic_write_text(prev_geo, geo_text)
+        atomic_write_text(prev_meta, meta_text)
+        size = prev_geo.stat().st_size
+        print(f"\n出力 {prev_geo}  {size/1024:.1f} KB / 今回 {len(new_features)} 基・"
+              f"据え置き {len(features) - len(new_features)} 基 = 計 {len(features)} 基")
     print(f"総時間 {(time.time()-t_all)/60:.1f} 分")
+    if failures:
+        print(f"\n失敗 {len(failures)} 基（既存の結果は残しています）:")
+        for i, k, m in failures:
+            print(f"  - {i} [{k}] {m}")
+        return 1
     return 0
 
 

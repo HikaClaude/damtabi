@@ -21,7 +21,7 @@
 // 新しい app.js と新しい索引・格子が必ず同じ世代で揃う。
 // 索引が指す格子のファイル名は dam_id そのものなので、索引だけ古くても
 // 別のダムの領域を読むことはない（未知IDは404になり画面に理由が出る）。
-var VERSION = "v14";
+var VERSION = "v15";
 var SHELL = "shell-" + VERSION;
 var PAGES = "pages-" + VERSION;
 var DATA = "data-" + VERSION;
