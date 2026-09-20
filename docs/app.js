@@ -12,6 +12,7 @@
   var ILLUST_URL = "./data/illustrations.json"; // カード用イラスト（3:2）の差分ファイル
   var ICON_URL = "./data/dam-icons.json";       // 地図ピン用イラスト（正方形）の差分ファイル
   var SPOTS_URL = "./data/spots.json";          // ダムごとの「行ったら何がある？」
+  var WS_INDEX_URL = "./watershed/index.json";  // 集水域「雨の行き先」の索引（無ければ機能ごと出さない）
   var GSI_TILE = "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png";
   // 出典は #credits に常時表示している（MapLibre の attribution は畳まれる可能性があるので使わない）
 
@@ -21,6 +22,7 @@
     icons: {},
     visits: {},        // 訪れたダム（この端末にだけ残る）
     spots: {},         // ダムごとの見どころ（無くても地図は動く）
+    map: null,         // 「雨の行き先」が地図座標を投影するため保持する
     tripTint: true,    // 旅の色分け（訪問済みだけ色を残す）
     basis: "irrigation",
     markers: {},   // id -> {marker, el, dam}
@@ -461,6 +463,9 @@
       (dam.obs_time ? "<strong>" + esc(fmtObsTime(dam.obs_time)) + "</strong> 観測の値です"
                     : "観測値の配信がありません") + "</p>";
 
+    // 「雨の行き先」の入口。集水域データが無い環境では中身を空のままにする
+    html += '<div id="ws-entry" class="ws-entry"></div>';
+
     html += '<div id="trip-slot" class="trip-slot"></div>';
     html += spotsBlock(dam);
 
@@ -514,6 +519,7 @@
     $("#panel").classList.remove("is-hidden");
     wireHelp();
     trip.renderSlot(dam);
+    ws.renderEntry(dam);
   }
 
   /** 用語ヘルプ: 1つ開いたら他は閉じる。パネルを描き直すたびに呼ぶ。 */
@@ -537,11 +543,13 @@
     var m = state.markers[id];
     if (!m) return;
     m.el.classList.add("is-active");
+    if (ws.activeId && ws.activeId !== id) ws.stop(false);
     renderPanel(m.dam);
     if (updateHash !== false) writeHash();
   }
 
   function closePanel() {
+    ws.stop(false);
     $("#panel").classList.add("is-hidden");
     if (state.activeId && state.markers[state.activeId]) {
       state.markers[state.activeId].el.classList.remove("is-active");
@@ -692,6 +700,8 @@
     var iconP = optional(ICON_URL);
     // 見どころも任意。置いていなければ欄ごと出ない
     var spotsP = optional(SPOTS_URL);
+    // 集水域データも任意。置いていなければ「雨の行き先」は現れず、地図は従来どおり動く
+    var wsP = optional(WS_INDEX_URL);
 
     Promise.all([
       fetch(DATA_URL, { cache: "no-cache" }).then(function (r) {
@@ -700,12 +710,14 @@
       }),
       illustP,
       iconP,
-      spotsP
+      spotsP,
+      wsP
     ]).then(function (res) {
       state.data = res[0];
       state.illust = res[1] || {};
       state.icons = res[2] || {};
       state.spots = (res[3] && res[3].dams) || {};
+      ws.init(res[4]);
       trip.load();
 
       renderMeta();
@@ -713,6 +725,7 @@
       renderLegend();
 
       var map = buildMap();
+      state.map = map;
       // 地図を動かしている間は、指の下のピンが拡大して見えるのを防ぐ
       map.on("movestart", function () { document.body.classList.add("is-moving"); });
       map.on("moveend", function () { document.body.classList.remove("is-moving"); });
@@ -733,7 +746,14 @@
         state.markers[dam.id] = { marker: marker, el: el, dam: dam };
       });
       selectFromHash();
-      map.on("click", closePanel);
+      // 地図のクリック。パネルが開いていて雨を降らせていないときは、これまでどおり閉じる。
+      // それ以外は「ここに降った雨はどこへ行くか」を1滴で見せる（集水域データがある場合のみ）。
+      map.on("click", function (ev) {
+        var panelOpen = !$("#panel").classList.contains("is-hidden");
+        if (panelOpen && !ws.activeId) { closePanel(); return; }
+        if (ws.enabled) ws.tap(ev.lngLat);
+        else if (panelOpen) closePanel();
+      });
 
       document.querySelectorAll('input[name="basis"]').forEach(function (r) {
         r.addEventListener("change", function () {
@@ -1439,6 +1459,766 @@
     html += "</section>";
     return html;
   }
+
+
+
+  // ------------------------------------------------------------ 雨の行き先
+
+  /**
+   * 「この水は、どこから来る？」
+   *
+   * 集水域を面で塗るのではなく、雨が降って地形をつたってダムへ集まる様子として見せる。
+   * 地図の任意の地点を押せば、そこに降った雨の行き先も1滴でたどれる。
+   *
+   * 事実の扱い:
+   *   流路も集水域も、地理院の標高タイルから計算した値だけを使う。経路は創作しない。
+   *   導水（別の谷から引いている水）は経路が公開資料で確認できないため描かず、
+   *   面積と注記だけを出す。すべて「概略」である旨を画面に書く。
+   *
+   * データ（docs/watershed/）が置かれていなければ ws.enabled が false のままになり、
+   * 入口ボタンも描画も一切出ない。地図はこれまでどおり動く。
+   */
+  var ws = (function () {
+    // build_flowgrids.py の D8（時計回り、0 = 北）
+    var DI = [-1, -1, 0, 1, 1, 1, 0, -1];
+    var DJ = [0, 1, 1, 1, 0, -1, -1, -1];
+    var FLOW_BASE = "./watershed/";
+    var BASIN_URL = "./watershed/basins.geojson";
+
+    var api = { enabled: false, activeId: null };
+    // 開始・終了のたびに進む世代番号。読み込みが遅れた前の応答で、
+    // あとから選び直したダムの表示を上書きしないための目印。
+    var epoch = 0;
+    var MAX_DROPS = 80;      // 連打しても雨つぶが溜まり続けないようにする上限
+    var index = null;        // ダムID -> 索引レコード
+    var version = null;      // 索引・ポリゴン・格子が同じ生成であることの目印
+    var basins = null;       // 集水域ポリゴン（初回利用時に読む）
+    var basinsP = null;
+    var grids = {};          // ダムID -> 流向格子
+    var drops = [];          // 流下中の雨つぶ
+    var ripples = [];        // 到着の波紋
+    var ridge = null;        // 尾根が描かれるアニメーション
+    var ambient = 0;         // 降り続ける雨のタイマー
+    var framing = false;
+
+    // ---------------------------------------- 流向格子
+
+    function bytes(b64) {
+      var bin = atob(b64), a = new Uint8Array(bin.length), i;
+      for (i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+      return a;
+    }
+
+    /** 4bit に詰めた D8 流向と、1bit の集水域マスクを読む格子。 */
+    function Grid(rec) {
+      for (var k in rec) if (rec.hasOwnProperty(k)) this[k] = rec[k];
+      this.d8b = bytes(rec.d8);
+      this.maskb = bytes(rec.mask);
+      this.world = 256 * Math.pow(2, rec.zoom);
+      // 到着点は「点」ではなく貯水池の水面。粗い格子では水面が平らで、
+      // 1点だけを終点にすると集水域の何割かが「届かない」ことになる。
+      this.goal = {};
+      var g = rec.outlets || [rec.outlet];
+      for (var i = 0; i < g.length; i++) this.goal[g[i][0] * rec.w + g[i][1]] = 1;
+    }
+    Grid.prototype.isGoal = function (i, j) {
+      return this.goal[i * this.w + j] === 1;
+    };
+    Grid.prototype.dirAt = function (i, j) {
+      var k = i * this.w + j, b = this.d8b[k >> 1];
+      return (k & 1) ? (b & 15) : (b >> 4);
+    };
+    Grid.prototype.maskAt = function (i, j) {
+      var k = i * this.w + j;
+      return (this.maskb[k >> 3] >> (7 - (k & 7))) & 1;
+    };
+    Grid.prototype.inside = function (i, j) {
+      return i >= 0 && i < this.h && j >= 0 && j < this.w;
+    };
+    Grid.prototype.cellLngLat = function (i, j) {
+      var px = this.x0 * 256 + (j + 0.5) * this.coarse;
+      var py = this.y0 * 256 + (i + 0.5) * this.coarse;
+      return [px / this.world * 360 - 180,
+              Math.atan(Math.sinh(Math.PI * (1 - 2 * py / this.world))) * 180 / Math.PI];
+    };
+    Grid.prototype.cellAt = function (lng, lat) {
+      var x = (lng + 180) / 360 * this.world;
+      var r = Math.PI / 180 * lat;
+      var y = (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * this.world;
+      return [Math.floor((y - this.y0 * 256) / this.coarse),
+              Math.floor((x - this.x0 * 256) / this.coarse)];
+    };
+
+    /** 出口（堤体）まで D8 をたどる。届かなければ reached:false。 */
+    function trace(g, i, j) {
+      var ll = [], cum = [], dist = 0, reached = false, guard = 0, k;
+      while (guard++ < 200000) {
+        ll.push(g.cellLngLat(i, j));
+        cum.push(dist);
+        if (g.isGoal(i, j)) { reached = true; break; }
+        k = g.dirAt(i, j);
+        if (k > 7) break;
+        dist += g.cell_m * ((DI[k] && DJ[k]) ? 1.4142 : 1);
+        i += DI[k];
+        j += DJ[k];
+        if (!g.inside(i, j)) break;
+      }
+      return { ll: ll, cum: cum, total: dist, reached: reached };
+    }
+
+    /**
+     * 版が食い違ったときのエラー。
+     *
+     * 索引・ポリゴン・格子は別々のファイルなので、画面を開いたまま新しい版が
+     * 公開されると、古い索引と新しい格子が組み合わさることがある。
+     * dam_id もキャッシュ名も「同じ版であること」を保証しない。
+     * そこで全ファイルに同じ生成版（内容ハッシュ）を書き込み、食い違ったら
+     * **黙って混ぜずに** ここで止めて、利用者に再読み込みしてもらう。
+     */
+    function StaleVersion(got) {
+      var e = new Error("版が違います（索引 " + version + " / 取得 " + (got || "不明") + "）");
+      e.stale = true;
+      return e;
+    }
+
+    function sameVersion(got) {
+      // 版を持たないデータ（旧形式）は比較しない
+      return !version || !got || got === version;
+    }
+
+    function loadGrid(id) {
+      if (grids[id]) return Promise.resolve(grids[id]);
+      return fetch(FLOW_BASE + index[id].file).then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      }).then(function (rec) {
+        if (!sameVersion(rec.version)) throw StaleVersion(rec.version);
+        return (grids[id] = new Grid(rec));
+      });
+    }
+
+    function loadBasins() {
+      if (basinsP) return basinsP;
+      basinsP = fetch(BASIN_URL + (version ? "?v=" + encodeURIComponent(version) : ""))
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        }).then(function (gj) {
+          if (!sameVersion(gj.version)) {
+            basinsP = null;               // 次の操作で取り直せるようにする
+            throw StaleVersion(gj.version);
+          }
+          return (basins = gj);
+        });
+      return basinsP;
+    }
+
+    // ---------------------------------------- 形
+
+    function featureOf(id) {
+      var f = basins.features, i;
+      for (i = 0; i < f.length; i++) if (f[i].properties.id === id) return f[i];
+      return null;
+    }
+
+    /**
+     * 表示用に輪郭をならす。
+     * 集水域ポリゴンは輪郭セルを重心まわりの角度順に並べたもので、凹んだところに
+     * 針状のトゲが残る。鋭角の頂点を落としてから Chaikin を掛ける。
+     * 面積の計算や判定には使わない。見せる線と面だけの処理。
+     */
+    function smoothRing(ring, iters) {
+      var r = ring.slice(0, ring.length - 1), pass, i, keep, out, a, b, c, v1, v2, n1, n2, cos, q;
+      for (pass = 0; pass < 3; pass++) {
+        keep = [];
+        for (i = 0; i < r.length; i++) {
+          a = r[(i + r.length - 1) % r.length];
+          b = r[i];
+          c = r[(i + 1) % r.length];
+          v1 = [a[0] - b[0], a[1] - b[1]];
+          v2 = [c[0] - b[0], c[1] - b[1]];
+          n1 = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
+          n2 = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
+          cos = (n1 && n2) ? (v1[0] * v2[0] + v1[1] * v2[1]) / (n1 * n2) : -1;
+          if (cos < 0.87) keep.push(b);           // 約30度より鋭い頂点だけ落とす
+        }
+        if (keep.length === r.length || keep.length < 8) break;
+        r = keep;
+      }
+      for (pass = 0; pass < iters; pass++) {
+        out = [];
+        for (i = 0; i < r.length; i++) {
+          b = r[i];
+          q = r[(i + 1) % r.length];
+          out.push([b[0] * 0.75 + q[0] * 0.25, b[1] * 0.75 + q[1] * 0.25]);
+          out.push([b[0] * 0.25 + q[0] * 0.75, b[1] * 0.25 + q[1] * 0.75]);
+        }
+        r = out;
+      }
+      r.push(r[0]);
+      return r;
+    }
+
+    function ringBounds(ring) {
+      var w = 999, s = 999, e = -999, n = -999;
+      ring.forEach(function (p) {
+        if (p[0] < w) w = p[0];
+        if (p[0] > e) e = p[0];
+        if (p[1] < s) s = p[1];
+        if (p[1] > n) n = p[1];
+      });
+      return [[w, s], [e, n]];
+    }
+
+    function inRing(lng, lat, ring) {
+      var hit = false, i, x1, y1, x2, y2;
+      for (i = 0; i < ring.length - 1; i++) {
+        x1 = ring[i][0]; y1 = ring[i][1];
+        x2 = ring[i + 1][0]; y2 = ring[i + 1][1];
+        if ((y1 > lat) !== (y2 > lat) &&
+            lng < (x2 - x1) * (lat - y1) / (y2 - y1) + x1) hit = !hit;
+      }
+      return hit;
+    }
+
+    function emptyFC() { return { type: "FeatureCollection", features: [] }; }
+
+    /** 集水域の面・輪郭・周囲を暗くするレイヤ。初回だけ作る。 */
+    function ensureLayers() {
+      var map = state.map;
+      if (!map || map.getSource("ws-basin")) return !!map;
+      try {
+        map.addSource("ws-basin", { type: "geojson", data: emptyFC() });
+        map.addSource("ws-outside", { type: "geojson", data: emptyFC() });
+        map.addLayer({
+          id: "ws-outside", type: "fill", source: "ws-outside",
+          paint: { "fill-color": "#10315a", "fill-opacity": 0,
+                   "fill-opacity-transition": { duration: 600 } }
+        });
+        map.addLayer({
+          id: "ws-fill", type: "fill", source: "ws-basin",
+          paint: { "fill-color": "#3b82f6", "fill-opacity": 0,
+                   "fill-opacity-transition": { duration: 900 } }
+        });
+        map.addLayer({
+          id: "ws-line", type: "line", source: "ws-basin",
+          paint: { "line-color": "#2563eb", "line-width": 2, "line-opacity": 0,
+                   "line-opacity-transition": { duration: 400 } }
+        });
+        return true;
+      } catch (e) {
+        console.warn("[ws] レイヤを追加できませんでした", e);
+        return false;
+      }
+    }
+
+    // ---------------------------------------- パネル内の入口
+
+    api.init = function (idx) {
+      if (!idx || !idx.dams || !idx.dams.length) return;   // データなし = 機能を出さない
+      index = {};
+      idx.dams.forEach(function (d) { index[d.id] = d; });
+      version = idx.version || null;
+      api.enabled = true;
+      // 標高タイルの出典と、DAM TABI による加工である旨。データがある環境でだけ出す。
+      var cr = $("#ws-credit");
+      if (cr) cr.hidden = false;
+    };
+
+    /** パネルを描くたびに呼ばれる。入口ボタン、または雨を降らせている間の説明。 */
+    api.renderEntry = function (dam) {
+      var box = $("#ws-entry");
+      if (!box || !api.enabled || !index[dam.id]) return;
+
+      box.addEventListener("click", function (ev) { ev.stopPropagation(); });
+
+      if (api.activeId !== dam.id) {
+        box.innerHTML =
+          '<button type="button" class="ws-open" id="ws-go">' +
+            "この水は、どこから来る？" +
+            '<span class="ws-open__sub">集水域に雨を降らせて、地形の流れを見る（概略）</span>' +
+          "</button>";
+        $("#ws-go").addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          var b = ev.currentTarget;
+          if (b.disabled) return;                 // 連打はここで止める
+          b.disabled = true;
+          b.classList.add("is-loading");
+          var revive = function (msg) {
+            // 押したのに何も起きない状態にしない。理由を出して押し直せるようにする。
+            if (!document.body.contains(b)) return;   // 別のダムへ移っていれば触らない
+            b.disabled = false;
+            b.classList.remove("is-loading");
+            var p = box.querySelector(".ws-error");
+            if (!p) {
+              p = document.createElement("p");
+              p.className = "ws-note ws-error";
+              box.appendChild(p);
+            }
+            p.textContent = msg;
+          };
+          api.start(dam).then(function (r) {
+            if (r && r.ok === false) {
+              revive(r.reason === "layer"
+                ? "地図に集水域を重ねられませんでした。地図を読み込み直してからもう一度お試しください。"
+                : "集水域を表示できませんでした。もう一度お試しください。");
+            }
+          })["catch"](function (e) {
+            console.warn("[ws]", e);
+            revive(e && e.stale
+              ? "集水域データが新しい版に更新されました。古い版と混ぜないため表示を止めています。" +
+                "ページを再読み込みしてください。"
+              : "集水域データを読み込めませんでした（" +
+                (e && e.message ? e.message : "原因不明") + "）。もう一度お試しください。");
+          });
+        });
+        return;
+      }
+
+      var d = index[dam.id];
+      var div = d.diversion || {};
+      var chips = "", note = "";
+      // 比較は「直接流域」と行う。合計（直接＋間接）と比べると、導水のあるダムで
+      // 地形計算が外れているように見える。合計は別の行に分けて出す。
+      var hasIndirect = d.official_total_km2 != null && d.official_area_km2 != null &&
+        d.official_total_km2 > d.official_area_km2;
+
+      if (div.status === "yes") {
+        chips += '<span class="ws-chip is-div">導水あり</span>';
+        note += "この輪のほかに、別の谷からも水を引いています（間接流域 約" +
+          esc(String(div.indirect_km2 == null ? "—" : div.indirect_km2)) +
+          " km²）。導水路の経路は公開資料で確認できないため描いていません。";
+      }
+      if (d.area_error_pct != null && Math.abs(d.area_error_pct) > 25) {
+        chips += '<span class="ws-chip is-warn">公式値と差が大きい</span>';
+        note += "計算した面積が公式の直接流域と大きく異なります。原因は特定できていません。";
+      }
+      if (d.official_area_km2 == null) {
+        chips += '<span class="ws-chip is-warn">ダム便覧に記載なし</span>';
+        note += "ダム便覧に該当の記載を確認できていないため、直接流域との比較はできていません。";
+        if (d.reference_area_km2 != null) {
+          note += "参考として" + esc(String(d.reference_source || "別の公式資料")) +
+            "の流域面積（約" + Math.round(d.reference_area_km2) +
+            " km²）とは近い値になっています。";
+        }
+      }
+
+      box.innerHTML =
+        '<div class="ws-panel">' +
+          '<p class="ws-lead">青い輪の内側に降った雨は、山をつたって' +
+            "<strong>すべてこのダムへ</strong>集まります。</p>" +
+          '<table class="ws-facts">' +
+            "<tr><th>集水域（地形計算）</th><td>約 " + Math.round(d.fine_area_km2) + " km²</td></tr>" +
+            (d.official_area_km2 == null ? "" :
+              "<tr><th>公式の流域面積" + (hasIndirect ? "（直接）" : "") +
+              "</th><td>約 " + Math.round(d.official_area_km2) + " km²</td></tr>") +
+            (hasIndirect ?
+              "<tr><th>同（導水を含む合計）</th><td>約 " + Math.round(d.official_total_km2) +
+              " km²</td></tr>" : "") +
+            (d.official_area_km2 == null && d.reference_area_km2 != null ?
+              "<tr><th>" + esc(String(d.reference_source)) + "の流域面積</th><td>約 " +
+              Math.round(d.reference_area_km2) + " km²</td></tr>" : "") +
+          "</table>" +
+          (chips ? chips + '<p class="ws-note">' + note + "</p>" : "") +
+          '<p class="ws-note">地理院の標高データから計算した概略です。' +
+            "輪の中のどこを押しても、雨の行き先を確かめられます。</p>" +
+          '<div class="ws-actions">' +
+            '<button type="button" class="ws-btn" id="ws-again">もう一度 雨を降らせる</button>' +
+            '<button type="button" class="ws-btn is-ghost" id="ws-stop">集水域を閉じる</button>' +
+          "</div>" +
+        "</div>";
+
+      $("#ws-again").addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        loadGrid(dam.id).then(function (g) { burst(g, 60); });
+      });
+      $("#ws-stop").addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        api.stop(true);
+      });
+    };
+
+    // ---------------------------------------- 開始と終了
+
+    api.start = function (dam) {
+      if (!api.enabled || !index[dam.id]) {
+        return Promise.resolve({ ok: false, reason: "nodata" });
+      }
+      return Promise.all([loadGrid(dam.id), loadBasins()]).then(function (r) {
+        var g = r[0];
+        // 読み込み中に別のダムへ移った／パネルを閉じた。前の応答で上書きしない。
+        if (state.activeId !== dam.id) return { ok: false, reason: "stale" };
+        if (!ensureLayers()) return { ok: false, reason: "layer" };
+        api.stop(false);
+        api.activeId = dam.id;
+        epoch++;
+        startFrames();
+
+        Object.keys(state.markers).forEach(function (id) {
+          state.markers[id].el.classList.toggle("is-ws-dim", id !== dam.id);
+        });
+
+        var map = state.map;
+        var f = featureOf(dam.id);
+        if (f) {
+          var ring = smoothRing(f.geometry.coordinates[0], 2);
+          map.getSource("ws-basin").setData({
+            type: "Feature", properties: {},
+            geometry: { type: "Polygon", coordinates: [ring] }
+          });
+          // 外側だけ暗くする。世界全体の四角に集水域を穴として開ける
+          map.getSource("ws-outside").setData({
+            type: "Feature", properties: {},
+            geometry: {
+              type: "Polygon",
+              coordinates: [[[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]], ring]
+            }
+          });
+          var panel = $("#panel");
+          var right = (panel && !panel.classList.contains("is-hidden")) ? panel.offsetWidth + 40 : 60;
+          map.fitBounds(ringBounds(f.geometry.coordinates[0]), {
+            padding: { top: 80, bottom: 60, left: 60, right: right },
+            duration: 900
+          });
+          map.setPaintProperty("ws-outside", "fill-opacity", 0.08);
+          ridge = { ring: ring, t0: performance.now(), dur: 1200 };
+          setTimeout(function () {
+            if (api.activeId === dam.id) map.setPaintProperty("ws-line", "line-opacity", 0.85);
+          }, 1250);
+          setTimeout(function () {
+            if (api.activeId === dam.id) map.setPaintProperty("ws-fill", "fill-opacity", 0.13);
+          }, 2600);
+        }
+
+        setTimeout(function () { if (api.activeId === dam.id) burst(g, 60); }, 500);
+        clearInterval(ambient);
+        ambient = setInterval(function () {
+          if (api.activeId === dam.id && !document.hidden && drops.length < 46) spawn(g);
+        }, 420);
+
+        api.renderEntry(dam);
+        return { ok: true };
+      });
+    };
+
+    api.stop = function (rerender) {
+      clearInterval(ambient);
+      drops = [];
+      ripples = [];
+      ridge = null;
+      epoch++;                 // 進行中の応答をすべて無効にする
+      var was = api.activeId;
+      api.activeId = null;
+      var map = state.map;
+      if (map && map.getSource && map.getSource("ws-basin")) {
+        map.getSource("ws-basin").setData(emptyFC());
+        map.getSource("ws-outside").setData(emptyFC());
+        map.setPaintProperty("ws-outside", "fill-opacity", 0);
+        map.setPaintProperty("ws-fill", "fill-opacity", 0);
+        map.setPaintProperty("ws-line", "line-opacity", 0);
+      }
+      Object.keys(state.markers).forEach(function (id) {
+        state.markers[id].el.classList.remove("is-ws-dim");
+      });
+      var card = $("#tapcard");
+      if (card) card.hidden = true;
+      if (rerender !== false && was && state.activeId && state.markers[state.activeId]) {
+        api.renderEntry(state.markers[state.activeId].dam);
+      }
+    };
+
+    // ---------------------------------------- 雨つぶ
+
+    function randomCell(g) {
+      var t, i, j;
+      for (t = 0; t < 400; t++) {
+        i = (Math.random() * g.h) | 0;
+        j = (Math.random() * g.w) | 0;
+        if (g.maskAt(i, j)) return [i, j];
+      }
+      return g.outlet;
+    }
+
+    function spawn(g, delay) {
+      if (drops.length >= MAX_DROPS) return;   // 「もう一度」の連打で溜め込まない
+      var c = randomCell(g);
+      var path = trace(g, c[0], c[1]);
+      if (!path.reached || path.total < g.cell_m * 3) return;
+      drops.push({
+        path: path, t0: performance.now() + (delay || 0), fall: 420,
+        // 道のりが長いほど速く見せないと、着くまで待たされて退屈になる
+        dur: 2600 + Math.min(4800, path.total / 3.2),
+        big: false, grey: false
+      });
+    }
+
+    function burst(g, n) {
+      for (var k = 0; k < n; k++) spawn(g, Math.random() * 2200);
+    }
+
+    // ---------------------------------------- 地図を押したとき
+
+    /** 押した地点に降った雨をたどる。届いたダムと、その下流の収録ダムを返す。 */
+    api.tap = function (lngLat) {
+      if (!api.enabled) return;
+      var lng = lngLat.lng, lat = lngLat.lat;
+      var myEpoch = epoch;          // この時点の世代。応答が返るまでに変われば捨てる
+
+      loadBasins().then(function () {
+        // 内側にいる集水域を面積の小さい順に。次に近いダムを予備で足す
+        var inside = basins.features.filter(function (f) {
+          return inRing(lng, lat, f.geometry.coordinates[0]);
+        }).sort(function (a, b) {
+          return a.properties.computed_area_km2 - b.properties.computed_area_km2;
+        }).map(function (f) { return f.properties.id; });
+
+        var near = Object.keys(index).map(function (id) {
+          var d = index[id];
+          var dx = (d.lon - lng) * 91, dy = (d.lat - lat) * 111;
+          return { id: id, km: Math.sqrt(dx * dx + dy * dy) };
+        }).sort(function (a, b) { return a.km - b.km; })
+          .filter(function (d) { return d.km < 45; })
+          .map(function (d) { return d.id; });
+
+        var tries = inside.concat(near.slice(0, 3)).filter(function (id, i, arr) {
+          return arr.indexOf(id) === i;
+        });
+
+        var chain = Promise.resolve({ hit: null, path: null });
+        tries.forEach(function (id) {
+          chain = chain.then(function (acc) {
+            if (acc.hit || (acc.path && inside.length === 0)) return acc;
+            return loadGrid(id).then(function (g) {
+              var c = g.cellAt(lng, lat);
+              if (!g.inside(c[0], c[1])) return acc;
+              var path = trace(g, c[0], c[1]);
+              return path.reached ? { hit: id, path: path }
+                                  : { hit: acc.hit, path: acc.path || path };
+            });
+          });
+        });
+        return chain;
+      }).then(function (res) {
+        // 読み込み中にダムを切り替えた／閉じたら、この結果はもう表示しない
+        if (epoch !== myEpoch) return;
+        if (!res) return;
+        if (!res.path || res.path.ll.length < 2) { showCard(null, null, true); return; }
+        startFrames();
+        if (drops.length >= MAX_DROPS) drops.splice(0, drops.length - MAX_DROPS + 1);
+        drops.push({
+          path: res.path, t0: performance.now(), fall: 420,
+          dur: 1800 + Math.min(5200, res.path.total / 2.8),
+          big: true, grey: !res.hit
+        });
+        showCard(res.hit, res.path, false);
+      })["catch"](function (e) {
+        console.warn("[ws] tap", e);
+        if (epoch === myEpoch) showCard(null, null, true, e);
+      });
+    };
+
+    function showCard(damId, path, nogrid, err) {
+      var el = $("#tapcard");
+      var panel = $("#panel");
+      var open = panel && !panel.classList.contains("is-hidden");
+      el.style.left = "calc(50% - " + ((open ? panel.offsetWidth : 0) / 2) + "px)";
+      el.hidden = false;
+      clearTimeout(el.dataset.timer);
+
+      if (err) {
+        // 取得に失敗したときに黙って終わらせない
+        el.innerHTML = err.stale
+          ? '<p class="ws-miss">集水域データが新しい版に更新されました。<br>' +
+            "古い版と混ぜないため表示を止めています。ページを再読み込みしてください。</p>"
+          : '<p class="ws-miss">地形データを読み込めませんでした（' +
+            esc(err && err.message ? err.message : "原因不明") + "）。<br>" +
+            "通信状況を確かめて、もう一度押してみてください。</p>";
+        el.dataset.timer = setTimeout(function () { el.hidden = true; }, 6000);
+        return;
+      }
+      if (nogrid) {
+        el.innerHTML = '<p class="ws-miss">このあたりの地形データは、まだ計算していません。<br>' +
+          "ダムの近く（山側）を押してみてください。</p>";
+        el.dataset.timer = setTimeout(function () { el.hidden = true; }, 4200);
+        return;
+      }
+      if (!damId) {
+        el.innerHTML = '<p class="ws-miss">ここに降った雨は、尾根の外側。<br>' +
+          "収録している" + Object.keys(index).length + "基のダムには集まらないようです。</p>" +
+          '<p class="ws-note">地理院の標高データによる概略の計算です</p>';
+        el.dataset.timer = setTimeout(function () { el.hidden = true; }, 5200);
+        return;
+      }
+
+      var d = index[damId];
+      // 下流の案内は「相手の集水域に入っている」だけでは確定しない。
+      // 生成時に相手の流向格子をたどって出口に届いたものだけを出す。
+      // 届く順番は確かめていないので、順序として書かない。
+      var down = (d.downstream_reaches || []).map(function (i) {
+        return index[i] ? index[i].name : null;
+      }).filter(Boolean);
+      var far = path.total >= 1000 ? (path.total / 1000).toFixed(1) + " km"
+                                   : Math.round(path.total) + " m";
+      el.innerHTML =
+        '<p class="ws-to">ここに降った雨は、<strong>' + esc(d.name) + "</strong> へ</p>" +
+        '<p class="ws-chain">地形をたどって約 ' + far + "</p>" +
+        (down.length ? '<p class="ws-chain">地形の上では、この先 ' + esc(down.join("・")) +
+          " の集水域にも入ります</p>" : "") +
+        '<p class="ws-note">地理院の標高データによる概略の計算です。' +
+          "実際の水の動きは放流の操作や導水で変わります</p>" +
+        '<button type="button" class="ws-btn" id="ws-jump">' + esc(d.name) + " を見る</button>";
+
+      $("#ws-jump").addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        el.hidden = true;
+        select(damId);
+        var m = state.markers[damId];
+        if (m) api.start(m.dam)["catch"](function (e) { console.warn("[ws]", e); });
+      });
+      el.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    }
+
+    // ---------------------------------------- 描画
+
+    function resizeFx() {
+      var c = $("#fx"), m = $("#map");
+      if (!c || !m) return;
+      var r = m.getBoundingClientRect();
+      c.style.left = r.left + "px";
+      c.style.top = r.top + "px";
+      c.style.width = r.width + "px";
+      c.style.height = r.height + "px";
+      c.width = Math.round(r.width * devicePixelRatio);
+      c.height = Math.round(r.height * devicePixelRatio);
+    }
+
+    function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+    /** 経路上、始点から dist メートルの位置。 */
+    function posAt(path, dist) {
+      var cum = path.cum, ll = path.ll, lo = 0, hi = cum.length - 1, mid;
+      while (lo < hi) {
+        mid = (lo + hi) >> 1;
+        if (cum[mid] < dist) lo = mid + 1; else hi = mid;
+      }
+      if (lo === 0) return ll[0];
+      var a = ll[lo - 1], b = ll[lo], d0 = cum[lo - 1], d1 = cum[lo];
+      var f = d1 > d0 ? (dist - d0) / (d1 - d0) : 0;
+      return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
+    }
+
+    var fxWired = false;
+
+    function startFrames() {
+      if (framing) return;
+      framing = true;
+      resizeFx();
+      if (!fxWired) { addEventListener("resize", resizeFx); fxWired = true; }
+      requestAnimationFrame(frame);
+    }
+
+    /** 描くものが無くなったら次のフレームを止める（閉じたあと回し続けない）。 */
+    function idle() {
+      return !ridge && !drops.length && !ripples.length && !api.activeId;
+    }
+
+    function frame(now) {
+      var c = $("#fx"), map = state.map;
+      if (!c || !map) { framing = false; return; }
+      var ctx = c.getContext("2d");
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      ctx.clearRect(0, 0, c.width, c.height);
+
+      function pt(ll) { return map.project({ lng: ll[0], lat: ll[1] }); }
+
+      if (ridge) {
+        var t = Math.min(1, (now - ridge.t0) / ridge.dur);
+        var n = Math.max(2, Math.floor(ridge.ring.length * ease(t))), i, p;
+        ctx.beginPath();
+        for (i = 0; i < n; i++) {
+          p = pt(ridge.ring[i]);
+          if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y);
+        }
+        ctx.strokeStyle = "rgba(37,99,235,.9)";
+        ctx.lineWidth = 2.2;
+        ctx.shadowColor = "rgba(37,99,235,.6)";
+        ctx.shadowBlur = 6;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        if (t >= 1) ridge = null;
+      }
+
+      var alive = [];
+      drops.forEach(function (d) {
+        var t = now - d.t0;
+        if (t < 0) { alive.push(d); return; }
+        var land = pt(d.path.ll[0]);
+        if (t < d.fall) {                                   // 落ちてくる
+          var f = t / d.fall;
+          var y = land.y - 46 * (1 - f * f);
+          ctx.globalAlpha = 0.25 + 0.75 * f;
+          ctx.beginPath();
+          ctx.moveTo(land.x, y - 7);
+          ctx.lineTo(land.x, y);
+          ctx.strokeStyle = d.grey ? "#8195a8" : "#3b82f6";
+          ctx.lineWidth = d.big ? 2.4 : 1.6;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+          alive.push(d);
+          return;
+        }
+        var ft = (t - d.fall) / d.dur;
+        if (ft <= 1) {                                      // 流れていく
+          var dist = d.path.total * ease(ft);
+          var head = pt(posAt(d.path, dist));
+          var tail = Math.max(600, d.path.total * 0.14);
+          var steps = d.big ? 14 : 8, k, q;
+          ctx.beginPath();
+          for (k = steps; k >= 0; k--) {
+            q = pt(posAt(d.path, Math.max(0, dist - tail * k / steps)));
+            if (k === steps) ctx.moveTo(q.x, q.y); else ctx.lineTo(q.x, q.y);
+          }
+          ctx.strokeStyle = d.grey ? "rgba(110,130,150,.6)" : "rgba(37,99,235,.7)";
+          ctx.lineWidth = d.big ? 3.4 : 2.4;
+          ctx.lineCap = "round";
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(head.x, head.y, d.big ? 4.4 : 3, 0, 7);
+          ctx.fillStyle = d.grey ? "#64788c" : "#1d4ed8";
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(head.x - 0.8, head.y - 0.8, d.big ? 1.4 : 0.9, 0, 7);
+          ctx.fillStyle = "rgba(255,255,255,.9)";
+          ctx.fill();
+          alive.push(d);
+          return;
+        }
+        if (d.path.reached) {
+          ripples.push({ ll: d.path.ll[d.path.ll.length - 1], t0: now, big: d.big });
+        }
+      });
+      drops = alive;
+
+      var keep = [];
+      ripples.forEach(function (r) {
+        var t = (now - r.t0) / 700;
+        if (t > 1) return;
+        var p = pt(r.ll);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 4 + t * (r.big ? 30 : 16), 0, 7);
+        ctx.strokeStyle = "rgba(29,78,216," + (0.6 * (1 - t)) + ")";
+        ctx.lineWidth = r.big ? 2.5 : 1.5;
+        ctx.stroke();
+        keep.push(r);
+      });
+      ripples = keep;
+
+      if (idle()) { framing = false; return; }   // 何も無くなったら止める
+      requestAnimationFrame(frame);
+    }
+
+    return api;
+  })();
 
 
   if (document.readyState === "loading") {

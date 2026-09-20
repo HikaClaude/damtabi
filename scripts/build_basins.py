@@ -51,6 +51,7 @@ UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
 
 TILE = "dem"                 # 10m メッシュ標高（z14）。低ズームは間引き済みの同系列
 SIMPLIFY_M = 30.0            # ポリゴンの簡略化許容誤差
+MAX_TILES = 361              # 1基あたりの標高タイル数の上限（窪地埋めが純Pythonのため）
 REQUEST_INTERVAL = 0.05      # 相手サーバへの礼儀
 # 河道へのスナップ探索半径。狭いと河道に届かず、広いと隣の大きな川へ飛ぶ。
 # 小さい方から試し、公式流域面積と桁が合った時点で採用する。
@@ -191,10 +192,27 @@ def flow_accum(fd: np.ndarray) -> np.ndarray:
 
 def upstream_of(fd: np.ndarray, oi: int, oj: int) -> np.ndarray:
     """出口セルへ流れ込むセルを全部拾う。"""
+    return upstream_of_set(fd, [(oi, oj)])
+
+
+def upstream_of_set(fd: np.ndarray, seeds) -> np.ndarray:
+    """複数のセルへ流れ込むセルを全部拾う（貯水池の水面をまとめて起点にする用）。
+
+    起点が1点だと、貯水池の水面のように平坦な場所では窪地埋めが作る
+    わずかな傾斜の向きで水面が分割され、上流の一部しか拾えないことがある。
+    （臼中ダムで水面の41%が集水域外になった。境川ダムでも同種の取りこぼし）
+    """
     h, w = fd.shape
     ws = np.zeros((h, w), dtype=bool)
-    ws[oi, oj] = True
-    q = deque([(oi, oj)])
+    q = deque()
+    if isinstance(seeds, np.ndarray):
+        ws |= seeds
+        q.extend(map(tuple, np.argwhere(seeds)))
+    else:
+        for i, j in seeds:
+            if not ws[i, j]:
+                ws[i, j] = True
+                q.append((i, j))
     while q:
         i, j = q.popleft()
         for k, (di, dj) in enumerate(D8):
@@ -203,6 +221,142 @@ def upstream_of(fd: np.ndarray, oi: int, oj: int) -> np.ndarray:
                 ws[ni, nj] = True
                 q.append((ni, nj))
     return ws
+
+
+# 貯水池の水面をどう見分けるか
+LAKE_FLAT_M = 0.6         # 3x3 の標高差がこれ未満なら「平ら」
+LAKE_SEARCH_M = 2000.0    # 堤体からこの距離までに水面があるはず
+LAKE_NEAR_M = 700.0       # 水面は堤体のこれくらい近くまで来ているはず
+LAKE_MIN_CELLS = 30
+LAKE_MAX_KM2 = 60.0       # これを超える「平ら」は湖ではない（平野・海など）
+LAKE_BAND_M = 1.5         # 水位からこの範囲を水面とみなす（標高タイルのばらつき分）
+
+
+def pick_outlet(dem, fd, acc, oi: int, oj: int, mpp: float, official: float | None):
+    """集水域の起点を決める。build_basins と build_flowgrids で同じものを使う。
+
+    返り値: (起点セルの集合 seeds, 代表セル (i,j), 方式名, 使った探索半径)
+
+    貯水池が見つかればその水面全体を起点にする。見つからなければ従来どおり
+    堤体の近くで集水量が最大のセルへ寄せる。半径は小さい方から試し、
+    公式の**直接流域**と桁が合った時点で採用する（合計を渡すと導水分まで
+    地形から探しに行って出口が飛ぶ。有峰ダムで実測）。
+    """
+    lake, level = find_reservoir(dem, oi, oj, mpp)
+    if lake is not None:
+        li, lj = np.argwhere(lake)[int(np.argmin(dem[lake]))]
+        return lake, (int(li), int(lj)), "reservoir", 0.0
+
+    best = None
+    for snap_m in SNAP_CANDIDATES_M:
+        snap = max(4, int(snap_m / mpp))
+        i0, j0 = max(0, oi - snap), max(0, oj - snap)
+        sub = acc[i0:oi + snap + 1, j0:oj + snap + 1]
+        di, dj = np.unravel_index(int(np.argmax(sub)), sub.shape)
+        ci, cj = i0 + di, j0 + dj
+        carea = float(upstream_of(fd, ci, cj).sum()) * mpp * mpp / 1e6
+        cand = (snap_m, ci, cj, carea)
+        if best is None:
+            best = cand
+        if official:
+            r = carea / official
+            if 0.5 <= r <= 1.6:
+                best = cand
+                break
+            if r > 1.6:
+                break
+            best = cand
+        else:
+            if carea > 0.3:
+                best = cand
+                break
+            best = cand
+    snap_used, si, sj, _ = best
+    return None, (int(si), int(sj)), "snap", snap_used
+
+
+def find_reservoir(dem: np.ndarray, oi: int, oj: int, mpp: float):
+    """堤体のそばにある「平らな連結域」＝貯水池の水面を探す。
+
+    集水域は本来「貯水池に流れ込む範囲」である。堤体の近くで集水量が最大の
+    セルを1点だけ選ぶ方式だと、その点が水面に乗ったときに水面が分割され、
+    上流を取りこぼす（臼中で水面の41%が集水域外、境川で −38.7%）。
+    水面全体を起点にすればこれを避けられる。
+
+    標高のヒストグラムの最頻値で水面を探すと、山腹の標高に引きずられて
+    失敗する（境川で実測）。ここでは「周囲との標高差がない」ことで見分ける。
+
+    見つからなければ (None, None) を返し、従来のスナップ方式に落とす。
+    """
+    h, w = dem.shape
+    r = max(40, int(LAKE_SEARCH_M / mpp))
+    i0, i1 = max(0, oi - r), min(h, oi + r + 1)
+    j0, j1 = max(0, oj - r), min(w, oj + r + 1)
+    sub = dem[i0:i1, j0:j1]
+    if sub.size < LAKE_MIN_CELLS or not np.isfinite(sub).any():
+        return None, None
+
+    # 3x3 の最大−最小。水面はここが 0 に近い。
+    big = np.where(np.isfinite(sub), sub, -1e9)
+    small = np.where(np.isfinite(sub), sub, 1e9)
+    mx = big.copy()
+    mn = small.copy()
+    for di in (-1, 0, 1):
+        for dj in (-1, 0, 1):
+            if di == 0 and dj == 0:
+                continue
+            mx = np.maximum(mx, np.roll(np.roll(big, di, 0), dj, 1))
+            mn = np.minimum(mn, np.roll(np.roll(small, di, 0), dj, 1))
+    flat = np.isfinite(sub) & ((mx - mn) < LAKE_FLAT_M)
+    flat[0, :] = flat[-1, :] = flat[:, 0] = flat[:, -1] = False   # roll の折り返し除け
+
+    ci, cj = oi - i0, oj - j0
+    near = max(4, int(LAKE_NEAR_M / mpp))
+    # 堤体の近くにある平坦セルを起点にする（近い順に探す）
+    cand = np.argwhere(flat)
+    if not len(cand):
+        return None, None
+    dist2 = (cand[:, 0] - ci) ** 2 + (cand[:, 1] - cj) ** 2
+    k = int(np.argmin(dist2))
+    if dist2[k] > near * near:
+        return None, None
+    start = (int(cand[k][0]), int(cand[k][1]))
+
+    hh, ww = flat.shape
+
+    def grow(ok: np.ndarray) -> np.ndarray:
+        seen = np.zeros_like(ok)
+        if not ok[start]:
+            return seen
+        seen[start] = True
+        q = deque([start])
+        while q:
+            i, j = q.popleft()
+            for di, dj in D8:
+                ni, nj = i + di, j + dj
+                if 0 <= ni < hh and 0 <= nj < ww and ok[ni, nj] and not seen[ni, nj]:
+                    seen[ni, nj] = True
+                    q.append((ni, nj))
+        return seen
+
+    # 1) まず「平ら」だけで連結成分を取り、そこから水位を決める
+    core = grow(flat)
+    if int(core.sum()) < LAKE_MIN_CELLS:
+        return None, None
+    level = float(np.nanmedian(sub[core]))
+
+    # 2) その水位の帯で取り直す。標高タイルの水面には多少のばらつきがあり、
+    #    「平ら」だけだと水面の一部しか取れない（臼中で 0.014km² しか取れなかった）。
+    band = np.isfinite(sub) & (np.abs(sub - level) < LAKE_BAND_M)
+    band[0, :] = band[-1, :] = band[:, 0] = band[:, -1] = False
+    seen = grow(band)
+    n = int(seen.sum())
+    if n < LAKE_MIN_CELLS or n * mpp * mpp / 1e6 > LAKE_MAX_KM2:
+        return None, None
+
+    out = np.zeros(dem.shape, dtype=bool)
+    out[i0:i1, j0:j1] = seen
+    return out, level
 
 
 # ---------------------------------------------------------------- 輪郭
@@ -280,7 +434,18 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
         px, py = tile_xy(lat, lon, z)
         oj = int((px - x0) * 256); oi = int((py - y0) * 256)
 
-        if outlet_ll is not None:
+        # --- まず貯水池を探す。見つかれば「水面に流れ込む範囲」を集水域とする。
+        lake, lake_lv = find_reservoir(dem, oi, oj, mpp)
+        if lake is not None:
+            ws = upstream_of_set(fd, lake)
+            area = float(ws.sum()) * mpp * mpp / 1e6
+            # 代表点（表示・記録用）は水面のうち最も低いセル
+            li, lj = np.argwhere(lake)[int(np.argmin(dem[lake]))]
+            si, sj = int(li), int(lj)
+            snap_used = 0.0
+            method = "reservoir"
+            lake_cells = int(lake.sum())
+        elif outlet_ll is not None:
             # 既に出口が決まっているので、同じ地点を新しい格子で指すだけ。
             # ここで選び直すと流向場の変化でスナップ先が隣の川へ移ることがある。
             ox, oy = tile_xy(outlet_ll[0], outlet_ll[1], z)
@@ -288,6 +453,8 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
             ws = upstream_of(fd, si, sj)
             area = float(ws.sum()) * mpp * mpp / 1e6
             snap_used = 0.0
+            method = "snap-fixed"
+            lake_cells = 0
         else:
             best = None
             for snap_m in SNAP_CANDIDATES_M:
@@ -316,16 +483,23 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
                     best = cand
             snap_used, si, sj, ws, area = best
             outlet_ll = xy_latlon(x0 + sj / 256.0, y0 + si / 256.0, z)
+            method = "snap"
+            lake_cells = 0
 
         # 縁に達していたら切れている可能性が高いので広げて再計算。
         # ただし公式面積と既に整合しているなら広げない
         # （広げると流向場が変わり、スナップ先が隣の川に移ることがある。角川ダムで実測）。
         touches = bool(ws[0, :].any() or ws[-1, :].any() or ws[:, 0].any() or ws[:, -1].any())
-        if touches and attempt < 3:
+        # 拡大には上限を置く。窪地埋めは純Pythonなので、際限なく広げると
+        # 現実的な時間で終わらない（1辺が2倍になると4倍の時間がかかる）。
+        nxt = pad + max(1, pad // 2)
+        if touches and attempt < 3 and (2 * nxt + 1) ** 2 <= MAX_TILES:
             if verbose:
-                print(f"    …範囲の端に達したので拡大して再計算 (pad {pad} → {pad + max(1, pad // 2)})")
-            pad += max(1, pad // 2)
+                print(f"    …範囲の端に達したので拡大して再計算 (pad {pad} → {nxt})")
+            pad = nxt
             continue
+        if touches and verbose:
+            print(f"    ※端に達したまま（タイル上限 {MAX_TILES}）。切れている可能性あり")
 
         pts = simplify(outline(ws), SIMPLIFY_M / mpp)
         coords = []
@@ -339,8 +513,15 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
             "computed_area_km2": round(area, 2),
             "zoom": z, "resolution_m": round(mpp, 1),
             "tiles": n_tiles, "vertices": len(coords),
+            "outlet_method": method,
+            "lake_cells": lake_cells,
+            "lake_km2": round(lake_cells * mpp * mpp / 1e6, 3),
+            "lake_level_m": round(lake_lv, 1) if lake is not None else None,
+            # 貯水池が集水域に収まっているか。収まらなければ取りこぼしている。
+            "lake_inside_pct": (round(float((lake & ws).sum()) / max(1, lake_cells) * 100, 1)
+                                if lake is not None else None),
+            "outlet_distance_m": round(math.hypot(si - oi, sj - oj) * mpp),
             "snap_distance_m": round(math.hypot(si - oi, sj - oj) * mpp),
-            "snap_radius_m": snap_used,
             "snap_radius_m": snap_used,
             "touches_edge": bool(touches),
             "seconds": round(time.time() - t0, 1),
@@ -383,9 +564,51 @@ def diversion_flag(spec: dict | None) -> dict:
     return {"status": "unknown", "note": "直接/間接の内訳を読み取れなかった"}
 
 
+def select_targets(dams: list, args) -> list:
+    """対象を明示的に決める。既定では何もしない（全件生成しない）。
+
+    2026-09-18 に、対象未指定のまま実行して 80 基すべてを計算してしまい、
+    地理院から **2,869 タイル（1.2GB）を意図せず追加取得**した。
+    標高タイルは1基あたり数百枚を取りに行くので、既定を「全件」にしてはいけない。
+    """
+    if args.all:
+        return list(dams)
+
+    picked: list = []
+    seen = set()
+
+    def add(d):
+        if d["id"] not in seen:
+            seen.add(d["id"])
+            picked.append(d)
+
+    if args.pref:
+        want = {p.strip() for p in args.pref.split(",") if p.strip()}
+        for d in dams:
+            if d["id"].split("-")[0] in want:
+                add(d)
+    if args.id:
+        want = {i.strip() for i in args.id.split(",") if i.strip()}
+        for d in dams:
+            if d["id"] in want:
+                add(d)
+    if args.only:
+        for d in dams:
+            if args.only in d["name"]:
+                add(d)
+    return picked
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="ダムの集水域を標高タイルから計算（単発）")
-    ap.add_argument("--only", help="ダム名の部分一致で対象を絞る")
+    ap = argparse.ArgumentParser(
+        description="ダムの集水域を標高タイルから計算（単発）。"
+                    "対象の指定は必須（--pref / --id / --only / --all のいずれか）。")
+    ap.add_argument("--pref", help="県で絞る。dam_id の接頭辞（例: toyama,ishikawa）")
+    ap.add_argument("--id", help="dam_id で絞る。カンマ区切り（例: toyama-usunaka）")
+    ap.add_argument("--only", help="ダム名の部分一致で絞る")
+    ap.add_argument("--all", action="store_true",
+                    help="dams.json の全基を対象にする（標高タイルを大量に取得するので明示が必要）")
+    ap.add_argument("--yes", action="store_true", help="確認を省く")
     ap.add_argument("--out", type=Path, default=OUT_DIR)
     args = ap.parse_args()
 
@@ -401,28 +624,84 @@ def main() -> int:
             fcd = (d.get("observation") or {}).get("obs_fcd")
             if fcd and fcd in obs and obs[fcd].get("bsnArea") is not None:
                 kawabou[d["name"]] = float(obs[fcd]["bsnArea"])
-    dams = data["dams"]
-    if args.only:
-        dams = [d for d in dams if args.only in d["name"]]
+    dams = select_targets(data["dams"], args)
+
+    # 対象が決まらないときは何もしない。**全件へ落とさない。**
+    if not dams:
+        if not (args.pref or args.id or args.only or args.all):
+            print("対象が指定されていません。--pref / --id / --only / --all のいずれかを付けてください。")
+            print("  例: python scripts/build_basins.py --pref toyama")
+            print("      python scripts/build_basins.py --id toyama-usunaka")
+        else:
+            print("指定に一致するダムがありません。全件へは切り替えません。")
+            print(f"  指定: pref={args.pref!r} id={args.id!r} only={args.only!r}")
+        return 2
+
+    print(f"対象 {len(dams)} 基 / dams.json の全 {len(data['dams'])} 基中")
+    for d in dams[:12]:
+        print(f"  - {d['id']}  {d['name']}")
+    if len(dams) > 12:
+        print(f"  … ほか {len(dams) - 12} 基")
+    if len(dams) > 30 and not args.yes:
+        # 標高タイルを大量に取りに行くので、数が多いときは一呼吸置く
+        print(f"\n{len(dams)} 基は標高タイルを大量に取得します（1基あたり数十〜数百枚）。")
+        print("続けるには --yes を付けて実行してください。")
+        return 2
 
     args.out.mkdir(parents=True, exist_ok=True)
+    # 一部だけを作り直すときに、対象外の結果を消さないよう既存を読み込んでおく
+    prev_geo = args.out / "basins.geojson"
+    prev_meta = args.out / "basins_meta.json"
+    keep_features, keep_metas = [], []
+    target_ids = {d["id"] for d in dams}
+    if prev_geo.exists() and prev_meta.exists():
+        try:
+            keep_features = [f for f in json.loads(prev_geo.read_text(encoding="utf-8"))["features"]
+                             if f["properties"]["id"] not in target_ids]
+            keep_metas = [m for m in json.loads(prev_meta.read_text(encoding="utf-8"))
+                          if m.get("id") not in target_ids]
+            if keep_metas:
+                print(f"  （対象外の {len(keep_metas)} 基は既存の結果をそのまま残します）")
+        except Exception as e:
+            print(f"  ※既存の出力を読めませんでした（{e}）。対象分だけを書き出します。")
+            keep_features, keep_metas = [], []
+
     features, metas = [], []
     t_all = time.time()
 
     for n, d in enumerate(dams, 1):
         sp = spec.get(d["name"])
-        official = None
-        if sp and sp.get("total_km2"):
+        # 河道選びの目安には「直接流域」を使う。合計（直接＋間接）を渡すと、
+        # 導水で水が来る分まで地形から探そうとして出口が遠くへ飛ぶ。
+        # 有峰ダムで実測: 合計219.9を目安にすると候補が全て外れ、最後に試した
+        # 半径700m（実距離677m）が採用されていた。直接49.9なら半径150m・
+        # 実距離174mで 50.52km²（直接比 1.01）に収まる。
+        official = None       # 誤差の比較に使う値（＝直接流域）
+        total = None          # 記録用（直接＋間接）
+        for key, dst in (("direct_km2", "d"), ("total_km2", "t")):
             try:
-                official = float(sp["total_km2"])
+                v = float(sp[key]) if sp and sp.get(key) else None
             except ValueError:
-                official = None
+                v = None
+            if dst == "d":
+                official = v
+            else:
+                total = v
+        if official is None:
+            official = total
         kw = kawabou.get(d["name"])
-        sizing = official if official else kw          # 格子の大きさを決めるためだけに使う
-        print(f"[{n}/{len(dams)}] {d['name']}（便覧 {official if official else '—'} / "
-              f"川防 {kw if kw else '—'} km2）")
+        # 格子の大きさ（＝解像度）は便覧の値で決める。川の防災情報の値を優先すると、
+        # 出典間で食い違うダムで解像度が粗くなり、貯水池の水面を見失う。
+        # 臼中で実測: 川防 48.2 を採ると z13（15.4m/セル）になり水面を検出できず、
+        # 便覧 13.5 なら z14（7.7m/セル）で検出できる。狭すぎた場合は端に達した
+        # 時点で自動的に広げるので、小さめに始めて構わない。
+        sizing = total or official or kw
+        print(f"[{n}/{len(dams)}] {d['name']}（便覧 直接 {official if official else '—'} / "
+              f"合計 {total if total else '—'} / 川防 {kw if kw else '—'} km2）")
 
         coords, meta = delineate(d["name"], d["lat"], d["lon"], official, sizing_area=sizing)
+        if total is not None:
+            meta["official_total_km2"] = total
         if kw:
             meta["kawabou_area_km2"] = kw
             meta["kawabou_error_pct"] = round((meta["computed_area_km2"] / kw - 1) * 100, 1)                 if meta.get("computed_area_km2") else None
@@ -458,14 +737,19 @@ def main() -> int:
               "simplify_m": SIMPLIFY_M,
               "source": "国土地理院 地理院タイル（標高タイル）を加工して作成",
           },
-          "features": features}
+          # 対象外の既存結果は消さずに残す（少数だけ作り直しても他が消えないように）
+          "features": keep_features + features}
+    order = {d["id"]: i for i, d in enumerate(data["dams"])}
+    gj["features"].sort(key=lambda f: order.get(f["properties"]["id"], 1 << 30))
+    all_metas = sorted(keep_metas + metas, key=lambda m: order.get(m.get("id"), 1 << 30))
     (args.out / "basins.geojson").write_text(
         json.dumps(gj, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     (args.out / "basins_meta.json").write_text(
-        json.dumps(metas, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        json.dumps(all_metas, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
     size = (args.out / "basins.geojson").stat().st_size
-    print(f"\n出力 {args.out/'basins.geojson'}  {size/1024:.1f} KB / {len(features)} 基")
+    print(f"\n出力 {args.out/'basins.geojson'}  {size/1024:.1f} KB / "
+          f"今回 {len(features)} 基・据え置き {len(keep_features)} 基 = 計 {len(gj['features'])} 基")
     print(f"総時間 {(time.time()-t_all)/60:.1f} 分")
     return 0
 

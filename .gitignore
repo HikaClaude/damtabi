@@ -11,12 +11,21 @@ docs/_*.html
 # 標高タイルのキャッシュ（再取得できるので追跡しない。約1000枚・数百MB）
 cache/dem/
 
-# 集水域の計算結果。第2段階で表示すると決まるまで docs/ には出さない
+# 集水域の計算ログ（中間生成物。基準となる .json は追跡する）
 data/basins/*.log
 
-# watershed 試作の D8 流向格子など（地理院標高タイル由来の派生物）。
-# 地理院への照会が済むまで公開しない。ローカル生成物が誤って追跡・公開
-# されるのを防ぐ（.git/info/exclude だけに頼らない二重の防止）。
-docs/watershed/
+# 集水域「雨の行き先」の配信データ（地理院標高タイル DEM10B 由来の派生物）。
+# docs/ は GitHub Pages がそのまま配信するので、ここに置いたものは公開される。
+#
+# 追跡する（＝公開する）のは次の3種類だけ:
+#   docs/watershed/index.json            公開対象ダムの索引
+#   docs/watershed/basins.geojson        公開対象ダムの集水域ポリゴン
+#   docs/watershed/flow/<dam_id>.json    公開対象ダムの D8 流向格子
+#
+# 下の2つはローカル評価専用。原因が分からず公開索引から外したダムの分で、
+# 追跡も公開もしない（scripts/build_flowgrids.py の EXCLUDED が根拠）。
+docs/watershed/index.local.json
+docs/watershed/flow/_local/
+docs/watershed/_check/
 
 __pycache__/

@@ -1021,3 +1021,133 @@ details.help > summary:focus-visible {
 
 .trip-backup-msg:empty { display: none; }
 .trip-backup-msg.is-warn { color: #9a3b1c; }
+
+/* ---------------------------------------------------------- 雨の行き先 */
+
+/* 雨つぶ・尾根・波紋を描く面。地図の上、パネル(z6)の下に重ねる。
+   集水域データを置いていない環境では何も描かれない */
+#fx {
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 雨を降らせている間、選んだダム以外を薄くして集水域に目を集める */
+.dam-pin.is-ws-dim .dam-pin__inner { opacity: .45; }
+
+/* --- パネル内の入口 --- */
+
+.ws-entry:empty { display: none; }
+.ws-entry { margin: 14px 0 2px; }
+
+.ws-open {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ws-open:hover { filter: brightness(1.08); }
+.ws-open.is-loading { opacity: .6; cursor: progress; }
+
+.ws-open__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #cfe0ee;
+}
+
+/* --- 雨を降らせている間の説明 --- */
+
+.ws-panel {
+  border: 1px solid #cfdded;
+  border-radius: 10px;
+  background: #f3f8fc;
+  padding: 11px 13px;
+}
+
+.ws-lead { margin: 0 0 7px; font-size: 12.5px; line-height: 1.7; }
+.ws-lead strong { color: var(--accent); }
+
+.ws-facts { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ws-facts th,
+.ws-facts td { padding: 3px 0; border-top: 1px solid #e2ecf4; text-align: left; }
+.ws-facts th { font-weight: 400; color: var(--ink-soft); width: 11em; }
+
+.ws-chip {
+  display: inline-block;
+  margin: 6px 4px 0 0;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ws-chip.is-div { background: #fef3c7; color: #92400e; }
+.ws-chip.is-warn { background: #fee2e2; color: #991b1b; }
+
+.ws-note {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.ws-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+.ws-btn {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ws-btn:hover { filter: brightness(1.08); }
+.ws-btn.is-ghost { background: var(--surface); color: var(--accent); }
+.ws-btn.is-ghost:hover { background: #eaf2f8; filter: none; }
+
+/* --- 地図を押したときのカード --- */
+
+#tapcard {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  max-width: min(430px, calc(100vw - 24px));
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+#tapcard p { margin: 2px 0; }
+#tapcard .ws-to { font-size: 15.5px; font-weight: 700; line-height: 1.6; }
+#tapcard .ws-to strong { color: var(--accent); }
+#tapcard .ws-chain { font-size: 12.5px; color: var(--ink-soft); }
+#tapcard .ws-miss { font-size: 13px; line-height: 1.7; color: var(--ink-soft); }
+#tapcard .ws-btn { flex: none; margin-top: 8px; padding: 6px 18px; }
+
+@media (max-width: 720px) {
+  #tapcard { bottom: 12px; left: 50% !important; }
+}
+
+/* 取得に失敗したことを画面に出す（黙って終わらせない） */
+.ws-error { color: #9a3b1c; }

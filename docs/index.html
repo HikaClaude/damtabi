@@ -51,6 +51,7 @@
     <p id="credits">
       出典：<a href="https://www.river.go.jp/kawabou/pcfull/tm" target="_blank" rel="noopener">国土交通省　川の防災情報ホームページ</a>を加工して作成
       ｜ 地図：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a>（国土地理院）
+      <span id="ws-credit" hidden>｜ 集水域：<a href="https://maps.gsi.go.jp/development/ichiran.html#dem" target="_blank" rel="noopener">地理院タイル（標高タイル DEM10B）</a>を DAM TABI が加工して作成</span>
       <span class="producer">DAM TABI LAB</span>
     </p>
   </header>
@@ -68,6 +69,11 @@
       <input type="checkbox" id="tint-toggle" checked> 訪れた場所に色を残す
     </label>
   </div>
+
+  <!-- 「雨の行き先」の描画面。地図の上、パネルの下に重ねる。
+       watershed データが無ければ何も描かれない -->
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div id="tapcard" hidden></div>
 
   <aside id="panel" class="is-hidden" aria-live="polite">
     <button id="panel-close" type="button" aria-label="閉じる">×</button>

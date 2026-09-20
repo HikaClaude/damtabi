@@ -15,7 +15,13 @@
  * CSS / JS / 画像 / アイコンのように古くても害のないものだけキャッシュ優先。
  */
 
-var VERSION = "v13";   // style.css / app.js を更新したら上げる（旧キャッシュを破棄させるため）
+// style.css / app.js / watershed/ を更新したら上げる（旧キャッシュを破棄させるため）。
+// watershed/ は /data/ の外なので下の「キャッシュ優先」側に入り、保存先は
+// shell-<VERSION>。VERSION を上げれば activate で旧世代ごと消えるため、
+// 新しい app.js と新しい索引・格子が必ず同じ世代で揃う。
+// 索引が指す格子のファイル名は dam_id そのものなので、索引だけ古くても
+// 別のダムの領域を読むことはない（未知IDは404になり画面に理由が出る）。
+var VERSION = "v14";
 var SHELL = "shell-" + VERSION;
 var PAGES = "pages-" + VERSION;
 var DATA = "data-" + VERSION;
@@ -85,7 +91,13 @@ self.addEventListener("fetch", function (e) {
 
   var isDoc = req.mode === "navigate" ||
     (req.headers.get("accept") || "").indexOf("text/html") !== -1;
-  var isData = url.pathname.indexOf("/data/") !== -1;
+  // 集水域の索引は「どの版を使うか」を決める大元なので、貯水率と同じくネットワーク優先。
+  // ここをキャッシュ優先にすると、古い索引を持ったまま新しい格子を読みに行き、
+  // 版の食い違いが起き続ける。Cache API の match は request の cache 指定を見ないので、
+  // fetch(..., {cache:"no-cache"}) では避けられない。
+  // 索引が指す格子・ポリゴンは ?v=<生成版> 付きなので、索引さえ新しければ必ず揃う。
+  var isData = url.pathname.indexOf("/data/") !== -1 ||
+    url.pathname.indexOf("/watershed/index.json") !== -1;
 
   // --- 貯水率を含むもの（JSON と HTML）はネットワーク優先
   if (isData || isDoc) {
