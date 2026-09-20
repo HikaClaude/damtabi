@@ -30,8 +30,10 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-REF_OK_PCT = 15.0          # 参考値との乖離の目安（面積誤差のゲートと同じ値）
-REF_SEVERE_PCT = 30.0      # 乖離が大きいものの目印
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import ws_evidence as we  # noqa: E402
+
+REF_OK_PCT = we.REF_OK_PCT  # 参考値との一致の目安 ±15%（面積誤差のゲートと同じ既存の値。ここで新設しない）
 
 # 判定は動いたが、データ・処理の整合が取れていない block
 INTEGRITY_CODES = {"fine_recompute_mismatch", "dem_edge", "dem_nodata_adjacent",
@@ -92,6 +94,59 @@ def needs_human(c: dict) -> bool:
     return False
 
 
+def build_evidence_report(cls: list, dams: list, metas: dict, spec: dict, obs: dict | None,
+                          profiles: dict | None) -> dict:
+    """全ダムの証拠値と評価区分（G1〜G4）。dam_id 基準。公開可否には接続しない。"""
+    by_id = {d["id"]: d for d in dams}
+    out = []
+    for c in cls:
+        i = c["id"]
+        meta = metas.get(i)
+        if meta is None:                       # 集水域が計算できていない基は、証拠を作れない
+            ev = None
+            group, why = "G4", ["qa_not_passed"]
+        else:
+            ev = we.build_evidence(by_id[i], meta, spec.get(i), obs, (profiles or {}).get(i))
+            group, why = we.evaluation_group(c["cls"], ev)
+        out.append({"id": i, "name": c["name"], "pref": c["pref"], "qa_class": c["cls"], "qa_codes": c["codes"],
+                    "evaluation_group": group, "group_name": we.GROUPS[group], "group_reasons": why,
+                    "evidence": ev})
+    counts = Counter(o["evaluation_group"] for o in out)
+    by_pref = defaultdict(Counter)
+    for o in out:
+        by_pref[o["pref"]][o["evaluation_group"]] += 1
+    return {
+        "evidence_version": we.EVIDENCE_VERSION,
+        "note": "評価区分（G1〜G4）は人手監査へ送る量を見積もるための分類で、公開可否・掲載可否には接続しない。"
+                "区分の規則が使う数値は既存の ±15%（参考面積との一致の目安）だけ。",
+        "ref_ok_pct": we.REF_OK_PCT,
+        "groups": {k: {"name": we.GROUPS[k], "count": counts.get(k, 0)} for k in we.GROUPS},
+        "by_pref": {p: {k: by_pref[p].get(k, 0) for k in we.GROUPS} for p in by_pref},
+        "profiles_collected": bool(profiles),
+        "dams": out,
+    }
+
+
+def evidence_markdown(rep: dict) -> str:
+    L = [f"# 集水域 証拠層と評価区分（{rep['evidence_version']}）\n", rep["note"] + "\n",
+         "| 評価区分 | 名称 | 基数 |\n|---|---|---|"]
+    for k, v in rep["groups"].items():
+        L.append(f"| {k} | {v['name']} | {v['count']} |")
+    L.append("\n## 県別\n\n| 県 | " + " | ".join(rep["groups"]) + " | 計 |\n|---|" + "---|" * (len(rep["groups"]) + 1))
+    for p in ("toyama", "ishikawa", "gifu", "fukui", "nagano"):
+        if p in rep["by_pref"]:
+            b = rep["by_pref"][p]
+            L.append(f"| {PREF_NAMES[p]} | " + " | ".join(str(b[k]) for k in rep["groups"]) + f" | {sum(b.values())} |")
+    L.append("\n## G4（人手・追加証拠が必要）\n")
+    for o in rep["dams"]:
+        if o["evaluation_group"] == "G4":
+            ev = o["evidence"] or {}
+            ref = (ev.get("reference") or {})
+            L.append(f"- {o['id']} {o['name']} [{o['qa_class']}] 理由: {','.join(o['group_reasons'])}"
+                     + (f" | 参考面積誤差 {ref['error_pct']:+.1f}%" if ref.get("error_pct") is not None else ""))
+    return "\n".join(L) + "\n"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--report", type=Path, required=True)
@@ -100,6 +155,10 @@ def main() -> int:
     ap.add_argument("--spec", type=Path, default=Path(__file__).resolve().parent.parent / "dam_basin_spec.csv")
     ap.add_argument("--out", type=Path)
     ap.add_argument("--md", type=Path)
+    ap.add_argument("--obs-master", type=Path, help="観測所マスタ(obs_master.json)。座標の由来の証拠に使う")
+    ap.add_argument("--profiles", type=Path, help="ws_outlet_profile.py の出力。出口周辺の面積プロファイルの証拠に使う")
+    ap.add_argument("--evidence-out", type=Path, help="証拠値と評価区分の JSON")
+    ap.add_argument("--evidence-md", type=Path, help="証拠層の評価区分の要約")
     args = ap.parse_args()
 
     rep = json.loads(args.report.read_text(encoding="utf-8"))
@@ -150,6 +209,22 @@ def main() -> int:
     }
     if args.out:
         args.out.write_text(json.dumps(summary, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+    if args.evidence_out or args.evidence_md:
+        import build_basins as bb
+        bb.SPEC_CSV = args.spec
+        spec_rows = bb.load_spec({d["id"] for d in dams})          # dam_id 基準・入口の検証つき
+        obs = None
+        if args.obs_master:
+            obs = json.loads(args.obs_master.read_text(encoding="utf-8")).get("obs", {})
+        profiles = None
+        if args.profiles:
+            profiles = json.loads(args.profiles.read_text(encoding="utf-8")).get("profiles", {})
+        ev = build_evidence_report(cls, dams, metas, spec_rows, obs, profiles)
+        if args.evidence_out:
+            args.evidence_out.write_text(json.dumps(ev, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        if args.evidence_md:
+            args.evidence_md.write_text(evidence_markdown(ev), encoding="utf-8")
 
     lines = []
     lines.append(f"# 集水域QA 全{len(cls)}基の分類（outline=exact / evaluate-only）\n")

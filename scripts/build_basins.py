@@ -556,6 +556,15 @@ def load_spec(dam_ids=None) -> dict:
     旧実装は dam_name で引いていた。全国に広げると同名のダムが現れる（例: 別の県の
     「大谷ダム」）ため、名前一致では別のダムの流域面積を黙って当ててしまう。
     dam_id が空・重複・dams.json に無い行は SpecError にして止める。
+
+    直接・間接流域の「入口」（列）:
+      direct_km2 / indirect_km2 / total_km2  流域面積（km²）。分かっている値だけを書く
+      source                                 出典（例: ダム便覧）
+      basin_status                           confirmed（確認済み）/ unconfirmed（未確認）
+      note                                   備考
+    - unconfirmed の行は数値を持てない（推測値を入れさせない）。行が無いダムも「未確認」と同じ扱い。
+    - confirmed の行は、直接または合計の数値と、出典（source またはダム便覧番号）が必須。
+    - basin_status 列が無い旧形式は、数値の有無から推定する（互換）。
     """
     import csv
     if not SPEC_CSV.exists():
@@ -563,19 +572,65 @@ def load_spec(dam_ids=None) -> dict:
     out = {}
     with SPEC_CSV.open(encoding="utf-8-sig", newline="") as f:
         for n, r in enumerate(csv.DictReader(f), 2):
+            where = f"{SPEC_CSV.name} {n}行目"
             did = (r.get("dam_id") or "").strip()
             if not did:
-                raise SpecError(f"{SPEC_CSV.name} {n}行目（{r.get('dam_name')}）に dam_id がありません")
+                raise SpecError(f"{where}（{r.get('dam_name')}）に dam_id がありません")
             if did in out:
-                raise SpecError(f"{SPEC_CSV.name} {n}行目: dam_id {did} が重複しています")
+                raise SpecError(f"{where}: dam_id {did} が重複しています")
             if dam_ids is not None and did not in dam_ids:
-                raise SpecError(f"{SPEC_CSV.name} {n}行目: dam_id {did} は dams.json にありません")
+                raise SpecError(f"{where}: dam_id {did} は dams.json にありません")
+            _check_basin_columns(r, where)
             out[did] = r
     return out
 
 
+BASIN_STATUSES = ("confirmed", "unconfirmed")
+_BASIN_NUMBERS = ("total_km2", "direct_km2", "indirect_km2")
+
+
+def _check_basin_columns(r: dict, where: str) -> None:
+    """直接・間接流域の入口の検証。値は書き換えない（basin_status の推定を補うだけ）。"""
+    nums = {}
+    for k in _BASIN_NUMBERS:
+        v = (r.get(k) or "").strip()
+        if v:
+            try:
+                nums[k] = float(v)
+            except ValueError:
+                raise SpecError(f"{where}: {k} が数値ではありません: {v!r}")
+            if nums[k] < 0:
+                raise SpecError(f"{where}: {k} が負です: {v}")
+    status = (r.get("basin_status") or "").strip()
+    if status == "":
+        status = "confirmed" if ("direct_km2" in nums or "total_km2" in nums) else "unconfirmed"
+        r["basin_status"] = status
+    if status not in BASIN_STATUSES:
+        raise SpecError(f"{where}: basin_status は {BASIN_STATUSES} のいずれか: {status!r}")
+    if status == "unconfirmed" and nums:
+        raise SpecError(f"{where}: 未確認(unconfirmed)の行に数値は入れられません（{', '.join(nums)}）")
+    if status == "confirmed":
+        if "direct_km2" not in nums and "total_km2" not in nums:
+            raise SpecError(f"{where}: 確認済み(confirmed)の行には直接または合計の流域面積が必要です")
+        if not (r.get("source") or "").strip() and not (r.get("binran_no") or "").strip():
+            raise SpecError(f"{where}: 確認済み(confirmed)の行には出典(source)が必要です")
+
+
 def diversion_flag(spec: dict | None) -> dict:
     """導水（間接流域）の有無を機械判定する。判定できないものは未確認とする。"""
+    if spec and not spec.get("basin_raw") and (spec.get("basin_status") or "").strip() == "confirmed":
+        # 入口から直接・間接の数値だけを受け取った行（ダム便覧の原文 basin_raw が無い）
+        def _f(k):
+            v = (spec.get(k) or "").strip()
+            return float(v) if v else None
+        dr, ind, tot = _f("direct_km2"), _f("indirect_km2"), _f("total_km2")
+        if ind is not None and ind > 0:
+            return {"status": "yes", "direct_km2": dr, "indirect_km2": ind,
+                    "note": "他の河川からの導水があり、地形上の集水域と実際の集水範囲は一致しない"}
+        if ind == 0 or (dr is not None and tot is not None and dr == tot):
+            return {"status": "none", "direct_km2": dr if dr is not None else tot, "indirect_km2": 0.0,
+                    "note": "全て直接流域（入力された流域面積）"}
+        return {"status": "unknown", "note": "直接/間接の内訳が入力されていない"}
     if not spec or not spec.get("basin_raw"):
         return {"status": "unknown",
                 "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"}

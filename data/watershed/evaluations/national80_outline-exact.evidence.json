@@ -1,0 +1,11311 @@
+{
+ "evidence_version": "ws-evidence/1",
+ "note": "評価区分（G1〜G4）は人手監査へ送る量を見積もるための分類で、公開可否・掲載可否には接続しない。区分の規則が使う数値は既存の ±15%（参考面積との一致の目安）だけ。",
+ "ref_ok_pct": 15.0,
+ "groups": {
+  "G1": {
+   "name": "official_verified",
+   "count": 17
+  },
+  "G2": {
+   "name": "official_with_diversion",
+   "count": 3
+  },
+  "G3": {
+   "name": "reference_consistent",
+   "count": 50
+  },
+  "G4": {
+   "name": "needs_evidence",
+   "count": 10
+  }
+ },
+ "by_pref": {
+  "toyama": {
+   "G1": 17,
+   "G2": 3,
+   "G3": 2,
+   "G4": 1
+  },
+  "ishikawa": {
+   "G1": 0,
+   "G2": 0,
+   "G3": 10,
+   "G4": 2
+  },
+  "gifu": {
+   "G1": 0,
+   "G2": 0,
+   "G3": 11,
+   "G4": 0
+  },
+  "fukui": {
+   "G1": 0,
+   "G2": 0,
+   "G3": 9,
+   "G4": 4
+  },
+  "nagano": {
+   "G1": 0,
+   "G2": 0,
+   "G3": 18,
+   "G4": 3
+  }
+ },
+ "profiles_collected": true,
+ "dams": [
+  {
+   "id": "toyama-unazuki",
+   "name": "宇奈月ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 617.5,
+     "source": "川の防災情報",
+     "computed_km2": 608.76,
+     "error_pct": -1.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2155600700006",
+     "offset_m": 0.0,
+     "station_lat": 36.8102778,
+     "station_lon": 137.5902778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      608.74,
+      608.76,
+      608.85,
+      609.01,
+      627.23,
+      628.08
+     ],
+     "dist_m": [
+      97,
+      126,
+      252,
+      398,
+      753,
+      1342
+     ],
+     "downstream_km2": [
+      [
+       0,
+       608.76
+      ],
+      [
+       270,
+       608.99
+      ],
+      [
+       535,
+       609.09
+      ],
+      [
+       782,
+       627.23
+      ],
+      [
+       1029,
+       627.38
+      ],
+      [
+       1268,
+       627.94
+      ],
+      [
+       1526,
+       628.07
+      ],
+      [
+       1765,
+       633.36
+      ],
+      [
+       2036,
+       634.48
+      ],
+      [
+       2275,
+       634.61
+      ],
+      [
+       2520,
+       635.73
+      ],
+      [
+       2785,
+       635.98
+      ]
+     ],
+     "adopted_km2": 608.76,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 126,
+     "max_over_min_150_400": 1.0,
+     "max_over_min_150_1000": 1.032
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 608.76,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 617.5,
+     "indirect_km2": 0.0,
+     "total_km2": 617.5,
+     "source": "ダム便覧",
+     "binran_no": "0873",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-muromaki",
+   "name": "室牧ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "diversion_yes",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G2",
+   "group_name": "official_with_diversion",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 128.3,
+     "source": "川の防災情報",
+     "computed_km2": 84.17,
+     "error_pct": -34.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0409800700063",
+     "offset_m": 0.0,
+     "station_lat": 36.5383333,
+     "station_lon": 137.0916667
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      84.12,
+      84.17,
+      84.27,
+      84.4,
+      84.89,
+      85.22
+     ],
+     "dist_m": [
+      49,
+      151,
+      253,
+      413,
+      711,
+      1004
+     ],
+     "downstream_km2": [
+      [
+       0,
+       84.17
+      ],
+      [
+       262,
+       84.36
+      ],
+      [
+       509,
+       84.74
+      ],
+      [
+       756,
+       84.99
+      ],
+      [
+       1005,
+       85.23
+      ],
+      [
+       1267,
+       85.5
+      ],
+      [
+       1514,
+       85.67
+      ],
+      [
+       1752,
+       85.84
+      ],
+      [
+       2011,
+       86.22
+      ],
+      [
+       2262,
+       86.33
+      ],
+      [
+       2506,
+       86.39
+      ],
+      [
+       2769,
+       89.72
+      ]
+     ],
+     "adopted_km2": 84.17,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 151,
+     "max_over_min_150_400": 1.003,
+     "max_over_min_150_1000": 1.012
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 84.17,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 85.2,
+     "indirect_km2": 43.1,
+     "total_km2": 128.3,
+     "source": "ダム便覧",
+     "binran_no": "0846",
+     "diversion_status": "yes"
+    }
+   }
+  },
+  {
+   "id": "toyama-kumanogawa",
+   "name": "熊野川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 39.8,
+     "source": "川の防災情報",
+     "computed_km2": 39.75,
+     "error_pct": -0.1
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0409800700061",
+     "offset_m": 0.0,
+     "station_lat": 36.5597222,
+     "station_lon": 137.3122222
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      39.75,
+      39.99,
+      40.12,
+      40.57,
+      41.0
+     ],
+     "dist_m": [
+      65,
+      142,
+      246,
+      428,
+      704,
+      1001
+     ],
+     "downstream_km2": [
+      [
+       0,
+       39.75
+      ],
+      [
+       253,
+       40.04
+      ],
+      [
+       515,
+       40.41
+      ],
+      [
+       765,
+       40.58
+      ],
+      [
+       1007,
+       40.94
+      ],
+      [
+       1251,
+       41.09
+      ],
+      [
+       1504,
+       41.38
+      ],
+      [
+       1763,
+       41.63
+      ],
+      [
+       2010,
+       41.79
+      ],
+      [
+       2263,
+       41.99
+      ],
+      [
+       2507,
+       42.16
+      ],
+      [
+       2760,
+       42.4
+      ]
+     ],
+     "adopted_km2": 39.75,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 142,
+     "max_over_min_150_400": 1.009,
+     "max_over_min_150_1000": 1.031
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 39.75,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 39.8,
+     "indirect_km2": 0.0,
+     "total_km2": 39.8,
+     "source": "ダム便覧",
+     "binran_no": "0865",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-kubusugawa",
+   "name": "久婦須川ダム",
+   "pref": "toyama",
+   "qa_class": "PASS",
+   "qa_codes": [],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 58.7,
+     "source": "川の防災情報",
+     "computed_km2": 59.01,
+     "error_pct": 0.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0409800700062",
+     "offset_m": 0.0,
+     "station_lat": 36.5111111,
+     "station_lon": 137.1886111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.05,
+      59.12,
+      59.17,
+      60.94,
+      62.46,
+      63.26
+     ],
+     "dist_m": [
+      65,
+      151,
+      275,
+      554,
+      956,
+      1269
+     ],
+     "downstream_km2": [
+      [
+       0,
+       59.12
+      ],
+      [
+       266,
+       59.25
+      ],
+      [
+       513,
+       60.95
+      ],
+      [
+       761,
+       62.44
+      ],
+      [
+       1008,
+       62.46
+      ],
+      [
+       1261,
+       63.25
+      ],
+      [
+       1513,
+       63.64
+      ],
+      [
+       1751,
+       64.99
+      ],
+      [
+       2020,
+       66.8
+      ],
+      [
+       2258,
+       67.1
+      ],
+      [
+       2515,
+       67.2
+      ],
+      [
+       2753,
+       68.07
+      ]
+     ],
+     "adopted_km2": 59.01,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 503,
+     "max_over_min_150_400": 1.031,
+     "max_over_min_150_1000": 1.07
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 59.01,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      0.05,
+      59.12,
+      59.17,
+      60.94,
+      62.46,
+      63.26
+     ],
+     "diff_pct_by_radius": [
+      -99.9,
+      0.2,
+      0.3,
+      3.3,
+      5.8,
+      7.2
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.14,
+     "catchment_km2": 59.01,
+     "ratio_pct": 0.237,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 58.7,
+     "indirect_km2": 0.0,
+     "total_km2": 58.7,
+     "source": "ダム便覧",
+     "binran_no": "0879",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-wadagawa",
+   "name": "和田川ダム",
+   "pref": "toyama",
+   "qa_class": "PASS",
+   "qa_codes": [],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 34.0,
+     "source": "川の防災情報",
+     "computed_km2": 32.15,
+     "error_pct": -5.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410400700104",
+     "offset_m": 0.0,
+     "station_lat": 36.6547222,
+     "station_lon": 137.0397222
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      29.95,
+      30.14,
+      30.27,
+      30.36,
+      30.65,
+      31.07
+     ],
+     "dist_m": [
+      48,
+      145,
+      326,
+      512,
+      701,
+      1008
+     ],
+     "downstream_km2": [
+      [
+       0,
+       30.14
+      ],
+      [
+       250,
+       30.2
+      ],
+      [
+       512,
+       30.25
+      ],
+      [
+       765,
+       30.34
+      ],
+      [
+       1020,
+       30.46
+      ],
+      [
+       1261,
+       30.63
+      ],
+      [
+       1505,
+       31.02
+      ],
+      [
+       1770,
+       31.19
+      ],
+      [
+       2002,
+       31.4
+      ],
+      [
+       2251,
+       31.58
+      ],
+      [
+       2507,
+       31.83
+      ],
+      [
+       2760,
+       31.9
+      ]
+     ],
+     "adopted_km2": 32.15,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 1991,
+     "max_over_min_150_400": 1.007,
+     "max_over_min_150_1000": 1.031
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 32.15,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      29.95,
+      30.14,
+      30.27,
+      30.36,
+      30.65,
+      31.07
+     ],
+     "diff_pct_by_radius": [
+      -6.8,
+      -6.3,
+      -5.8,
+      -5.6,
+      -4.7,
+      -3.4
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.247,
+     "catchment_km2": 32.15,
+     "ratio_pct": 0.768,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 34.0,
+     "indirect_km2": 0.0,
+     "total_km2": 34.0,
+     "source": "ダム便覧",
+     "binran_no": "0854",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-togagawa",
+   "name": "利賀川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 38.0,
+     "source": "川の防災情報",
+     "computed_km2": 38.54,
+     "error_pct": 1.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410400700103",
+     "offset_m": 0.0,
+     "station_lat": 36.3277778,
+     "station_lon": 136.9986111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      38.46,
+      38.54,
+      38.63,
+      39.02,
+      39.91,
+      40.3
+     ],
+     "dist_m": [
+      46,
+      139,
+      258,
+      409,
+      778,
+      1082
+     ],
+     "downstream_km2": [
+      [
+       0,
+       38.54
+      ],
+      [
+       260,
+       38.9
+      ],
+      [
+       505,
+       39.02
+      ],
+      [
+       768,
+       39.17
+      ],
+      [
+       1013,
+       39.95
+      ],
+      [
+       1254,
+       40.1
+      ],
+      [
+       1516,
+       40.75
+      ],
+      [
+       1751,
+       41.2
+      ],
+      [
+       2018,
+       41.96
+      ],
+      [
+       2253,
+       42.23
+      ],
+      [
+       2514,
+       42.69
+      ],
+      [
+       2765,
+       42.98
+      ]
+     ],
+     "adopted_km2": 38.54,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 139,
+     "max_over_min_150_400": 1.012,
+     "max_over_min_150_1000": 1.046
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 38.54,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 38.0,
+     "indirect_km2": 0.0,
+     "total_km2": 38.0,
+     "source": "ダム便覧",
+     "binran_no": "0858",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-sakaigawa",
+   "name": "境川ダム",
+   "pref": "toyama",
+   "qa_class": "PASS",
+   "qa_codes": [],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 37.7,
+     "source": "川の防災情報",
+     "computed_km2": 37.6,
+     "error_pct": -0.3
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410400700101",
+     "offset_m": 0.0,
+     "station_lat": 36.3425,
+     "station_lon": 136.8394444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      22.98,
+      23.1,
+      23.1,
+      23.54,
+      23.95,
+      39.39
+     ],
+     "dist_m": [
+      49,
+      166,
+      263,
+      404,
+      697,
+      1170
+     ],
+     "downstream_km2": [
+      [
+       0,
+       23.1
+      ],
+      [
+       259,
+       23.54
+      ],
+      [
+       519,
+       23.95
+      ],
+      [
+       752,
+       37.64
+      ],
+      [
+       1012,
+       37.98
+      ],
+      [
+       1251,
+       38.74
+      ],
+      [
+       1520,
+       39.07
+      ],
+      [
+       1761,
+       39.23
+      ],
+      [
+       2002,
+       39.4
+      ],
+      [
+       2265,
+       39.89
+      ],
+      [
+       2518,
+       40.39
+      ],
+      [
+       2753,
+       40.63
+      ]
+     ],
+     "adopted_km2": 37.6,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 770,
+     "max_over_min_150_400": 1.019,
+     "max_over_min_150_1000": 1.705
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 37.6,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      22.98,
+      23.1,
+      23.1,
+      23.54,
+      23.95,
+      39.39
+     ],
+     "diff_pct_by_radius": [
+      -38.9,
+      -38.6,
+      -38.6,
+      -37.4,
+      -36.3,
+      4.8
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.987,
+     "catchment_km2": 37.6,
+     "ratio_pct": 2.625,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 37.7,
+     "indirect_km2": 0.0,
+     "total_km2": 37.7,
+     "source": "ダム便覧",
+     "binran_no": "0870",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-tori",
+   "name": "刀利ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 45.9,
+     "source": "川の防災情報",
+     "computed_km2": 45.65,
+     "error_pct": -0.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410400700122",
+     "offset_m": 0.0,
+     "station_lat": 36.4672222,
+     "station_lon": 136.8102778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.03,
+      0.06,
+      0.14,
+      45.65,
+      46.39,
+      46.66
+     ],
+     "dist_m": [
+      49,
+      146,
+      248,
+      504,
+      840,
+      1045
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.06
+      ],
+      [
+       253,
+       0.15
+      ],
+      [
+       503,
+       45.65
+      ],
+      [
+       754,
+       45.75
+      ],
+      [
+       1007,
+       46.37
+      ],
+      [
+       1260,
+       46.5
+      ],
+      [
+       1501,
+       46.61
+      ],
+      [
+       1757,
+       47.43
+      ],
+      [
+       2013,
+       48.01
+      ],
+      [
+       2251,
+       48.25
+      ],
+      [
+       2511,
+       48.43
+      ],
+      [
+       2752,
+       48.71
+      ]
+     ],
+     "adopted_km2": 45.65,
+     "adopted_method": "snap",
+     "snap_radius_m": 400.0,
+     "outlet_distance_m": 504,
+     "max_over_min_150_400": 760.833,
+     "max_over_min_150_1000": 777.667
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 45.65,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 45.9,
+     "indirect_km2": 0.0,
+     "total_km2": 45.9,
+     "source": "ダム便覧",
+     "binran_no": "0853",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-goi",
+   "name": "五位ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 13.8,
+     "source": "川の防災情報",
+     "computed_km2": 13.24,
+     "error_pct": -4.1
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2053400700051",
+     "offset_m": 0.0,
+     "station_lat": 36.7525,
+     "station_lon": 136.8830556
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      13.24,
+      13.25,
+      14.49,
+      15.76,
+      15.98
+     ],
+     "dist_m": [
+      48,
+      185,
+      271,
+      412,
+      843,
+      1206
+     ],
+     "downstream_km2": [
+      [
+       0,
+       13.24
+      ],
+      [
+       256,
+       14.49
+      ],
+      [
+       503,
+       15.62
+      ],
+      [
+       753,
+       15.69
+      ],
+      [
+       1007,
+       15.77
+      ],
+      [
+       1253,
+       15.93
+      ],
+      [
+       1510,
+       15.97
+      ],
+      [
+       1752,
+       16.95
+      ],
+      [
+       2001,
+       17.3
+      ],
+      [
+       2250,
+       17.38
+      ],
+      [
+       2502,
+       18.28
+      ],
+      [
+       2757,
+       18.47
+      ]
+     ],
+     "adopted_km2": 13.24,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 185,
+     "max_over_min_150_400": 1.094,
+     "max_over_min_150_1000": 1.207
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 13.24,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 13.8,
+     "indirect_km2": 0.0,
+     "total_km2": 13.8,
+     "source": "ダム便覧",
+     "binran_no": "0872",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-konadegawa",
+   "name": "子撫川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 31.8,
+     "source": "川の防災情報",
+     "computed_km2": 32.08,
+     "error_pct": 0.9
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410500700121",
+     "offset_m": 0.0,
+     "station_lat": 36.725,
+     "station_lon": 136.8541667
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      32.0,
+      32.08,
+      32.2,
+      32.52,
+      34.0,
+      34.16
+     ],
+     "dist_m": [
+      55,
+      158,
+      336,
+      493,
+      804,
+      1131
+     ],
+     "downstream_km2": [
+      [
+       0,
+       32.08
+      ],
+      [
+       259,
+       32.2
+      ],
+      [
+       514,
+       32.54
+      ],
+      [
+       766,
+       32.65
+      ],
+      [
+       1010,
+       32.68
+      ],
+      [
+       1262,
+       33.53
+      ],
+      [
+       1502,
+       33.67
+      ],
+      [
+       1766,
+       33.74
+      ],
+      [
+       2015,
+       33.85
+      ],
+      [
+       2261,
+       33.97
+      ],
+      [
+       2501,
+       34.04
+      ],
+      [
+       2757,
+       34.13
+      ]
+     ],
+     "adopted_km2": 32.08,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 158,
+     "max_over_min_150_400": 1.014,
+     "max_over_min_150_1000": 1.065
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 32.08,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 31.8,
+     "indirect_km2": 0.0,
+     "total_km2": 31.8,
+     "source": "ダム便覧",
+     "binran_no": "0863",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-johana",
+   "name": "城端ダム",
+   "pref": "toyama",
+   "qa_class": "PASS",
+   "qa_codes": [],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 10.8,
+     "source": "川の防災情報",
+     "computed_km2": 10.31,
+     "error_pct": -4.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410400700102",
+     "offset_m": 0.0,
+     "station_lat": 36.4838889,
+     "station_lon": 136.87
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      10.31,
+      10.36,
+      10.72,
+      10.79,
+      10.97,
+      11.39
+     ],
+     "dist_m": [
+      65,
+      153,
+      268,
+      414,
+      749,
+      1067
+     ],
+     "downstream_km2": [
+      [
+       0,
+       10.36
+      ],
+      [
+       256,
+       10.74
+      ],
+      [
+       508,
+       10.84
+      ],
+      [
+       754,
+       10.97
+      ],
+      [
+       1010,
+       11.37
+      ],
+      [
+       1257,
+       11.49
+      ],
+      [
+       1503,
+       11.57
+      ],
+      [
+       1758,
+       11.73
+      ],
+      [
+       2002,
+       11.82
+      ],
+      [
+       2252,
+       11.93
+      ],
+      [
+       2503,
+       12.4
+      ],
+      [
+       2755,
+       12.47
+      ]
+     ],
+     "adopted_km2": 10.31,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 306,
+     "max_over_min_150_400": 1.042,
+     "max_over_min_150_1000": 1.099
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 10.31,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      10.31,
+      10.36,
+      10.72,
+      10.79,
+      10.97,
+      11.39
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.5,
+      4.0,
+      4.7,
+      6.4,
+      10.5
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.108,
+     "catchment_km2": 10.31,
+     "ratio_pct": 1.048,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 10.8,
+     "indirect_km2": 0.0,
+     "total_km2": 10.8,
+     "source": "ダム便覧",
+     "binran_no": "0877",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-usunaka",
+   "name": "臼中ダム",
+   "pref": "toyama",
+   "qa_class": "PASS",
+   "qa_codes": [],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 48.2,
+     "source": "川の防災情報",
+     "computed_km2": 13.12,
+     "error_pct": -72.8
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410400700123",
+     "offset_m": 0.0,
+     "station_lat": 36.4669444,
+     "station_lon": 136.8558333
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.02,
+      8.43,
+      8.6,
+      14.59,
+      14.87,
+      15.7
+     ],
+     "dist_m": [
+      47,
+      158,
+      249,
+      499,
+      864,
+      1228
+     ],
+     "downstream_km2": [
+      [
+       0,
+       8.43
+      ],
+      [
+       254,
+       13.62
+      ],
+      [
+       501,
+       14.58
+      ],
+      [
+       752,
+       14.77
+      ],
+      [
+       1009,
+       14.94
+      ],
+      [
+       1255,
+       15.61
+      ],
+      [
+       1500,
+       15.96
+      ],
+      [
+       1757,
+       16.16
+      ],
+      [
+       2005,
+       16.43
+      ],
+      [
+       2255,
+       16.54
+      ],
+      [
+       2502,
+       16.65
+      ],
+      [
+       2752,
+       17.38
+      ]
+     ],
+     "adopted_km2": 13.12,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 300,
+     "max_over_min_150_400": 1.731,
+     "max_over_min_150_1000": 1.862
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 13.12,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      0.02,
+      8.43,
+      8.6,
+      14.59,
+      14.87,
+      15.7
+     ],
+     "diff_pct_by_radius": [
+      -99.8,
+      -35.7,
+      -34.5,
+      11.2,
+      13.3,
+      19.7
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.126,
+     "catchment_km2": 13.12,
+     "ratio_pct": 0.96,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 13.5,
+     "indirect_km2": 0.0,
+     "total_km2": 13.5,
+     "source": "ダム便覧",
+     "binran_no": "0869",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-asahiogawa",
+   "name": "朝日小川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 68.2,
+     "source": "川の防災情報",
+     "computed_km2": 29.18,
+     "error_pct": -57.2
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410200700001",
+     "offset_m": 0.0,
+     "station_lat": 36.8880556,
+     "station_lon": 137.6177778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.03,
+      29.18,
+      29.23,
+      29.58,
+      29.85,
+      30.48
+     ],
+     "dist_m": [
+      48,
+      205,
+      325,
+      511,
+      864,
+      1235
+     ],
+     "downstream_km2": [
+      [
+       0,
+       29.18
+      ],
+      [
+       256,
+       29.55
+      ],
+      [
+       508,
+       29.73
+      ],
+      [
+       761,
+       29.86
+      ],
+      [
+       1007,
+       30.45
+      ],
+      [
+       1255,
+       30.53
+      ],
+      [
+       1506,
+       34.7
+      ],
+      [
+       1760,
+       34.93
+      ],
+      [
+       2005,
+       35.11
+      ],
+      [
+       2255,
+       42.97
+      ],
+      [
+       2508,
+       43.71
+      ],
+      [
+       2754,
+       43.83
+      ]
+     ],
+     "adopted_km2": 29.18,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 205,
+     "max_over_min_150_400": 1.014,
+     "max_over_min_150_1000": 1.045
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 29.18,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 28.3,
+     "indirect_km2": 0.0,
+     "total_km2": 28.3,
+     "source": "ダム便覧",
+     "binran_no": "0878",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-kadokawa",
+   "name": "角川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 16.2,
+     "source": "川の防災情報",
+     "computed_km2": 16.03,
+     "error_pct": -1.0
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410100700021",
+     "offset_m": 0.0,
+     "station_lat": 36.7536111,
+     "station_lon": 137.4305556
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.14,
+      16.03,
+      16.15,
+      16.25,
+      39.48,
+      39.65
+     ],
+     "dist_m": [
+      60,
+      168,
+      262,
+      456,
+      727,
+      999
+     ],
+     "downstream_km2": [
+      [
+       0,
+       16.03
+      ],
+      [
+       251,
+       16.17
+      ],
+      [
+       502,
+       16.3
+      ],
+      [
+       751,
+       16.63
+      ],
+      [
+       1006,
+       16.93
+      ],
+      [
+       1257,
+       17.96
+      ],
+      [
+       1506,
+       18.19
+      ],
+      [
+       1753,
+       18.59
+      ],
+      [
+       2003,
+       18.78
+      ],
+      [
+       2257,
+       20.46
+      ],
+      [
+       2502,
+       21.12
+      ],
+      [
+       2759,
+       21.6
+      ]
+     ],
+     "adopted_km2": 16.03,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 168,
+     "max_over_min_150_400": 1.014,
+     "max_over_min_150_1000": 2.473
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 16.03,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 16.2,
+     "indirect_km2": 0.0,
+     "total_km2": 16.2,
+     "source": "ダム便覧",
+     "binran_no": "0862",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-kamiichigawa",
+   "name": "上市川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 44.7,
+     "source": "川の防災情報",
+     "computed_km2": 45.91,
+     "error_pct": 2.7
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410000700041",
+     "offset_m": 0.0,
+     "station_lat": 36.6780556,
+     "station_lon": 137.4152778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      45.91,
+      46.54,
+      46.63,
+      46.82,
+      49.5
+     ],
+     "dist_m": [
+      46,
+      195,
+      274,
+      468,
+      864,
+      1238
+     ],
+     "downstream_km2": [
+      [
+       0,
+       45.91
+      ],
+      [
+       268,
+       46.53
+      ],
+      [
+       509,
+       46.63
+      ],
+      [
+       764,
+       46.76
+      ],
+      [
+       1005,
+       46.82
+      ],
+      [
+       1271,
+       49.47
+      ],
+      [
+       1518,
+       49.64
+      ],
+      [
+       1759,
+       50.79
+      ],
+      [
+       2003,
+       50.99
+      ],
+      [
+       2250,
+       51.26
+      ],
+      [
+       2518,
+       51.39
+      ],
+      [
+       2762,
+       51.83
+      ]
+     ],
+     "adopted_km2": 45.91,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 195,
+     "max_over_min_150_400": 1.016,
+     "max_over_min_150_1000": 1.078
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 45.91,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 44.7,
+     "indirect_km2": 0.0,
+     "total_km2": 44.7,
+     "source": "ダム便覧",
+     "binran_no": "0850",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-kamiichigawa-daini",
+   "name": "上市川第二ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 38.7,
+     "source": "川の防災情報",
+     "computed_km2": 39.57,
+     "error_pct": 2.2
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410000700042",
+     "offset_m": 0.0,
+     "station_lat": 36.6697222,
+     "station_lon": 137.4344444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      39.57,
+      39.63,
+      40.3,
+      40.6,
+      44.93
+     ],
+     "dist_m": [
+      48,
+      138,
+      250,
+      413,
+      755,
+      1315
+     ],
+     "downstream_km2": [
+      [
+       0,
+       39.57
+      ],
+      [
+       259,
+       40.29
+      ],
+      [
+       503,
+       40.37
+      ],
+      [
+       759,
+       40.71
+      ],
+      [
+       1014,
+       44.66
+      ],
+      [
+       1267,
+       44.85
+      ],
+      [
+       1508,
+       45.03
+      ],
+      [
+       1754,
+       45.23
+      ],
+      [
+       2001,
+       45.38
+      ],
+      [
+       2260,
+       45.53
+      ],
+      [
+       2515,
+       45.98
+      ],
+      [
+       2756,
+       46.63
+      ]
+     ],
+     "adopted_km2": 39.57,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 138,
+     "max_over_min_150_400": 1.018,
+     "max_over_min_150_1000": 1.135
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 39.57,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 38.7,
+     "indirect_km2": 0.0,
+     "total_km2": 38.7,
+     "source": "ダム便覧",
+     "binran_no": "0867",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-shiraiwagawa",
+   "name": "白岩川ダム",
+   "pref": "toyama",
+   "qa_class": "HOLD",
+   "qa_codes": [
+    "manual_hold",
+    "area_error"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "qa_not_passed"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 24.0,
+     "source": "川の防災情報",
+     "computed_km2": 27.95,
+     "error_pct": 16.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410000700043",
+     "offset_m": 0.0,
+     "station_lat": 36.6394444,
+     "station_lon": 137.36
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      22.39,
+      22.43,
+      22.5,
+      25.66,
+      31.48,
+      32.15
+     ],
+     "dist_m": [
+      51,
+      146,
+      253,
+      400,
+      789,
+      1012
+     ],
+     "downstream_km2": [
+      [
+       0,
+       22.43
+      ],
+      [
+       253,
+       25.56
+      ],
+      [
+       509,
+       25.72
+      ],
+      [
+       751,
+       25.78
+      ],
+      [
+       1000,
+       31.5
+      ],
+      [
+       1254,
+       32.08
+      ],
+      [
+       1504,
+       32.32
+      ],
+      [
+       1755,
+       32.42
+      ],
+      [
+       2005,
+       32.55
+      ],
+      [
+       2257,
+       32.62
+      ],
+      [
+       2504,
+       33.47
+      ],
+      [
+       2755,
+       40.38
+      ]
+     ],
+     "adopted_km2": 27.95,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 542,
+     "max_over_min_150_400": 1.144,
+     "max_over_min_150_1000": 1.433
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 27.95,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      22.39,
+      22.43,
+      22.5,
+      25.66,
+      31.48,
+      32.15
+     ],
+     "diff_pct_by_radius": [
+      -19.9,
+      -19.7,
+      -19.5,
+      -8.2,
+      12.6,
+      15.0
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.049,
+     "catchment_km2": 27.95,
+     "ratio_pct": 0.175,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 24.0,
+     "indirect_km2": 0.0,
+     "total_km2": 24.0,
+     "source": "ダム便覧",
+     "binran_no": "0859",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-funagawa",
+   "name": "舟川ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 3.44,
+     "source": "川の防災情報",
+     "computed_km2": 3.51,
+     "error_pct": 2.0
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410200700003",
+     "offset_m": 0.0,
+     "station_lat": 36.8704972,
+     "station_lon": 137.5850111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      3.43,
+      3.51,
+      3.65,
+      3.71,
+      6.75,
+      7.05
+     ],
+     "dist_m": [
+      51,
+      195,
+      346,
+      526,
+      882,
+      1155
+     ],
+     "downstream_km2": [
+      [
+       0,
+       3.51
+      ],
+      [
+       253,
+       3.66
+      ],
+      [
+       503,
+       5.43
+      ],
+      [
+       756,
+       6.69
+      ],
+      [
+       1000,
+       6.79
+      ],
+      [
+       1256,
+       7.32
+      ],
+      [
+       1509,
+       7.73
+      ],
+      [
+       1754,
+       7.86
+      ],
+      [
+       2007,
+       8.12
+      ],
+      [
+       2251,
+       8.48
+      ],
+      [
+       2507,
+       9.08
+      ],
+      [
+       2755,
+       9.18
+      ]
+     ],
+     "adopted_km2": 3.51,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 195,
+     "max_over_min_150_400": 1.057,
+     "max_over_min_150_1000": 2.009
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 3.51,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "toyama-fusegawa",
+   "name": "布施川ダム",
+   "pref": "toyama",
+   "qa_class": "PASS",
+   "qa_codes": [],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 13.0,
+     "source": "川の防災情報",
+     "computed_km2": 13.21,
+     "error_pct": 1.6
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410100700022",
+     "offset_m": 0.0,
+     "station_lat": 36.8041667,
+     "station_lon": 137.5183333
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.01,
+      13.4,
+      13.64,
+      13.7,
+      14.19,
+      14.96
+     ],
+     "dist_m": [
+      65,
+      176,
+      267,
+      445,
+      754,
+      1109
+     ],
+     "downstream_km2": [
+      [
+       0,
+       13.4
+      ],
+      [
+       250,
+       13.68
+      ],
+      [
+       504,
+       13.98
+      ],
+      [
+       759,
+       14.19
+      ],
+      [
+       1003,
+       14.55
+      ],
+      [
+       1255,
+       14.96
+      ],
+      [
+       1503,
+       15.04
+      ],
+      [
+       1754,
+       16.08
+      ],
+      [
+       2003,
+       17.71
+      ],
+      [
+       2252,
+       17.77
+      ],
+      [
+       2505,
+       18.08
+      ],
+      [
+       2757,
+       18.13
+      ]
+     ],
+     "adopted_km2": 13.21,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 146,
+     "max_over_min_150_400": 1.022,
+     "max_over_min_150_1000": 1.116
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 13.21,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      0.01,
+      13.4,
+      13.64,
+      13.7,
+      14.19,
+      14.96
+     ],
+     "diff_pct_by_radius": [
+      -99.9,
+      1.4,
+      3.3,
+      3.7,
+      7.4,
+      13.2
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.072,
+     "catchment_km2": 13.21,
+     "ratio_pct": 0.545,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 13.0,
+     "indirect_km2": 0.0,
+     "total_km2": 13.0,
+     "source": "ダム便覧",
+     "binran_no": "0876",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 1.5,
+     "source": "川の防災情報",
+     "computed_km2": 1.48,
+     "error_pct": -1.3
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0410200700002",
+     "offset_m": 0.0,
+     "station_lat": 36.8558333,
+     "station_lon": 137.4863889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.44,
+      1.48,
+      1.52,
+      1.76,
+      1.91,
+      2.42
+     ],
+     "dist_m": [
+      65,
+      148,
+      245,
+      406,
+      730,
+      1115
+     ],
+     "downstream_km2": [
+      [
+       0,
+       1.48
+      ],
+      [
+       252,
+       1.66
+      ],
+      [
+       509,
+       1.85
+      ],
+      [
+       755,
+       1.95
+      ],
+      [
+       1003,
+       2.07
+      ],
+      [
+       1255,
+       2.46
+      ],
+      [
+       1506,
+       2.58
+      ],
+      [
+       1754,
+       2.69
+      ],
+      [
+       2001,
+       3.22
+      ],
+      [
+       2250,
+       3.31
+      ],
+      [
+       2503,
+       4.14
+      ],
+      [
+       2755,
+       4.4
+      ]
+     ],
+     "adopted_km2": 1.48,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 148,
+     "max_over_min_150_400": 1.189,
+     "max_over_min_150_1000": 1.635
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 1.48,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "toyama-kurobe",
+   "name": "黒部ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "diversion_yes"
+   ],
+   "evaluation_group": "G2",
+   "group_name": "official_with_diversion",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": null,
+     "source": null,
+     "computed_km2": 181.09,
+     "error_pct": null
+    },
+    "coordinate": {
+     "class": "no_station_master",
+     "station_fcd": null,
+     "offset_m": null
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      181.19,
+      181.2,
+      181.25,
+      185.79,
+      186.38,
+      188.31
+     ],
+     "dist_m": [
+      92,
+      123,
+      247,
+      404,
+      800,
+      1039
+     ],
+     "downstream_km2": [
+      [
+       0,
+       181.2
+      ],
+      [
+       271,
+       185.78
+      ],
+      [
+       506,
+       186.11
+      ],
+      [
+       790,
+       186.37
+      ],
+      [
+       1030,
+       186.46
+      ],
+      [
+       1258,
+       188.47
+      ],
+      [
+       1529,
+       188.65
+      ],
+      [
+       1782,
+       188.75
+      ],
+      [
+       2022,
+       189.41
+      ],
+      [
+       2288,
+       197.27
+      ],
+      [
+       2515,
+       197.33
+      ],
+      [
+       2768,
+       199.21
+      ]
+     ],
+     "adopted_km2": 181.09,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 223,
+     "max_over_min_150_400": 1.025,
+     "max_over_min_150_1000": 1.039
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 181.09,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      181.19,
+      181.2,
+      181.25,
+      185.79,
+      186.38,
+      188.31
+     ],
+     "diff_pct_by_radius": [
+      0.1,
+      0.1,
+      0.1,
+      2.6,
+      2.9,
+      4.0
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.14,
+     "catchment_km2": 181.09,
+     "ratio_pct": 0.63,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 184.5,
+     "indirect_km2": 4.0,
+     "total_km2": 188.5,
+     "source": "ダム便覧",
+     "binran_no": "0848",
+     "diversion_status": "yes"
+    }
+   }
+  },
+  {
+   "id": "toyama-arimine",
+   "name": "有峰ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "diversion_yes"
+   ],
+   "evaluation_group": "G2",
+   "group_name": "official_with_diversion",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": null,
+     "source": null,
+     "computed_km2": 50.44,
+     "error_pct": null
+    },
+    "coordinate": {
+     "class": "no_station_master",
+     "station_fcd": null,
+     "offset_m": null
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      45.64,
+      50.52,
+      50.66,
+      50.7,
+      55.86,
+      56.22
+     ],
+     "dist_m": [
+      130,
+      174,
+      263,
+      428,
+      677,
+      1000
+     ],
+     "downstream_km2": [
+      [
+       0,
+       50.52
+      ],
+      [
+       271,
+       50.7
+      ],
+      [
+       507,
+       55.74
+      ],
+      [
+       773,
+       55.98
+      ],
+      [
+       1008,
+       56.13
+      ],
+      [
+       1279,
+       56.35
+      ],
+      [
+       1502,
+       57.01
+      ],
+      [
+       1755,
+       57.27
+      ],
+      [
+       2008,
+       58.02
+      ],
+      [
+       2274,
+       58.2
+      ],
+      [
+       2509,
+       58.32
+      ],
+      [
+       2793,
+       58.76
+      ]
+     ],
+     "adopted_km2": 50.44,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 31,
+     "max_over_min_150_400": 1.004,
+     "max_over_min_150_1000": 1.113
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 50.44,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      45.64,
+      50.52,
+      50.66,
+      50.7,
+      55.86,
+      56.22
+     ],
+     "diff_pct_by_radius": [
+      -9.5,
+      0.2,
+      0.4,
+      0.5,
+      10.7,
+      11.5
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.545,
+     "catchment_km2": 50.44,
+     "ratio_pct": 3.063,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 49.9,
+     "indirect_km2": 170.0,
+     "total_km2": 219.9,
+     "source": "ダム便覧",
+     "binran_no": "0841",
+     "diversion_status": "yes"
+    }
+   }
+  },
+  {
+   "id": "toyama-dashidaira",
+   "name": "出し平ダム",
+   "pref": "toyama",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G1",
+   "group_name": "official_verified",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": null,
+     "source": null,
+     "computed_km2": 459.82,
+     "error_pct": null
+    },
+    "coordinate": {
+     "class": "no_station_master",
+     "station_fcd": null,
+     "offset_m": null
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      459.8,
+      459.82,
+      461.45,
+      461.78,
+      462.23,
+      463.03
+     ],
+     "dist_m": [
+      92,
+      126,
+      289,
+      452,
+      698,
+      1095
+     ],
+     "downstream_km2": [
+      [
+       0,
+       459.82
+      ],
+      [
+       278,
+       461.65
+      ],
+      [
+       512,
+       462.15
+      ],
+      [
+       752,
+       462.25
+      ],
+      [
+       1029,
+       462.75
+      ],
+      [
+       1269,
+       463.09
+      ],
+      [
+       1534,
+       463.48
+      ],
+      [
+       1756,
+       463.6
+      ],
+      [
+       2003,
+       463.77
+      ],
+      [
+       2268,
+       464.09
+      ],
+      [
+       2538,
+       580.59
+      ],
+      [
+       2760,
+       580.96
+      ]
+     ],
+     "adopted_km2": 459.82,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 126,
+     "max_over_min_150_400": 1.004,
+     "max_over_min_150_1000": 1.007
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 459.82,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": true,
+     "status": "confirmed",
+     "direct_km2": 461.2,
+     "indirect_km2": 0.0,
+     "total_km2": 461.2,
+     "source": "ダム便覧",
+     "binran_no": "0881",
+     "diversion_status": "none"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-tedorigawa",
+   "name": "手取川ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 247.23,
+     "source": "川の防災情報",
+     "computed_km2": 247.35,
+     "error_pct": 0.0
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2156500700001",
+     "offset_m": 605.6,
+     "station_lat": 36.2652778,
+     "station_lon": 136.6438889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.3,
+      1.32,
+      1.34,
+      1.86,
+      245.82,
+      251.01
+     ],
+     "dist_m": [
+      131,
+      174,
+      291,
+      375,
+      787,
+      1197
+     ],
+     "downstream_km2": [
+      [
+       0,
+       1.32
+      ],
+      [
+       272,
+       1.36
+      ],
+      [
+       526,
+       1.44
+      ],
+      [
+       780,
+       247.35
+      ],
+      [
+       1003,
+       248.62
+      ],
+      [
+       1257,
+       248.97
+      ],
+      [
+       1516,
+       249.35
+      ],
+      [
+       1770,
+       249.48
+      ],
+      [
+       2037,
+       250.9
+      ],
+      [
+       2286,
+       251.01
+      ],
+      [
+       2527,
+       251.15
+      ],
+      [
+       2776,
+       251.3
+      ]
+     ],
+     "adopted_km2": 247.35,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 830,
+     "max_over_min_150_400": 1.409,
+     "max_over_min_150_1000": 190.159
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 247.35,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      1.3,
+      1.32,
+      1.34,
+      1.86,
+      245.82,
+      251.01
+     ],
+     "diff_pct_by_radius": [
+      -99.5,
+      -99.5,
+      -99.5,
+      -99.2,
+      -0.6,
+      1.5
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.354,
+     "catchment_km2": 247.35,
+     "ratio_pct": 0.547,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-dainichigawa",
+   "name": "大日川ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 56.49,
+     "source": "川の防災情報",
+     "computed_km2": 56.54,
+     "error_pct": 0.1
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700021",
+     "offset_m": 34.7,
+     "station_lat": 36.2894444,
+     "station_lon": 136.5797222
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      56.56,
+      56.75,
+      56.88,
+      56.95,
+      61.7,
+      61.88
+     ],
+     "dist_m": [
+      65,
+      146,
+      247,
+      400,
+      825,
+      1116
+     ],
+     "downstream_km2": [
+      [
+       0,
+       56.75
+      ],
+      [
+       264,
+       56.92
+      ],
+      [
+       512,
+       61.16
+      ],
+      [
+       765,
+       61.3
+      ],
+      [
+       1010,
+       61.42
+      ],
+      [
+       1258,
+       61.54
+      ],
+      [
+       1509,
+       61.71
+      ],
+      [
+       1757,
+       61.81
+      ],
+      [
+       2014,
+       61.9
+      ],
+      [
+       2262,
+       62.11
+      ],
+      [
+       2500,
+       62.19
+      ],
+      [
+       2763,
+       62.65
+      ]
+     ],
+     "adopted_km2": 56.54,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 132,
+     "max_over_min_150_400": 1.004,
+     "max_over_min_150_1000": 1.09
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 56.54,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      56.56,
+      56.75,
+      56.88,
+      56.95,
+      61.7,
+      61.88
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.4,
+      0.6,
+      0.7,
+      9.1,
+      9.4
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.977,
+     "catchment_km2": 56.54,
+     "ratio_pct": 1.728,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-uchikawa",
+   "name": "内川ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 34.45,
+     "source": "川の防災情報",
+     "computed_km2": 35.09,
+     "error_pct": 1.9
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700062",
+     "offset_m": 103.9,
+     "station_lat": 36.4725,
+     "station_lon": 136.6688889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      34.97,
+      35.09,
+      35.15,
+      35.23,
+      36.55,
+      37.01
+     ],
+     "dist_m": [
+      46,
+      196,
+      275,
+      402,
+      724,
+      1113
+     ],
+     "downstream_km2": [
+      [
+       0,
+       35.09
+      ],
+      [
+       253,
+       35.22
+      ],
+      [
+       507,
+       36.25
+      ],
+      [
+       766,
+       36.7
+      ],
+      [
+       1013,
+       36.83
+      ],
+      [
+       1254,
+       37.02
+      ],
+      [
+       1514,
+       37.29
+      ],
+      [
+       1754,
+       37.65
+      ],
+      [
+       2013,
+       37.86
+      ],
+      [
+       2261,
+       37.91
+      ],
+      [
+       2501,
+       38.26
+      ],
+      [
+       2758,
+       38.54
+      ]
+     ],
+     "adopted_km2": 35.09,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 196,
+     "max_over_min_150_400": 1.004,
+     "max_over_min_150_1000": 1.055
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 35.09,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-shin-uchikawa",
+   "name": "新内川ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 37.25,
+     "source": "川の防災情報",
+     "computed_km2": 38.52,
+     "error_pct": 3.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0435300700063",
+     "offset_m": 0.0,
+     "station_lat": 36.4886111,
+     "station_lon": 136.6808333
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      38.28,
+      38.52,
+      38.64,
+      41.29,
+      41.59,
+      41.93
+     ],
+     "dist_m": [
+      55,
+      175,
+      348,
+      533,
+      840,
+      1142
+     ],
+     "downstream_km2": [
+      [
+       0,
+       38.52
+      ],
+      [
+       260,
+       38.65
+      ],
+      [
+       507,
+       41.38
+      ],
+      [
+       765,
+       41.59
+      ],
+      [
+       1009,
+       41.88
+      ],
+      [
+       1256,
+       41.98
+      ],
+      [
+       1513,
+       42.33
+      ],
+      [
+       1754,
+       43.18
+      ],
+      [
+       2010,
+       43.26
+      ],
+      [
+       2250,
+       54.14
+      ],
+      [
+       2516,
+       54.28
+      ],
+      [
+       2763,
+       54.38
+      ]
+     ],
+     "adopted_km2": 38.52,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 175,
+     "max_over_min_150_400": 1.072,
+     "max_over_min_150_1000": 1.089
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 38.52,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-saigawa",
+   "name": "犀川ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 57.8,
+     "source": "川の防災情報",
+     "computed_km2": 56.21,
+     "error_pct": -2.8
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700061",
+     "offset_m": 330.6,
+     "station_lat": 36.4288889,
+     "station_lon": 136.7466667
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      56.23,
+      57.0,
+      58.4,
+      59.03,
+      60.29
+     ],
+     "dist_m": [
+      65,
+      142,
+      299,
+      486,
+      815,
+      1289
+     ],
+     "downstream_km2": [
+      [
+       0,
+       56.23
+      ],
+      [
+       265,
+       56.99
+      ],
+      [
+       506,
+       58.34
+      ],
+      [
+       759,
+       58.42
+      ],
+      [
+       1016,
+       59.03
+      ],
+      [
+       1264,
+       59.44
+      ],
+      [
+       1511,
+       59.56
+      ],
+      [
+       1767,
+       60.36
+      ],
+      [
+       2020,
+       60.95
+      ],
+      [
+       2252,
+       61.53
+      ],
+      [
+       2505,
+       61.71
+      ],
+      [
+       2768,
+       63.56
+      ]
+     ],
+     "adopted_km2": 56.21,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 791,
+     "max_over_min_150_400": 1.039,
+     "max_over_min_150_1000": 1.072
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 56.21,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      0.0,
+      56.23,
+      57.0,
+      58.4,
+      59.03,
+      60.29
+     ],
+     "diff_pct_by_radius": [
+      -100.0,
+      0.0,
+      1.4,
+      3.9,
+      5.0,
+      7.3
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.168,
+     "catchment_km2": 56.21,
+     "ratio_pct": 0.299,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-tatsumi",
+   "name": "辰巳ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 77.1,
+     "source": "川の防災情報",
+     "computed_km2": 77.84,
+     "error_pct": 1.0
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700065",
+     "offset_m": 111.3,
+     "station_lat": 36.4988889,
+     "station_lon": 136.7138889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      77.84,
+      78.14,
+      78.42,
+      78.6,
+      79.28
+     ],
+     "dist_m": [
+      65,
+      185,
+      307,
+      554,
+      822,
+      1328
+     ],
+     "downstream_km2": [
+      [
+       0,
+       77.84
+      ],
+      [
+       266,
+       78.18
+      ],
+      [
+       500,
+       78.46
+      ],
+      [
+       753,
+       78.6
+      ],
+      [
+       1004,
+       78.85
+      ],
+      [
+       1253,
+       79.0
+      ],
+      [
+       1507,
+       79.31
+      ],
+      [
+       1754,
+       79.48
+      ],
+      [
+       2000,
+       79.64
+      ],
+      [
+       2256,
+       80.02
+      ],
+      [
+       2503,
+       80.16
+      ],
+      [
+       2769,
+       80.36
+      ]
+     ],
+     "adopted_km2": 77.84,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 185,
+     "max_over_min_150_400": 1.007,
+     "max_over_min_150_1000": 1.018
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 77.84,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-kitakawachi",
+   "name": "北河内ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 10.6,
+     "source": "川の防災情報",
+     "computed_km2": 10.68,
+     "error_pct": 0.8
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700031",
+     "offset_m": 132.9,
+     "station_lat": 37.3772222,
+     "station_lon": 137.0425
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      10.68,
+      10.7,
+      36.59,
+      36.89,
+      37.38
+     ],
+     "dist_m": [
+      64,
+      167,
+      249,
+      532,
+      860,
+      1059
+     ],
+     "downstream_km2": [
+      [
+       0,
+       10.68
+      ],
+      [
+       255,
+       10.73
+      ],
+      [
+       501,
+       36.57
+      ],
+      [
+       752,
+       36.73
+      ],
+      [
+       1008,
+       36.9
+      ],
+      [
+       1254,
+       37.26
+      ],
+      [
+       1510,
+       37.55
+      ],
+      [
+       1759,
+       37.75
+      ],
+      [
+       2007,
+       38.08
+      ],
+      [
+       2252,
+       38.13
+      ],
+      [
+       2506,
+       40.13
+      ],
+      [
+       2756,
+       40.26
+      ]
+     ],
+     "adopted_km2": 10.68,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 167,
+     "max_over_min_150_400": 3.426,
+     "max_over_min_150_1000": 3.5
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 10.68,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-akase",
+   "name": "赤瀬ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 40.6,
+     "source": "川の防災情報",
+     "computed_km2": 40.46,
+     "error_pct": -0.3
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700064",
+     "offset_m": 113.0,
+     "station_lat": 36.2958333,
+     "station_lon": 136.4844444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      40.4,
+      40.48,
+      40.6,
+      42.92,
+      44.43,
+      44.74
+     ],
+     "dist_m": [
+      65,
+      159,
+      338,
+      474,
+      897,
+      987
+     ],
+     "downstream_km2": [
+      [
+       0,
+       40.48
+      ],
+      [
+       260,
+       40.62
+      ],
+      [
+       501,
+       42.99
+      ],
+      [
+       762,
+       43.15
+      ],
+      [
+       1007,
+       43.22
+      ],
+      [
+       1251,
+       43.34
+      ],
+      [
+       1509,
+       44.37
+      ],
+      [
+       1757,
+       44.47
+      ],
+      [
+       2017,
+       44.6
+      ],
+      [
+       2264,
+       44.67
+      ],
+      [
+       2512,
+       44.76
+      ],
+      [
+       2763,
+       44.9
+      ]
+     ],
+     "adopted_km2": 40.46,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 1146,
+     "max_over_min_150_400": 1.06,
+     "max_over_min_150_1000": 1.105
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 40.46,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      40.4,
+      40.48,
+      40.6,
+      42.92,
+      44.43,
+      44.74
+     ],
+     "diff_pct_by_radius": [
+      -0.1,
+      0.0,
+      0.3,
+      6.1,
+      9.8,
+      10.6
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.172,
+     "catchment_km2": 40.46,
+     "ratio_pct": 0.425,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-kutani",
+   "name": "九谷ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 71.0,
+     "source": "川の防災情報",
+     "computed_km2": 71.13,
+     "error_pct": 0.2
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700002",
+     "offset_m": 723.3,
+     "station_lat": 36.2061111,
+     "station_lon": 136.3777778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.41,
+      58.8,
+      58.89,
+      58.95,
+      71.18,
+      71.74
+     ],
+     "dist_m": [
+      49,
+      152,
+      258,
+      405,
+      694,
+      1025
+     ],
+     "downstream_km2": [
+      [
+       0,
+       58.8
+      ],
+      [
+       257,
+       58.94
+      ],
+      [
+       501,
+       69.11
+      ],
+      [
+       755,
+       71.23
+      ],
+      [
+       1013,
+       71.68
+      ],
+      [
+       1261,
+       72.33
+      ],
+      [
+       1520,
+       72.85
+      ],
+      [
+       1756,
+       72.94
+      ],
+      [
+       2011,
+       73.94
+      ],
+      [
+       2253,
+       74.07
+      ],
+      [
+       2513,
+       74.13
+      ],
+      [
+       2750,
+       74.36
+      ]
+     ],
+     "adopted_km2": 71.13,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 518,
+     "max_over_min_150_400": 1.003,
+     "max_over_min_150_1000": 1.22
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 71.13,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      1.41,
+      58.8,
+      58.89,
+      58.95,
+      71.18,
+      71.74
+     ],
+     "diff_pct_by_radius": [
+      -98.0,
+      -17.3,
+      -17.2,
+      -17.1,
+      0.1,
+      0.9
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.964,
+     "catchment_km2": 71.13,
+     "ratio_pct": 1.355,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-wagatani",
+   "name": "我谷ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 86.1,
+     "source": "川の防災情報",
+     "computed_km2": 86.35,
+     "error_pct": 0.3
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700001",
+     "offset_m": 19.8,
+     "station_lat": 36.2108333,
+     "station_lon": 136.3494444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      86.27,
+      86.35,
+      86.47,
+      86.53,
+      90.0,
+      90.22
+     ],
+     "dist_m": [
+      49,
+      140,
+      283,
+      434,
+      736,
+      1010
+     ],
+     "downstream_km2": [
+      [
+       0,
+       86.35
+      ],
+      [
+       264,
+       86.5
+      ],
+      [
+       515,
+       89.93
+      ],
+      [
+       759,
+       90.05
+      ],
+      [
+       1012,
+       90.23
+      ],
+      [
+       1260,
+       90.38
+      ],
+      [
+       1513,
+       90.6
+      ],
+      [
+       1755,
+       90.78
+      ],
+      [
+       2020,
+       92.41
+      ],
+      [
+       2258,
+       92.52
+      ],
+      [
+       2521,
+       93.85
+      ],
+      [
+       2760,
+       94.07
+      ]
+     ],
+     "adopted_km2": 86.35,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 140,
+     "max_over_min_150_400": 1.002,
+     "max_over_min_150_1000": 1.045
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 86.35,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-hakkagawa",
+   "name": "八ヶ川ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "reference_divergent"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 10.4,
+     "source": "川の防災情報",
+     "computed_km2": 8.81,
+     "error_pct": -15.3
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700041",
+     "offset_m": 35.2,
+     "station_lat": 37.2622222,
+     "station_lon": 136.8322222
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      8.71,
+      8.81,
+      8.86,
+      11.09,
+      12.43,
+      12.72
+     ],
+     "dist_m": [
+      55,
+      157,
+      246,
+      399,
+      721,
+      1148
+     ],
+     "downstream_km2": [
+      [
+       0,
+       8.81
+      ],
+      [
+       251,
+       11.07
+      ],
+      [
+       505,
+       11.24
+      ],
+      [
+       754,
+       12.43
+      ],
+      [
+       1003,
+       12.58
+      ],
+      [
+       1258,
+       12.67
+      ],
+      [
+       1507,
+       12.76
+      ],
+      [
+       1754,
+       16.24
+      ],
+      [
+       2007,
+       16.33
+      ],
+      [
+       2250,
+       18.14
+      ],
+      [
+       2505,
+       18.23
+      ],
+      [
+       2756,
+       18.63
+      ]
+     ],
+     "adopted_km2": 8.81,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 157,
+     "max_over_min_150_400": 1.259,
+     "max_over_min_150_1000": 1.444
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 8.81,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "ishikawa-oya",
+   "name": "小屋ダム",
+   "pref": "ishikawa",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "reference_divergent"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 12.8,
+     "source": "川の防災情報",
+     "computed_km2": 9.54,
+     "error_pct": -25.5
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0435300700051",
+     "offset_m": 130.7,
+     "station_lat": 37.3913889,
+     "station_lon": 137.1775
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      12.75,
+      12.77,
+      12.84,
+      13.55,
+      17.69,
+      18.35
+     ],
+     "dist_m": [
+      46,
+      144,
+      245,
+      396,
+      708,
+      1054
+     ],
+     "downstream_km2": [
+      [
+       0,
+       12.77
+      ],
+      [
+       257,
+       13.55
+      ],
+      [
+       505,
+       17.63
+      ],
+      [
+       752,
+       17.69
+      ],
+      [
+       1010,
+       17.78
+      ],
+      [
+       1251,
+       18.35
+      ],
+      [
+       1505,
+       19.31
+      ],
+      [
+       1750,
+       19.51
+      ],
+      [
+       2006,
+       19.64
+      ],
+      [
+       2253,
+       20.03
+      ],
+      [
+       2506,
+       23.65
+      ],
+      [
+       2750,
+       23.86
+      ]
+     ],
+     "adopted_km2": 9.54,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 82,
+     "max_over_min_150_400": 1.061,
+     "max_over_min_150_1000": 1.437
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 9.54,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      12.75,
+      12.77,
+      12.84,
+      13.55,
+      17.69,
+      18.35
+     ],
+     "diff_pct_by_radius": [
+      33.6,
+      33.9,
+      34.6,
+      42.0,
+      85.4,
+      92.3
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.01,
+     "catchment_km2": 9.54,
+     "ratio_pct": 0.105,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-tokuyama",
+   "name": "徳山ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 254.5,
+     "source": "川の防災情報",
+     "computed_km2": 256.08,
+     "error_pct": 0.6
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2181100700056",
+     "offset_m": 263.0,
+     "station_lat": 35.6647222,
+     "station_lon": 136.4994444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      256.74,
+      256.92,
+      256.97,
+      257.02,
+      257.56,
+      260.93
+     ],
+     "dist_m": [
+      132,
+      176,
+      256,
+      374,
+      827,
+      1224
+     ],
+     "downstream_km2": [
+      [
+       0,
+       256.92
+      ],
+      [
+       256,
+       257.01
+      ],
+      [
+       543,
+       257.36
+      ],
+      [
+       786,
+       257.48
+      ],
+      [
+       1029,
+       258.08
+      ],
+      [
+       1267,
+       258.8
+      ],
+      [
+       1523,
+       258.88
+      ],
+      [
+       1761,
+       260.98
+      ],
+      [
+       2011,
+       261.46
+      ],
+      [
+       2254,
+       261.68
+      ],
+      [
+       2536,
+       262.19
+      ],
+      [
+       2761,
+       262.49
+      ]
+     ],
+     "adopted_km2": 256.08,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 2141,
+     "max_over_min_150_400": 1.0,
+     "max_over_min_150_1000": 1.016
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 256.08,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      256.74,
+      256.92,
+      256.97,
+      257.02,
+      257.56,
+      260.93
+     ],
+     "diff_pct_by_radius": [
+      0.3,
+      0.3,
+      0.3,
+      0.4,
+      0.6,
+      1.9
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.409,
+     "catchment_km2": 256.08,
+     "ratio_pct": 0.55,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-agigawa",
+   "name": "阿木川ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 81.8,
+     "source": "川の防災情報",
+     "computed_km2": 82.37,
+     "error_pct": 0.7
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2181100700008",
+     "offset_m": 179.3,
+     "station_lat": 35.4255556,
+     "station_lon": 137.4319444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.01,
+      82.45,
+      82.67,
+      82.96,
+      83.49,
+      84.11
+     ],
+     "dist_m": [
+      66,
+      160,
+      302,
+      432,
+      766,
+      1020
+     ],
+     "downstream_km2": [
+      [
+       0,
+       82.45
+      ],
+      [
+       266,
+       82.62
+      ],
+      [
+       503,
+       82.97
+      ],
+      [
+       764,
+       83.43
+      ],
+      [
+       1014,
+       83.54
+      ],
+      [
+       1264,
+       84.15
+      ],
+      [
+       1521,
+       84.31
+      ],
+      [
+       1756,
+       84.35
+      ],
+      [
+       2003,
+       84.75
+      ],
+      [
+       2261,
+       84.96
+      ],
+      [
+       2520,
+       106.15
+      ],
+      [
+       2764,
+       106.82
+      ]
+     ],
+     "adopted_km2": 82.37,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 258,
+     "max_over_min_150_400": 1.006,
+     "max_over_min_150_1000": 1.02
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 82.37,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      0.01,
+      82.45,
+      82.67,
+      82.96,
+      83.49,
+      84.11
+     ],
+     "diff_pct_by_radius": [
+      -100.0,
+      0.1,
+      0.4,
+      0.7,
+      1.4,
+      2.1
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.034,
+     "catchment_km2": 82.37,
+     "ratio_pct": 1.255,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-iwaya",
+   "name": "岩屋ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 264.9,
+     "source": "川の防災情報",
+     "computed_km2": 266.75,
+     "error_pct": 0.7
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2181100700009",
+     "offset_m": 199.0,
+     "station_lat": 35.7616667,
+     "station_lon": 137.1597222
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      266.84,
+      266.86,
+      266.87,
+      267.11,
+      270.32,
+      271.04
+     ],
+     "dist_m": [
+      132,
+      139,
+      250,
+      377,
+      707,
+      1031
+     ],
+     "downstream_km2": [
+      [
+       0,
+       266.86
+      ],
+      [
+       268,
+       267.05
+      ],
+      [
+       511,
+       267.25
+      ],
+      [
+       767,
+       270.54
+      ],
+      [
+       1010,
+       271.04
+      ],
+      [
+       1252,
+       271.44
+      ],
+      [
+       1534,
+       271.73
+      ],
+      [
+       1771,
+       271.83
+      ],
+      [
+       2001,
+       272.39
+      ],
+      [
+       2270,
+       272.5
+      ],
+      [
+       2538,
+       275.1
+      ],
+      [
+       2763,
+       275.67
+      ]
+     ],
+     "adopted_km2": 266.75,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 2008,
+     "max_over_min_150_400": 1.001,
+     "max_over_min_150_1000": 1.016
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 266.75,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      266.84,
+      266.86,
+      266.87,
+      267.11,
+      270.32,
+      271.04
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      1.3,
+      1.6
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.382,
+     "catchment_km2": 266.75,
+     "ratio_pct": 0.518,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-maruyama",
+   "name": "丸山ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 2409.0,
+     "source": "川の防災情報",
+     "computed_km2": 2439.14,
+     "error_pct": 1.3
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2181100700001",
+     "offset_m": 274.6,
+     "station_lat": 35.4702778,
+     "station_lon": 137.1694444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      2439.21,
+      2439.23,
+      2439.26,
+      2439.48,
+      2441.07,
+      2441.38
+     ],
+     "dist_m": [
+      112,
+      156,
+      294,
+      467,
+      829,
+      1064
+     ],
+     "downstream_km2": [
+      [
+       0,
+       2439.23
+      ],
+      [
+       282,
+       2439.37
+      ],
+      [
+       521,
+       2440.98
+      ],
+      [
+       790,
+       2441.1
+      ],
+      [
+       1016,
+       2441.35
+      ],
+      [
+       1254,
+       2441.46
+      ],
+      [
+       1529,
+       2441.55
+      ],
+      [
+       1778,
+       2446.32
+      ],
+      [
+       2027,
+       2446.88
+      ],
+      [
+       2291,
+       2447.0
+      ],
+      [
+       2529,
+       2447.96
+      ],
+      [
+       2778,
+       2447.97
+      ]
+     ],
+     "adopted_km2": 2439.14,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 31,
+     "max_over_min_150_400": 1.0,
+     "max_over_min_150_1000": 1.001
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 2439.14,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      2439.21,
+      2439.23,
+      2439.26,
+      2439.48,
+      2441.07,
+      2441.38
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.1
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.385,
+     "catchment_km2": 2439.14,
+     "ratio_pct": 0.016,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-yokoyama",
+   "name": "横山ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 471.0,
+     "source": "川の防災情報",
+     "computed_km2": 471.04,
+     "error_pct": 0.0
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2181100700052",
+     "offset_m": 112.2,
+     "station_lat": 35.5922222,
+     "station_lon": 136.4561111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      470.75,
+      471.04,
+      471.12,
+      471.21,
+      471.48,
+      473.31
+     ],
+     "dist_m": [
+      112,
+      139,
+      266,
+      378,
+      690,
+      1033
+     ],
+     "downstream_km2": [
+      [
+       0,
+       471.04
+      ],
+      [
+       274,
+       471.21
+      ],
+      [
+       531,
+       471.41
+      ],
+      [
+       768,
+       472.2
+      ],
+      [
+       1038,
+       473.31
+      ],
+      [
+       1255,
+       473.83
+      ],
+      [
+       1529,
+       474.04
+      ],
+      [
+       1773,
+       474.23
+      ],
+      [
+       2011,
+       477.59
+      ],
+      [
+       2272,
+       477.77
+      ],
+      [
+       2541,
+       477.91
+      ],
+      [
+       2753,
+       478.53
+      ]
+     ],
+     "adopted_km2": 471.04,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 139,
+     "max_over_min_150_400": 1.0,
+     "max_over_min_150_1000": 1.005
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 471.04,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-origawa",
+   "name": "小里川ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 55.0,
+     "source": "川の防災情報",
+     "computed_km2": 56.05,
+     "error_pct": 1.9
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2178200700001",
+     "offset_m": 44.3,
+     "station_lat": 35.3288889,
+     "station_lon": 137.3027778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      56.03,
+      56.05,
+      56.22,
+      56.28,
+      59.34,
+      71.8
+     ],
+     "dist_m": [
+      66,
+      141,
+      251,
+      420,
+      767,
+      998
+     ],
+     "downstream_km2": [
+      [
+       0,
+       56.05
+      ],
+      [
+       263,
+       56.27
+      ],
+      [
+       515,
+       58.6
+      ],
+      [
+       759,
+       59.37
+      ],
+      [
+       1006,
+       71.67
+      ],
+      [
+       1250,
+       71.8
+      ],
+      [
+       1501,
+       72.25
+      ],
+      [
+       1754,
+       72.49
+      ],
+      [
+       2002,
+       73.24
+      ],
+      [
+       2252,
+       73.45
+      ],
+      [
+       2516,
+       73.84
+      ],
+      [
+       2754,
+       73.91
+      ]
+     ],
+     "adopted_km2": 56.05,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 141,
+     "max_over_min_150_400": 1.004,
+     "max_over_min_150_1000": 1.281
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 56.05,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-atagi",
+   "name": "阿多岐ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 16.0,
+     "source": "川の防災情報",
+     "computed_km2": 16.3,
+     "error_pct": 1.9
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0537700700001",
+     "offset_m": 140.5,
+     "station_lat": 35.9038889,
+     "station_lon": 136.9013889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      16.25,
+      16.3,
+      16.41,
+      16.48,
+      16.99,
+      17.31
+     ],
+     "dist_m": [
+      47,
+      150,
+      248,
+      398,
+      732,
+      1151
+     ],
+     "downstream_km2": [
+      [
+       0,
+       16.3
+      ],
+      [
+       256,
+       16.47
+      ],
+      [
+       502,
+       16.73
+      ],
+      [
+       759,
+       17.01
+      ],
+      [
+       1007,
+       17.22
+      ],
+      [
+       1257,
+       17.32
+      ],
+      [
+       1500,
+       17.54
+      ],
+      [
+       1754,
+       17.76
+      ],
+      [
+       2002,
+       41.05
+      ],
+      [
+       2256,
+       41.23
+      ],
+      [
+       2504,
+       41.33
+      ],
+      [
+       2751,
+       41.75
+      ]
+     ],
+     "adopted_km2": 16.3,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 150,
+     "max_over_min_150_400": 1.011,
+     "max_over_min_150_1000": 1.062
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 16.3,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-iwamura",
+   "name": "岩村ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 1.7,
+     "source": "川の防災情報",
+     "computed_km2": 1.71,
+     "error_pct": 0.6
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0537700700003",
+     "offset_m": 43.7,
+     "station_lat": 35.3627778,
+     "station_lon": 137.4741667
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.68,
+      1.71,
+      2.0,
+      2.12,
+      2.24,
+      2.58
+     ],
+     "dist_m": [
+      47,
+      150,
+      269,
+      465,
+      954,
+      1219
+     ],
+     "downstream_km2": [
+      [
+       0,
+       1.71
+      ],
+      [
+       261,
+       2.03
+      ],
+      [
+       509,
+       2.15
+      ],
+      [
+       753,
+       2.21
+      ],
+      [
+       1002,
+       2.27
+      ],
+      [
+       1257,
+       2.58
+      ],
+      [
+       1505,
+       2.66
+      ],
+      [
+       1755,
+       2.71
+      ],
+      [
+       2003,
+       2.76
+      ],
+      [
+       2258,
+       2.79
+      ],
+      [
+       2502,
+       2.81
+      ],
+      [
+       2760,
+       2.89
+      ]
+     ],
+     "adopted_km2": 1.71,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 150,
+     "max_over_min_150_400": 1.24,
+     "max_over_min_150_1000": 1.509
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 1.71,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-ogahora",
+   "name": "大ヶ洞ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 4.4,
+     "source": "川の防災情報",
+     "computed_km2": 4.24,
+     "error_pct": -3.6
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0537700700005",
+     "offset_m": 222.2,
+     "station_lat": 35.9091667,
+     "station_lon": 137.2452778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.01,
+      4.24,
+      5.86,
+      5.89,
+      7.27,
+      7.68
+     ],
+     "dist_m": [
+      56,
+      192,
+      339,
+      497,
+      868,
+      1183
+     ],
+     "downstream_km2": [
+      [
+       0,
+       4.24
+      ],
+      [
+       256,
+       5.88
+      ],
+      [
+       510,
+       6.52
+      ],
+      [
+       759,
+       7.27
+      ],
+      [
+       1002,
+       7.55
+      ],
+      [
+       1257,
+       7.82
+      ],
+      [
+       1504,
+       8.27
+      ],
+      [
+       1752,
+       8.4
+      ],
+      [
+       2002,
+       8.53
+      ],
+      [
+       2254,
+       8.68
+      ],
+      [
+       2501,
+       8.77
+      ],
+      [
+       2754,
+       9.82
+      ]
+     ],
+     "adopted_km2": 4.24,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 192,
+     "max_over_min_150_400": 1.389,
+     "max_over_min_150_1000": 1.811
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 4.24,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-nakanoho",
+   "name": "中野方ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 1.6,
+     "source": "川の防災情報",
+     "computed_km2": 1.54,
+     "error_pct": -3.7
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0537700700004",
+     "offset_m": 155.8,
+     "station_lat": 35.5297222,
+     "station_lon": 137.3413889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.07,
+      1.54,
+      1.61,
+      2.34,
+      2.51,
+      2.78
+     ],
+     "dist_m": [
+      47,
+      149,
+      249,
+      398,
+      700,
+      996
+     ],
+     "downstream_km2": [
+      [
+       0,
+       1.54
+      ],
+      [
+       254,
+       2.34
+      ],
+      [
+       503,
+       2.47
+      ],
+      [
+       751,
+       2.54
+      ],
+      [
+       1000,
+       4.73
+      ],
+      [
+       1257,
+       4.9
+      ],
+      [
+       1506,
+       5.12
+      ],
+      [
+       1760,
+       7.6
+      ],
+      [
+       2005,
+       7.93
+      ],
+      [
+       2254,
+       8.88
+      ],
+      [
+       2504,
+       9.56
+      ],
+      [
+       2757,
+       10.85
+      ]
+     ],
+     "adopted_km2": 1.54,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 149,
+     "max_over_min_150_400": 1.519,
+     "max_over_min_150_1000": 1.805
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 1.54,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "gifu-nyukawa",
+   "name": "丹生川ダム",
+   "pref": "gifu",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 23.0,
+     "source": "川の防災情報",
+     "computed_km2": 23.22,
+     "error_pct": 1.0
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0537700700006",
+     "offset_m": 56.7,
+     "station_lat": 36.2169444,
+     "station_lon": 137.3711111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      23.16,
+      23.22,
+      23.49,
+      23.71,
+      24.33,
+      24.69
+     ],
+     "dist_m": [
+      60,
+      197,
+      299,
+      425,
+      870,
+      1191
+     ],
+     "downstream_km2": [
+      [
+       0,
+       23.22
+      ],
+      [
+       253,
+       23.64
+      ],
+      [
+       501,
+       23.76
+      ],
+      [
+       752,
+       23.88
+      ],
+      [
+       1003,
+       24.37
+      ],
+      [
+       1256,
+       24.68
+      ],
+      [
+       1503,
+       24.87
+      ],
+      [
+       1758,
+       30.82
+      ],
+      [
+       2002,
+       30.92
+      ],
+      [
+       2257,
+       31.43
+      ],
+      [
+       2505,
+       31.61
+      ],
+      [
+       2761,
+       32.39
+      ]
+     ],
+     "adopted_km2": 23.22,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 197,
+     "max_over_min_150_400": 1.021,
+     "max_over_min_150_1000": 1.063
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 23.22,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-ryugahana",
+   "name": "龍ヶ鼻ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 31.1,
+     "source": "川の防災情報",
+     "computed_km2": 31.02,
+     "error_pct": -0.3
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700003",
+     "offset_m": 56.1,
+     "station_lat": 36.1519444,
+     "station_lon": 136.3463889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      30.93,
+      31.02,
+      31.77,
+      31.9,
+      32.21,
+      32.64
+     ],
+     "dist_m": [
+      49,
+      167,
+      328,
+      475,
+      852,
+      1165
+     ],
+     "downstream_km2": [
+      [
+       0,
+       31.02
+      ],
+      [
+       258,
+       31.81
+      ],
+      [
+       506,
+       31.99
+      ],
+      [
+       762,
+       32.22
+      ],
+      [
+       1000,
+       32.58
+      ],
+      [
+       1264,
+       32.69
+      ],
+      [
+       1509,
+       38.47
+      ],
+      [
+       1751,
+       38.51
+      ],
+      [
+       2001,
+       40.19
+      ],
+      [
+       2258,
+       40.57
+      ],
+      [
+       2515,
+       40.71
+      ],
+      [
+       2760,
+       42.59
+      ]
+     ],
+     "adopted_km2": 31.02,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 167,
+     "max_over_min_150_400": 1.028,
+     "max_over_min_150_1000": 1.052
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 31.02,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-eiheiji",
+   "name": "永平寺ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 3.1,
+     "source": "川の防災情報",
+     "computed_km2": 3.09,
+     "error_pct": -0.3
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700004",
+     "offset_m": 127.6,
+     "station_lat": 36.0491667,
+     "station_lon": 136.3619444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      3.12,
+      3.18,
+      3.25,
+      3.52,
+      4.21,
+      4.74
+     ],
+     "dist_m": [
+      66,
+      182,
+      344,
+      506,
+      983,
+      1233
+     ],
+     "downstream_km2": [
+      [
+       0,
+       3.18
+      ],
+      [
+       252,
+       3.34
+      ],
+      [
+       505,
+       3.57
+      ],
+      [
+       751,
+       4.15
+      ],
+      [
+       1003,
+       4.66
+      ],
+      [
+       1250,
+       4.74
+      ],
+      [
+       1507,
+       7.52
+      ],
+      [
+       1751,
+       7.75
+      ],
+      [
+       2002,
+       8.17
+      ],
+      [
+       2259,
+       8.38
+      ],
+      [
+       2500,
+       8.61
+      ],
+      [
+       2757,
+       9.5
+      ]
+     ],
+     "adopted_km2": 3.09,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 135,
+     "max_over_min_150_400": 1.107,
+     "max_over_min_150_1000": 1.491
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 3.09,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      3.12,
+      3.18,
+      3.25,
+      3.52,
+      4.21,
+      4.74
+     ],
+     "diff_pct_by_radius": [
+      1.0,
+      2.9,
+      5.2,
+      13.9,
+      36.2,
+      53.4
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.037,
+     "catchment_km2": 3.09,
+     "ratio_pct": 1.197,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-sasogawa",
+   "name": "笹生川ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 70.66,
+     "source": "川の防災情報",
+     "computed_km2": 71.21,
+     "error_pct": 0.8
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700001",
+     "offset_m": 19.3,
+     "station_lat": 35.8430556,
+     "station_lon": 136.5466667
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      71.22,
+      71.37,
+      71.42,
+      71.49,
+      77.32,
+      77.92
+     ],
+     "dist_m": [
+      56,
+      147,
+      250,
+      395,
+      975,
+      1203
+     ],
+     "downstream_km2": [
+      [
+       0,
+       71.37
+      ],
+      [
+       255,
+       71.46
+      ],
+      [
+       508,
+       71.61
+      ],
+      [
+       751,
+       76.24
+      ],
+      [
+       1019,
+       76.32
+      ],
+      [
+       1268,
+       76.54
+      ],
+      [
+       1504,
+       77.11
+      ],
+      [
+       1762,
+       77.32
+      ],
+      [
+       2004,
+       77.6
+      ],
+      [
+       2251,
+       77.97
+      ],
+      [
+       2519,
+       78.75
+      ],
+      [
+       2752,
+       78.86
+      ]
+     ],
+     "adopted_km2": 71.21,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 22,
+     "max_over_min_150_400": 1.002,
+     "max_over_min_150_1000": 1.092
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 71.21,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      71.22,
+      71.37,
+      71.42,
+      71.49,
+      77.32,
+      77.92
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.2,
+      0.3,
+      0.4,
+      8.6,
+      9.4
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 1.191,
+     "catchment_km2": 71.21,
+     "ratio_pct": 1.673,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-jodojigawa",
+   "name": "浄土寺川ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 7.7,
+     "source": "川の防災情報",
+     "computed_km2": 8.0,
+     "error_pct": 3.9
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700005",
+     "offset_m": 52.7,
+     "station_lat": 36.0633333,
+     "station_lon": 136.5419444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      7.81,
+      8.0,
+      8.05,
+      8.19,
+      8.43,
+      8.95
+     ],
+     "dist_m": [
+      56,
+      170,
+      249,
+      394,
+      696,
+      997
+     ],
+     "downstream_km2": [
+      [
+       0,
+       8.0
+      ],
+      [
+       250,
+       8.17
+      ],
+      [
+       509,
+       8.35
+      ],
+      [
+       756,
+       8.64
+      ],
+      [
+       1003,
+       8.99
+      ],
+      [
+       1255,
+       9.26
+      ],
+      [
+       1500,
+       9.44
+      ],
+      [
+       1757,
+       9.54
+      ],
+      [
+       2007,
+       10.96
+      ],
+      [
+       2259,
+       11.34
+      ],
+      [
+       2501,
+       11.42
+      ],
+      [
+       2761,
+       11.47
+      ]
+     ],
+     "adopted_km2": 8.0,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 170,
+     "max_over_min_150_400": 1.024,
+     "max_over_min_150_1000": 1.119
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 8.0,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-hirono",
+   "name": "広野ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 42.3,
+     "source": "川の防災情報",
+     "computed_km2": 41.69,
+     "error_pct": -1.4
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700002",
+     "offset_m": 7.2,
+     "station_lat": 35.7138889,
+     "station_lon": 136.2575
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      41.69,
+      41.83,
+      42.04,
+      42.27,
+      43.24,
+      43.65
+     ],
+     "dist_m": [
+      56,
+      143,
+      250,
+      412,
+      894,
+      1117
+     ],
+     "downstream_km2": [
+      [
+       0,
+       41.83
+      ],
+      [
+       256,
+       42.08
+      ],
+      [
+       508,
+       42.31
+      ],
+      [
+       762,
+       42.46
+      ],
+      [
+       1005,
+       43.16
+      ],
+      [
+       1257,
+       43.27
+      ],
+      [
+       1507,
+       43.66
+      ],
+      [
+       1751,
+       49.9
+      ],
+      [
+       2018,
+       50.04
+      ],
+      [
+       2257,
+       53.67
+      ],
+      [
+       2507,
+       53.89
+      ],
+      [
+       2760,
+       54.72
+      ]
+     ],
+     "adopted_km2": 41.69,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 606,
+     "max_over_min_150_400": 1.011,
+     "max_over_min_150_1000": 1.044
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 41.69,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      41.69,
+      41.83,
+      42.04,
+      42.27,
+      43.24,
+      43.65
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.3,
+      0.8,
+      1.4,
+      3.7,
+      4.7
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.385,
+     "catchment_km2": 41.69,
+     "ratio_pct": 0.923,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-masutani",
+   "name": "桝谷ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 10.2,
+     "source": "川の防災情報",
+     "computed_km2": 10.29,
+     "error_pct": 0.9
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700006",
+     "offset_m": 34.8,
+     "station_lat": 35.7408333,
+     "station_lon": 136.2483333
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.01,
+      10.29,
+      10.32,
+      11.54,
+      12.01,
+      12.44
+     ],
+     "dist_m": [
+      66,
+      183,
+      251,
+      422,
+      719,
+      1060
+     ],
+     "downstream_km2": [
+      [
+       0,
+       10.29
+      ],
+      [
+       258,
+       10.56
+      ],
+      [
+       506,
+       11.57
+      ],
+      [
+       757,
+       11.99
+      ],
+      [
+       1008,
+       12.21
+      ],
+      [
+       1256,
+       12.3
+      ],
+      [
+       1507,
+       13.4
+      ],
+      [
+       1755,
+       13.78
+      ],
+      [
+       2007,
+       13.94
+      ],
+      [
+       2253,
+       14.23
+      ],
+      [
+       2510,
+       14.3
+      ],
+      [
+       2750,
+       64.99
+      ]
+     ],
+     "adopted_km2": 10.29,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 183,
+     "max_over_min_150_400": 1.121,
+     "max_over_min_150_1000": 1.209
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 10.29,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-otsuro",
+   "name": "大津呂ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 1.58,
+     "source": "川の防災情報",
+     "computed_km2": 1.58,
+     "error_pct": 0.0
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "0460900700007",
+     "offset_m": 22.0,
+     "station_lat": 35.4541667,
+     "station_lon": 135.6308333
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.53,
+      1.58,
+      1.87,
+      1.92,
+      2.48,
+      2.81
+     ],
+     "dist_m": [
+      52,
+      151,
+      257,
+      421,
+      858,
+      1355
+     ],
+     "downstream_km2": [
+      [
+       0,
+       1.58
+      ],
+      [
+       250,
+       1.91
+      ],
+      [
+       500,
+       2.2
+      ],
+      [
+       753,
+       2.46
+      ],
+      [
+       1010,
+       2.62
+      ],
+      [
+       1254,
+       2.8
+      ],
+      [
+       1511,
+       2.88
+      ],
+      [
+       1750,
+       2.9
+      ],
+      [
+       2007,
+       4.9
+      ],
+      [
+       2254,
+       6.18
+      ],
+      [
+       2507,
+       20.36
+      ],
+      [
+       2756,
+       21.09
+      ]
+     ],
+     "adopted_km2": 1.58,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 151,
+     "max_over_min_150_400": 1.215,
+     "max_over_min_150_1000": 1.778
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 1.58,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-kochigawa",
+   "name": "河内川ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 14.5,
+     "source": "川の防災情報",
+     "computed_km2": 14.69,
+     "error_pct": 1.3
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0460900700010",
+     "offset_m": 0.0,
+     "station_lat": 35.4325,
+     "station_lon": 135.8952778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      14.6,
+      14.69,
+      14.75,
+      14.81,
+      15.31,
+      15.55
+     ],
+     "dist_m": [
+      61,
+      148,
+      249,
+      401,
+      753,
+      1101
+     ],
+     "downstream_km2": [
+      [
+       0,
+       14.69
+      ],
+      [
+       252,
+       14.81
+      ],
+      [
+       501,
+       15.08
+      ],
+      [
+       751,
+       15.31
+      ],
+      [
+       1003,
+       15.42
+      ],
+      [
+       1257,
+       15.57
+      ],
+      [
+       1509,
+       55.13
+      ],
+      [
+       1758,
+       55.38
+      ],
+      [
+       2008,
+       55.57
+      ],
+      [
+       2260,
+       60.22
+      ],
+      [
+       2508,
+       60.49
+      ],
+      [
+       2750,
+       60.83
+      ]
+     ],
+     "adopted_km2": 14.69,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 148,
+     "max_over_min_150_400": 1.008,
+     "max_over_min_150_1000": 1.059
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 14.69,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-kuzuryu",
+   "name": "九頭竜ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "reference_divergent"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 301.5,
+     "source": "川の防災情報",
+     "computed_km2": 185.09,
+     "error_pct": -38.6
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2209900700001",
+     "offset_m": 153.8,
+     "station_lat": 35.8886111,
+     "station_lon": 136.6894444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      185.11,
+      185.11,
+      185.14,
+      185.33,
+      191.19,
+      191.4
+     ],
+     "dist_m": [
+      93,
+      124,
+      250,
+      373,
+      880,
+      1137
+     ],
+     "downstream_km2": [
+      [
+       0,
+       185.11
+      ],
+      [
+       286,
+       185.33
+      ],
+      [
+       523,
+       189.36
+      ],
+      [
+       766,
+       189.68
+      ],
+      [
+       1026,
+       189.87
+      ],
+      [
+       1269,
+       191.29
+      ],
+      [
+       1529,
+       191.56
+      ],
+      [
+       1759,
+       192.0
+      ],
+      [
+       2006,
+       192.31
+      ],
+      [
+       2280,
+       192.41
+      ],
+      [
+       2504,
+       192.77
+      ],
+      [
+       2759,
+       193.14
+      ]
+     ],
+     "adopted_km2": 185.09,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 186,
+     "max_over_min_150_400": 1.001,
+     "max_over_min_150_1000": 1.034
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 185.09,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      185.11,
+      185.11,
+      185.14,
+      185.33,
+      191.19,
+      191.4
+     ],
+     "diff_pct_by_radius": [
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      3.3,
+      3.4
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 2.5,
+     "catchment_km2": 185.09,
+     "ratio_pct": 1.351,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-managawa",
+   "name": "真名川ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 223.7,
+     "source": "川の防災情報",
+     "computed_km2": 222.31,
+     "error_pct": -0.6
+    },
+    "coordinate": {
+     "class": "differs_from_station_master",
+     "station_fcd": "2209900700002",
+     "offset_m": 92.5,
+     "station_lat": 35.9188889,
+     "station_lon": 136.5416667
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      222.29,
+      222.31,
+      222.7,
+      222.77,
+      223.25,
+      223.84
+     ],
+     "dist_m": [
+      131,
+      175,
+      350,
+      483,
+      824,
+      1337
+     ],
+     "downstream_km2": [
+      [
+       0,
+       222.31
+      ],
+      [
+       294,
+       222.75
+      ],
+      [
+       505,
+       222.91
+      ],
+      [
+       760,
+       223.21
+      ],
+      [
+       1002,
+       223.51
+      ],
+      [
+       1288,
+       223.71
+      ],
+      [
+       1531,
+       223.83
+      ],
+      [
+       1768,
+       224.41
+      ],
+      [
+       2018,
+       225.24
+      ],
+      [
+       2267,
+       225.43
+      ],
+      [
+       2504,
+       225.6
+      ],
+      [
+       2754,
+       225.7
+      ]
+     ],
+     "adopted_km2": 222.31,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 175,
+     "max_over_min_150_400": 1.002,
+     "max_over_min_150_1000": 1.007
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 222.31,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-takinami",
+   "name": "滝波ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "no_verification_material"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": null,
+     "source": null,
+     "computed_km2": 6.24,
+     "error_pct": null
+    },
+    "coordinate": {
+     "class": "no_station_master",
+     "station_fcd": null,
+     "offset_m": null
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      6.08,
+      6.24,
+      6.35,
+      6.55,
+      6.83,
+      7.19
+     ],
+     "dist_m": [
+      66,
+      142,
+      249,
+      387,
+      700,
+      991
+     ],
+     "downstream_km2": [
+      [
+       0,
+       6.24
+      ],
+      [
+       255,
+       6.4
+      ],
+      [
+       512,
+       6.76
+      ],
+      [
+       763,
+       6.87
+      ],
+      [
+       1003,
+       7.14
+      ],
+      [
+       1251,
+       7.28
+      ],
+      [
+       1505,
+       7.4
+      ],
+      [
+       1759,
+       7.76
+      ],
+      [
+       2010,
+       7.85
+      ],
+      [
+       2272,
+       7.97
+      ],
+      [
+       2508,
+       19.14
+      ],
+      [
+       2750,
+       19.19
+      ]
+     ],
+     "adopted_km2": 6.24,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 142,
+     "max_over_min_150_400": 1.05,
+     "max_over_min_150_1000": 1.152
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 6.24,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-kaitani",
+   "name": "開谷ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "no_verification_material"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": null,
+     "source": null,
+     "computed_km2": 1.16,
+     "error_pct": null
+    },
+    "coordinate": {
+     "class": "no_station_master",
+     "station_fcd": null,
+     "offset_m": null
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      1.14,
+      1.16,
+      1.4,
+      1.43,
+      2.08,
+      2.7
+     ],
+     "dist_m": [
+      56,
+      152,
+      284,
+      468,
+      922,
+      1276
+     ],
+     "downstream_km2": [
+      [
+       0,
+       1.16
+      ],
+      [
+       272,
+       1.42
+      ],
+      [
+       502,
+       1.51
+      ],
+      [
+       770,
+       2.05
+      ],
+      [
+       1022,
+       2.66
+      ],
+      [
+       1271,
+       2.7
+      ],
+      [
+       1517,
+       4.94
+      ],
+      [
+       1763,
+       5.08
+      ],
+      [
+       2006,
+       5.25
+      ],
+      [
+       2254,
+       5.32
+      ],
+      [
+       2503,
+       5.44
+      ],
+      [
+       2761,
+       5.67
+      ]
+     ],
+     "adopted_km2": 1.16,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 152,
+     "max_over_min_150_400": 1.233,
+     "max_over_min_150_1000": 2.328
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 1.16,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "fukui-yoshinosegawa",
+   "name": "吉野瀬川ダム",
+   "pref": "fukui",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "no_verification_material"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": null,
+     "source": null,
+     "computed_km2": 23.75,
+     "error_pct": null
+    },
+    "coordinate": {
+     "class": "no_station_master",
+     "station_fcd": null,
+     "offset_m": null
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      23.71,
+      23.75,
+      23.86,
+      23.92,
+      24.23,
+      24.57
+     ],
+     "dist_m": [
+      56,
+      147,
+      250,
+      387,
+      697,
+      991
+     ],
+     "downstream_km2": [
+      [
+       0,
+       23.75
+      ],
+      [
+       258,
+       23.92
+      ],
+      [
+       520,
+       24.13
+      ],
+      [
+       753,
+       24.27
+      ],
+      [
+       1002,
+       24.57
+      ],
+      [
+       1250,
+       28.37
+      ],
+      [
+       1515,
+       28.49
+      ],
+      [
+       1764,
+       28.78
+      ],
+      [
+       2010,
+       28.99
+      ],
+      [
+       2255,
+       29.08
+      ],
+      [
+       2516,
+       29.37
+      ],
+      [
+       2757,
+       29.39
+      ]
+     ],
+     "adopted_km2": 23.75,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 147,
+     "max_over_min_150_400": 1.007,
+     "max_over_min_150_1000": 1.035
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 23.75,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-omachi",
+   "name": "大町ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 193.0,
+     "source": "川の防災情報",
+     "computed_km2": 194.73,
+     "error_pct": 0.9
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2154500700001",
+     "offset_m": 0.0,
+     "station_lat": 36.5140389,
+     "station_lon": 137.7819611
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      194.69,
+      194.73,
+      194.91,
+      197.34,
+      197.69,
+      198.09
+     ],
+     "dist_m": [
+      97,
+      127,
+      248,
+      404,
+      676,
+      985
+     ],
+     "downstream_km2": [
+      [
+       0,
+       194.73
+      ],
+      [
+       276,
+       197.33
+      ],
+      [
+       504,
+       197.62
+      ],
+      [
+       775,
+       198.01
+      ],
+      [
+       1016,
+       198.1
+      ],
+      [
+       1269,
+       242.19
+      ],
+      [
+       1509,
+       242.41
+      ],
+      [
+       1781,
+       245.35
+      ],
+      [
+       2008,
+       245.45
+      ],
+      [
+       2280,
+       245.92
+      ],
+      [
+       2538,
+       246.24
+      ],
+      [
+       2753,
+       246.32
+      ]
+     ],
+     "adopted_km2": 194.73,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 127,
+     "max_over_min_150_400": 1.013,
+     "max_over_min_150_1000": 1.017
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 194.73,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-miwa",
+   "name": "美和ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 311.1,
+     "source": "川の防災情報",
+     "computed_km2": 310.18,
+     "error_pct": -0.3
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2183100700002",
+     "offset_m": 0.0,
+     "station_lat": 35.8133333,
+     "station_lon": 138.0819444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      308.89,
+      308.99,
+      310.55,
+      310.89,
+      371.38,
+      371.76
+     ],
+     "dist_m": [
+      112,
+      139,
+      351,
+      465,
+      862,
+      1298
+     ],
+     "downstream_km2": [
+      [
+       0,
+       308.99
+      ],
+      [
+       274,
+       310.55
+      ],
+      [
+       542,
+       310.93
+      ],
+      [
+       779,
+       371.19
+      ],
+      [
+       1004,
+       371.5
+      ],
+      [
+       1259,
+       371.69
+      ],
+      [
+       1527,
+       373.6
+      ],
+      [
+       1770,
+       374.37
+      ],
+      [
+       2026,
+       374.51
+      ],
+      [
+       2294,
+       374.99
+      ],
+      [
+       2531,
+       376.0
+      ],
+      [
+       2781,
+       376.33
+      ]
+     ],
+     "adopted_km2": 310.18,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 128,
+     "max_over_min_150_400": 1.006,
+     "max_over_min_150_1000": 1.203
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 310.18,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      308.89,
+      308.99,
+      310.55,
+      310.89,
+      371.38,
+      371.76
+     ],
+     "diff_pct_by_radius": [
+      -0.4,
+      -0.4,
+      0.1,
+      0.2,
+      19.7,
+      19.9
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.738,
+     "catchment_km2": 310.18,
+     "ratio_pct": 0.238,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-koshibu",
+   "name": "小渋ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 288.0,
+     "source": "川の防災情報",
+     "computed_km2": 289.22,
+     "error_pct": 0.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2183100700001",
+     "offset_m": 0.0,
+     "station_lat": 35.6055556,
+     "station_lon": 137.9775
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.32,
+      289.63,
+      290.17,
+      290.2,
+      291.82,
+      292.85
+     ],
+     "dist_m": [
+      98,
+      176,
+      311,
+      432,
+      695,
+      994
+     ],
+     "downstream_km2": [
+      [
+       0,
+       289.63
+      ],
+      [
+       256,
+       290.19
+      ],
+      [
+       505,
+       291.78
+      ],
+      [
+       756,
+       291.88
+      ],
+      [
+       1030,
+       293.27
+      ],
+      [
+       1255,
+       293.42
+      ],
+      [
+       1506,
+       293.68
+      ],
+      [
+       1762,
+       293.84
+      ],
+      [
+       2036,
+       293.98
+      ],
+      [
+       2261,
+       294.3
+      ],
+      [
+       2530,
+       294.45
+      ],
+      [
+       2768,
+       294.67
+      ]
+     ],
+     "adopted_km2": 289.22,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 278,
+     "max_over_min_150_400": 1.002,
+     "max_over_min_150_1000": 1.011
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 289.22,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      0.32,
+      289.63,
+      290.17,
+      290.2,
+      291.82,
+      292.85
+     ],
+     "diff_pct_by_radius": [
+      -99.9,
+      0.1,
+      0.3,
+      0.3,
+      0.9,
+      1.3
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.934,
+     "catchment_km2": 289.22,
+     "ratio_pct": 0.323,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-misogawa",
+   "name": "味噌川ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 55.1,
+     "source": "川の防災情報",
+     "computed_km2": 55.54,
+     "error_pct": 0.8
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2181100700005",
+     "offset_m": 0.0,
+     "station_lat": 35.9761111,
+     "station_lon": 137.7680556
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      55.64,
+      55.65,
+      55.69,
+      56.08,
+      56.72,
+      57.1
+     ],
+     "dist_m": [
+      66,
+      176,
+      284,
+      436,
+      762,
+      1057
+     ],
+     "downstream_km2": [
+      [
+       0,
+       55.65
+      ],
+      [
+       270,
+       56.08
+      ],
+      [
+       510,
+       56.18
+      ],
+      [
+       755,
+       56.77
+      ],
+      [
+       1016,
+       57.1
+      ],
+      [
+       1253,
+       57.23
+      ],
+      [
+       1501,
+       57.42
+      ],
+      [
+       1759,
+       57.72
+      ],
+      [
+       2010,
+       57.85
+      ],
+      [
+       2252,
+       58.11
+      ],
+      [
+       2516,
+       99.56
+      ],
+      [
+       2766,
+       99.64
+      ]
+     ],
+     "adopted_km2": 55.54,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 2006,
+     "max_over_min_150_400": 1.008,
+     "max_over_min_150_1000": 1.026
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 55.54,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      55.64,
+      55.65,
+      55.69,
+      56.08,
+      56.72,
+      57.1
+     ],
+     "diff_pct_by_radius": [
+      0.2,
+      0.2,
+      0.3,
+      1.0,
+      2.1,
+      2.8
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.761,
+     "catchment_km2": 55.54,
+     "ratio_pct": 1.37,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-susobana",
+   "name": "裾花ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 250.0,
+     "source": "川の防災情報",
+     "computed_km2": 243.69,
+     "error_pct": -2.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700014",
+     "offset_m": 0.0,
+     "station_lat": 36.6647222,
+     "station_lon": 138.1238889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.06,
+      0.06,
+      243.69,
+      243.84,
+      248.6,
+      248.76
+     ],
+     "dist_m": [
+      97,
+      126,
+      326,
+      439,
+      681,
+      983
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.06
+      ],
+      [
+       265,
+       243.74
+      ],
+      [
+       518,
+       245.49
+      ],
+      [
+       766,
+       245.74
+      ],
+      [
+       1018,
+       248.66
+      ],
+      [
+       1271,
+       248.8
+      ],
+      [
+       1524,
+       249.92
+      ],
+      [
+       1789,
+       250.33
+      ],
+      [
+       2011,
+       250.46
+      ],
+      [
+       2264,
+       259.6
+      ],
+      [
+       2504,
+       260.08
+      ],
+      [
+       2774,
+       260.3
+      ]
+     ],
+     "adopted_km2": 243.69,
+     "adopted_method": "snap",
+     "snap_radius_m": 250.0,
+     "outlet_distance_m": 326,
+     "max_over_min_150_400": 4064.0,
+     "max_over_min_150_1000": 4146.0
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 243.69,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-matsukawa",
+   "name": "松川ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 60.0,
+     "source": "川の防災情報",
+     "computed_km2": 62.04,
+     "error_pct": 3.4
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2183100700010",
+     "offset_m": 0.0,
+     "station_lat": 35.5283333,
+     "station_lon": 137.7819444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.01,
+      0.02,
+      62.04,
+      62.13,
+      68.12,
+      68.36
+     ],
+     "dist_m": [
+      56,
+      187,
+      261,
+      408,
+      916,
+      1397
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.02
+      ],
+      [
+       263,
+       62.1
+      ],
+      [
+       514,
+       62.19
+      ],
+      [
+       758,
+       62.31
+      ],
+      [
+       1011,
+       65.77
+      ],
+      [
+       1252,
+       68.18
+      ],
+      [
+       1506,
+       68.31
+      ],
+      [
+       1750,
+       68.39
+      ],
+      [
+       2001,
+       68.63
+      ],
+      [
+       2258,
+       70.22
+      ],
+      [
+       2507,
+       70.47
+      ],
+      [
+       2764,
+       71.52
+      ]
+     ],
+     "adopted_km2": 62.04,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 261,
+     "max_over_min_150_400": 3106.5,
+     "max_over_min_150_1000": 3418.0
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 62.04,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-yukawa",
+   "name": "湯川ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 147.2,
+     "source": "川の防災情報",
+     "computed_km2": 147.31,
+     "error_pct": 0.1
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700021",
+     "offset_m": 0.0,
+     "station_lat": 36.3097222,
+     "station_lon": 138.5430556
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      147.25,
+      147.31,
+      147.75,
+      147.81,
+      148.02,
+      148.41
+     ],
+     "dist_m": [
+      56,
+      152,
+      327,
+      513,
+      824,
+      1260
+     ],
+     "downstream_km2": [
+      [
+       0,
+       147.31
+      ],
+      [
+       264,
+       147.75
+      ],
+      [
+       502,
+       147.81
+      ],
+      [
+       756,
+       147.94
+      ],
+      [
+       1001,
+       148.02
+      ],
+      [
+       1259,
+       148.2
+      ],
+      [
+       1516,
+       148.44
+      ],
+      [
+       1761,
+       154.16
+      ],
+      [
+       2015,
+       154.24
+      ],
+      [
+       2262,
+       154.4
+      ],
+      [
+       2507,
+       158.44
+      ],
+      [
+       2752,
+       158.97
+      ]
+     ],
+     "adopted_km2": 147.31,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 152,
+     "max_over_min_150_400": 1.003,
+     "max_over_min_150_1000": 1.007
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 147.31,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-okususobana",
+   "name": "奥裾花ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 65.0,
+     "source": "川の防災情報",
+     "computed_km2": 64.17,
+     "error_pct": -1.3
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700015",
+     "offset_m": 0.0,
+     "station_lat": 36.7246056,
+     "station_lon": 137.966975
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      64.12,
+      64.17,
+      64.53,
+      64.62,
+      64.98,
+      68.97
+     ],
+     "dist_m": [
+      65,
+      151,
+      245,
+      409,
+      700,
+      1029
+     ],
+     "downstream_km2": [
+      [
+       0,
+       64.17
+      ],
+      [
+       256,
+       64.6
+      ],
+      [
+       511,
+       64.66
+      ],
+      [
+       763,
+       67.74
+      ],
+      [
+       1004,
+       68.97
+      ],
+      [
+       1256,
+       69.1
+      ],
+      [
+       1514,
+       69.53
+      ],
+      [
+       1763,
+       70.3
+      ],
+      [
+       2009,
+       70.47
+      ],
+      [
+       2259,
+       70.82
+      ],
+      [
+       2518,
+       70.92
+      ],
+      [
+       2751,
+       71.45
+      ]
+     ],
+     "adopted_km2": 64.17,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 151,
+     "max_over_min_150_400": 1.007,
+     "max_over_min_150_1000": 1.075
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 64.17,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-narai",
+   "name": "奈良井ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 46.0,
+     "source": "川の防災情報",
+     "computed_km2": 47.17,
+     "error_pct": 2.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700013",
+     "offset_m": 0.0,
+     "station_lat": 35.9316667,
+     "station_lon": 137.8119444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.07,
+      0.19,
+      47.17,
+      47.51,
+      47.77,
+      48.47
+     ],
+     "dist_m": [
+      49,
+      186,
+      339,
+      429,
+      797,
+      1081
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.19
+      ],
+      [
+       251,
+       47.42
+      ],
+      [
+       513,
+       47.56
+      ],
+      [
+       765,
+       48.15
+      ],
+      [
+       1014,
+       48.41
+      ],
+      [
+       1256,
+       48.59
+      ],
+      [
+       1505,
+       48.77
+      ],
+      [
+       1766,
+       49.16
+      ],
+      [
+       2012,
+       50.96
+      ],
+      [
+       2261,
+       51.15
+      ],
+      [
+       2516,
+       51.57
+      ],
+      [
+       2762,
+       51.79
+      ]
+     ],
+     "adopted_km2": 47.17,
+     "adopted_method": "snap-fixed",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 339,
+     "max_over_min_150_400": 250.053,
+     "max_over_min_150_1000": 255.105
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 47.17,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-koya",
+   "name": "古谷ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 13.0,
+     "source": "川の防災情報",
+     "computed_km2": 12.66,
+     "error_pct": -2.6
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700016",
+     "offset_m": 0.0,
+     "station_lat": 36.1252778,
+     "station_lon": 138.5938889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      5.01,
+      12.7,
+      17.96,
+      18.43,
+      18.73,
+      25.58
+     ],
+     "dist_m": [
+      56,
+      150,
+      255,
+      395,
+      696,
+      1030
+     ],
+     "downstream_km2": [
+      [
+       0,
+       12.7
+      ],
+      [
+       254,
+       18.42
+      ],
+      [
+       501,
+       18.69
+      ],
+      [
+       759,
+       18.81
+      ],
+      [
+       1004,
+       25.57
+      ],
+      [
+       1254,
+       25.67
+      ],
+      [
+       1507,
+       26.08
+      ],
+      [
+       1757,
+       26.64
+      ],
+      [
+       2007,
+       27.11
+      ],
+      [
+       2252,
+       27.52
+      ],
+      [
+       2503,
+       27.97
+      ],
+      [
+       2754,
+       28.1
+      ]
+     ],
+     "adopted_km2": 12.66,
+     "adopted_method": "reservoir",
+     "snap_radius_m": 0.0,
+     "outlet_distance_m": 321,
+     "max_over_min_150_400": 1.451,
+     "max_over_min_150_1000": 2.014
+    },
+    "method_agreement": {
+     "applicable": true,
+     "collected": true,
+     "reservoir_km2": 12.66,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "snap_candidate_km2": [
+      5.01,
+      12.7,
+      17.96,
+      18.43,
+      18.73,
+      25.58
+     ],
+     "diff_pct_by_radius": [
+      -60.4,
+      0.3,
+      41.9,
+      45.6,
+      47.9,
+      102.1
+     ]
+    },
+    "lake": {
+     "detected": true,
+     "lake_km2": 0.053,
+     "catchment_km2": 12.66,
+     "ratio_pct": 0.419,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-uchimura",
+   "name": "内村ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "reference_divergent"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 13.0,
+     "source": "川の防災情報",
+     "computed_km2": 2.28,
+     "error_pct": -82.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700017",
+     "offset_m": 0.0,
+     "station_lat": 36.2891667,
+     "station_lon": 138.1161111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      2.28,
+      2.35,
+      2.42,
+      17.46,
+      17.86
+     ],
+     "dist_m": [
+      52,
+      162,
+      272,
+      476,
+      927,
+      1190
+     ],
+     "downstream_km2": [
+      [
+       0,
+       2.28
+      ],
+      [
+       256,
+       2.36
+      ],
+      [
+       501,
+       2.42
+      ],
+      [
+       750,
+       15.46
+      ],
+      [
+       1004,
+       15.98
+      ],
+      [
+       1258,
+       17.12
+      ],
+      [
+       1503,
+       17.23
+      ],
+      [
+       1755,
+       17.43
+      ],
+      [
+       2007,
+       17.71
+      ],
+      [
+       2258,
+       17.92
+      ],
+      [
+       2505,
+       19.27
+      ],
+      [
+       2754,
+       19.53
+      ]
+     ],
+     "adopted_km2": 2.28,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 162,
+     "max_over_min_150_400": 1.061,
+     "max_over_min_150_1000": 7.833
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 2.28,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-yokokawa",
+   "name": "横川ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 38.8,
+     "source": "川の防災情報",
+     "computed_km2": 36.58,
+     "error_pct": -5.7
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2183100700007",
+     "offset_m": 0.0,
+     "station_lat": 35.9780556,
+     "station_lon": 137.9069444
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.04,
+      0.05,
+      36.58,
+      38.19,
+      39.54,
+      39.79
+     ],
+     "dist_m": [
+      49,
+      143,
+      350,
+      443,
+      710,
+      994
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.05
+      ],
+      [
+       263,
+       0.11
+      ],
+      [
+       511,
+       38.81
+      ],
+      [
+       769,
+       39.54
+      ],
+      [
+       1020,
+       39.73
+      ],
+      [
+       1251,
+       39.97
+      ],
+      [
+       1512,
+       40.69
+      ],
+      [
+       1755,
+       45.49
+      ],
+      [
+       2007,
+       45.72
+      ],
+      [
+       2257,
+       46.16
+      ],
+      [
+       2509,
+       46.73
+      ],
+      [
+       2763,
+       49.37
+      ]
+     ],
+     "adopted_km2": 36.58,
+     "adopted_method": "snap",
+     "snap_radius_m": 250.0,
+     "outlet_distance_m": 350,
+     "max_over_min_150_400": 763.8,
+     "max_over_min_150_1000": 795.8
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 36.58,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-katagiri",
+   "name": "片桐ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 15.1,
+     "source": "川の防災情報",
+     "computed_km2": 14.84,
+     "error_pct": -1.7
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "2183100700011",
+     "offset_m": 0.0,
+     "station_lat": 35.6183333,
+     "station_lon": 137.8533333
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.03,
+      0.06,
+      0.07,
+      14.84,
+      15.33,
+      18.65
+     ],
+     "dist_m": [
+      61,
+      163,
+      260,
+      518,
+      699,
+      1010
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.06
+      ],
+      [
+       261,
+       0.49
+      ],
+      [
+       508,
+       14.82
+      ],
+      [
+       758,
+       15.05
+      ],
+      [
+       1002,
+       15.14
+      ],
+      [
+       1255,
+       18.56
+      ],
+      [
+       1500,
+       18.62
+      ],
+      [
+       1757,
+       18.8
+      ],
+      [
+       2010,
+       20.63
+      ],
+      [
+       2257,
+       20.76
+      ],
+      [
+       2507,
+       20.87
+      ],
+      [
+       2754,
+       21.46
+      ]
+     ],
+     "adopted_km2": 14.84,
+     "adopted_method": "snap",
+     "snap_radius_m": 400.0,
+     "outlet_distance_m": 518,
+     "max_over_min_150_400": 247.333,
+     "max_over_min_150_1000": 310.833
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 14.84,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-minowa",
+   "name": "箕輪ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 38.2,
+     "source": "川の防災情報",
+     "computed_km2": 38.17,
+     "error_pct": -0.1
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700012",
+     "offset_m": 0.0,
+     "station_lat": 35.925,
+     "station_lon": 138.0338889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.08,
+      0.12,
+      0.2,
+      38.17,
+      38.39,
+      43.04
+     ],
+     "dist_m": [
+      66,
+      147,
+      277,
+      515,
+      768,
+      1121
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.12
+      ],
+      [
+       252,
+       0.21
+      ],
+      [
+       501,
+       38.18
+      ],
+      [
+       756,
+       38.32
+      ],
+      [
+       1018,
+       38.39
+      ],
+      [
+       1264,
+       42.97
+      ],
+      [
+       1507,
+       43.64
+      ],
+      [
+       1751,
+       44.33
+      ],
+      [
+       2012,
+       44.51
+      ],
+      [
+       2261,
+       44.6
+      ],
+      [
+       2500,
+       45.0
+      ],
+      [
+       2755,
+       45.2
+      ]
+     ],
+     "adopted_km2": 38.17,
+     "adopted_method": "snap",
+     "snap_radius_m": 400.0,
+     "outlet_distance_m": 515,
+     "max_over_min_150_400": 318.083,
+     "max_over_min_150_1000": 358.667
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 38.17,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-toyooka",
+   "name": "豊丘ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "reference_divergent"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 13.1,
+     "source": "川の防災情報",
+     "computed_km2": 10.36,
+     "error_pct": -20.9
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700018",
+     "offset_m": 0.0,
+     "station_lat": 36.6186111,
+     "station_lon": 138.3813889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      10.36,
+      10.41,
+      13.09,
+      13.55,
+      13.88
+     ],
+     "dist_m": [
+      51,
+      147,
+      257,
+      498,
+      828,
+      1082
+     ],
+     "downstream_km2": [
+      [
+       0,
+       10.36
+      ],
+      [
+       255,
+       12.46
+      ],
+      [
+       507,
+       13.33
+      ],
+      [
+       752,
+       13.51
+      ],
+      [
+       1007,
+       13.76
+      ],
+      [
+       1257,
+       13.89
+      ],
+      [
+       1502,
+       13.96
+      ],
+      [
+       1754,
+       14.18
+      ],
+      [
+       2000,
+       15.17
+      ],
+      [
+       2252,
+       15.28
+      ],
+      [
+       2505,
+       15.44
+      ],
+      [
+       2752,
+       15.59
+      ]
+     ],
+     "adopted_km2": 10.36,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 147,
+     "max_over_min_150_400": 1.264,
+     "max_over_min_150_1000": 1.34
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 10.36,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-kanabara",
+   "name": "金原ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 3.15,
+     "source": "川の防災情報",
+     "computed_km2": 3.03,
+     "error_pct": -3.8
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700022",
+     "offset_m": 0.0,
+     "station_lat": 36.4088889,
+     "station_lon": 138.3613889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.02,
+      3.03,
+      3.26,
+      3.38,
+      3.6,
+      5.72
+     ],
+     "dist_m": [
+      46,
+      153,
+      254,
+      478,
+      878,
+      1257
+     ],
+     "downstream_km2": [
+      [
+       0,
+       3.03
+      ],
+      [
+       252,
+       3.3
+      ],
+      [
+       510,
+       3.4
+      ],
+      [
+       754,
+       3.54
+      ],
+      [
+       1006,
+       3.62
+      ],
+      [
+       1257,
+       5.7
+      ],
+      [
+       1501,
+       5.75
+      ],
+      [
+       1753,
+       5.93
+      ],
+      [
+       2001,
+       5.97
+      ],
+      [
+       2256,
+       6.02
+      ],
+      [
+       2504,
+       6.16
+      ],
+      [
+       2761,
+       6.22
+      ]
+     ],
+     "adopted_km2": 3.03,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 153,
+     "max_over_min_150_400": 1.116,
+     "max_over_min_150_1000": 1.888
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 3.03,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-kitayama",
+   "name": "北山ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 1.25,
+     "source": "川の防災情報",
+     "computed_km2": 1.25,
+     "error_pct": 0.0
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700020",
+     "offset_m": 0.0,
+     "station_lat": 36.48,
+     "station_lon": 138.0536111
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.03,
+      0.06,
+      1.25,
+      1.43,
+      1.74,
+      2.63
+     ],
+     "dist_m": [
+      65,
+      147,
+      332,
+      410,
+      705,
+      1142
+     ],
+     "downstream_km2": [
+      [
+       0,
+       0.06
+      ],
+      [
+       260,
+       0.18
+      ],
+      [
+       507,
+       1.7
+      ],
+      [
+       756,
+       1.8
+      ],
+      [
+       1007,
+       1.92
+      ],
+      [
+       1257,
+       4.89
+      ],
+      [
+       1507,
+       4.98
+      ],
+      [
+       1753,
+       5.11
+      ],
+      [
+       2005,
+       5.16
+      ],
+      [
+       2257,
+       5.24
+      ],
+      [
+       2510,
+       5.28
+      ],
+      [
+       2754,
+       5.29
+      ]
+     ],
+     "adopted_km2": 1.25,
+     "adopted_method": "snap",
+     "snap_radius_m": 250.0,
+     "outlet_distance_m": 332,
+     "max_over_min_150_400": 23.833,
+     "max_over_min_150_1000": 43.833
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 1.25,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-mizukami",
+   "name": "水上ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 2.29,
+     "source": "川の防災情報",
+     "computed_km2": 2.45,
+     "error_pct": 7.0
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700023",
+     "offset_m": 0.0,
+     "station_lat": 36.3511111,
+     "station_lon": 138.04
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      2.31,
+      2.45,
+      2.49,
+      2.77,
+      2.87,
+      9.4
+     ],
+     "dist_m": [
+      47,
+      196,
+      322,
+      550,
+      942,
+      1266
+     ],
+     "downstream_km2": [
+      [
+       0,
+       2.45
+      ],
+      [
+       256,
+       2.51
+      ],
+      [
+       501,
+       2.8
+      ],
+      [
+       756,
+       2.87
+      ],
+      [
+       1001,
+       9.19
+      ],
+      [
+       1256,
+       9.42
+      ],
+      [
+       1504,
+       9.56
+      ],
+      [
+       1755,
+       12.94
+      ],
+      [
+       2003,
+       14.16
+      ],
+      [
+       2257,
+       14.67
+      ],
+      [
+       2505,
+       14.97
+      ],
+      [
+       2750,
+       23.66
+      ]
+     ],
+     "adopted_km2": 2.45,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 196,
+     "max_over_min_150_400": 1.131,
+     "max_over_min_150_1000": 3.837
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 2.45,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-onikuma",
+   "name": "小仁熊ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G4",
+   "group_name": "needs_evidence",
+   "group_reasons": [
+    "reference_divergent"
+   ],
+   "evidence": {
+    "reference": {
+     "area_km2": 20.8,
+     "source": "川の防災情報",
+     "computed_km2": 9.46,
+     "error_pct": -54.5
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700024",
+     "offset_m": 0.0,
+     "station_lat": 36.4191667,
+     "station_lon": 138.0005556
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.0,
+      9.46,
+      9.68,
+      9.72,
+      18.94,
+      26.25
+     ],
+     "dist_m": [
+      49,
+      186,
+      343,
+      491,
+      842,
+      1365
+     ],
+     "downstream_km2": [
+      [
+       0,
+       9.46
+      ],
+      [
+       253,
+       9.7
+      ],
+      [
+       506,
+       18.4
+      ],
+      [
+       757,
+       18.92
+      ],
+      [
+       1005,
+       18.98
+      ],
+      [
+       1257,
+       19.15
+      ],
+      [
+       1502,
+       19.42
+      ],
+      [
+       1757,
+       19.51
+      ],
+      [
+       2004,
+       19.87
+      ],
+      [
+       2250,
+       19.92
+      ],
+      [
+       2507,
+       21.66
+      ],
+      [
+       2755,
+       21.74
+      ]
+     ],
+     "adopted_km2": 9.46,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 186,
+     "max_over_min_150_400": 1.027,
+     "max_over_min_150_1000": 2.775
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 9.46,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-yoji",
+   "name": "余地ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 2.52,
+     "source": "川の防災情報",
+     "computed_km2": 2.52,
+     "error_pct": 0.0
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700019",
+     "offset_m": 0.0,
+     "station_lat": 36.1613889,
+     "station_lon": 138.5663889
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      0.01,
+      2.52,
+      2.82,
+      2.99,
+      3.65,
+      4.11
+     ],
+     "dist_m": [
+      47,
+      173,
+      254,
+      393,
+      695,
+      999
+     ],
+     "downstream_km2": [
+      [
+       0,
+       2.52
+      ],
+      [
+       252,
+       2.98
+      ],
+      [
+       508,
+       3.61
+      ],
+      [
+       751,
+       4.01
+      ],
+      [
+       1007,
+       4.12
+      ],
+      [
+       1250,
+       4.69
+      ],
+      [
+       1501,
+       4.96
+      ],
+      [
+       1756,
+       5.41
+      ],
+      [
+       2002,
+       5.64
+      ],
+      [
+       2254,
+       5.87
+      ],
+      [
+       2504,
+       6.15
+      ],
+      [
+       2756,
+       6.48
+      ]
+     ],
+     "adopted_km2": 2.52,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 173,
+     "max_over_min_150_400": 1.187,
+     "max_over_min_150_1000": 1.631
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 2.52,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  },
+  {
+   "id": "nagano-asakawa",
+   "name": "浅川ダム",
+   "pref": "nagano",
+   "qa_class": "WARN",
+   "qa_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "evaluation_group": "G3",
+   "group_name": "reference_consistent",
+   "group_reasons": [],
+   "evidence": {
+    "reference": {
+     "area_km2": 15.2,
+     "source": "川の防災情報",
+     "computed_km2": 15.79,
+     "error_pct": 3.9
+    },
+    "coordinate": {
+     "class": "identical_to_station_master",
+     "station_fcd": "0512100700001",
+     "offset_m": 0.0,
+     "station_lat": 36.6916667,
+     "station_lon": 138.1902778
+    },
+    "outlet_profile": {
+     "collected": true,
+     "radii_m": [
+      50,
+      150,
+      250,
+      400,
+      700,
+      1000
+     ],
+     "area_km2": [
+      15.7,
+      15.79,
+      15.8,
+      15.86,
+      16.04,
+      21.42
+     ],
+     "dist_m": [
+      55,
+      172,
+      278,
+      422,
+      727,
+      1234
+     ],
+     "downstream_km2": [
+      [
+       0,
+       15.79
+      ],
+      [
+       257,
+       15.85
+      ],
+      [
+       508,
+       16.01
+      ],
+      [
+       754,
+       21.04
+      ],
+      [
+       1010,
+       21.17
+      ],
+      [
+       1255,
+       21.41
+      ],
+      [
+       1503,
+       21.46
+      ],
+      [
+       1759,
+       21.65
+      ],
+      [
+       2002,
+       21.7
+      ],
+      [
+       2252,
+       21.75
+      ],
+      [
+       2507,
+       21.83
+      ],
+      [
+       2757,
+       21.89
+      ]
+     ],
+     "adopted_km2": 15.79,
+     "adopted_method": "snap",
+     "snap_radius_m": 150.0,
+     "outlet_distance_m": 172,
+     "max_over_min_150_400": 1.004,
+     "max_over_min_150_1000": 1.357
+    },
+    "method_agreement": {
+     "applicable": false,
+     "reason": "出口の決め方が河道スナップで、比べる貯水池法の結果が無い"
+    },
+    "lake": {
+     "detected": false,
+     "lake_km2": null,
+     "catchment_km2": 15.79,
+     "ratio_pct": null,
+     "note": "記録のみ。合否・評価区分の条件ではない"
+    },
+    "basin_info": {
+     "spec_row_present": false,
+     "status": "unconfirmed",
+     "direct_km2": null,
+     "indirect_km2": null,
+     "total_km2": null,
+     "source": null,
+     "binran_no": null,
+     "diversion_status": "unknown"
+    }
+   }
+  }
+ ]
+}

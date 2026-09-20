@@ -835,6 +835,45 @@ python -m unittest discover -s tests -v
 `--outline exact`（輪郭を画素の辺に沿ってたどる）は画素単位で一致する。既存の輪を黙って変えないため、
 既定は `legacy` のまま。切り替えは、影響（輪の形が変わる）を確認してから。
 
+### 証拠層と評価区分（全国化に向けた、人手監査への振り分け）
+
+品質ゲート（上）は「配信してよいか」を止める仕組みで、「集水域そのものが正しいか」は保証しない
+（`exact` の輪では輪と雨マスクは自明に一致する。面積の照合は便覧のある基だけ）。
+全国化で正常群を自動でふるい分け、異常だけを人手監査へ送れるよう、**判定の材料になる観測値を
+dam_id ごとに記録する層**を別に持つ。`scripts/ws_evidence.py`（純関数）・`scripts/ws_outlet_profile.py`
+（出口周辺の面積プロファイル）・`scripts/ws_eval_summary.py`（集計）。
+
+```bash
+python scripts/ws_outlet_profile.py --basins-dir <build_basins の出力> --out profiles.json --workers 4   # 標高キャッシュのみ・通信なし
+python scripts/ws_eval_summary.py --report eval.json --basins-dir <同上> --obs-master <obs_master.json> \
+    --profiles profiles.json --evidence-out evidence.json --evidence-md evidence.md
+```
+
+| 証拠 | 記録する値 |
+|---|---|
+| `reference` | 参考面積（川の防災情報）・算出面積・誤差 % |
+| `coordinate` | `dams.json` の座標が観測所マスタの座標と同一か（`identical_to_station_master` / `differs_from_station_master` / `no_station_master`）とずれ量 m。**座標の正しさは判定しない** |
+| `outlet_profile` | 半径 50/150/250/400/700/1000m の出口候補の上流面積・距離、採用出口から下流 3km の面積の増え方 |
+| `method_agreement` | 貯水池法の面積と、河道法の候補面積の差 %（半径ごと）。河道スナップの基は対象外 |
+| `lake` | 水面の面積と、集水域に対する比 %（**記録のみ**） |
+| `basin_info` | 直接・間接流域の有無・値・出典・確認状態（`dam_basin_spec.csv`）・導水の判定 |
+
+**評価区分（G1〜G4）**は、人手監査へ送る量を見積もるための分類。**公開可否・掲載可否には接続しない**。
+区分の規則が使う数値は、既存の ±15%（参考面積との一致の目安。`watershed_qa` の面積誤差と同じ値）だけで、
+新しい閾値は無い。水面比・座標のずれ・出口周辺のプロファイルは記録するだけで、区分の条件にしない。
+
+| 区分 | 名称 | 規則 |
+|---|---|---|
+| G1 | official_verified | QA が PASS/WARN で、便覧の直接流域があり、導水の記載なし |
+| G2 | official_with_diversion | 同上で、導水あり |
+| G3 | reference_consistent | 便覧なし。参考面積と ±15% 以内で、QA が PASS/WARN |
+| G4 | needs_evidence | QA が HOLD/FAIL/判定不能、または便覧なしで参考面積と乖離・参考面積なし |
+
+**`dam_basin_spec.csv` の入口**（`dam_id` 単位）: `direct_km2` / `indirect_km2` / `total_km2`（分かっている値だけ）、
+`source`（出典）、`basin_status`（`confirmed` / `unconfirmed`）、`note`。`unconfirmed` の行は数値を持てない
+（推測値を入れさせない）。`confirmed` の行は数値（直接または合計）と出典が必須。行が無いダムは「未確認」として扱う。
+検証は `build_basins.load_spec`。**この入口は受け皿であって、値の調査・入力はしていない。**
+
 ### 版の食い違いを起こさない
 
 索引・ポリゴン・格子は別々のファイルなので、画面を開いたまま新しい版を公開すると
