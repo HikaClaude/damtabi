@@ -1,0 +1,357 @@
+{
+ "id": "toyama-otani",
+ "name": "大谷ダム",
+ "published": {
+  "flow_version": "ad0cde7174d5",
+  "index": {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "lat": 36.8558333,
+   "lon": 137.4863889,
+   "area_km2": 1.48,
+   "fine_area_km2": 1.48,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 1.5,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.0,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 22.9,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    137.4848,
+    36.85428
+   ],
+   [
+    137.48471,
+    36.85559
+   ],
+   [
+    137.48617,
+    36.85586
+   ],
+   [
+    137.48634,
+    36.85772
+   ],
+   [
+    137.49012,
+    36.85799
+   ],
+   [
+    137.49218,
+    36.8593
+   ],
+   [
+    137.49312,
+    36.85895
+   ],
+   [
+    137.4951,
+    36.85916
+   ],
+   [
+    137.49578,
+    36.85861
+   ],
+   [
+    137.49673,
+    36.85888
+   ],
+   [
+    137.49784,
+    36.85792
+   ],
+   [
+    137.4999,
+    36.8584
+   ],
+   [
+    137.50059,
+    36.85751
+   ],
+   [
+    137.50394,
+    36.8573
+   ],
+   [
+    137.50531,
+    36.85662
+   ],
+   [
+    137.5078,
+    36.85621
+   ],
+   [
+    137.50754,
+    36.85511
+   ],
+   [
+    137.5066,
+    36.85421
+   ],
+   [
+    137.50669,
+    36.85339
+   ],
+   [
+    137.50703,
+    36.85263
+   ],
+   [
+    137.50832,
+    36.85188
+   ],
+   [
+    137.50814,
+    36.85037
+   ],
+   [
+    137.50917,
+    36.84844
+   ],
+   [
+    137.50566,
+    36.84968
+   ],
+   [
+    137.50205,
+    36.84975
+   ],
+   [
+    137.49982,
+    36.85078
+   ],
+   [
+    137.4981,
+    36.85099
+   ],
+   [
+    137.49767,
+    36.85064
+   ],
+   [
+    137.49664,
+    36.85126
+   ],
+   [
+    137.4939,
+    36.8516
+   ],
+   [
+    137.49227,
+    36.85257
+   ],
+   [
+    137.49098,
+    36.85257
+   ],
+   [
+    137.49038,
+    36.85339
+   ],
+   [
+    137.48703,
+    36.85311
+   ],
+   [
+    137.49029,
+    36.85346
+   ],
+   [
+    137.48609,
+    36.85311
+   ],
+   [
+    137.49029,
+    36.85353
+   ],
+   [
+    137.48583,
+    36.85318
+   ],
+   [
+    137.49021,
+    36.8536
+   ],
+   [
+    137.48574,
+    36.85325
+   ],
+   [
+    137.49012,
+    36.85366
+   ],
+   [
+    137.4854,
+    36.85339
+   ],
+   [
+    137.48995,
+    36.85373
+   ],
+   [
+    137.48531,
+    36.85346
+   ],
+   [
+    137.48978,
+    36.85373
+   ],
+   [
+    137.48523,
+    36.85353
+   ],
+   [
+    137.48969,
+    36.8538
+   ],
+   [
+    137.48523,
+    36.8536
+   ],
+   [
+    137.48952,
+    36.85387
+   ],
+   [
+    137.48523,
+    36.85373
+   ],
+   [
+    137.48488,
+    36.85421
+   ],
+   [
+    137.4848,
+    36.85428
+   ]
+  ],
+  "feature_properties": {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "computed_area_km2": 1.48,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.6,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 22.9,
+    "mask_cells": 2813,
+    "ring_cells": 2735,
+    "mask_area_km2": 1.48,
+    "ring_area_km2": 1.43,
+    "ring_vs_mask_area_pct": -2.77,
+    "raw_ring_vs_drawn_ring_pct": 0.07,
+    "iou": 0.9521,
+    "mask_outside_pct": 3.8,
+    "ring_only_pct": 1.06,
+    "mask_far_outside_pct": 0.07,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.14,
+    "path_outside_pct": 0.07,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-21T00:39:31+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "ad0cde7174d5",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 22.9,
+   "mask_cells": 2813,
+   "ring_cells": 2735,
+   "mask_area_km2": 1.48,
+   "ring_area_km2": 1.43,
+   "ring_vs_mask_area_pct": -2.77,
+   "raw_ring_vs_drawn_ring_pct": 0.07,
+   "iou": 0.9521,
+   "mask_outside_pct": 3.8,
+   "ring_only_pct": 1.06,
+   "mask_far_outside_pct": 0.07,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 1.14,
+   "path_outside_pct": 0.07,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-21T00:39:31+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.018883413550185857,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.05,
+   "method_here": "snap"
+  }
+ }
+}

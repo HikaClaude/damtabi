@@ -1,0 +1,78 @@
+{
+ "id": "toyama-kubusugawa",
+ "name": "久婦須川ダム",
+ "published": null,
+ "latest": {
+  "status": "hold",
+  "block_codes": [
+   "rain_outside_ring",
+   "path_leaves_ring"
+  ],
+  "reasons": [
+   {
+    "code": "rain_outside_ring",
+    "severity": "block",
+    "message": "雨マスクの 3.1% が描画される輪の外（境界から2セル超）にある",
+    "value": 3.12,
+    "limit": 2.0
+   },
+   {
+    "code": "path_leaves_ring",
+    "severity": "block",
+    "message": "雨の経路の 3.5% が輪の外へ流れ出る",
+    "value": 3.54,
+    "limit": 2.0
+   }
+  ],
+  "flow_version": "825a18c3dd73",
+  "spatial": {
+   "grid": [
+    576,
+    576
+   ],
+   "cell_m": 61.4,
+   "mask_cells": 15670,
+   "ring_cells": 14850,
+   "mask_area_km2": 59.08,
+   "ring_area_km2": 55.98,
+   "ring_vs_mask_area_pct": -5.23,
+   "raw_ring_vs_drawn_ring_pct": 1.22,
+   "iou": 0.9225,
+   "mask_outside_pct": 6.54,
+   "ring_only_pct": 1.38,
+   "mask_far_outside_pct": 3.12,
+   "ring_far_only_pct": 0.05,
+   "unreached_pct": 1.58,
+   "path_outside_pct": 3.54,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 55,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 81,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-21T00:35:15+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": 0.5,
+   "grid_drift_pct": 0.22677361671117335,
+   "official_area_km2": 58.7,
+   "diversion_status": "none",
+   "outlet_method": "reservoir",
+   "fine_recompute_pct": 0.0,
+   "method_here": "reservoir"
+  }
+ }
+}

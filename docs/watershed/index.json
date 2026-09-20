@@ -1,8 +1,10 @@
 {
- "version": "982e25241c0a",
- "generated": "2026-09-19",
+ "version": "cd6e28ae6d51",
+ "generated": "2026-09-21",
  "source": "国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）をDAM TABI が加工して作成",
  "note": "地形から計算した概略の集水域。公式に確定した集水区域や実測の流域界ではない。",
+ "pipeline": "ws-pipeline/2",
+ "basins_version": "98ffd546b1be",
  "excluded": {
   "toyama-shiraiwagawa": "貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、この1基だけ逆に動いている。**原因は特定できていない。** 「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。"
  },
@@ -22,7 +24,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -1.4,
    "grid_drift_pct": -0.1,
-   "unreached_pct": 0.8,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap-fixed",
@@ -33,10 +34,12 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
+   "unreached_pct": 0.8,
    "downstream_candidates": [],
-   "file": "flow/toyama-unazuki.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "v": "1a6924950186",
+   "file": "flow/toyama-unazuki.json?v=1a6924950186"
   },
   {
    "id": "toyama-muromaki",
@@ -53,7 +56,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -1.2,
    "grid_drift_pct": -0.0,
-   "unreached_pct": 0.7,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap-fixed",
@@ -64,10 +66,12 @@
     "indirect_km2": 43.1,
     "note": "他の河川からの導水があり、地形上の集水域と実際の集水範囲は一致しない"
    },
+   "unreached_pct": 0.7,
    "downstream_candidates": [],
-   "file": "flow/toyama-muromaki.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "v": "62b388bca61c",
+   "file": "flow/toyama-muromaki.json?v=62b388bca61c"
   },
   {
    "id": "toyama-kumanogawa",
@@ -84,7 +88,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -0.1,
    "grid_drift_pct": -0.0,
-   "unreached_pct": 0.3,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -96,40 +99,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-kumanogawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
-  },
-  {
-   "id": "toyama-kubusugawa",
-   "name": "久婦須川ダム",
-   "lat": 36.5111111,
-   "lon": 137.1886111,
-   "area_km2": 59.14,
-   "fine_area_km2": 59.01,
-   "official_area_km2": 58.7,
-   "official_total_km2": 58.7,
-   "official_indirect_km2": 0.0,
-   "official_source": "ダム便覧",
-   "reference_area_km2": 58.7,
-   "reference_source": "川の防災情報",
-   "area_error_pct": 0.5,
-   "grid_drift_pct": 0.2,
-   "unreached_pct": 1.6,
-   "lake_km2": 0.14,
-   "lake_inside_pct": 100.0,
-   "outlet_method": "reservoir",
-   "cell_m": 61.4,
-   "diversion": {
-    "status": "none",
-    "direct_km2": 58.7,
-    "indirect_km2": 0.0,
-    "note": "全て直接流域（ダム便覧）"
-   },
-   "downstream_candidates": [],
-   "file": "flow/toyama-kubusugawa.json?v=982e25241c0a",
-   "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.3,
+   "v": "eecec879de82",
+   "file": "flow/toyama-kumanogawa.json?v=eecec879de82"
   },
   {
    "id": "toyama-wadagawa",
@@ -146,7 +120,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -5.4,
    "grid_drift_pct": 0.0,
-   "unreached_pct": 0.7,
    "lake_km2": 0.247,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -158,9 +131,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-wadagawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.7,
+   "v": "a33cbe453e6e",
+   "file": "flow/toyama-wadagawa.json?v=a33cbe453e6e"
   },
   {
    "id": "toyama-togagawa",
@@ -177,7 +152,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": 1.4,
    "grid_drift_pct": -0.1,
-   "unreached_pct": 0.5,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -189,9 +163,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-togagawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.5,
+   "v": "c027e2748313",
+   "file": "flow/toyama-togagawa.json?v=c027e2748313"
   },
   {
    "id": "toyama-sakaigawa",
@@ -208,7 +184,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -0.3,
    "grid_drift_pct": 0.0,
-   "unreached_pct": 0.2,
    "lake_km2": 0.987,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -220,9 +195,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-sakaigawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.1,
+   "v": "0bca111bfadf",
+   "file": "flow/toyama-sakaigawa.json?v=0bca111bfadf"
   },
   {
    "id": "toyama-tori",
@@ -239,7 +216,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -0.5,
    "grid_drift_pct": -0.0,
-   "unreached_pct": 0.4,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -251,9 +227,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-tori.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.4,
+   "v": "06178bc0eefd",
+   "file": "flow/toyama-tori.json?v=06178bc0eefd"
   },
   {
    "id": "toyama-goi",
@@ -270,7 +248,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -4.1,
    "grid_drift_pct": 0.1,
-   "unreached_pct": 0.7,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -284,11 +261,13 @@
    "downstream_candidates": [
     "toyama-konadegawa"
    ],
-   "file": "flow/toyama-goi.json?v=982e25241c0a",
    "downstream_reaches": [
     "toyama-konadegawa"
    ],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.7,
+   "v": "e51785c2c718",
+   "file": "flow/toyama-goi.json?v=e51785c2c718"
   },
   {
    "id": "toyama-konadegawa",
@@ -305,7 +284,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": 0.9,
    "grid_drift_pct": 0.0,
-   "unreached_pct": 0.7,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -317,9 +295,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-konadegawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.7,
+   "v": "b9e9c167ec5a",
+   "file": "flow/toyama-konadegawa.json?v=b9e9c167ec5a"
   },
   {
    "id": "toyama-johana",
@@ -336,7 +316,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -4.5,
    "grid_drift_pct": -0.0,
-   "unreached_pct": 0.2,
    "lake_km2": 0.108,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -348,9 +327,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-johana.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.2,
+   "v": "d60ae78f6ffa",
+   "file": "flow/toyama-johana.json?v=d60ae78f6ffa"
   },
   {
    "id": "toyama-usunaka",
@@ -367,7 +348,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -2.8,
    "grid_drift_pct": 0.2,
-   "unreached_pct": 0.2,
    "lake_km2": 0.126,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -379,9 +359,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-usunaka.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.2,
+   "v": "853436252b77",
+   "file": "flow/toyama-usunaka.json?v=853436252b77"
   },
   {
    "id": "toyama-asahiogawa",
@@ -398,7 +380,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": 3.1,
    "grid_drift_pct": 0.0,
-   "unreached_pct": 0.3,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -409,10 +390,12 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
+   "unreached_pct": 0.3,
    "downstream_candidates": [],
-   "file": "flow/toyama-asahiogawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "v": "3cb670daf710",
+   "file": "flow/toyama-asahiogawa.json?v=3cb670daf710"
   },
   {
    "id": "toyama-kadokawa",
@@ -429,7 +412,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": -1.0,
    "grid_drift_pct": 0.1,
-   "unreached_pct": 0.6,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -440,10 +422,12 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
+   "unreached_pct": 0.6,
    "downstream_candidates": [],
-   "file": "flow/toyama-kadokawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "v": "3ab707ac4977",
+   "file": "flow/toyama-kadokawa.json?v=3ab707ac4977"
   },
   {
    "id": "toyama-kamiichigawa",
@@ -460,7 +444,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": 2.7,
    "grid_drift_pct": 0.1,
-   "unreached_pct": 0.4,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -471,10 +454,12 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
+   "unreached_pct": 0.4,
    "downstream_candidates": [],
-   "file": "flow/toyama-kamiichigawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "v": "8ab15eb9c38e",
+   "file": "flow/toyama-kamiichigawa.json?v=8ab15eb9c38e"
   },
   {
    "id": "toyama-kamiichigawa-daini",
@@ -491,7 +476,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": 2.2,
    "grid_drift_pct": -0.0,
-   "unreached_pct": 0.4,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -502,14 +486,16 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
+   "unreached_pct": 0.4,
    "downstream_candidates": [
     "toyama-kamiichigawa"
    ],
-   "file": "flow/toyama-kamiichigawa-daini.json?v=982e25241c0a",
    "downstream_reaches": [
     "toyama-kamiichigawa"
    ],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "v": "81ca63a280e4",
+   "file": "flow/toyama-kamiichigawa-daini.json?v=81ca63a280e4"
   },
   {
    "id": "toyama-funagawa",
@@ -526,7 +512,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": null,
    "grid_drift_pct": 0.2,
-   "unreached_pct": 0.5,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -536,9 +521,11 @@
     "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-funagawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.5,
+   "v": "1b0d5abe15ad",
+   "file": "flow/toyama-funagawa.json?v=1b0d5abe15ad"
   },
   {
    "id": "toyama-fusegawa",
@@ -555,7 +542,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": 1.6,
    "grid_drift_pct": 0.2,
-   "unreached_pct": 0.4,
    "lake_km2": 0.072,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -567,9 +553,11 @@
     "note": "全て直接流域（ダム便覧）"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-fusegawa.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.4,
+   "v": "24f25f846b49",
+   "file": "flow/toyama-fusegawa.json?v=24f25f846b49"
   },
   {
    "id": "toyama-otani",
@@ -586,7 +574,6 @@
    "reference_source": "川の防災情報",
    "area_error_pct": null,
    "grid_drift_pct": -0.0,
-   "unreached_pct": 1.1,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap",
@@ -596,9 +583,11 @@
     "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-otani.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 1.1,
+   "v": "ad0cde7174d5",
+   "file": "flow/toyama-otani.json?v=ad0cde7174d5"
   },
   {
    "id": "toyama-kurobe",
@@ -615,7 +604,6 @@
    "reference_source": null,
    "area_error_pct": -1.8,
    "grid_drift_pct": 0.0,
-   "unreached_pct": 0.4,
    "lake_km2": 1.14,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -630,12 +618,14 @@
     "toyama-dashidaira",
     "toyama-unazuki"
    ],
-   "file": "flow/toyama-kurobe.json?v=982e25241c0a",
    "downstream_reaches": [
     "toyama-dashidaira",
     "toyama-unazuki"
    ],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.4,
+   "v": "050798c308ba",
+   "file": "flow/toyama-kurobe.json?v=050798c308ba"
   },
   {
    "id": "toyama-arimine",
@@ -652,7 +642,6 @@
    "reference_source": null,
    "area_error_pct": 1.1,
    "grid_drift_pct": 0.1,
-   "unreached_pct": 0.5,
    "lake_km2": 1.545,
    "lake_inside_pct": 100.0,
    "outlet_method": "reservoir",
@@ -664,9 +653,11 @@
     "note": "他の河川からの導水があり、地形上の集水域と実際の集水範囲は一致しない"
    },
    "downstream_candidates": [],
-   "file": "flow/toyama-arimine.json?v=982e25241c0a",
    "downstream_reaches": [],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.5,
+   "v": "9fa5afd5df96",
+   "file": "flow/toyama-arimine.json?v=9fa5afd5df96"
   },
   {
    "id": "toyama-dashidaira",
@@ -683,7 +674,6 @@
    "reference_source": null,
    "area_error_pct": -0.3,
    "grid_drift_pct": 0.1,
-   "unreached_pct": 0.7,
    "lake_km2": 0.0,
    "lake_inside_pct": null,
    "outlet_method": "snap-fixed",
@@ -697,11 +687,13 @@
    "downstream_candidates": [
     "toyama-unazuki"
    ],
-   "file": "flow/toyama-dashidaira.json?v=982e25241c0a",
    "downstream_reaches": [
     "toyama-unazuki"
    ],
-   "downstream_unverified": []
+   "downstream_unverified": [],
+   "unreached_pct": 0.7,
+   "v": "22589471dfa4",
+   "file": "flow/toyama-dashidaira.json?v=22589471dfa4"
   }
  ]
 }

@@ -1,0 +1,84 @@
+{
+ "id": "toyama-shiraiwagawa",
+ "name": "白岩川ダム",
+ "published": null,
+ "latest": {
+  "status": "hold",
+  "block_codes": [
+   "manual_hold",
+   "area_error",
+   "path_leaves_ring"
+  ],
+  "reasons": [
+   {
+    "code": "manual_hold",
+    "severity": "block",
+    "message": "原因が特定できていないため保留: 貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、この1基だけ逆に動いている。**原因は特定できていない。** 「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。"
+   },
+   {
+    "code": "area_error",
+    "severity": "block",
+    "message": "便覧の直接流域と +16.5%（許容 ±15%）",
+    "value": 16.5,
+    "limit": 15.0
+   },
+   {
+    "code": "path_leaves_ring",
+    "severity": "block",
+    "message": "雨の経路の 80.5% が輪の外へ流れ出る",
+    "value": 80.46,
+    "limit": 2.0
+   }
+  ],
+  "flow_version": "16902b3218e6",
+  "spatial": {
+   "grid": [
+    563,
+    563
+   ],
+   "cell_m": 38.3,
+   "mask_cells": 19029,
+   "ring_cells": 18660,
+   "mask_area_km2": 27.91,
+   "ring_area_km2": 27.37,
+   "ring_vs_mask_area_pct": -1.94,
+   "raw_ring_vs_drawn_ring_pct": 0.14,
+   "iou": 0.9591,
+   "mask_outside_pct": 3.04,
+   "ring_only_pct": 1.12,
+   "mask_far_outside_pct": 1.18,
+   "ring_far_only_pct": 0.11,
+   "unreached_pct": 0.46,
+   "path_outside_pct": 80.46,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 59,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 121,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-21T00:38:56+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": 16.5,
+   "grid_drift_pct": 0.043989735691396525,
+   "official_area_km2": 24.0,
+   "diversion_status": "none",
+   "outlet_method": "reservoir",
+   "fine_recompute_pct": -0.01,
+   "method_here": "reservoir"
+  }
+ }
+}
