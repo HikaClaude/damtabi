@@ -122,6 +122,8 @@ def main(argv=None) -> int:
                     help="標高を使わず、状態から索引・ポリゴンを組み直す")
     ap.add_argument("--prune-orphans", action="store_true",
                     help="状態の無い配信ファイル（旧実装の成果）を削除する。既定は止めて報告")
+    ap.add_argument("--basins-dir", type=Path, default=ROOT / "data" / "basins",
+                    help="build_basins.py の出力先（既定 data/basins）。別方式の輪を評価するときに使う")
     ap.add_argument("--unpublish", help="dam_id を配信から外す（格子ファイルも削除。状態には残る）")
     bb.add_source_args(ap)
     args = ap.parse_args(argv)
@@ -173,9 +175,12 @@ def main(argv=None) -> int:
         return 2
 
     spec = bb.load_spec(set(by_id))
+    if args.basins_dir != ROOT / "data" / "basins" and not args.evaluate:
+        print("--basins-dir を既定以外にできるのは --evaluate のときだけです（配信物に別の輪を混ぜない）。")
+        return 2
     metas = {m["id"]: m for m in json.loads(
-        (ROOT / "data" / "basins" / "basins_meta.json").read_text(encoding="utf-8"))}
-    gj = json.loads((ROOT / "data" / "basins" / "basins.geojson").read_text(encoding="utf-8"))
+        (args.basins_dir / "basins_meta.json").read_text(encoding="utf-8"))}
+    gj = json.loads((args.basins_dir / "basins.geojson").read_text(encoding="utf-8"))
     features = {f["properties"]["id"]: f for f in gj["features"]}
 
     print(f"対象 {len(targets)} 基 / dams.json の全 {len(dams)} 基中"

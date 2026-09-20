@@ -412,6 +412,8 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
         rec["downstream_candidates"] = cands
         rec["downstream_reaches"] = ok
         rec["downstream_unverified"] = un
+        # 雨が届かない割合。配信した d8 から測り直した値（状態の qa に保存してある）
+        rec["unreached_pct"] = round(pub[i]["qa"]["spatial"]["unreached_pct"], 1)
         rec["v"] = pub[i]["flow_version"]
         rec["file"] = f"flow/{i}.json?v={pub[i]['flow_version']}"
         dams_out.append(rec)

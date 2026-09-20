@@ -94,22 +94,34 @@ def straddles_dam(lake: np.ndarray, oi: int, oj: int, mpp: float):
 
 
 def main() -> int:
-    dams = {d["name"]: d for d in json.loads(
+    import argparse
+    ap = argparse.ArgumentParser(description="貯水池シードの検出結果を点検する（dam_id で指定）")
+    ap.add_argument("ids", nargs="*", help="dam_id（省略すると、水面を検出できた全基）")
+    bb.add_source_args(ap)
+    args = ap.parse_args()
+    bb.setup_source(args)
+
+    # dam_id で引く（名前では引かない。全国に広げると同名のダムが現れる）
+    dams = {d["id"]: d for d in json.loads(
         (ROOT / "docs" / "data" / "dams.json").read_text(encoding="utf-8"))["dams"]}
-    metas = {m["name"]: m for m in json.loads(
+    metas = {m["id"]: m for m in json.loads(
         (ROOT / "data" / "basins" / "basins_meta.json").read_text(encoding="utf-8"))}
 
-    targets = sys.argv[1:] or [m["name"] for m in metas.values()
-                               if m.get("outlet_method") == "reservoir"]
+    targets = args.ids or [i for i, m in metas.items() if m.get("outlet_method") == "reservoir"]
+    unknown = [i for i in targets if i not in dams]
+    if unknown:
+        print("dams.json に無い dam_id: " + ", ".join(unknown))
+        return 2
     OUT.mkdir(parents=True, exist_ok=True)
 
     print("%-12s %8s %8s %7s %8s %8s %7s %s" % (
         "ダム", "水面km2", "標高幅m", "堤体m", "分断数", "広がりm", "湖内%", "判定"))
     rows = []
-    for name in targets:
-        d, m = dams.get(name), metas.get(name)
-        if not d or not m:
-            print(f"{name}: メタなし")
+    for did in targets:
+        d, m = dams[did], metas.get(did)
+        name = d["name"]
+        if not m:
+            print(f"{did}: 集水域のメタなし")
             continue
         z = m["zoom"]
         pad = int((m["tiles"] ** 0.5 - 1) / 2)

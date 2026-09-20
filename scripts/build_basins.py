@@ -42,6 +42,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import dem_tiles  # noqa: E402  標高タイルの取得（通信障害と本当の欠損を分ける）
 from dem_tiles import DemFetchError  # noqa: E402
+import ws_common as wc  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DAMS_JSON = ROOT / "docs" / "data" / "dams.json"
@@ -51,6 +52,10 @@ CACHE = ROOT / "cache" / "dem"
 
 TILE = "dem"                 # 10m メッシュ標高（z14）。低ズームは間引き済みの同系列
 SIMPLIFY_M = 30.0            # ポリゴンの簡略化許容誤差
+# 輪の作り方。"legacy" = 輪郭セルを重心まわりの角度順に並べる（監査済みの既存成果の方式）。
+# "exact" = 輪郭を画素の辺に沿ってたどる。legacy は集水域と 3〜7% ずれる（空間QAで実測）。
+# 既存22基の輪を黙って変えないため、既定は legacy。切り替えは --outline exact。
+OUTLINE = "legacy"
 MAX_TILES = 361              # 1基あたりの標高タイル数の上限（窪地埋めが純Pythonのため）
 # 河道へのスナップ探索半径。狭いと河道に届かず、広いと隣の大きな川へ飛ぶ。
 # 小さい方から試し、公式流域面積と桁が合った時点で採用する。
@@ -505,7 +510,7 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
         if touches and verbose:
             print(f"    ※端に達したまま（タイル上限 {MAX_TILES}）。切れている可能性あり")
 
-        pts = simplify(outline(ws), SIMPLIFY_M / mpp)
+        pts = simplify(wc.outline_exact(ws) if OUTLINE == "exact" else outline(ws), SIMPLIFY_M / mpp)
         coords = []
         for i, j in pts:
             la, lo = xy_latlon(x0 + j / 256.0, y0 + i / 256.0, z)
@@ -528,6 +533,7 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
             "snap_distance_m": round(math.hypot(si - oi, sj - oj) * mpp),
             "snap_radius_m": snap_used,
             "touches_edge": bool(touches),
+            "outline": OUTLINE,
             "dem_tiles": rep.get("counts"),
             "seconds": round(time.time() - t0, 1),
         }
@@ -670,6 +676,7 @@ def _ordered(d: dict, order: dict) -> list:
 
 
 def main() -> int:
+    global OUTLINE
     ap = argparse.ArgumentParser(
         description="ダムの集水域を標高タイルから計算（単発）。"
                     "対象の指定は必須（--pref / --id / --only / --all のいずれか）。")
@@ -680,8 +687,11 @@ def main() -> int:
                     help="dams.json の全基を対象にする（標高タイルを大量に取得するので明示が必要）")
     ap.add_argument("--yes", action="store_true", help="確認を省く")
     ap.add_argument("--out", type=Path, default=OUT_DIR)
+    ap.add_argument("--outline", choices=("legacy", "exact"), default=OUTLINE,
+                    help="輪の作り方。legacy=角度順（既定・既存成果と同じ）/ exact=輪郭をたどる")
     add_source_args(ap)
     args = ap.parse_args()
+    OUTLINE = args.outline
 
     data = json.loads(DAMS_JSON.read_text(encoding="utf-8"))
     spec = load_spec({d["id"] for d in data["dams"]})

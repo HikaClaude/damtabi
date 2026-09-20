@@ -225,3 +225,67 @@ def components(mask: np.ndarray) -> list[int]:
                     q.append((ni, nj))
         sizes.append(n)
     return sorted(sizes, reverse=True)
+
+
+# ---------------------------------------------------------------- 輪郭
+
+def outline_exact(mask: np.ndarray) -> np.ndarray:
+    """マスクの外周を、画素の辺に沿って**実際にたどる**（crack following）。
+
+    build_basins.outline() は輪郭セルを重心まわりの角度順に並べるだけで、凹んだ集水域や
+    細長い集水域では輪郭を取りこぼす（細格子の集水域に対する IoU 0.90〜0.955、集水域の
+    最大 7% が輪の外に出る。空間QAで検出）。こちらは輪郭そのものをたどるので、
+    輪は集水域マスクと画素単位で一致する。
+
+    返り値: (行, 列) の角の座標（セル中心は +0.5）。最大の外周ループだけ（穴・飛び地は捨てる）。
+    2ループが1点で接する所（斜めに接するセル）は、内側を左に見て**左へ曲がる**辺を優先する
+    ことで、連結を分けずに1周にする（8連結の集水域を割らない）。
+    """
+    h, w = mask.shape
+    out: dict[tuple[int, int], list[tuple[int, int]]] = {}
+
+    def add(a, b):
+        out.setdefault(a, []).append(b)
+
+    for i, j in np.argwhere(mask):
+        i, j = int(i), int(j)
+        if i == 0 or not mask[i - 1, j]:
+            add((i, j), (i, j + 1))                 # 上辺: 右へ
+        if j == w - 1 or not mask[i, j + 1]:
+            add((i, j + 1), (i + 1, j + 1))         # 右辺: 下へ
+        if i == h - 1 or not mask[i + 1, j]:
+            add((i + 1, j + 1), (i + 1, j))         # 下辺: 左へ
+        if j == 0 or not mask[i, j - 1]:
+            add((i + 1, j), (i, j))                 # 左辺: 上へ
+
+    def turn_rank(prev, cur, nxt):
+        # 進行方向に対して 左(0) → 直進(1) → 右(2) の順に優先
+        d1 = (cur[0] - prev[0], cur[1] - prev[1])
+        d2 = (nxt[0] - cur[0], nxt[1] - cur[1])
+        cross = d1[1] * d2[0] - d1[0] * d2[1]       # 画像座標（行が下向き）での外積
+        return 1 if cross == 0 else (0 if cross < 0 else 2)
+
+    loops = []
+    while out:
+        start = next(iter(out))
+        cur, prev, loop = start, None, [start]
+        while True:
+            nxts = out.get(cur)
+            if not nxts:
+                break
+            if len(nxts) > 1 and prev is not None:
+                nxts.sort(key=lambda n: turn_rank(prev, cur, n), reverse=True)   # pop() が最優先を取る
+            nx = nxts.pop()
+            if not nxts:
+                del out[cur]
+            prev, cur = cur, nx
+            if cur == start:
+                break
+            loop.append(cur)
+        loops.append(loop)
+
+    def area2(loop):
+        a = np.array(loop, dtype=float)
+        return abs(float(np.dot(a[:, 0], np.roll(a[:, 1], -1)) - np.dot(a[:, 1], np.roll(a[:, 0], -1))))
+
+    return np.array(max(loops, key=area2), dtype=float)

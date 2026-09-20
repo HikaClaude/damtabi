@@ -158,6 +158,43 @@ class TestGeometry(unittest.TestCase):
         self.assertEqual(int(wc.dilate(m, 2).sum()), 25)
 
 
+class TestOutlineExact(unittest.TestCase):
+    @staticmethod
+    def area(p):
+        a = np.asarray(p, float)
+        return 0.5 * abs(np.dot(a[:, 0], np.roll(a[:, 1], -1)) - np.dot(a[:, 1], np.roll(a[:, 0], -1)))
+
+    def shapes(self):
+        rect = np.zeros((10, 10), bool)
+        rect[2:5, 3:8] = True
+        L = np.zeros((10, 10), bool)
+        L[1:8, 1:3] = True
+        L[6:8, 1:8] = True
+        U = np.zeros((10, 10), bool)
+        U[1:9, 1:3] = True
+        U[1:9, 6:8] = True
+        U[7:9, 1:8] = True
+        return {"rect": rect, "L": L, "U": U}
+
+    def test_polygon_area_equals_cell_count_for_concave_shapes(self):
+        for name, m in self.shapes().items():
+            self.assertEqual(self.area(wc.outline_exact(m)), float(m.sum()), name)
+
+    def test_legacy_angle_order_outline_misses_concavity(self):
+        # 現行 outline()（角度順）は U 字の凹みを取りこぼす。exact との差が、空間QAで見つかったずれの原因
+        U = self.shapes()["U"]
+        self.assertNotEqual(self.area(bb.outline(U)), float(U.sum()))
+
+    def test_hole_is_ignored_and_diagonal_touch_stays_one_loop(self):
+        H = np.zeros((9, 9), bool)
+        H[1:8, 1:8] = True
+        H[3:6, 3:6] = False
+        self.assertEqual(self.area(wc.outline_exact(H)), 49.0)
+        D = np.zeros((6, 6), bool)
+        D[1, 1] = D[2, 2] = True
+        self.assertEqual(self.area(wc.outline_exact(D)), 2.0)
+
+
 # ------------------------------------------------------------------ DEM: 通信障害と本当の欠損の分離
 
 class TestTileSource(unittest.TestCase):
@@ -209,6 +246,14 @@ class TestTileSource(unittest.TestCase):
             src.get(14, 9, 9)
         self.assertEqual(net.calls, 0)
         self.assertEqual(files(Path(self.tmp) / "dem"), [])
+
+    def test_missing_tile_promotes_grid_to_float64_like_legacy(self):
+        # 旧実装との出力同一性のための挙動（dem_tiles._nan_tile の docstring）
+        src, _ = make_src(self.tmp, ["404"])
+        a, _k = src.get(14, 6, 6)
+        self.assertEqual(a.dtype, np.float64)
+        src2, _ = make_src(self.tmp, ["ok"])
+        self.assertEqual(src2.get(14, 6, 7)[0].dtype, np.float32)
 
     def test_legacy_empty_is_flagged_not_silently_sea(self):
         d = Path(self.tmp) / "dem"

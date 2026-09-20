@@ -40,6 +40,17 @@ TILE = "dem"
 URL = "https://cyberjapandata.gsi.go.jp/xyz/{tile}/{z}/{x}/{y}.txt"
 
 
+def _nan_tile() -> np.ndarray:
+    """データの無いタイル。**float64** で返す（旧実装 np.full((256,256), nan) と同じ）。
+
+    実データのタイルは float32。欠損タイルを1枚でも含む格子は hstack で float64 に昇格し、
+    以後の解析が float64 で行われる。旧実装の出力とバイト単位で同一に保つため、
+    この昇格をそのまま再現している（float32 に揃えると、欠損タイルを含む6基で
+    集水域の外の d8 が1〜6セル変わる。実測）。
+    """
+    return np.full((256, 256), np.nan)
+
+
 class DemFetchError(Exception):
     """標高タイルを確定できなかった（通信障害など）。呼び出し側はそのダムの生成を中止する。
     既存の成果物は壊さない。"""
@@ -189,29 +200,29 @@ class TileSource:
                     raise DemUnavailable(f"キャッシュのタイル {key} が壊れています: {e}") from e
                 kind, arr = self._download(z, x, y)
                 self.kinds[key] = kind
-                return (arr if arr is not None else np.full((256, 256), np.nan, np.float32)), kind
+                return (arr if arr is not None else _nan_tile()), kind
             self.kinds[key] = "ok"
             return arr, "ok"
 
         if mk is not None:
             self.kinds[key] = "missing"
-            return np.full((256, 256), np.nan, np.float32), "missing"
+            return _nan_tile(), "missing"
 
         if emp is not None:                 # サイズ0 = 旧実装が書いた空。由来不明
             if not self.revalidate_empty:
                 self.kinds[key] = "legacy_empty"
-                return np.full((256, 256), np.nan, np.float32), "legacy_empty"
+                return _nan_tile(), "legacy_empty"
             if self.offline:
                 raise DemUnavailable(f"offline のため空タイル {key} を確認できません")
             kind, arr = self._download(z, x, y)
             self.kinds[key] = kind
-            return (arr if arr is not None else np.full((256, 256), np.nan, np.float32)), kind
+            return (arr if arr is not None else _nan_tile()), kind
 
         if self.offline:
             raise DemUnavailable(f"offline でキャッシュに無いタイル {key} が必要です")
         kind, arr = self._download(z, x, y)
         self.kinds[key] = kind
-        return (arr if arr is not None else np.full((256, 256), np.nan, np.float32)), kind
+        return (arr if arr is not None else _nan_tile()), kind
 
     # ---- 格子
     def build_grid(self, tile_xy_fn, lat: float, lon: float, z: int, pad: int, report: dict | None = None):
