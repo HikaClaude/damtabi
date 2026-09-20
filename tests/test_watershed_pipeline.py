@@ -235,6 +235,16 @@ class TestTileSource(unittest.TestCase):
                 src2 = dem_tiles.TileSource(Path(tmp) / "dem", opener=FakeNet(["ok"]), sleep=lambda s: None, interval=0)
                 self.assertEqual(src2.get(14, 7, 7)[1], "ok")
 
+    def test_network_request_cap_stops_runaway_fetching(self):
+        # 想定外の大量通信を止める: 上限に達したら DemFetchError にして、それ以上は通信しない
+        src, net = make_src(self.tmp, ["ok"] * 10, max_network_requests=2)
+        src.get(14, 1, 1)
+        src.get(14, 1, 2)
+        with self.assertRaises(dem_tiles.DemFetchError):
+            src.get(14, 1, 3)
+        self.assertEqual(net.calls, 2)
+        self.assertEqual(files(Path(self.tmp) / "dem"), ["dem_14_1_1.txt", "dem_14_1_2.txt"])
+
     def test_retry_then_success(self):
         src, net = make_src(self.tmp, ["500", "timeout", "ok"])
         self.assertEqual(src.get(14, 3, 3)[1], "ok")

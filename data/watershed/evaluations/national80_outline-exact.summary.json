@@ -1,0 +1,3061 @@
+{
+ "total": 80,
+ "counts": {
+  "PASS": 6,
+  "WARN": 73,
+  "HOLD": 1,
+  "FAIL": 0,
+  "UNEVALUABLE": 0
+ },
+ "by_pref": {
+  "toyama": {
+   "PASS": 6,
+   "WARN": 16,
+   "HOLD": 1,
+   "FAIL": 0,
+   "UNEVALUABLE": 0
+  },
+  "ishikawa": {
+   "PASS": 0,
+   "WARN": 12,
+   "HOLD": 0,
+   "FAIL": 0,
+   "UNEVALUABLE": 0
+  },
+  "gifu": {
+   "PASS": 0,
+   "WARN": 11,
+   "HOLD": 0,
+   "FAIL": 0,
+   "UNEVALUABLE": 0
+  },
+  "fukui": {
+   "PASS": 0,
+   "WARN": 13,
+   "HOLD": 0,
+   "FAIL": 0,
+   "UNEVALUABLE": 0
+  },
+  "nagano": {
+   "PASS": 0,
+   "WARN": 21,
+   "HOLD": 0,
+   "FAIL": 0,
+   "UNEVALUABLE": 0
+  }
+ },
+ "warn_by_verification_material": {
+  "official": 14,
+  "ref_ok": 50,
+  "ref_divergent": 6,
+  "no_material": 3
+ },
+ "codes": {
+  "HOLD:area_error": 1,
+  "HOLD:manual_hold": 1,
+  "WARN:diversion_unknown": 59,
+  "WARN:diversion_yes": 3,
+  "WARN:no_official_direct_area": 59,
+  "WARN:no_reservoir_surface": 53
+ },
+ "needs_human_review": {
+  "count": 10,
+  "ratio_pct": 12.5,
+  "ids": [
+   "toyama-shiraiwagawa",
+   "ishikawa-hakkagawa",
+   "ishikawa-oya",
+   "fukui-kuzuryu",
+   "fukui-takinami",
+   "fukui-kaitani",
+   "fukui-yoshinosegawa",
+   "nagano-uchimura",
+   "nagano-toyooka",
+   "nagano-onikuma"
+  ]
+ },
+ "thresholds": {
+  "area_error_pct": 15.0,
+  "grid_drift_pct": 15.0,
+  "unreached_pct": 10.0,
+  "tol_cells": 2,
+  "mask_far_outside_pct": 2.0,
+  "ring_far_only_pct": 5.0,
+  "path_outside_pct": 2.0,
+  "ring_self_intersections": 0,
+  "mask_min_largest_pct": 95.0
+ },
+ "ref_ok_pct": 15.0,
+ "dams": [
+  {
+   "id": "toyama-unazuki",
+   "name": "宇奈月ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9976,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.81,
+    "area_error_pct": -1.4,
+    "grid_drift_pct": -0.09207696769517604,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 608.76,
+    "reference_km2": 617.5,
+    "reference_error_pct": -1.4,
+    "outlet_method": "snap-fixed",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 166,
+     "missing": 59,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 34.77
+   }
+  },
+  {
+   "id": "toyama-muromaki",
+   "name": "室牧ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "diversion_yes",
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9952,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.7,
+    "area_error_pct": -1.2,
+    "grid_drift_pct": -0.0132017548990504,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 84.17,
+    "reference_km2": 128.3,
+    "reference_error_pct": -34.4,
+    "outlet_method": "snap-fixed",
+    "diversion": "yes"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 221,
+     "missing": 4,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 3.69
+   }
+  },
+  {
+   "id": "toyama-kumanogawa",
+   "name": "熊野川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9936,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.26,
+    "area_error_pct": -0.1,
+    "grid_drift_pct": -0.018681089068139922,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 39.75,
+    "reference_km2": 39.8,
+    "reference_error_pct": -0.1,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-kubusugawa",
+   "name": "久婦須川ダム",
+   "pref": "toyama",
+   "cls": "PASS",
+   "codes": [],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9929,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.58,
+    "area_error_pct": 0.5,
+    "grid_drift_pct": 0.22677361671117335,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 59.01,
+    "reference_km2": 58.7,
+    "reference_error_pct": 0.5,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-wadagawa",
+   "name": "和田川ダム",
+   "pref": "toyama",
+   "cls": "PASS",
+   "codes": [],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9929,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.71,
+    "area_error_pct": -5.4,
+    "grid_drift_pct": 0.0351173787855652,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 32.15,
+    "reference_km2": 34.0,
+    "reference_error_pct": -5.4,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.22
+   }
+  },
+  {
+   "id": "toyama-togagawa",
+   "name": "利賀川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9921,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.46,
+    "area_error_pct": 1.4,
+    "grid_drift_pct": -0.05816772267432935,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 38.54,
+    "reference_km2": 38.0,
+    "reference_error_pct": 1.4,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-sakaigawa",
+   "name": "境川ダム",
+   "pref": "toyama",
+   "cls": "PASS",
+   "codes": [],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9945,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.15,
+    "area_error_pct": -0.3,
+    "grid_drift_pct": 0.019834884180802703,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 37.6,
+    "reference_km2": 37.7,
+    "reference_error_pct": -0.3,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-tori",
+   "name": "刀利ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9938,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.41,
+    "area_error_pct": -0.5,
+    "grid_drift_pct": -0.026074288196920037,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 45.65,
+    "reference_km2": 45.9,
+    "reference_error_pct": -0.5,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-goi",
+   "name": "五位ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9876,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.66,
+    "area_error_pct": -4.1,
+    "grid_drift_pct": 0.11474940503060083,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 13.24,
+    "reference_km2": 13.8,
+    "reference_error_pct": -4.1,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-konadegawa",
+   "name": "子撫川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9932,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.73,
+    "area_error_pct": 0.9,
+    "grid_drift_pct": 0.011084738494027135,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 32.08,
+    "reference_km2": 31.8,
+    "reference_error_pct": 0.9,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 2.17
+   }
+  },
+  {
+   "id": "toyama-johana",
+   "name": "城端ダム",
+   "pref": "toyama",
+   "cls": "PASS",
+   "codes": [],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9842,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.23,
+    "area_error_pct": -4.5,
+    "grid_drift_pct": -0.046943479894479,
+    "fine_recompute_pct": -0.03,
+    "computed_km2": 10.31,
+    "reference_km2": 10.8,
+    "reference_error_pct": -4.5,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-usunaka",
+   "name": "臼中ダム",
+   "pref": "toyama",
+   "cls": "PASS",
+   "codes": [],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9893,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.22,
+    "area_error_pct": -2.8,
+    "grid_drift_pct": 0.19014368801713033,
+    "fine_recompute_pct": -0.02,
+    "computed_km2": 13.12,
+    "reference_km2": 48.2,
+    "reference_error_pct": -72.8,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-asahiogawa",
+   "name": "朝日小川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.993,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.34,
+    "area_error_pct": 3.1,
+    "grid_drift_pct": 0.030802979974109412,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 29.18,
+    "reference_km2": 68.2,
+    "reference_error_pct": -57.2,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 118,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 5.06
+   }
+  },
+  {
+   "id": "toyama-kadokawa",
+   "name": "角川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9881,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.6,
+    "area_error_pct": -1.0,
+    "grid_drift_pct": 0.12466180128662963,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 16.03,
+    "reference_km2": 16.2,
+    "reference_error_pct": -1.0,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 78,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 8.24
+   }
+  },
+  {
+   "id": "toyama-kamiichigawa",
+   "name": "上市川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.993,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.4,
+    "area_error_pct": 2.7,
+    "grid_drift_pct": 0.06359555553661078,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 45.91,
+    "reference_km2": 44.7,
+    "reference_error_pct": 2.7,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 47,
+     "missing": 2,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 7.56
+   }
+  },
+  {
+   "id": "toyama-kamiichigawa-daini",
+   "name": "上市川第二ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9932,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.36,
+    "area_error_pct": 2.2,
+    "grid_drift_pct": -0.021014713229305926,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 39.57,
+    "reference_km2": 38.7,
+    "reference_error_pct": 2.2,
+    "outlet_method": "snap",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 4.83
+   }
+  },
+  {
+   "id": "toyama-shiraiwagawa",
+   "name": "白岩川ダム",
+   "pref": "toyama",
+   "cls": "HOLD",
+   "codes": [
+    "manual_hold",
+    "area_error"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9906,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.46,
+    "area_error_pct": 16.5,
+    "grid_drift_pct": 0.043989735691396525,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 27.95,
+    "reference_km2": 24.0,
+    "reference_error_pct": 16.5,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 121,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-funagawa",
+   "name": "舟川ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9778,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.49,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.20683850848912666,
+    "fine_recompute_pct": 0.13,
+    "computed_km2": 3.51,
+    "reference_km2": 3.44,
+    "reference_error_pct": 2.0,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-fusegawa",
+   "name": "布施川ダム",
+   "pref": "toyama",
+   "cls": "PASS",
+   "codes": [],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9858,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.37,
+    "area_error_pct": 1.6,
+    "grid_drift_pct": 0.21401607449169635,
+    "fine_recompute_pct": 0.04,
+    "computed_km2": 13.21,
+    "reference_km2": 13.0,
+    "reference_error_pct": 1.6,
+    "outlet_method": "reservoir",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.05
+   }
+  },
+  {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9638,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.14,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.018883413550185857,
+    "fine_recompute_pct": 0.05,
+    "computed_km2": 1.48,
+    "reference_km2": 1.5,
+    "reference_error_pct": -1.3,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-kurobe",
+   "name": "黒部ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "diversion_yes"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.998,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.37,
+    "area_error_pct": -1.8,
+    "grid_drift_pct": 0.006301759167848253,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 181.09,
+    "reference_km2": null,
+    "reference_error_pct": null,
+    "outlet_method": "reservoir",
+    "diversion": "yes"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.06
+   }
+  },
+  {
+   "id": "toyama-arimine",
+   "name": "有峰ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "diversion_yes"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9971,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.54,
+    "area_error_pct": 1.1,
+    "grid_drift_pct": 0.06387218447956311,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 50.44,
+    "reference_km2": null,
+    "reference_error_pct": null,
+    "outlet_method": "reservoir",
+    "diversion": "yes"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "toyama-dashidaira",
+   "name": "出し平ダム",
+   "pref": "toyama",
+   "cls": "WARN",
+   "codes": [
+    "no_reservoir_surface"
+   ],
+   "material": "official",
+   "metrics": {
+    "iou": 0.9982,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.72,
+    "area_error_pct": -0.3,
+    "grid_drift_pct": 0.07538884595321704,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 459.82,
+    "reference_km2": null,
+    "reference_error_pct": null,
+    "outlet_method": "snap-fixed",
+    "diversion": "none"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 132,
+     "missing": 37,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 30.26
+   }
+  },
+  {
+   "id": "ishikawa-tedorigawa",
+   "name": "手取川ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9977,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.45,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.006236759175903828,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 247.35,
+    "reference_km2": 247.23,
+    "reference_error_pct": 0.0,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 6.44
+   }
+  },
+  {
+   "id": "ishikawa-dainichigawa",
+   "name": "大日川ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9932,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.87,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.21485971384307412,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 56.54,
+    "reference_km2": 56.49,
+    "reference_error_pct": 0.1,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 80,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 3.05
+   }
+  },
+  {
+   "id": "ishikawa-uchikawa",
+   "name": "内川ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9929,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.48,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.028571155072987242,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 35.09,
+    "reference_km2": 34.45,
+    "reference_error_pct": 1.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.51
+   }
+  },
+  {
+   "id": "ishikawa-shin-uchikawa",
+   "name": "新内川ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9923,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.86,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.005209589890986521,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 38.52,
+    "reference_km2": 37.25,
+    "reference_error_pct": 3.4,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.51
+   }
+  },
+  {
+   "id": "ishikawa-saigawa",
+   "name": "犀川ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9949,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.17,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.04828613752927424,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 56.21,
+    "reference_km2": 57.8,
+    "reference_error_pct": -2.8,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "ishikawa-tatsumi",
+   "name": "辰巳ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9962,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.98,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1748119159237893,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 77.84,
+    "reference_km2": 77.1,
+    "reference_error_pct": 1.0,
+    "outlet_method": "snap-fixed",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 143,
+     "missing": 26,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 19.11
+   }
+  },
+  {
+   "id": "ishikawa-kitakawachi",
+   "name": "北河内ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9831,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.28,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.02343950280434548,
+    "fine_recompute_pct": 0.03,
+    "computed_km2": 10.68,
+    "reference_km2": 10.6,
+    "reference_error_pct": 0.8,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 7.04
+   }
+  },
+  {
+   "id": "ishikawa-akase",
+   "name": "赤瀬ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9926,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.34,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.034294483008423526,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 40.46,
+    "reference_km2": 40.6,
+    "reference_error_pct": -0.3,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 5.03
+   }
+  },
+  {
+   "id": "ishikawa-kutani",
+   "name": "九谷ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9957,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.38,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.12710109370051015,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 71.13,
+    "reference_km2": 71.0,
+    "reference_error_pct": 0.2,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 80,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 4.76
+   }
+  },
+  {
+   "id": "ishikawa-wagatani",
+   "name": "我谷ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9962,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.41,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1037789830814484,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 86.35,
+    "reference_km2": 86.1,
+    "reference_error_pct": 0.3,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 75,
+     "missing": 6,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 13.89
+   }
+  },
+  {
+   "id": "ishikawa-hakkagawa",
+   "name": "八ヶ川ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_divergent",
+   "metrics": {
+    "iou": 0.9794,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.33,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.09820926134015417,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 8.81,
+    "reference_km2": 10.4,
+    "reference_error_pct": -15.3,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.17
+   }
+  },
+  {
+   "id": "ishikawa-oya",
+   "name": "小屋ダム",
+   "pref": "ishikawa",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_divergent",
+   "metrics": {
+    "iou": 0.9843,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.88,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.24997098668826379,
+    "fine_recompute_pct": -0.03,
+    "computed_km2": 9.54,
+    "reference_km2": 12.8,
+    "reference_error_pct": -25.5,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 78,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 13.6
+   }
+  },
+  {
+   "id": "gifu-tokuyama",
+   "name": "徳山ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9985,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.15,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.031509396083195806,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 256.08,
+    "reference_km2": 254.5,
+    "reference_error_pct": 0.6,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-agigawa",
+   "name": "阿木川ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9961,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.57,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.048615597474799266,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 82.37,
+    "reference_km2": 81.8,
+    "reference_error_pct": 0.7,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-iwaya",
+   "name": "岩屋ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9979,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.71,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.22469465682708467,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 266.75,
+    "reference_km2": 264.9,
+    "reference_error_pct": 0.7,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-maruyama",
+   "name": "丸山ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9988,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.72,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.002332808583949131,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 2439.14,
+    "reference_km2": 2409.0,
+    "reference_error_pct": 1.3,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 359,
+     "missing": 2,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 2.0
+   }
+  },
+  {
+   "id": "gifu-yokoyama",
+   "name": "横山ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9987,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.38,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.07658467940840907,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 471.04,
+    "reference_km2": 471.0,
+    "reference_error_pct": 0.0,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.08
+   }
+  },
+  {
+   "id": "gifu-origawa",
+   "name": "小里川ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9944,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.5,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.05153464395226681,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 56.05,
+    "reference_km2": 55.0,
+    "reference_error_pct": 1.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-atagi",
+   "name": "阿多岐ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9899,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.23,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1258107695959687,
+    "fine_recompute_pct": -0.03,
+    "computed_km2": 16.3,
+    "reference_km2": 16.0,
+    "reference_error_pct": 1.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-iwamura",
+   "name": "岩村ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.975,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.99,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.015273544590987953,
+    "fine_recompute_pct": -0.02,
+    "computed_km2": 1.71,
+    "reference_km2": 1.7,
+    "reference_error_pct": 0.6,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-ogahora",
+   "name": "大ヶ洞ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.981,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.33,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.07983832028611859,
+    "fine_recompute_pct": -0.05,
+    "computed_km2": 4.24,
+    "reference_km2": 4.4,
+    "reference_error_pct": -3.6,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-nakanoho",
+   "name": "中野方ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9773,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.99,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1751393725057282,
+    "fine_recompute_pct": -0.08,
+    "computed_km2": 1.54,
+    "reference_km2": 1.6,
+    "reference_error_pct": -3.7,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "gifu-nyukawa",
+   "name": "丹生川ダム",
+   "pref": "gifu",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.989,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.01,
+    "unreached_pct": 0.55,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.03170563746894839,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 23.22,
+    "reference_km2": 23.0,
+    "reference_error_pct": 1.0,
+    "outlet_method": "snap-fixed",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 169,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-ryugahana",
+   "name": "龍ヶ鼻ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9939,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.21,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.06234182045758985,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 31.02,
+    "reference_km2": 31.1,
+    "reference_error_pct": -0.3,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.5
+   }
+  },
+  {
+   "id": "fukui-eiheiji",
+   "name": "永平寺ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9775,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.35,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.03824257622171423,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 3.09,
+    "reference_km2": 3.1,
+    "reference_error_pct": -0.3,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-sasogawa",
+   "name": "笹生川ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9959,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.78,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.15665699213787132,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 71.21,
+    "reference_km2": 70.66,
+    "reference_error_pct": 0.8,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-jodojigawa",
+   "name": "浄土寺川ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9849,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.42,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.04459761901071113,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 8.0,
+    "reference_km2": 7.7,
+    "reference_error_pct": 3.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-hirono",
+   "name": "広野ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9945,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.24,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.05151004978425355,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 41.69,
+    "reference_km2": 42.3,
+    "reference_error_pct": -1.4,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.05
+   }
+  },
+  {
+   "id": "fukui-masutani",
+   "name": "桝谷ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9872,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.29,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.1069875965643119,
+    "fine_recompute_pct": -0.02,
+    "computed_km2": 10.29,
+    "reference_km2": 10.2,
+    "reference_error_pct": 0.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-otsuro",
+   "name": "大津呂ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9721,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.76,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.06408417895227281,
+    "fine_recompute_pct": 0.14,
+    "computed_km2": 1.58,
+    "reference_km2": 1.58,
+    "reference_error_pct": 0.0,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 9.1
+   }
+  },
+  {
+   "id": "fukui-kochigawa",
+   "name": "河内川ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9891,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.36,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.16752397276473818,
+    "fine_recompute_pct": 0.02,
+    "computed_km2": 14.69,
+    "reference_km2": 14.5,
+    "reference_error_pct": 1.3,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-kuzuryu",
+   "name": "九頭竜ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_divergent",
+   "metrics": {
+    "iou": 0.9972,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.09,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1522878886637935,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 185.09,
+    "reference_km2": 301.5,
+    "reference_error_pct": -38.6,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-managawa",
+   "name": "真名川ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9979,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.65,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.054853266215393326,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 222.31,
+    "reference_km2": 223.7,
+    "reference_error_pct": -0.6,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "fukui-takinami",
+   "name": "滝波ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "no_material",
+   "metrics": {
+    "iou": 0.9815,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 2.75,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.04828497275255472,
+    "fine_recompute_pct": -0.06,
+    "computed_km2": 6.24,
+    "reference_km2": null,
+    "reference_error_pct": null,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 42,
+     "missing": 7,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 26.54
+   }
+  },
+  {
+   "id": "fukui-kaitani",
+   "name": "開谷ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "no_material",
+   "metrics": {
+    "iou": 0.9638,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.85,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.3362095060533976,
+    "fine_recompute_pct": 0.38,
+    "computed_km2": 1.16,
+    "reference_km2": null,
+    "reference_error_pct": null,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 46,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 15.1
+   }
+  },
+  {
+   "id": "fukui-yoshinosegawa",
+   "name": "吉野瀬川ダム",
+   "pref": "fukui",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "no_material",
+   "metrics": {
+    "iou": 0.9914,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.36,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.14105557080081876,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 23.75,
+    "reference_km2": null,
+    "reference_error_pct": null,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 46,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 19.84
+   }
+  },
+  {
+   "id": "nagano-omachi",
+   "name": "大町ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.998,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.28,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.017235100093104805,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 194.73,
+    "reference_km2": 193.0,
+    "reference_error_pct": 0.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-miwa",
+   "name": "美和ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9983,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.25,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.10491206381542106,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 310.18,
+    "reference_km2": 311.1,
+    "reference_error_pct": -0.3,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-koshibu",
+   "name": "小渋ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9982,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.23,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.027126041243241694,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 289.22,
+    "reference_km2": 288.0,
+    "reference_error_pct": 0.4,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-misogawa",
+   "name": "味噌川ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9942,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.13,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.014028802209709035,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 55.54,
+    "reference_km2": 55.1,
+    "reference_error_pct": 0.8,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-susobana",
+   "name": "裾花ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9982,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.6,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.024354901675949225,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 243.69,
+    "reference_km2": 250.0,
+    "reference_error_pct": -2.5,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-matsukawa",
+   "name": "松川ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9942,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.5,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.15964613490104806,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 62.04,
+    "reference_km2": 60.0,
+    "reference_error_pct": 3.4,
+    "outlet_method": "snap-fixed",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-yukawa",
+   "name": "湯川ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.998,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.71,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.014649334949889958,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 147.31,
+    "reference_km2": 147.2,
+    "reference_error_pct": 0.1,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 121,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-okususobana",
+   "name": "奥裾花ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9964,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.79,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1339847639885594,
+    "fine_recompute_pct": -0.01,
+    "computed_km2": 64.17,
+    "reference_km2": 65.0,
+    "reference_error_pct": -1.3,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-narai",
+   "name": "奈良井ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9948,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.55,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.22107265645687768,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 47.17,
+    "reference_km2": 46.0,
+    "reference_error_pct": 2.5,
+    "outlet_method": "snap-fixed",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-koya",
+   "name": "古谷ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9869,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.41,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.22760246874065082,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 12.66,
+    "reference_km2": 13.0,
+    "reference_error_pct": -2.6,
+    "outlet_method": "reservoir",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-uchimura",
+   "name": "内村ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_divergent",
+   "metrics": {
+    "iou": 0.9808,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.79,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.5594960801485804,
+    "fine_recompute_pct": 0.18,
+    "computed_km2": 2.28,
+    "reference_km2": 13.0,
+    "reference_error_pct": -82.5,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-yokokawa",
+   "name": "横川ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9945,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.25,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.014063257079888203,
+    "fine_recompute_pct": 0.01,
+    "computed_km2": 36.58,
+    "reference_km2": 38.8,
+    "reference_error_pct": -5.7,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-katagiri",
+   "name": "片桐ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9911,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.21,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.16687109551591917,
+    "fine_recompute_pct": 0.0,
+    "computed_km2": 14.84,
+    "reference_km2": 15.1,
+    "reference_error_pct": -1.7,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-minowa",
+   "name": "箕輪ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9928,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.35,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.06976653993048254,
+    "fine_recompute_pct": -0.0,
+    "computed_km2": 38.17,
+    "reference_km2": 38.2,
+    "reference_error_pct": -0.1,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-toyooka",
+   "name": "豊丘ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_divergent",
+   "metrics": {
+    "iou": 0.9874,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.62,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.34495341776732413,
+    "fine_recompute_pct": 0.04,
+    "computed_km2": 10.36,
+    "reference_km2": 13.1,
+    "reference_error_pct": -20.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-kanabara",
+   "name": "金原ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9775,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 2.43,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.10014001078094692,
+    "fine_recompute_pct": -0.03,
+    "computed_km2": 3.03,
+    "reference_km2": 3.15,
+    "reference_error_pct": -3.8,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-kitayama",
+   "name": "北山ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9661,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.06,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1616359226437325,
+    "fine_recompute_pct": -0.21,
+    "computed_km2": 1.25,
+    "reference_km2": 1.25,
+    "reference_error_pct": 0.0,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-mizukami",
+   "name": "水上ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9705,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.48,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.32592464965753853,
+    "fine_recompute_pct": -0.2,
+    "computed_km2": 2.45,
+    "reference_km2": 2.29,
+    "reference_error_pct": 7.0,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-onikuma",
+   "name": "小仁熊ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_divergent",
+   "metrics": {
+    "iou": 0.9836,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.86,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.25137573334335084,
+    "fine_recompute_pct": 0.02,
+    "computed_km2": 9.46,
+    "reference_km2": 20.8,
+    "reference_error_pct": -54.5,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-yoji",
+   "name": "余地ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9761,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.38,
+    "area_error_pct": null,
+    "grid_drift_pct": -0.00882781890670925,
+    "fine_recompute_pct": 0.05,
+    "computed_km2": 2.52,
+    "reference_km2": 2.52,
+    "reference_error_pct": 0.0,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  },
+  {
+   "id": "nagano-asakawa",
+   "name": "浅川ダム",
+   "pref": "nagano",
+   "cls": "WARN",
+   "codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "material": "ref_ok",
+   "metrics": {
+    "iou": 0.9883,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.64,
+    "area_error_pct": null,
+    "grid_drift_pct": 0.12138740257878755,
+    "fine_recompute_pct": -0.03,
+    "computed_km2": 15.79,
+    "reference_km2": 15.2,
+    "reference_error_pct": 3.9,
+    "outlet_method": "snap",
+    "diversion": "unknown"
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   }
+  }
+ ]
+}

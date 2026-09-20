@@ -114,7 +114,8 @@ class TileSource:
 
     def __init__(self, cache_dir: Path, offline: bool = False, opener=None,
                  retries: int = 3, backoff: float = 1.5, interval: float = 0.05,
-                 sleep=time.sleep, revalidate_empty: bool = False, fallback_dirs=()):
+                 sleep=time.sleep, revalidate_empty: bool = False, fallback_dirs=(),
+                 max_network_requests: int | None = None):
         # 書き込むのは cache_dir だけ。fallback_dirs は読み取り専用の追加キャッシュ
         # （別の作業ツリーが持っている取得済みタイルを、書き換えずに再利用するため）
         self.cache = Path(cache_dir)
@@ -128,6 +129,8 @@ class TileSource:
         self.revalidate_empty = revalidate_empty
         self.kinds: dict[str, str] = {}      # "z/x/y" -> kind（この Source が見たもの）
         self.network_requests = 0
+        # 想定外の大量通信を止めるための上限（None = 無制限）。超えたら DemFetchError にして通信を止める
+        self.max_network_requests = max_network_requests
 
     # ---- パス（書き込み先は常に self.cache）
     def _txt(self, z, x, y) -> Path:
@@ -156,6 +159,8 @@ class TileSource:
         url = URL.format(tile=TILE, z=z, x=x, y=y)
         last = None
         for attempt in range(self.retries):
+            if self.max_network_requests is not None and self.network_requests >= self.max_network_requests:
+                raise DemFetchError(f"通信回数の上限（{self.max_network_requests}）に達したため停止します")
             try:
                 self.network_requests += 1
                 status, body = self.opener(url)

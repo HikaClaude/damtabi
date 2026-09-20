@@ -661,6 +661,8 @@ def add_source_args(ap: argparse.ArgumentParser) -> None:
                     help="読み取り専用の追加の標高タイル置き場（複数可）。書き換えない")
     ap.add_argument("--offline", action="store_true",
                     help="ネットワークを使わない。キャッシュに無いタイルは DemUnavailable で止める")
+    ap.add_argument("--max-fetch", type=int, default=None,
+                    help="地理院へのリクエスト数の上限（超えたら止める。想定外の大量通信の防止）")
     ap.add_argument("--revalidate-empty", action="store_true",
                     help="由来不明の空タイル（旧実装が書いたもの）を地理院で取り直して 404 かどうか確定させる")
 
@@ -668,6 +670,7 @@ def add_source_args(ap: argparse.ArgumentParser) -> None:
 def setup_source(args) -> dem_tiles.TileSource:
     return configure_source(args.cache_root / "dem", offline=args.offline,
                             revalidate_empty=args.revalidate_empty,
+                            max_network_requests=args.max_fetch,
                             fallback_dirs=list(args.dem_fallback))
 
 
