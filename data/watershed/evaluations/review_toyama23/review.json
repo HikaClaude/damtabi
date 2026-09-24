@@ -1,0 +1,1725 @@
+{
+ "generated": "2026-09-24",
+ "base_commit": "d9763b6",
+ "common": {
+  "not_an_approval": "この資料は公開承認ではない。release.json の承認は0件、docs/watershed/ は空。",
+  "classification_meaning": "「設定した追加確認条件に該当しない」は、この資料で置いた追加確認の条件（ダム座標の出典・便覧の直接流域・導水の有無が未確認、画面の面積表示の食い違い、出口の目安）に当たらなかったという意味だけを持つ。集水域が正しいこと・公開してよいことを示すものではない。",
+  "dam_axis_unconfirmed": "堤体・取水口と採用出口の位置関係は、全23基で独立資料による照合が未確認。",
+  "display_shape": "画面の輪は、exact 方式で作った輪郭（画素の辺に沿ってたどり簡略化した多角形）を、表示時に smoothRing(ring, 2)（約30度より鋭い頂点を落としてから Chaikin を2回）で平滑化したもの。QA もこの平滑化後の輪で判定している。生の輪（平滑化前）は参考値のみ。",
+  "blocker_sp": "スマホ幅（390×844）では全21基で輪と雨が見えない。fitBounds の右余白に下部シートの幅（画面幅）を使っているため『Map cannot fit within canvas』で拡大されず（zoom 6.12 のまま）、輪は数ピクセルで下部シートの下に隠れる（表示率 0%）。説明文は読める。公開前にアプリ側の修正が必要（全基共通）。",
+  "text_rounding": "面積は整数 km² に丸めて表示する。小さな集水域（舟川 3.51 と参考 3.44 → 約4 / 約3、大谷 1.48 と参考 1.5 → 約1 / 約2）では、近い値なのに食い違って見える。他の19基は読み取りに問題なし。",
+  "preview": "隔離コピー（作業用フォルダ）で、リポジトリ外の模擬承認を使って 21 基を表示。127.0.0.1 のみで配信し、終了時に停止。リポジトリの docs/watershed/ と release.json は変更していない。",
+  "triage_marks": {
+   "outlet_distance_m_over": 500,
+   "area_ratio_150_400_over": 1.1,
+   "note": "審査の振り分けの目安で、QA の閾値ではない。QA の判定は変えていない。"
+  }
+ },
+ "dams": [
+  {
+   "id": "toyama-unazuki",
+   "name": "宇奈月ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "黒部川水系 黒部川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap-fixed",
+    "distance_from_dam_coord_m": 126,
+    "area_ratio_150_400m": 1.0,
+    "area_ratio_150_1000m": 1.032,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 608.76,
+    "binran_direct_km2": 617.5,
+    "binran_total_km2": 617.5,
+    "binran_status": "confirmed",
+    "diff_pct": -1.4,
+    "kawabou_ref_km2": 617.5,
+    "kawabou_diff_pct": -1.4
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9976,
+    "raw_ring_reference": "pass",
+    "flow_version": "1a6924950186",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 3997,
+     "expected_smoothed_vertices": 3997,
+     "rain_pixels": 217,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 3997,
+     "rain_pixels": 554,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-muromaki",
+   "name": "室牧ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "神通川水系 井田川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap-fixed",
+    "distance_from_dam_coord_m": 151,
+    "area_ratio_150_400m": 1.003,
+    "area_ratio_150_1000m": 1.012,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 84.17,
+    "binran_direct_km2": 85.2,
+    "binran_total_km2": 128.3,
+    "binran_status": "confirmed",
+    "diff_pct": -1.2,
+    "kawabou_ref_km2": 128.3,
+    "kawabou_diff_pct": -34.4
+   },
+   "diversion": {
+    "status": "yes",
+    "indirect_km2": 43.1,
+    "screen_note": "画面に「導水あり」と間接流域の注記を表示"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "diversion_yes",
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9952,
+    "raw_ring_reference": "pass",
+    "flow_version": "62b388bca61c",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 1201,
+     "expected_smoothed_vertices": 1201,
+     "rain_pixels": 292,
+     "ring_visible_pct": 100,
+     "chips": [
+      "導水あり"
+     ],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 1201,
+     "rain_pixels": 310,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    },
+    "boundary_taps_pc": {
+     "points": 16,
+     "offset_m": null,
+     "inside_to_this_dam": 8,
+     "inside_total": 8,
+     "outside_not_this_dam": 8,
+     "outside_total": 8,
+     "outside_went_to": [
+      "利賀川ダム"
+     ],
+     "grid_agrees_with_drawn": 16,
+     "raw_agrees_with_drawn": 16
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている",
+    "導水あり（間接流域 43.1 km²）。導水路は描いていない。輪は直接流域だけ",
+    "川の防災情報の流域面積（128.3）は導水を含む合計と一致"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-kumanogawa",
+   "name": "熊野川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "神通川水系 熊野川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 142,
+    "area_ratio_150_400m": 1.009,
+    "area_ratio_150_1000m": 1.031,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 39.75,
+    "binran_direct_km2": 39.8,
+    "binran_total_km2": 39.8,
+    "binran_status": "confirmed",
+    "diff_pct": -0.1,
+    "kawabou_ref_km2": 39.8,
+    "kawabou_diff_pct": -0.1
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9936,
+    "raw_ring_reference": "pass",
+    "flow_version": "eecec879de82",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 749,
+     "expected_smoothed_vertices": 749,
+     "rain_pixels": 338,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 749,
+     "rain_pixels": 251,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-kubusugawa",
+   "name": "久婦須川ダム",
+   "candidate": false,
+   "outline": null,
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "神通川水系 久婦須川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 503,
+    "area_ratio_150_400m": 1.031,
+    "area_ratio_150_1000m": 1.07,
+    "lake_km2": 0.14,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 59.01,
+    "binran_direct_km2": 58.7,
+    "binran_total_km2": 58.7,
+    "binran_status": "confirmed",
+    "diff_pct": 0.5,
+    "kawabou_ref_km2": 58.7,
+    "kawabou_diff_pct": 0.5
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "iou": 0.9929,
+    "raw_ring_reference": "pass",
+    "flow_version": "825a18c3dd73",
+    "grid_same_as_legacy": true
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）"
+   ],
+   "needs": [
+    "QA hold の解除は人の判断が必要（exact は evaluate-only で pass。候補を作っていない）",
+    "採用出口がダム座標から 503 m（小さな水面 0.14 km² から決めている）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-wadagawa",
+   "name": "和田川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "庄川水系 和田川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 1991,
+    "area_ratio_150_400m": 1.007,
+    "area_ratio_150_1000m": 1.031,
+    "lake_km2": 0.247,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 32.15,
+    "binran_direct_km2": 34.0,
+    "binran_total_km2": 34.0,
+    "binran_status": "confirmed",
+    "diff_pct": -5.4,
+    "kawabou_ref_km2": 34.0,
+    "kawabou_diff_pct": -5.4
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "iou": 0.9929,
+    "raw_ring_reference": "pass",
+    "flow_version": "a33cbe453e6e",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 697,
+     "expected_smoothed_vertices": 697,
+     "rain_pixels": 268,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 697,
+     "rain_pixels": 187,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）"
+   ],
+   "needs": [
+    "採用出口がダム座標から 1991 m（500 m 超）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-togagawa",
+   "name": "利賀川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "庄川水系 利賀川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 139,
+    "area_ratio_150_400m": 1.012,
+    "area_ratio_150_1000m": 1.046,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 38.54,
+    "binran_direct_km2": 38.0,
+    "binran_total_km2": 38.0,
+    "binran_status": "confirmed",
+    "diff_pct": 1.4,
+    "kawabou_ref_km2": 38.0,
+    "kawabou_diff_pct": 1.4
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9921,
+    "raw_ring_reference": "pass",
+    "flow_version": "c027e2748313",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 937,
+     "expected_smoothed_vertices": 937,
+     "rain_pixels": 266,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 937,
+     "rain_pixels": 217,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-sakaigawa",
+   "name": "境川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "庄川水系 境川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 770,
+    "area_ratio_150_400m": 1.019,
+    "area_ratio_150_1000m": 1.705,
+    "lake_km2": 0.987,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 37.6,
+    "binran_direct_km2": 37.7,
+    "binran_total_km2": 37.7,
+    "binran_status": "confirmed",
+    "diff_pct": -0.3,
+    "kawabou_ref_km2": 37.7,
+    "kawabou_diff_pct": -0.3
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "iou": 0.9945,
+    "raw_ring_reference": "pass",
+    "flow_version": "0bca111bfadf",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 537,
+     "expected_smoothed_vertices": 537,
+     "rain_pixels": 291,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 537,
+     "rain_pixels": 236,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）"
+   ],
+   "needs": [
+    "採用出口がダム座標から 770 m（500 m 超）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-tori",
+   "name": "刀利ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小矢部川水系 小矢部川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 504,
+    "area_ratio_150_400m": 760.833,
+    "area_ratio_150_1000m": 777.667,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 45.65,
+    "binran_direct_km2": 45.9,
+    "binran_total_km2": 45.9,
+    "binran_status": "confirmed",
+    "diff_pct": -0.6,
+    "kawabou_ref_km2": 45.9,
+    "kawabou_diff_pct": -0.5
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9938,
+    "raw_ring_reference": "pass",
+    "flow_version": "06178bc0eefd",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 637,
+     "expected_smoothed_vertices": 637,
+     "rain_pixels": 333,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 637,
+     "rain_pixels": 217,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [
+    "採用出口がダム座標から 504 m（500 m 超）",
+    "出口候補を 150→400m に広げると上流面積が ×760.833（出口の位置に敏感）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-goi",
+   "name": "五位ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小矢部川水系 子撫川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 185,
+    "area_ratio_150_400m": 1.094,
+    "area_ratio_150_1000m": 1.207,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 13.24,
+    "binran_direct_km2": 13.8,
+    "binran_total_km2": 13.8,
+    "binran_status": "confirmed",
+    "diff_pct": -4.1,
+    "kawabou_ref_km2": 13.8,
+    "kawabou_diff_pct": -4.1
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9876,
+    "raw_ring_reference": "pass",
+    "flow_version": "e51785c2c718",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 401,
+     "expected_smoothed_vertices": 401,
+     "rain_pixels": 328,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 401,
+     "rain_pixels": 174,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-konadegawa",
+   "name": "子撫川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小矢部川水系 子撫川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 158,
+    "area_ratio_150_400m": 1.014,
+    "area_ratio_150_1000m": 1.065,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 32.08,
+    "binran_direct_km2": 31.8,
+    "binran_total_km2": 31.8,
+    "binran_status": "confirmed",
+    "diff_pct": 0.9,
+    "kawabou_ref_km2": 31.8,
+    "kawabou_diff_pct": 0.9
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9932,
+    "raw_ring_reference": "pass",
+    "flow_version": "b9e9c167ec5a",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 713,
+     "expected_smoothed_vertices": 713,
+     "rain_pixels": 274,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 713,
+     "rain_pixels": 217,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-johana",
+   "name": "城端ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小矢部川水系 山田川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 306,
+    "area_ratio_150_400m": 1.042,
+    "area_ratio_150_1000m": 1.099,
+    "lake_km2": 0.108,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 10.31,
+    "binran_direct_km2": 10.8,
+    "binran_total_km2": 10.8,
+    "binran_status": "confirmed",
+    "diff_pct": -4.6,
+    "kawabou_ref_km2": 10.8,
+    "kawabou_diff_pct": -4.5
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "iou": 0.9842,
+    "raw_ring_reference": "pass",
+    "flow_version": "d60ae78f6ffa",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 321,
+     "expected_smoothed_vertices": 321,
+     "rain_pixels": 286,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 321,
+     "rain_pixels": 170,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-usunaka",
+   "name": "臼中ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小矢部川水系 打尾川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 300,
+    "area_ratio_150_400m": 1.731,
+    "area_ratio_150_1000m": 1.862,
+    "lake_km2": 0.126,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 13.12,
+    "binran_direct_km2": 13.5,
+    "binran_total_km2": 13.5,
+    "binran_status": "confirmed",
+    "diff_pct": -2.8,
+    "kawabou_ref_km2": 48.2,
+    "kawabou_diff_pct": -72.8
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "iou": 0.9893,
+    "raw_ring_reference": "pass",
+    "flow_version": "853436252b77",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 325,
+     "expected_smoothed_vertices": 325,
+     "rain_pixels": 318,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 325,
+     "rain_pixels": 210,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "川の防災情報の流域面積とは -72.8%（便覧とは一致。参考値の集計単位の違いと見ているが出典で未確認）"
+   ],
+   "needs": [
+    "出口候補を 150→400m に広げると上流面積が ×1.731（出口の位置に敏感）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-asahiogawa",
+   "name": "朝日小川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小川水系 小川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 205,
+    "area_ratio_150_400m": 1.014,
+    "area_ratio_150_1000m": 1.045,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 29.18,
+    "binran_direct_km2": 28.3,
+    "binran_total_km2": 28.3,
+    "binran_status": "confirmed",
+    "diff_pct": 3.1,
+    "kawabou_ref_km2": 68.2,
+    "kawabou_diff_pct": -57.2
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.993,
+    "raw_ring_reference": "pass",
+    "flow_version": "3cb670daf710",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 425,
+     "expected_smoothed_vertices": 425,
+     "rain_pixels": 269,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 425,
+     "rain_pixels": 234,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている",
+    "川の防災情報の流域面積とは -57.2%（便覧とは一致。参考値の集計単位の違いと見ているが出典で未確認）"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-kadokawa",
+   "name": "角川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "角川水系 角川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 168,
+    "area_ratio_150_400m": 1.014,
+    "area_ratio_150_1000m": 2.473,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 16.03,
+    "binran_direct_km2": 16.2,
+    "binran_total_km2": 16.2,
+    "binran_status": "confirmed",
+    "diff_pct": -1.1,
+    "kawabou_ref_km2": 16.2,
+    "kawabou_diff_pct": -1.0
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9881,
+    "raw_ring_reference": "pass",
+    "flow_version": "3ab707ac4977",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 377,
+     "expected_smoothed_vertices": 377,
+     "rain_pixels": 319,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 377,
+     "rain_pixels": 143,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-kamiichigawa",
+   "name": "上市川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "上市川水系 上市川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 195,
+    "area_ratio_150_400m": 1.016,
+    "area_ratio_150_1000m": 1.078,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 45.91,
+    "binran_direct_km2": 44.7,
+    "binran_total_km2": 44.7,
+    "binran_status": "confirmed",
+    "diff_pct": 2.7,
+    "kawabou_ref_km2": 44.7,
+    "kawabou_diff_pct": 2.7
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.993,
+    "raw_ring_reference": "pass",
+    "flow_version": "8ab15eb9c38e",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 737,
+     "expected_smoothed_vertices": 737,
+     "rain_pixels": 331,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 737,
+     "rain_pixels": 215,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-kamiichigawa-daini",
+   "name": "上市川第二ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "上市川水系 上市川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 138,
+    "area_ratio_150_400m": 1.018,
+    "area_ratio_150_1000m": 1.135,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 39.57,
+    "binran_direct_km2": 38.7,
+    "binran_total_km2": 38.7,
+    "binran_status": "confirmed",
+    "diff_pct": 2.3,
+    "kawabou_ref_km2": 38.7,
+    "kawabou_diff_pct": 2.2
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9932,
+    "raw_ring_reference": "pass",
+    "flow_version": "81ca63a280e4",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 649,
+     "expected_smoothed_vertices": 649,
+     "rain_pixels": 270,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 649,
+     "rain_pixels": 253,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-shiraiwagawa",
+   "name": "白岩川ダム",
+   "candidate": false,
+   "outline": null,
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "白岩川水系 白岩川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 542,
+    "area_ratio_150_400m": 1.144,
+    "area_ratio_150_1000m": 1.433,
+    "lake_km2": 0.049,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 27.95,
+    "binran_direct_km2": 24.0,
+    "binran_total_km2": 24.0,
+    "binran_status": "confirmed",
+    "diff_pct": 16.4,
+    "kawabou_ref_km2": 24.0,
+    "kawabou_diff_pct": 16.5
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "hold",
+    "block_codes": [
+     "manual_hold",
+     "area_error"
+    ],
+    "warn_codes": [],
+    "iou": 0.9906,
+    "raw_ring_reference": "hold",
+    "flow_version": "16902b3218e6",
+    "grid_same_as_legacy": true
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "川の防災情報の流域面積とは 16.5%（便覧とは一致。参考値の集計単位の違いと見ているが出典で未確認）"
+   ],
+   "needs": [
+    "HOLD 維持（人による保留：原因不明。exact でも面積誤差 +16.4% で ±15% を超える）"
+   ],
+   "classification": "HOLD（審査対象外）"
+  },
+  {
+   "id": "toyama-funagawa",
+   "name": "舟川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "小川水系 舟川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 195,
+    "area_ratio_150_400m": 1.057,
+    "area_ratio_150_1000m": 2.009,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 3.51,
+    "binran_direct_km2": null,
+    "binran_total_km2": null,
+    "binran_status": "unconfirmed",
+    "diff_pct": null,
+    "kawabou_ref_km2": 3.44,
+    "kawabou_diff_pct": 2.0,
+    "note": "便覧の直接流域は未確認（dam_basin_spec.csv は unconfirmed のまま。補完していない）"
+   },
+   "diversion": {
+    "status": "unknown",
+    "indirect_km2": null,
+    "screen_note": "画面に導水の注記なし（導水の有無が未確認であることは画面に出ない）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_official_direct_area",
+     "diversion_unknown",
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9778,
+    "raw_ring_reference": "pass",
+    "flow_version": "1b0d5abe15ad",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 181,
+     "expected_smoothed_vertices": 181,
+     "rain_pixels": 409,
+     "ring_visible_pct": 100,
+     "chips": [
+      "ダム便覧に記載なし"
+     ],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 181,
+     "rain_pixels": 126,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [
+    "便覧の直接流域が未確認（面積の照合ができない）",
+    "導水の有無が未確認（画面にも出ない）",
+    "画面の面積が整数に丸められ、算出 3.51 km² と参考 3.44 km² が「約 4」「約 3 km²」と食い違って見える（直後の注記は『近い値』と書いている）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-fusegawa",
+   "name": "布施川ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "片貝川水系 布施川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 146,
+    "area_ratio_150_400m": 1.022,
+    "area_ratio_150_1000m": 1.116,
+    "lake_km2": 0.072,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 13.21,
+    "binran_direct_km2": 13.0,
+    "binran_total_km2": 13.0,
+    "binran_status": "confirmed",
+    "diff_pct": 1.7,
+    "kawabou_ref_km2": 13.0,
+    "kawabou_diff_pct": 1.6
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "iou": 0.9858,
+    "raw_ring_reference": "pass",
+    "flow_version": "24f25f846b49",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 305,
+     "expected_smoothed_vertices": 305,
+     "rain_pixels": 353,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 305,
+     "rain_pixels": 173,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）"
+   ],
+   "needs": [],
+   "classification": "設定した追加確認条件に該当しない"
+  },
+  {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "ダム座標は 川の防災情報 観測所マスタの座標と一致（ずれ 0 m）",
+    "official_river": "黒瀬川水系 大谷川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap",
+    "distance_from_dam_coord_m": 148,
+    "area_ratio_150_400m": 1.189,
+    "area_ratio_150_1000m": 1.635,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 1.48,
+    "binran_direct_km2": null,
+    "binran_total_km2": null,
+    "binran_status": "unconfirmed",
+    "diff_pct": null,
+    "kawabou_ref_km2": 1.5,
+    "kawabou_diff_pct": -1.3,
+    "note": "便覧の直接流域は未確認（dam_basin_spec.csv は unconfirmed のまま。補完していない）"
+   },
+   "diversion": {
+    "status": "unknown",
+    "indirect_km2": null,
+    "screen_note": "画面に導水の注記なし（導水の有無が未確認であることは画面に出ない）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_official_direct_area",
+     "diversion_unknown",
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9638,
+    "raw_ring_reference": "pass",
+    "flow_version": "ad0cde7174d5",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 145,
+     "expected_smoothed_vertices": 145,
+     "rain_pixels": 400,
+     "ring_visible_pct": 100,
+     "chips": [
+      "ダム便覧に記載なし"
+     ],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 145,
+     "rain_pixels": 124,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [
+    "便覧の直接流域が未確認（面積の照合ができない）",
+    "導水の有無が未確認（画面にも出ない）",
+    "出口候補を 150→400m に広げると上流面積が ×1.189（出口の位置に敏感）",
+    "画面の面積が整数に丸められ、算出 1.48 km² と参考 1.5 km² が「約 1」「約 2 km²」と食い違って見える（直後の注記は『近い値』と書いている）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-kurobe",
+   "name": "黒部ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "観測所マスタなし。ダム座標の出典は記録されておらず未確認",
+    "official_river": "黒部川水系 黒部川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 223,
+    "area_ratio_150_400m": 1.025,
+    "area_ratio_150_1000m": 1.039,
+    "lake_km2": 1.14,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 181.09,
+    "binran_direct_km2": 184.5,
+    "binran_total_km2": 188.5,
+    "binran_status": "confirmed",
+    "diff_pct": -1.8,
+    "kawabou_ref_km2": null,
+    "kawabou_diff_pct": null
+   },
+   "diversion": {
+    "status": "yes",
+    "indirect_km2": 4.0,
+    "screen_note": "画面に「導水あり」と間接流域の注記を表示"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "diversion_yes"
+    ],
+    "iou": 0.998,
+    "raw_ring_reference": "pass",
+    "flow_version": "050798c308ba",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 1625,
+     "expected_smoothed_vertices": 1625,
+     "rain_pixels": 252,
+     "ring_visible_pct": 100,
+     "chips": [
+      "導水あり"
+     ],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 1625,
+     "rain_pixels": 391,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    },
+    "boundary_taps_pc": {
+     "points": 16,
+     "offset_m": null,
+     "inside_to_this_dam": 8,
+     "inside_total": 8,
+     "outside_not_this_dam": 8,
+     "outside_total": 8,
+     "outside_went_to": [
+      "出し平ダム"
+     ],
+     "grid_agrees_with_drawn": 16,
+     "raw_agrees_with_drawn": 16
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "導水あり（間接流域 4.0 km²）。導水路は描いていない。輪は直接流域だけ"
+   ],
+   "needs": [
+    "ダム座標の出典が未確認（観測所マスタなし）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-arimine",
+   "name": "有峰ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "観測所マスタなし。ダム座標の出典は記録されておらず未確認",
+    "official_river": "常願寺川水系 和田川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "reservoir",
+    "distance_from_dam_coord_m": 31,
+    "area_ratio_150_400m": 1.004,
+    "area_ratio_150_1000m": 1.113,
+    "lake_km2": 1.545,
+    "note": "貯水池の水面から出口を決めている（水面検出は生成結果）"
+   },
+   "area": {
+    "computed_km2": 50.44,
+    "binran_direct_km2": 49.9,
+    "binran_total_km2": 219.9,
+    "binran_status": "confirmed",
+    "diff_pct": 1.1,
+    "kawabou_ref_km2": null,
+    "kawabou_diff_pct": null
+   },
+   "diversion": {
+    "status": "yes",
+    "indirect_km2": 170.0,
+    "screen_note": "画面に「導水あり」と間接流域の注記を表示"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "diversion_yes"
+    ],
+    "iou": 0.9971,
+    "raw_ring_reference": "pass",
+    "flow_version": "9fa5afd5df96",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 877,
+     "expected_smoothed_vertices": 877,
+     "rain_pixels": 234,
+     "ring_visible_pct": 100,
+     "chips": [
+      "導水あり"
+     ],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 877,
+     "rain_pixels": 261,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    },
+    "boundary_taps_pc": {
+     "points": 16,
+     "offset_m": null,
+     "inside_to_this_dam": 8,
+     "inside_total": 8,
+     "outside_not_this_dam": 8,
+     "outside_total": 8,
+     "outside_went_to": [],
+     "grid_agrees_with_drawn": 16,
+     "raw_agrees_with_drawn": 16
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "導水あり（間接流域 170.0 km²）。導水路は描いていない。輪は直接流域だけ"
+   ],
+   "needs": [
+    "ダム座標の出典が未確認（観測所マスタなし）"
+   ],
+   "classification": "追加確認が必要"
+  },
+  {
+   "id": "toyama-dashidaira",
+   "name": "出し平ダム",
+   "candidate": true,
+   "outline": "exact を平滑化して表示（smoothRing(...,2)）",
+   "outlet_independent": {
+    "dam_coordinate": "観測所マスタなし。ダム座標の出典は記録されておらず未確認",
+    "official_river": "黒部川水系 黒部川（国土数値情報 W01-14「ダム」（国土交通省、2014年公開））",
+    "dam_axis_vs_outlet": "未確認（堤体・取水口の位置を独立資料で照合していない）",
+    "outlet_on_official_river": "未確認（採用出口がその河川上にあるかは照合していない）"
+   },
+   "outlet_generated_not_evidence": {
+    "method": "snap-fixed",
+    "distance_from_dam_coord_m": 126,
+    "area_ratio_150_400m": 1.004,
+    "area_ratio_150_1000m": 1.007,
+    "lake_km2": null,
+    "note": "河道スナップは便覧の面積と桁が合う半径を選ぶため、便覧との一致は出口の根拠として完全には独立しない"
+   },
+   "area": {
+    "computed_km2": 459.82,
+    "binran_direct_km2": 461.2,
+    "binran_total_km2": 461.2,
+    "binran_status": "confirmed",
+    "diff_pct": -0.3,
+    "kawabou_ref_km2": null,
+    "kawabou_diff_pct": null
+   },
+   "diversion": {
+    "status": "none",
+    "indirect_km2": 0.0,
+    "screen_note": "導水なし（便覧）"
+   },
+   "qa": {
+    "gate_smoothed": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "iou": 0.9982,
+    "raw_ring_reference": "pass",
+    "flow_version": "22589471dfa4",
+    "grid_same_as_legacy": true
+   },
+   "screen": {
+    "pc_1280x860": {
+     "ring_drawn_vertices": 3193,
+     "expected_smoothed_vertices": 3193,
+     "rain_pixels": 228,
+     "ring_visible_pct": 100,
+     "chips": [],
+     "console_warnings": [],
+     "ok": true
+    },
+    "sp_390x844": {
+     "ring_drawn_vertices": 3193,
+     "rain_pixels": 481,
+     "ring_visible_pct": 0,
+     "zoom": 6.12,
+     "console_warnings": [
+      "Map cannot fit within canvas with the given bounds, padding, and/or offset."
+     ],
+     "text_ok": true,
+     "ok": false
+    }
+   },
+   "uncertainties": [
+    "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
+    "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
+   ],
+   "needs": [
+    "ダム座標の出典が未確認（観測所マスタなし）"
+   ],
+   "classification": "追加確認が必要"
+  }
+ ]
+}
