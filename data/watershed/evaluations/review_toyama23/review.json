@@ -82,6 +82,66 @@
      "ok": false
     }
    },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「宇奈月」（ダムコード 1101）の点。所在地「富山県黒部市宇奈月町内山字大尾地先」、黒部川水系 黒部川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.80948889,
+       137.5903625
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0873/",
+      "where": "「位置」欄「北緯36度48分34秒，東経137度35分25秒」",
+      "position": [
+       36.8094444,
+       137.5902778
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "国土交通省 北陸地方整備局「宇奈月ダム」",
+      "url": "https://www.hrr.mlit.go.jp/tiiki/manaviva/guide/toyama/unazuki.html",
+      "where": "富山県黒部市宇奈月町黒部4-9（住所。管理所の所在地と見られる。緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap-fixed",
+     "cell_latlon": [
+      36.811346,
+      137.590542
+     ],
+     "resolution_m": 30.6,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 207,
+     "outlet_to_binran": 213,
+     "w01_to_binran": 9,
+     "w01_to_dam_coordinate_used": 88
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 9 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 207 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
+    }
+   },
    "uncertainties": [
     "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
     "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
@@ -171,6 +231,66 @@
      "raw_agrees_with_drawn": 16
     }
    },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「室牧」（ダムコード 1138）の点。所在地「富山県富山市八尾町小谷北原」、神通川水系 井田川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.53833182,
+       137.0917126
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0846/",
+      "where": "「位置」欄「北緯36度32分18秒，東経137度5分30秒」",
+      "position": [
+       36.5383333,
+       137.0916667
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "神通川水系室牧川の富山市八尾町蒲谷、小谷北原地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap-fixed",
+     "cell_latlon": [
+      36.53964,
+      137.092295
+     ],
+     "resolution_m": 15.4,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 155,
+     "outlet_to_binran": 156,
+     "w01_to_binran": 4,
+     "w01_to_dam_coordinate_used": 4
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 4 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 155 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
+    }
+   },
    "uncertainties": [
     "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
     "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている",
@@ -244,6 +364,66 @@
      ],
      "text_ok": true,
      "ok": false
+    }
+   },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「熊野川」（ダムコード 1131）の点。所在地「富山県富山市手出」、神通川水系 熊野川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.56044328,
+       137.31265327
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0865/",
+      "where": "「位置」欄「北緯36度33分39秒，東経137度18分47秒」",
+      "position": [
+       36.5608333,
+       137.3130556
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "神通川水系熊野川の富山市手出、赤倉地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.561014,
+      137.312536
+     ],
+     "resolution_m": 15.3,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 64,
+     "outlet_to_binran": 51,
+     "w01_to_binran": 56,
+     "w01_to_dam_coordinate_used": 89
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 56 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 64 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
     }
    },
    "uncertainties": [
@@ -440,6 +620,66 @@
      ],
      "text_ok": true,
      "ok": false
+    }
+   },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「利賀川」（ダムコード 1155）の点。所在地「富山県南砺市利賀村大勘場水無」、庄川水系 利賀川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.32799327,
+       136.99847972
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0858/",
+      "where": "「位置」欄「北緯36度19分40秒，東経136度59分53秒」",
+      "position": [
+       36.3277778,
+       136.9980556
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "庄川水系利賀川の南砺市利賀村水無地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.329025,
+      136.998739
+     ],
+     "resolution_m": 15.4,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 117,
+     "outlet_to_binran": 152,
+     "w01_to_binran": 45,
+     "w01_to_dam_coordinate_used": 27
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 45 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 117 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
     }
    },
    "uncertainties": [
@@ -663,6 +903,66 @@
      "ok": false
     }
    },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「五位」（ダムコード 1175）の点。所在地「富山県高岡市福岡町五位字島崎1669番地」、小矢部川水系 子撫川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.75250634,
+       136.88164798
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0872/",
+      "where": "「位置」欄「北緯36度45分8秒，東経136度52分54秒」",
+      "position": [
+       36.7522222,
+       136.8816667
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「五位ダムの概要」",
+      "url": "https://www.pref.toyama.jp/1559/kendodukuri/shinrinkasen/kasen/kj00009248/kj00009248-002-01.html",
+      "where": "富山県 高岡市 福岡町 五位 堀切。矢瀬尾川と三合谷川との合流点付近。子撫川ダムの約4.1km上流（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.751161,
+      136.881795
+     ],
+     "resolution_m": 7.7,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 150,
+     "outlet_to_binran": 119,
+     "w01_to_binran": 32,
+     "w01_to_dam_coordinate_used": 126
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 32 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 150 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
+    }
+   },
    "uncertainties": [
     "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
     "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
@@ -736,6 +1036,66 @@
      "ok": false
     }
    },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「子撫川」（ダムコード 1171）の点。所在地「富山県小矢部市森屋」、小矢部川水系 子撫川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.72549863,
+       136.85292148
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0863/",
+      "where": "「位置」欄「北緯36度43分32秒，東経136度51分11秒」",
+      "position": [
+       36.7255556,
+       136.8530556
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "小矢部川水系子撫川の小矢部市森屋地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.72437,
+      136.852655
+     ],
+     "resolution_m": 15.3,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 128,
+     "outlet_to_binran": 137,
+     "w01_to_binran": 14,
+     "w01_to_dam_coordinate_used": 124
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 14 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 128 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
+    }
+   },
    "uncertainties": [
     "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
     "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
@@ -805,6 +1165,67 @@
      ],
      "text_ok": true,
      "ok": false
+    }
+   },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「城端」（ダムコード 1167）の点。所在地「富山県南砺市上原」、小矢部川水系 山田川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.48406644,
+       136.86977503
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0877/",
+      "where": "「位置」欄「北緯36度29分2秒，東経136度52分12秒」",
+      "position": [
+       36.4838889,
+       136.87
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（11～16）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-03.html",
+      "where": "小矢部川水系山田川の南砺市上原地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "reservoir",
+     "cell_latlon": [
+      36.481174,
+      136.869349
+     ],
+     "resolution_m": 7.7,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 324,
+     "outlet_to_binran": 308,
+     "w01_to_binran": 28,
+     "w01_to_dam_coordinate_used": 28,
+     "w01_to_nearest_detected_water_cell": 7
+    },
+    "w01_point_inside_exact_catchment": false,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 28 m で一致（W01 は位置精度レベル1）",
+      "貯水池の水面から出口を決めている。ダムの位置（W01）は検出した水面から 7 m（水面の縁）。代表点（水面の最も低いセル）とは 324 m"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
     }
    },
    "uncertainties": [
@@ -952,6 +1373,66 @@
      "ok": false
     }
    },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「朝日小川」（ダムコード 1097）の点。所在地「富山県下新川郡朝日町山崎字道口」、小川水系 小川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.88860996,
+       137.61815319
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0878/",
+      "where": "「位置」欄「北緯36度53分18秒，東経137度37分5秒」",
+      "position": [
+       36.8883333,
+       137.6180556
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "小川水系小川の朝日町道口、阿造谷地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.889335,
+      137.616162
+     ],
+     "resolution_m": 7.6,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 195,
+     "outlet_to_binran": 202,
+     "w01_to_binran": 32,
+     "w01_to_dam_coordinate_used": 70
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 32 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 195 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
+    }
+   },
    "uncertainties": [
     "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
     "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている",
@@ -1024,6 +1505,66 @@
      ],
      "text_ok": true,
      "ok": false
+    }
+   },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「角川」（ダムコード 1106）の点。所在地「富山県魚津市鹿熊字水尾」、角川水系 角川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.75352654,
+       137.43069929
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0862/",
+      "where": "「位置」欄「北緯36度45分13秒，東経137度25分51秒」",
+      "position": [
+       36.7536111,
+       137.4308333
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "角川水系角川の魚津市鹿熊地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.754943,
+      137.429652
+     ],
+     "resolution_m": 7.7,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 183,
+     "outlet_to_binran": 182,
+     "w01_to_binran": 15,
+     "w01_to_dam_coordinate_used": 16
+    },
+    "w01_point_inside_exact_catchment": true,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 15 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）は採用出口から 183 m で、集水域の内側にある（出口はダムと同じ位置か下流側にあると読める。集水域は生成結果なので、これは位置関係の説明であって根拠ではない）"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
     }
    },
    "uncertainties": [
@@ -1099,6 +1640,66 @@
      "ok": false
     }
    },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「上市川」（ダムコード 1107）の点。所在地「富山県中新川郡上市町東種」、上市川水系 上市川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.67956931,
+       137.41613206
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0850/",
+      "where": "「位置」欄「北緯36度40分46秒，東経137度24分59秒」",
+      "position": [
+       36.6794444,
+       137.4163889
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "上市川水系上市川の上市町東種、稲村地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.679227,
+      137.416906
+     ],
+     "resolution_m": 15.3,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 79,
+     "outlet_to_binran": 52,
+     "w01_to_binran": 27,
+     "w01_to_dam_coordinate_used": 185
+    },
+    "w01_point_inside_exact_catchment": false,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "まだ根拠が足りない",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 27 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）が集水域の外側にある（出口から 79 m）。出口がダムより上流にあるのか、別の沢に乗っているのかを、独立資料では確定できない"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
+    }
+   },
    "uncertainties": [
     "堤体・取水口と採用出口の位置関係は独立資料で未確認（全基共通）",
     "貯水池の水面を検出できず河道スナップ。スナップ半径の選択に便覧の面積（桁）を使っている"
@@ -1170,6 +1771,66 @@
      ],
      "text_ok": true,
      "ok": false
+    }
+   },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「上市川第2」（ダムコード 1108）の点。所在地「富山県中新川郡上市町東種」、上市川水系 上市川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.66958209,
+       137.43389353
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0867/",
+      "where": "「位置」欄「北緯36度40分11秒，東経137度26分2秒」",
+      "position": [
+       36.6697222,
+       137.4338889
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（1～10）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-02.html",
+      "where": "上市川ダムの約2km上流（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "snap",
+     "cell_latlon": [
+      36.670966,
+      137.434416
+     ],
+     "resolution_m": 15.3,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 161,
+     "outlet_to_binran": 146,
+     "w01_to_binran": 16,
+     "w01_to_dam_coordinate_used": 52
+    },
+    "w01_point_inside_exact_catchment": false,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "まだ根拠が足りない",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 16 m で一致（W01 は位置精度レベル1）",
+      "ダムの位置（W01）が集水域の外側にある（出口から 161 m）。出口がダムより上流にあるのか、別の沢に乗っているのかを、独立資料では確定できない"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
     }
    },
    "uncertainties": [
@@ -1377,6 +2038,67 @@
      ],
      "text_ok": true,
      "ok": false
+    }
+   },
+   "dam_position_check": {
+    "sources": [
+     {
+      "name": "国土数値情報（ダムデータ）W01-14（国土交通省）。出典: 国土地理院、日本ダム協会「ダム年鑑」",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-W01.html",
+      "where": "ダム名「布施川」（ダムコード 1105）の点。所在地「富山県黒部市福平」、片貝川水系 布施川。位置情報精度コード 1（レベル1: 地形図上に名称と場所が明示され位置が明確）",
+      "position": [
+       36.80417179,
+       137.51824423
+      ],
+      "datum": "JGD2011（明記あり）",
+      "what_point": "「ダムの位置」（点。堤体上のどこかは定義なし）"
+     },
+     {
+      "name": "日本ダム協会「ダム便覧」",
+      "url": "https://dambinran.damnet.or.jp/dams/japan/0876/",
+      "where": "「位置」欄「北緯36度48分15秒，東経137度31分6秒」",
+      "position": [
+       36.8041667,
+       137.5183333
+      ],
+      "datum": "明記なし（便覧の地図リンクが世界測地系の地図に同じ値を渡しているため世界測地系として扱った）",
+      "what_point": "定義なし"
+     },
+     {
+      "name": "富山県「富山県土木部所管のダム（11～16）」",
+      "url": "https://www.pref.toyama.jp/1503/kendodukuri/shinrinkasen/kasen/kj00015226/kj00015226-002-03.html",
+      "where": "片貝川水系布施川の黒部市福平地先（緯度経度なし）",
+      "position": null,
+      "datum": null,
+      "what_point": "地先・住所のみ"
+     }
+    ],
+    "sources_independence": "W01 と便覧はどちらも日本ダム協会の資料に由来する（W01 の位置は国土地理院の地形図から取得）。完全に独立した2資料ではない",
+    "adopted_outlet": {
+     "method": "reservoir",
+     "cell_latlon": [
+      36.802859,
+      137.518144
+     ],
+     "resolution_m": 7.7,
+     "note": "生成結果（照合の対象であって、位置の根拠ではない）。コミット済みの exact 成果と同一であることを再計算で確認"
+    },
+    "distance_m": {
+     "outlet_to_w01": 146,
+     "outlet_to_binran": 147,
+     "w01_to_binran": 8,
+     "w01_to_dam_coordinate_used": 8,
+     "w01_to_nearest_detected_water_cell": 35
+    },
+    "w01_point_inside_exact_catchment": false,
+    "intake": "未確認（どの資料にも取水口の位置の記載なし）",
+    "review": {
+     "status": "人が個別判断できる資料が揃った",
+     "reasons": [
+      "独立資料のダムの位置が2つあり、互いに 8 m で一致（W01 は位置精度レベル1）",
+      "貯水池の水面から出口を決めている。ダムの位置（W01）は検出した水面から 35 m（水面の縁）。代表点（水面の最も低いセル）とは 146 m"
+     ],
+     "note": "資料が揃ったことは、出口の位置が正しいことを意味しない。差の大きさを見て人が判断する。取水口は全基未確認"
     }
    },
    "uncertainties": [
