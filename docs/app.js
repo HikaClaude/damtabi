@@ -1498,6 +1498,7 @@
     var grids = {};          // ダムID -> 流向格子
     var drops = [];          // 流下中の雨つぶ
     var ripples = [];        // 到着の波紋
+    var sheetMode = false;   // パネルが下部シートとして地図に重なっている（スマホ幅）
     var ridge = null;        // 尾根が描かれるアニメーション
     var ambient = 0;         // 降り続ける雨のタイマー
     var framing = false;
@@ -1675,6 +1676,53 @@
       return [[w, s], [e, n]];
     }
 
+    /** 面積の表示。10 km² 未満は小数1桁（整数に丸めると、近い値どうしが 1 と 2 のように食い違って見える）。 */
+    function km2(v) {
+      return v < 10 ? (Math.round(v * 10) / 10).toFixed(1) : String(Math.round(v));
+    }
+
+    /**
+     * 集水域を地図に収めるときの余白。地図の表示領域（mr）と、開いているパネル（pr、閉じていれば null）の
+     * 実際の位置から計算する。どちらも {left, top, right, bottom}（画面座標）。
+     *
+     * - 広い画面（PC）はパネルが右に重なる → 右の余白にパネルの幅を足す（従来の値 top80/bottom60/left60/右=パネル幅+40 と同じ）
+     * - 狭い画面（スマホ）はパネルが下部シートとして下に重なる → 下の余白にシートの高さを足す
+     *   （従来は右にシートの幅＝画面幅を足しており、地図に収まらず拡大されなかった）
+     * - 余白の合計が地図より大きいと fitBounds が動かないので、輪を描く幅・高さ（最低 MIN px）が残るよう縮める
+     * sheet: パネルが下に重なっているか（呼び出し側がシートを集水域の説明までスクロールするのに使う）
+     */
+    function fitPadding(mr, pr) {
+      var w = mr.right - mr.left, h = mr.bottom - mr.top, MIN = 80;
+      var wide = w > 720;
+      var p = wide ? { top: 80, bottom: 60, left: 60, right: 60 } : { top: 20, bottom: 16, left: 16, right: 16 };
+      var sheet = false;
+      if (pr) {
+        var ox = Math.min(mr.right, pr.right) - Math.max(mr.left, pr.left);
+        var oy = Math.min(mr.bottom, pr.bottom) - Math.max(mr.top, pr.top);
+        if (ox > 0 && oy > 0) {
+          var freeW = Math.max(0, pr.left - mr.left);   // 地図のうちパネルより左の幅
+          var freeH = Math.max(0, pr.top - mr.top);     // 地図のうちパネルより上の高さ
+          if (freeW * h >= freeH * w) {
+            p.right = (wide ? 40 : p.right) + (mr.right - pr.left);
+          } else {
+            p.bottom = p.bottom + (mr.bottom - pr.top);
+            sheet = true;
+          }
+        }
+      }
+      function shrink(a, b, size) {
+        var room = Math.max(0, size - MIN);
+        if (p[a] + p[b] > room) {
+          var k = room / (p[a] + p[b]);
+          p[a] = Math.floor(p[a] * k);
+          p[b] = Math.floor(p[b] * k);
+        }
+      }
+      shrink("left", "right", w);
+      shrink("top", "bottom", h);
+      return { top: p.top, bottom: p.bottom, left: p.left, right: p.right, sheet: sheet };
+    }
+
     function inRing(lng, lat, ring) {
       var hit = false, i, x1, y1, x2, y2;
       for (i = 0; i < ring.length - 1; i++) {
@@ -1812,6 +1860,11 @@
         note += "この輪のほかに、別の谷からも水を引いています（間接流域 約" +
           esc(String(div.indirect_km2 == null ? "—" : div.indirect_km2)) +
           " km²）。導水路の経路は公開資料で確認できないため描いていません。";
+      } else if (div.status === "unknown") {
+        // 「導水なし」と読まれないよう、確認できていないことをそのまま出す
+        chips += '<span class="ws-chip is-warn">導水の有無は未確認</span>';
+        note += "別の谷から水を引いている（導水がある）かどうかは、公開資料で確認できていません。" +
+          "導水がある場合、実際にこのダムへ集まる水の範囲はこの輪より広くなります。";
       }
       if (d.area_error_pct != null && Math.abs(d.area_error_pct) > 25) {
         chips += '<span class="ws-chip is-warn">公式値と差が大きい</span>';
@@ -1821,9 +1874,11 @@
         chips += '<span class="ws-chip is-warn">ダム便覧に記載なし</span>';
         note += "ダム便覧に該当の記載を確認できていないため、直接流域との比較はできていません。";
         if (d.reference_area_km2 != null) {
+          // 「近い」と書くのは実際に近いときだけ（面積の許容と同じ ±15%）
+          var refDiff = Math.abs(d.fine_area_km2 / d.reference_area_km2 - 1) * 100;
           note += "参考として" + esc(String(d.reference_source || "別の公式資料")) +
-            "の流域面積（約" + Math.round(d.reference_area_km2) +
-            " km²）とは近い値になっています。";
+            "の流域面積（約 " + km2(d.reference_area_km2) + " km²）" +
+            (refDiff <= 15 ? "とは近い値になっています。" : "とは差があります。原因は特定できていません。");
         }
       }
 
@@ -1832,16 +1887,16 @@
           '<p class="ws-lead">青い輪の内側に降った雨は、山をつたって' +
             "<strong>すべてこのダムへ</strong>集まります。</p>" +
           '<table class="ws-facts">' +
-            "<tr><th>集水域（地形計算）</th><td>約 " + Math.round(d.fine_area_km2) + " km²</td></tr>" +
+            "<tr><th>集水域（地形計算）</th><td>約 " + km2(d.fine_area_km2) + " km²</td></tr>" +
             (d.official_area_km2 == null ? "" :
               "<tr><th>公式の流域面積" + (hasIndirect ? "（直接）" : "") +
-              "</th><td>約 " + Math.round(d.official_area_km2) + " km²</td></tr>") +
+              "</th><td>約 " + km2(d.official_area_km2) + " km²</td></tr>") +
             (hasIndirect ?
-              "<tr><th>同（導水を含む合計）</th><td>約 " + Math.round(d.official_total_km2) +
+              "<tr><th>同（導水を含む合計）</th><td>約 " + km2(d.official_total_km2) +
               " km²</td></tr>" : "") +
             (d.official_area_km2 == null && d.reference_area_km2 != null ?
               "<tr><th>" + esc(String(d.reference_source)) + "の流域面積</th><td>約 " +
-              Math.round(d.reference_area_km2) + " km²</td></tr>" : "") +
+              km2(d.reference_area_km2) + " km²</td></tr>" : "") +
           "</table>" +
           (chips ? chips + '<p class="ws-note">' + note + "</p>" : "") +
           '<p class="ws-note">地理院の標高データから計算した概略です。' +
@@ -1899,9 +1954,14 @@
             }
           });
           var panel = $("#panel");
-          var right = (panel && !panel.classList.contains("is-hidden")) ? panel.offsetWidth + 40 : 60;
+          var open = panel && !panel.classList.contains("is-hidden");
+          // スマホ幅では下部シートを低くして地図の見える範囲を空ける（CSS はスマホ幅でだけ効く）
+          if (open) panel.classList.add("is-ws-compact");
+          var pad = fitPadding(map.getContainer().getBoundingClientRect(),
+                               open ? panel.getBoundingClientRect() : null);
+          sheetMode = pad.sheet;
           map.fitBounds(ringBounds(f.geometry.coordinates[0]), {
-            padding: { top: 80, bottom: 60, left: 60, right: right },
+            padding: { top: pad.top, bottom: pad.bottom, left: pad.left, right: pad.right },
             duration: 900
           });
           map.setPaintProperty("ws-outside", "fill-opacity", 0.08);
@@ -1921,6 +1981,11 @@
         }, 420);
 
         api.renderEntry(dam);
+        if (sheetMode) {
+          // 下部シートでは、写真や貯水率の下にある集水域の説明が見えるところまで送る
+          var sh = $("#panel"), en = $("#ws-entry");
+          if (sh && en) sh.scrollTop += en.getBoundingClientRect().top - sh.getBoundingClientRect().top - 8;
+        }
         return { ok: true };
       });
     };
@@ -1933,6 +1998,9 @@
       epoch++;                 // 進行中の応答をすべて無効にする
       var was = api.activeId;
       api.activeId = null;
+      sheetMode = false;
+      var pnl = $("#panel");
+      if (pnl) pnl.classList.remove("is-ws-compact");
       var map = state.map;
       if (map && map.getSource && map.getSource("ws-basin")) {
         map.getSource("ws-basin").setData(emptyFC());

@@ -658,6 +658,10 @@ details.help > summary:focus-visible {
 
   #panel.is-hidden { transform: translateY(100%); }
 
+  /* 集水域を表示している間は下部シートを低くして、地図（輪と雨）の見える範囲を空ける。
+     シートの中はスクロールできるので、説明文は読める */
+  #panel.is-ws-compact { max-height: 44%; }
+
   .dam-illust { aspect-ratio: 16 / 6; max-height: 22vh; }
 
   #list-link { order: 2; }
