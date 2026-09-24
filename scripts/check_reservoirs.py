@@ -12,7 +12,7 @@
      （水面の標高幅、広がり、堤体からの距離）
   3. 集水域が水面を丸ごと含んでいるか（含まなければ取りこぼし）
 
-画像は `docs/watershed/_check/<id>.png`（.gitignore 対象・公開しない）。
+画像は `data/watershed/_check/<id>.png`（.gitignore 対象。docs/ の外なので公開されない）。
   水色 = 検出した水面 / 赤の点 = 集水域 / 黄 = 堤体 / 背景 = 標高の陰影
 """
 
@@ -31,7 +31,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import build_basins as bb  # noqa: E402
 
-OUT = ROOT / "docs" / "watershed" / "_check"
+OUT = ROOT / "data" / "watershed" / "_check"   # docs/ の外（公開しない）
 MAX_PX = 900
 
 # 堤体で切ったとき、これ以上のかたまりが2つ以上残れば、水面が堤体をまたいで

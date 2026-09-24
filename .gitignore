@@ -17,13 +17,19 @@ data/basins/*.log
 # 集水域「雨の行き先」の配信データ（地理院標高タイル DEM10B 由来の派生物）。
 # docs/ は GitHub Pages がそのまま配信するので、ここに置いたものは公開される。
 #
-# 追跡する（＝公開する）のは次の3種類だけ:
-#   docs/watershed/index.json            公開対象ダムの索引
-#   docs/watershed/basins.geojson        公開対象ダムの集水域ポリゴン
-#   docs/watershed/flow/<dam_id>.json    公開対象ダムの D8 流向格子
+# docs/watershed/ に置くのは「公開可能なダム」（個別承認・QA pass・輪郭方式 exact・
+# 承認時の格子版と輪の版が一致）の次の3種類だけ（scripts/ws_pipeline.py の assemble が書く）:
+#   docs/watershed/index.json            公開可能なダムの索引（0基なら dams が空）
+#   docs/watershed/basins.geojson        公開可能なダムの集水域ポリゴン
+#   docs/watershed/flow/<dam_id>.json    公開可能なダムの D8 流向格子
 #
-# 下の2つはローカル評価専用。原因が分からず公開索引から外したダムの分で、
-# 追跡も公開もしない（scripts/build_flowgrids.py の EXCLUDED が根拠）。
+# QA 合格の公開候補は data/watershed/staged/（追跡する・公開しない）。
+# 下はローカル評価専用で、追跡も公開もしない。
+data/watershed/staged/index.local.json
+data/watershed/staged/held/
+data/watershed/staged/quarantine/
+data/watershed/_check/
+# 旧配置（いまは使わない。残っていれば assemble が staged/quarantine/ へ移す）
 docs/watershed/index.local.json
 docs/watershed/flow/_local/
 docs/watershed/_check/

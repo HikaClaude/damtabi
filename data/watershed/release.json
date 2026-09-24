@@ -1,0 +1,5 @@
+{
+ "schema": "ws-release/1",
+ "note": "集水域を画面に出してよいと人が1基ずつ判断した記録。QA の pass・評価区分 G1〜G4・P0 の合格は承認ではない。承認は flow_version・ring_version・outline_method に結び付き、作り直すと失効する（release_status=stale）。各項目に flow_version, ring_version, outline_method, approved_by, approved_on が必須。",
+ "approvals": {}
+}

@@ -775,21 +775,39 @@ python scripts/make_images.py   # OGP画像を作り直す
 
 ### 配信するファイル（版管理の対象）
 
-`docs/` は GitHub Pages がそのまま配信する。追跡する（＝配信する）のは次の3種類だけ。
-**品質判定（下記）に合格したダムだけ**が載る。ダム数はその時の合格数で決まるので、件数を固定で書かない。
+`docs/` は GitHub Pages がそのまま配信する。`docs/watershed/` に置くのは
+**公開可能なダム**の次の3種類だけで、`scripts/ws_pipeline.py` の `assemble` が書く。
+
+**公開可能 = 個別承認済み・QA pass・輪郭方式 exact・承認時の格子版と輪の版が今と一致。**
+QA の pass、評価区分 G1〜G4、P0 の合格は、どれも承認ではない。承認が0件なら、索引は `dams: []`、
+ポリゴンは空になり、画面には入口ボタンも出典も出ない（2026-09-24 時点は0基）。
 
 | パス | 内容 | 件数 |
 |---|---|---|
-| `docs/watershed/index.json` | 配信するダムの索引。全体の版 `version`、ポリゴンの期待版 `basins_version`、ダムごとの格子の期待版 `v` を持つ | 1 |
-| `docs/watershed/basins.geojson` | 配信するダムの集水域ポリゴン | 1 |
-| `docs/watershed/flow/<dam_id>.json` | D8 流向格子（1基 118〜300KB） | 合格した基数 |
+| `docs/watershed/index.json` | 公開可能なダムの索引。全体の版 `version`、ポリゴンの期待版 `basins_version`、ダムごとの格子の期待版 `v`、`release_schema`、各ダムの `release_status`・`qa_status`・`outline_method` を持つ | 1 |
+| `docs/watershed/basins.geojson` | 公開可能なダムの集水域ポリゴン | 1 |
+| `docs/watershed/flow/<dam_id>.json` | D8 流向格子（1基 118〜300KB）。`data/watershed/staged/flow/` と同じバイト列 | 公開可能な基数 |
+
+QA に合格した**公開候補**は `data/watershed/staged/` に置く（追跡する・公開しない）。
+`staged/flow/<dam_id>.json`（格子）、`staged/index.json`・`staged/basins.geojson`（候補全基の索引と輪。
+`release_status` は `approved` / `stale`（承認後に作り直した）/ `unapproved` / `not_exact`（輪郭が exact でない）。
+legacy の輪は承認を書いても `not_exact` のままで、公開されない）。
+
+公開承認は `data/watershed/release.json`（`schema: ws-release/1`）に人が1基ずつ書く。各項目に
+`flow_version`・`ring_version`（`ws_pipeline.ring_version(ring)`）・`outline_method`（`exact`）・
+`approved_by`・`approved_on` が必須。作り直すと版が変わり、その承認は失効する。
+
+`docs/watershed/` にそれ以外のファイルがあれば、`assemble` が取り除く。公開候補の格子と同じ内容なら
+消すだけ（`staged/flow/` に残っている）、それ以外は `data/watershed/staged/quarantine/` へ移す（消さない）。
+`app.js` の `releasedDams` も同じ条件を画面側で確かめる（二重確認）。
 
 状態（`data/watershed/dams/<dam_id>.json`）と判定レポート（`data/watershed/qa_report.json`）は
-**配信しない**（`docs/` の外）。追跡はする。各ダムの「今配信している版」と「直近の判定」を持つ。
+**配信しない**（`docs/` の外）。追跡はする。状態の `published` は互換のためのキー名で、意味は
+「QA に合格した公開候補の版」。
 
 追跡しないもの（`.gitignore`）: `cache/`（生の標高タイル）、`data/basins/*.log`、
-`docs/watershed/index.local.json`、`docs/watershed/flow/_local/`（QAで保留した新しい結果の退避先）、
-`docs/watershed/_check/`（点検用の画面と画像）。
+`data/watershed/staged/index.local.json`、`data/watershed/staged/held/`（QAで保留した新しい結果の退避先）、
+`data/watershed/staged/quarantine/`、`data/watershed/_check/`（点検用の画像）。
 
 ### パイプラインと品質ゲート
 
@@ -807,12 +825,12 @@ python -m unittest discover -s tests -v
 | 仕組み | 内容 | コード |
 |---|---|---|
 | **1基単位の差分** | 対象のダムだけを作り直す。旧実装は `--id` で実行すると索引とポリゴンが対象だけになり、他のダムが消えて版がずれた。今は状態（`data/watershed/dams/`）から索引を組み直すので、他のダムは1バイトも変わらない | `ws_pipeline.py` |
-| **QA不合格は配信しない** | 判定が `hold` のダムの新しい結果は `flow/_local/` に退避し、配信しない。すでに配信中の版があればそれを残す。旧実装の3閾値（面積誤差・輪と雨の面積ずれ・雨が届かない）は「警告のみ」だったが、いずれも `block` にした | `watershed_qa.py` |
+| **QA不合格は公開候補にしない** | 判定が `hold` のダムの新しい結果は `data/watershed/staged/held/` に退避し、公開候補にしない。すでに候補の版があればそれを残す。旧実装の3閾値（面積誤差・輪と雨の面積ずれ・雨が届かない）は「警告のみ」だったが、いずれも `block` にした | `watershed_qa.py` |
 | **描画後の輪 × 雨マスクの空間QA** | 配信する文字列（`mask`/`d8`）を読み戻し、**ブラウザが実際に描く輪**（`smoothRing` の移植）と重ねて、IoU・輪の外にはみ出す雨・雨の降らない輪の内側・雨の経路が輪の外へ出る割合・輪の自己交差・雨マスクの分断を測る。面積が同じでも位置がずれていれば止まる。**雨を輪の中へ切り落として見かけだけ合わせる処理は入れていない** | `watershed_qa.py`, `ws_common.py` |
 | **通信障害と本当のDEM欠損の分離** | 旧実装は `except Exception: 空ファイルを保存`。通信障害の穴が「海」として固まり、以後取りに行かなかった。今は 404 だけを `*.missing`（欠損確認済み）として保存し、5xx/429/タイムアウト/切断/壊れた本文/200で空は再試行のうえ `DemFetchError`（何も保存しない・そのダムは何も書かない）。旧実装の空ファイルは `legacy_empty`（由来不明）として区別し、集水域に接していれば止める。`--revalidate-empty` で地理院に確認できる | `dem_tiles.py` |
 | **内容変更を確実に識別する版** | 格子ファイルの版＝格子レコード全体の内容ハッシュ、ポリゴンの版＝全ポリゴンの内容ハッシュ、索引の版＝索引全体のハッシュ（日付を除く）。旧実装は `d8`・`mask`・面積だけを入力にしており、出口・格子の位置・ポリゴンが変わっても版が変わらなかった。索引が部品ごとの期待版（`v`・`basins_version`）を持ち、`app.js` は部品ごとに照合する。1基作り直すと、そのダムの格子と索引とポリゴンの版だけが変わる | `ws_common.py`, `ws_pipeline.py` |
 | **名前ではなく dam_id** | 便覧の流域面積（`dam_basin_spec.csv` は `dam_id` 列を持つ）・川の防災情報・保留（`EXCLUDED`）・状態ファイルをすべて `dam_id` で引く。`dam_id` が空・重複・`dams.json` に無い行は読み込みを中止する。`--id` の打ち間違いは黙って捨てず中止する（`--only` の部分一致は同名を拾うので、id を確認すること） | `build_basins.py` |
-| **失敗しても既存を壊さない** | 生成に失敗した基は何も書かない（`build_basins` も失敗した基の既存結果を残す）。書き出しは一時ファイル経由。読めない既存出力は上書きせず中止。改変された格子・状態の無い配信ファイルがあれば組み立てを中止（`--prune-orphans` で明示的に消す）。索引は最後に書く。終了コード: 0=成功（保留は結果であって失敗ではない）/ 1=生成失敗あり / 2=引数 / 3=組み立て中止 | 全体 |
+| **失敗しても既存を壊さない** | 生成に失敗した基は何も書かない（`build_basins` も失敗した基の既存結果を残す）。書き出しは一時ファイル経由。読めない既存出力は上書きせず中止。改変された格子・状態の無い候補の格子があれば組み立てを中止（`--prune-orphans` で `staged/quarantine/` へ移す）。索引は最後に書く。終了コード: 0=成功（保留は結果であって失敗ではない）/ 1=生成失敗あり / 2=引数 / 3=組み立て中止 | 全体 |
 
 判定の閾値は `watershed_qa.THRESHOLDS` に集約してある。`block`（配信しない）と `warn`（配信するが理由を残す）を分ける。
 
@@ -890,13 +908,14 @@ python scripts/ws_eval_summary.py --report eval.json --basins-dir <同上> --obs
 ### 点検用の画面（ローカル専用）
 
 ```bash
-cd docs && python -m http.server 8777
+cd data/watershed && python -m http.server 8777
 ```
-→ `http://127.0.0.1:8777/watershed/_check/`
+→ `http://127.0.0.1:8777/_check/`
 
 生成版・公開候補/一時保留の別・輪と雨のずれ・未到達率・面積誤差・水面の大きさを一覧し、
 境川・臼中・有峰・白岩川については水面と集水域を重ねた画像を並べる。
-`.gitignore` 対象なので公開されない。
+`docs/` の外かつ `.gitignore` 対象なので公開されない（以前は `docs/watershed/_check/` に置いていた。
+残っていれば `assemble` が `staged/quarantine/` へ移す）。
 
 `scripts/update_and_publish.py` と CI は commit 対象を許可リストで固定しており、
 `docs/watershed/` は含まれない。**観測値の日次更新に巻き込まれることはなく、
@@ -1017,7 +1036,7 @@ python scripts/build_flowgrids.py --id toyama-usunaka # 流向格子＋QA判定�
 になって水面を検出できず、便覧の 13.5km² なら z14（7.7m/セル）で検出できた。
 目安には便覧の値を優先する。
 
-データは `docs/watershed/flow/_local/` と `index.local.json` に残してある（`.gitignore` 対象）。
+データは `data/watershed/staged/held/` と `data/watershed/staged/index.local.json` に残してある（`.gitignore` 対象）。
 原因が分かれば `EXCLUDED` から外して再生成するだけで公開対象に戻せる。
 
 ### 輪と雨を同じ解析結果から作る

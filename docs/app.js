@@ -1719,10 +1719,28 @@
 
     // ---------------------------------------- パネル内の入口
 
+    /**
+     * 画面に出してよいダムだけを返す。公開索引には公開可能なダムしか載らない
+     * （scripts/ws_pipeline.assemble）が、画面でも同じ条件をもう一度確かめる。
+     * 条件: release_status "approved"（人の個別承認が今の格子・輪の版と一致）・qa_status "pass"・
+     * outline_method "exact"。承認の仕組みを持たない索引（旧形式）では1基も出さない。
+     */
+    function releasedDams(idx) {
+      var out = [], i, d;
+      if (!idx || idx.release_schema !== "ws-release/1" || !idx.dams) return out;
+      for (i = 0; i < idx.dams.length; i++) {
+        d = idx.dams[i];
+        if (d && d.id && d.release_status === "approved" && d.qa_status === "pass" &&
+            d.outline_method === "exact") out.push(d);
+      }
+      return out;
+    }
+
     api.init = function (idx) {
-      if (!idx || !idx.dams || !idx.dams.length) return;   // データなし = 機能を出さない
+      var shown = releasedDams(idx);
+      if (!shown.length) return;   // データなし・承認なし = 機能を出さない
       index = {};
-      idx.dams.forEach(function (d) { index[d.id] = d; });
+      shown.forEach(function (d) { index[d.id] = d; });
       version = idx.version || null;
       basinsVersion = idx.basins_version || null;
       api.enabled = true;
@@ -1972,8 +1990,9 @@
 
       loadBasins().then(function () {
         // 内側にいる集水域を面積の小さい順に。次に近いダムを予備で足す
+        // 輪のファイルには未承認のダムも入っている。出してよいのは index にあるものだけ
         var inside = basins.features.filter(function (f) {
-          return inRing(lng, lat, f.geometry.coordinates[0]);
+          return index[f.properties.id] && inRing(lng, lat, f.geometry.coordinates[0]);
         }).sort(function (a, b) {
           return a.properties.computed_area_km2 - b.properties.computed_area_km2;
         }).map(function (f) { return f.properties.id; });

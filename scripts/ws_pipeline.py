@@ -10,15 +10,30 @@ build_flowgrids.py（CLI）から使う。標高タイルの取得は build_basi
 1. **1基単位の差分**: 対象のダムだけを作り直し、他のダムの配信物・状態には触れない。
    旧実装は対象だけで索引とポリゴンを作り直したため、`--id X` で実行すると他のダムが
    索引から消え、版のずれで画面が「再読み込みしてください」になった。
-2. **QA不合格は配信しない**: watershed_qa.evaluate が block を返した新しい結果は
-   docs/watershed/flow/ に置かない（`_local/` へ退避）。既に配信中の版があればそれを残す。
+2. **QA不合格は候補にしない**: watershed_qa.evaluate が block を返した新しい結果は
+   公開候補に入れない（`data/watershed/staged/held/` へ退避）。既に候補の版があればそれを残す。
 3. **版は内容から**: 格子ファイルの版 = 格子レコード全体のハッシュ、ポリゴンの版 = 全
    ポリゴンのハッシュ、索引の版 = 索引全体のハッシュ。索引が各部の期待版を持つ。
 4. **ID で処理**: 便覧・川の防災情報・保留・状態ファイルはすべて dam_id で引く。
 5. **失敗しても壊さない**: 生成に失敗したダムは何も書かない。書き出しは一時ファイル経由。
+6. **公開の境界**: docs/ は GitHub Pages がそのまま配信する。docs/watershed/ に置くのは
+   **公開可能なダム**（個別承認・QA pass・輪郭方式 exact・承認時の格子版と輪の版が一致）の
+   索引・輪・格子だけ。QA 合格の公開候補は data/watershed/staged/ に置き、公開しない。
+   docs/watershed/ に想定外のファイルがあれば、消さずに staged/quarantine/ へ移す。
+
+置き場所
+  data/watershed/dams/<dam_id>.json       状態（下記）
+  data/watershed/staged/flow/<id>.json    公開候補（QA 合格）の格子
+  data/watershed/staged/index.json        公開候補全基の索引（release_status 付き・公開しない）
+  data/watershed/staged/basins.geojson    公開候補全基の輪（公開しない）
+  data/watershed/staged/held/<id>.json    QA で保留した新しい結果（追跡しない）
+  data/watershed/staged/quarantine/       docs/watershed/ から移した想定外のファイル（追跡しない）
+  data/watershed/release.json             公開承認（人が1基ずつ書く）
+  docs/watershed/{index.json, basins.geojson, flow/<id>.json}   公開可能なダムの分だけ
 
 状態ファイル data/watershed/dams/<dam_id>.json
-  published: 今配信している版（索引の項目・輪・格子の版・その時のQA）。無ければ null
+  published: QA に合格した公開候補の版（索引の項目・輪・輪郭方式・格子の版・その時のQA）。
+             無ければ null。キー名は互換のため。**公開してよいかは release_status が決める**
   latest   : 直近に生成した結果とQA判定（hold でも残す）
 """
 
@@ -63,6 +78,17 @@ EXCLUDED: dict[str, str] = {
         "（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。"
         "どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。",
 }
+
+# 公開承認（人が1基ずつ記録する）。QA の pass や評価区分 G1〜G4 は承認ではない。
+# 承認は「その時の格子・輪・輪の作り方」に結び付ける。作り直せば版が変わり、承認は失効する。
+# 公開できる輪郭方式は exact だけ（legacy は輪郭セルを角度順に並べた近似で、細格子の集水域と
+# 3〜7% ずれる）。legacy の候補は承認を書いても公開しない（release_status = not_exact）。
+# 画面（docs/app.js の releasedDams）も、release_schema が一致し、release_status が approved・
+# qa_status が pass・outline_method が exact のダムだけを出す（公開索引の二重確認）。
+RELEASE_SCHEMA = "ws-release/1"
+RELEASABLE_OUTLINE = "exact"
+RELEASE_FILE = Path("data") / "watershed" / "release.json"
+RELEASE_KEYS = ("flow_version", "ring_version", "outline_method", "approved_by", "approved_on")
 
 HEADER_SOURCE = ("国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）を"
                  "DAM TABI が加工して作成")
@@ -246,13 +272,18 @@ def judge(gen: dict, ring, dam_id: str, thresholds: dict | None = None) -> dict:
 # ---------------------------------------------------------------- 状態と配信物
 
 class Store:
-    """docs/watershed と data/watershed/dams の読み書き。1ダムずつアトミックに書く。"""
+    """状態・公開候補（data/watershed/）と公開物（docs/watershed/）の読み書き。1ダムずつアトミックに書く。"""
+
+    PUBLIC_FILES = ("index.json", "basins.geojson")   # docs/watershed/ 直下に置いてよいもの（＋flow/<id>.json）
 
     def __init__(self, root: Path = ROOT):
         self.root = Path(root)
-        self.out = self.root / "docs" / "watershed"
-        self.flow = self.out / "flow"
-        self.local = self.flow / "_local"
+        self.out = self.root / "docs" / "watershed"            # 公開（GitHub Pages が配信する）
+        self.out_flow = self.out / "flow"
+        self.stage = self.root / "data" / "watershed" / "staged"   # 公開候補（公開しない）
+        self.flow = self.stage / "flow"
+        self.local = self.stage / "held"
+        self.quarantine = self.stage / "quarantine"
         self.state = self.root / "data" / "watershed" / "dams"
 
     # ---- 状態
@@ -278,7 +309,7 @@ class Store:
     def write_state(self, dam_id: str, st: dict) -> None:
         dem_tiles.atomic_write_bytes(self.state_path(dam_id), self._dump(st, indent=1).encode("utf-8"))
 
-    # ---- 格子
+    # ---- 格子（published=True は公開候補の格子、False は QA 保留の退避。どちらも公開しない）
     def flow_path(self, dam_id: str, published: bool) -> Path:
         return (self.flow if published else self.local) / f"{dam_id}.json"
 
@@ -290,12 +321,58 @@ class Store:
         p = self.flow_path(dam_id, published)
         return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
 
+    # ---- 公開承認
+    def load_release(self) -> dict:
+        """承認記録（dam_id → 承認）。ファイルが無ければ「承認なし」。形が違えば PipelineError。"""
+        p = self.root / RELEASE_FILE
+        if not p.exists():
+            return {}
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if doc.get("schema") != RELEASE_SCHEMA:
+            raise PipelineError(f"{RELEASE_FILE}: schema は {RELEASE_SCHEMA!r}: {doc.get('schema')!r}")
+        approvals = doc.get("approvals")
+        if not isinstance(approvals, dict):
+            raise PipelineError(f"{RELEASE_FILE}: approvals は dam_id をキーにした object")
+        for did, a in approvals.items():
+            missing = [k for k in RELEASE_KEYS if not (isinstance(a, dict) and a.get(k))]
+            if missing:
+                raise PipelineError(f"{RELEASE_FILE}: {did} に {', '.join(missing)} がありません")
+        return approvals
 
-def apply_result(store: Store, dam: dict, judged: dict, gen: dict, ring, feature_props: dict) -> dict:
+
+def ring_version(ring) -> str:
+    """輪（経緯度の列）の内容ハッシュ。承認を輪の形に結び付けるために使う。"""
+    return wc.content_version({"ring": ring}, exclude=())
+
+
+def release_status(pub: dict, approval: dict | None) -> str:
+    """公開候補1基の公開可否。approved だけが公開可能。
+
+    not_exact : 輪郭方式が exact でない（legacy・不明）。承認があっても公開しない
+    unapproved: 承認の記録が無い
+    stale     : 承認後に作り直した（格子版・輪の版・輪郭方式のどれかが承認時と違う）
+    approved  : 承認が今の格子・輪・輪郭方式（exact）と一致
+    qa は pass が前提（公開候補は QA 合格の版だけ）。
+    """
+    if pub.get("outline_method") != RELEASABLE_OUTLINE:
+        return "not_exact"
+    if not approval:
+        return "unapproved"
+    same = (approval["flow_version"] == pub["flow_version"]
+            and approval["ring_version"] == ring_version(pub["ring"])
+            and approval["outline_method"] == RELEASABLE_OUTLINE)
+    return "approved" if same else "stale"
+
+
+RELEASE_STATUSES = ("approved", "stale", "unapproved", "not_exact")
+
+
+def apply_result(store: Store, dam: dict, judged: dict, gen: dict, ring, feature_props: dict,
+                 outline_method: str | None = None) -> dict:
     """1基分の結果を書き出す。返り値は報告用の要約。**他のダムには触れない。**
 
-    pass : flow/<id>.json を置き換え、published を更新する
-    hold : 新しい結果は flow/_local/<id>.json へ。published はそのまま（あれば残す）
+    pass : 公開候補の staged/flow/<id>.json を置き換え、published を更新する（公開はしない）
+    hold : 新しい結果は staged/held/<id>.json へ。published はそのまま（あれば残す）
     """
     did = dam["id"]
     now = time.strftime("%Y-%m-%dT%H:%M:%S+09:00")
@@ -319,6 +396,8 @@ def apply_result(store: Store, dam: dict, judged: dict, gen: dict, ring, feature
             "flow_version": rec["version"],
             "index": gen["index"],
             "ring": ring,
+            # build_basins の --outline（legacy / exact）。不明なら null のまま（承認できない）
+            "outline_method": outline_method,
             "feature_properties": feature_props,
             "qa": {"warn_codes": [r["code"] for r in gate["reasons"] if r["severity"] == wq.WARN],
                    "spatial": judged["spatial"]},
@@ -353,42 +432,9 @@ def _routing_reaches(fd, goal_cells, i, j) -> bool:
     return False
 
 
-def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: bool = False) -> dict:
-    """状態（published）から、配信する索引・ポリゴンを作り直す。標高データは使わない。
-
-    - 配信する = 状態の published が非 null のダム。
-    - flow/<id>.json の版が published.flow_version と一致しなければ PipelineError（書かない）。
-    - 状態の無い flow ファイル（旧実装の配信物）は孤児として報告する。prune_orphans なら消す。
-    - 内容が変わらなければ書き換えない（無関係な差分と版の変動を出さない）。
-    """
-    order = {d["id"]: i for i, d in enumerate(dams)}
-    states = store.all_states()
-    pub = {i: s["published"] for i, s in states.items() if s.get("published")}
-    unknown = [i for i in states if i not in order]
-    if unknown:
-        raise PipelineError("dams.json に無い dam_id の状態があります: " + ", ".join(unknown))
-    ids = sorted(pub, key=lambda i: order[i])
-
-    # 格子ファイルの整合
-    flows = {}
-    for i in ids:
-        rec = store.read_flow(i, published=True)
-        if rec is None:
-            raise PipelineError(f"{i}: 配信するはずの flow/{i}.json がありません")
-        if rec.get("version") != pub[i]["flow_version"] or wc.content_version(rec) != rec.get("version"):
-            raise PipelineError(f"{i}: flow/{i}.json の版が状態と一致しません（内容が書き換わっている）")
-        flows[i] = rec
-    on_disk = sorted(p.stem for p in store.flow.glob("*.json")) if store.flow.exists() else []
-    orphans = [i for i in on_disk if i not in pub]
-    if orphans and prune_orphans and write:
-        for i in orphans:
-            store.flow_path(i, True).unlink()
-    elif orphans and write:
-        # 配信物なのに状態が無い（または published でない）。黙って残すと索引と食い違う
-        raise PipelineError("状態の無い（または配信対象でない）flow ファイルがあります: "
-                            + ", ".join(orphans) + "  → --prune-orphans で消せます")
-
-    # 下流の案内: 「包含」は候補。実際に流向格子をたどって出口に届いたものだけ確定
+def _index_records(ids, pub, flows, approvals):
+    """ids のダムの索引レコードとポリゴンを作る。下流の案内は ids の中だけで探す
+    （公開索引が、公開していないダムを下流として名指ししないように）。"""
     areas = {i: pub[i]["index"]["fine_area_km2"] for i in ids}
     rings = {i: pub[i]["ring"] for i in ids}
     routing = {}
@@ -399,6 +445,7 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
     dams_out = []
     for i in ids:
         rec = dict(pub[i]["index"])
+        # 下流の案内: 「包含」は候補。実際に流向格子をたどって出口に届いたものだけ確定
         cands = [k for _, k in sorted((areas[k], k) for k in ids
                                       if k != i and wc.point_in_poly(rec["lon"], rec["lat"], rings[k]))]
         ok, un = [], []
@@ -416,54 +463,173 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
         rec["unreached_pct"] = round(pub[i]["qa"]["spatial"]["unreached_pct"], 1)
         rec["v"] = pub[i]["flow_version"]
         rec["file"] = f"flow/{i}.json?v={pub[i]['flow_version']}"
+        # 公開候補は QA に合格した版だけなので qa_status は常に pass。
+        # 公開してよいかは release_status が決める（QA 合格・評価区分とは別）。
+        rec["qa_status"] = "pass"
+        rec["outline_method"] = pub[i].get("outline_method")
+        rec["release_status"] = release_status(pub[i], approvals.get(i))
         dams_out.append(rec)
-
-    # ポリゴン: 配信するダムの輪だけ。版は features 全体の内容ハッシュ
+    # ポリゴン: ids の輪だけ
     features = [{"type": "Feature", "properties": pub[i]["feature_properties"],
                  "geometry": {"type": "Polygon", "coordinates": [pub[i]["ring"]]}} for i in ids]
-    basins_version = wc.content_version({"features": features}, exclude=())
+    return dams_out, features
 
-    excluded = {k: v for k, v in EXCLUDED.items() if k in states}
+
+def _index_doc(dams_out, features, excluded):
+    """索引の本体。ポリゴンの版は features 全体の内容ハッシュ、索引の版は索引全体の内容ハッシュ。"""
+    basins_version = wc.content_version({"features": features}, exclude=())
+    methods = sorted({str(d["outline_method"]) for d in dams_out})
     index = {
         "version": None, "generated": time.strftime("%Y-%m-%d"),
         "source": HEADER_SOURCE, "note": HEADER_NOTE,
         "pipeline": PIPELINE, "basins_version": basins_version,
+        "release_schema": RELEASE_SCHEMA,
+        # 全基が同じ作り方なら その名前、混在なら mixed（各ダムの outline_method を見る）
+        "outline_method": (dams_out[0]["outline_method"] if len(methods) == 1 else "mixed") if dams_out else None,
         "excluded": excluded, "dams": dams_out,
     }
     index["version"] = wc.content_version(index, exclude=("version", "generated"))
+    return index, basins_version
 
-    plan = {"published_ids": ids, "orphans": orphans, "index_version": index["version"],
-            "basins_version": basins_version, "written": []}
-    if not write:
-        plan["index"], plan["features"] = index, features
-        return plan
 
-    def unchanged(path: Path, key: str, value: str) -> bool:
-        if not path.exists():
-            return False
+def _write_if_changed(path: Path, data: bytes) -> bool:
+    if path.exists() and path.read_bytes() == data:
+        return False
+    dem_tiles.atomic_write_bytes(path, data)
+    return True
+
+
+def _write_index_pair(dirpath: Path, index: dict, features: list, basins_version: str) -> list[str]:
+    """索引とポリゴンを書く。版が同じなら書き換えない（generated の日付だけの差分を出さない）。"""
+    def unchanged(path: Path, value: str) -> bool:
         try:
-            return json.loads(path.read_text(encoding="utf-8")).get(key) == value
+            return path.exists() and json.loads(path.read_text(encoding="utf-8")).get("version") == value
         except Exception:
             return False
-
-    bp = store.out / "basins.geojson"
-    if not unchanged(bp, "version", basins_version):
+    written = []
+    bp = dirpath / "basins.geojson"
+    if not unchanged(bp, basins_version):
         gj = {"type": "FeatureCollection", "features": features, "version": basins_version}
         dem_tiles.atomic_write_bytes(bp, (json.dumps(gj, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8"))
-        plan["written"].append("basins.geojson")
-    ip = store.out / "index.json"
-    if not unchanged(ip, "version", index["version"]):
+        written.append("basins.geojson")
+    ip = dirpath / "index.json"
+    if not unchanged(ip, index["version"]):
         dem_tiles.atomic_write_bytes(ip, (json.dumps(index, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
-        plan["written"].append("index.json")
+        written.append("index.json")
+    return written
 
-    # ローカル評価用（配信しない）: 直近の判定も含めて全ダム
-    local = dict(index, dams=[])
+
+def _quarantine(store: Store, src: Path, rel: str) -> str:
+    """公開してはいけないファイルを、消さずに staged/quarantine/ へ移す。移した先（root 相対）を返す。"""
+    dst = store.quarantine / rel
+    if dst.exists() and dst.read_bytes() != src.read_bytes():
+        dst = dst.with_name(f"{dst.stem}.{time.strftime('%Y%m%d%H%M%S')}{dst.suffix}")
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    if dst.exists():
+        src.unlink()                       # 同じ内容が既に隔離済み
+    else:
+        src.replace(dst)
+    return dst.relative_to(store.root).as_posix()
+
+
+def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: bool = False) -> dict:
+    """状態から、公開候補の索引（staged/）と公開物（docs/watershed/）を作り直す。標高データは使わない。
+
+    - 公開候補 = 状態の published が非 null のダム（QA 合格）。staged/ に索引・輪を書く。
+    - 公開可能 = 公開候補のうち release_status が approved のもの。docs/watershed/ には
+      その索引・輪・格子（staged/flow から複製）だけを書く。0基なら空の索引と輪を書く。
+    - docs/watershed/ にそれ以外のファイルがあれば取り除く。公開候補の格子と同じ内容なら
+      消すだけ（staged/flow に残っている）、それ以外は staged/quarantine/ へ移す（消さない）。
+    - staged/flow/<id>.json の版が published.flow_version と一致しなければ PipelineError（書かない）。
+    - 状態の無い staged/flow ファイルは孤児として止める。prune_orphans なら quarantine へ移す。
+    - 内容が変わらなければ書き換えない（無関係な差分と版の変動を出さない）。
+    """
+    order = {d["id"]: i for i, d in enumerate(dams)}
+    states = store.all_states()
+    pub = {i: s["published"] for i, s in states.items() if s.get("published")}
+    unknown = [i for i in states if i not in order]
+    if unknown:
+        raise PipelineError("dams.json に無い dam_id の状態があります: " + ", ".join(unknown))
+    ids = sorted(pub, key=lambda i: order[i])
+    approvals = store.load_release()
+    stray = [i for i in approvals if i not in order]
+    if stray:
+        raise PipelineError(f"{RELEASE_FILE} に dams.json に無い dam_id があります: " + ", ".join(stray))
+
+    # 公開候補の格子ファイルの整合
+    flows, flow_bytes = {}, {}
+    for i in ids:
+        p = store.flow_path(i, published=True)
+        if not p.exists():
+            raise PipelineError(f"{i}: 公開候補の格子 {p.relative_to(store.root).as_posix()} がありません")
+        flow_bytes[i] = p.read_bytes()
+        rec = json.loads(flow_bytes[i].decode("utf-8"))
+        if rec.get("version") != pub[i]["flow_version"] or wc.content_version(rec) != rec.get("version"):
+            raise PipelineError(f"{i}: 公開候補の格子の版が状態と一致しません（内容が書き換わっている）")
+        flows[i] = rec
+    on_disk = sorted(p.stem for p in store.flow.glob("*.json")) if store.flow.exists() else []
+    orphans = [i for i in on_disk if i not in pub]
+    if orphans and write and not prune_orphans:
+        # 候補の格子なのに状態が無い（または published でない）。黙って残すと索引と食い違う
+        raise PipelineError("状態の無い（または公開候補でない）格子ファイルがあります: "
+                            + ", ".join(orphans) + "  → --prune-orphans で staged/quarantine/ へ移せます")
+
+    cand_dams, cand_features = _index_records(ids, pub, flows, approvals)
+    cand_index, cand_bv = _index_doc(cand_dams, cand_features,
+                                     {k: v for k, v in EXCLUDED.items() if k in states})
+    status = {d["id"]: d["release_status"] for d in cand_dams}
+    public_ids = [i for i in ids if status[i] == "approved"]
+    pub_dams, pub_features = _index_records(public_ids, pub, flows, approvals)
+    # 公開索引には、公開しないダムの話（保留の理由など）を載せない
+    pub_index, pub_bv = _index_doc(pub_dams, pub_features, {})
+
+    release = {s: [i for i in ids if status[i] == s] for s in RELEASE_STATUSES}
+    plan = {"published_ids": ids, "public_ids": public_ids, "orphans": orphans,
+            "index_version": pub_index["version"], "basins_version": pub_bv,
+            "candidate_index_version": cand_index["version"], "candidate_basins_version": cand_bv,
+            "release": release, "approvals_not_candidates": [i for i in approvals if i not in pub],
+            "written": [], "staged_written": [], "removed": [], "quarantined": []}
+    if not write:
+        plan["index"], plan["features"] = pub_index, pub_features
+        plan["candidate_index"], plan["candidate_features"] = cand_index, cand_features
+        return plan
+
+    for i in orphans:
+        plan["quarantined"].append(_quarantine(store, store.flow_path(i, True), f"staged_flow/{i}.json"))
+
+    # 1) 公開候補（staged/）
+    plan["staged_written"] = _write_index_pair(store.stage, cand_index, cand_features, cand_bv)
+
+    # 2) 公開物（docs/watershed/）。格子 → 輪 → 索引の順に書き、最後に余計なものを取り除く
+    for i in public_ids:
+        if _write_if_changed(store.out_flow / f"{i}.json", flow_bytes[i]):
+            plan["written"].append(f"flow/{i}.json")
+    plan["written"] += _write_index_pair(store.out, pub_index, pub_features, pub_bv)
+    allowed = set(Store.PUBLIC_FILES) | {f"flow/{i}.json" for i in public_ids}
+    for p in sorted(store.out.rglob("*"), key=lambda q: len(q.parts), reverse=True):
+        rel = p.relative_to(store.out).as_posix()
+        if p.is_dir():
+            if not any(p.iterdir()):
+                p.rmdir()                  # 空になった flow/ などは残さない
+            continue
+        if rel in allowed:
+            continue
+        stem = p.stem if rel.startswith("flow/") and rel.count("/") == 1 else None
+        if stem in flow_bytes and p.read_bytes() == flow_bytes[stem]:
+            p.unlink()                     # 公開候補と同じ内容。staged/flow に残っている
+            plan["removed"].append(rel)
+        else:
+            plan["quarantined"].append(_quarantine(store, p, rel))
+
+    # 3) ローカル評価用（公開しない）: 直近の判定も含めて全ダム
+    local = dict(cand_index, dams=[])
     for i, s in sorted(states.items(), key=lambda kv: order[kv[0]]):
         lat = s.get("latest") or {}
-        entry = {"id": i, "name": s.get("name"), "published": bool(s.get("published")),
+        entry = {"id": i, "name": s.get("name"), "candidate": bool(s.get("published")),
                  "latest_status": lat.get("status"), "latest_flow_version": lat.get("flow_version"),
-                 "block_codes": lat.get("block_codes"), "excluded_reason": EXCLUDED.get(i)}
+                 "block_codes": lat.get("block_codes"), "excluded_reason": EXCLUDED.get(i),
+                 "release_status": status.get(i), "approval_recorded": i in approvals}
         local["dams"].append(entry)
-    dem_tiles.atomic_write_bytes(store.out / "index.local.json",
+    dem_tiles.atomic_write_bytes(store.stage / "index.local.json",
                                  (json.dumps(local, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
     return plan

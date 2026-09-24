@@ -4,7 +4,8 @@
 
 build_basins.py が作った集水域ポリゴン（data/basins/）と標高タイルから、ダムごとに
 D8 流向の格子を作り、品質判定（scripts/watershed_qa.py）に通し、合格したものだけを
-docs/watershed/ に配信する。ブラウザ側は
+公開候補（data/watershed/staged/）にする。docs/watershed/ に出すのは、そのうち人が個別に
+承認した（data/watershed/release.json）輪郭方式 exact のダムだけ（ws_pipeline.assemble）。ブラウザ側は
 
   ・任意の地点から雨滴の経路をトレースする
   ・集水域内に雨を降らせて流れを描く
@@ -24,7 +25,7 @@ docs/watershed/ に配信する。ブラウザ側は
 失敗しても既存の配信物を壊さない
 --------------------------------
 - 標高タイルを取れない（通信障害）→ そのダムは何も書かない。既存はそのまま。exit 1。
-- QA 不合格（hold）→ 新しい結果は配信しない。配信中の版があれば残す。exit 0（結果であって失敗ではない）。
+- QA 不合格（hold）→ 新しい結果は公開候補にしない。候補の版があれば残す。exit 0（結果であって失敗ではない）。
 - 書き出しは一時ファイル経由。索引は最後に書く。
 
 国土地理院の標高データから作った派生物であり、配信の可否は inquiry/ の回答に基づく。
@@ -81,6 +82,18 @@ def report_row(dam_id, name, latest, published):
     }
 
 
+def release_line(plan) -> str:
+    """公開の内訳。QA 合格（公開候補）でも、承認・exact・版の一致がそろわないダムは docs に出さない。"""
+    r = plan["release"]
+    out = (f"公開 {len(plan['public_ids'])} 基（docs/watershed/） / 公開候補 {len(plan['published_ids'])} 基"
+           f"（data/watershed/staged/）: 承認済み {len(r['approved'])} / 承認後に作り直し {len(r['stale'])} / "
+           f"未承認 {len(r['unapproved'])} / 輪郭が exact でない {len(r['not_exact'])}")
+    if plan.get("removed") or plan.get("quarantined"):
+        out += (f"\n公開側から取り除いた: {len(plan.get('removed', []))} 件（候補と同一） / "
+                f"隔離した: {', '.join(plan.get('quarantined', [])) or 'なし'}")
+    return out
+
+
 def print_table(rows):
     nan = float("nan")
     print(f"{'dam_id':<27}{'判定':<6}{'IoU':>6}{'輪外%':>7}{'輪のみ%':>8}{'経路外%':>8}{'未到達%':>8}  理由")
@@ -126,10 +139,10 @@ def main(argv=None) -> int:
     ap.add_argument("--assemble-only", action="store_true",
                     help="標高を使わず、状態から索引・ポリゴンを組み直す")
     ap.add_argument("--prune-orphans", action="store_true",
-                    help="状態の無い配信ファイル（旧実装の成果）を削除する。既定は止めて報告")
+                    help="状態の無い公開候補の格子を staged/quarantine/ へ移す。既定は止めて報告")
     ap.add_argument("--basins-dir", type=Path, default=ROOT / "data" / "basins",
                     help="build_basins.py の出力先（既定 data/basins）。別方式の輪を評価するときに使う")
-    ap.add_argument("--unpublish", help="dam_id を配信から外す（格子ファイルも削除。状態には残る）")
+    ap.add_argument("--unpublish", help="dam_id を公開候補から外す（候補の格子も削除。状態には残る。公開物からも消える）")
     bb.add_source_args(ap)
     args = ap.parse_args(argv)
 
@@ -144,7 +157,7 @@ def main(argv=None) -> int:
             return 2
         st = store.load_state(args.unpublish)
         if not st or not st.get("published"):
-            print(f"{args.unpublish} は配信していません。")
+            print(f"{args.unpublish} は公開候補ではありません。")
             return 0
         st["published"] = None
         store.write_state(args.unpublish, st)
@@ -152,7 +165,7 @@ def main(argv=None) -> int:
         if fp.exists():
             fp.unlink()
         args.assemble_only = True
-        print(f"{args.unpublish} を配信から外しました（状態は残してあります）。")
+        print(f"{args.unpublish} を公開候補から外しました（状態は残してあります）。")
 
     if args.assemble_only:
         try:
@@ -160,8 +173,9 @@ def main(argv=None) -> int:
         except wp.PipelineError as e:
             print(f"組み立てを中止しました（何も書いていません）: {e}")
             return 3
-        print(f"配信 {len(plan['published_ids'])} 基 / 索引版 {plan['index_version']} / "
+        print(f"公開索引版 {plan['index_version']} / "
               f"ポリゴン版 {plan['basins_version']} / 書き換え: {plan['written'] or 'なし'}")
+        print(release_line(plan))
         return 0
 
     if not (args.pref or args.id or args.only or args.all):
@@ -236,7 +250,8 @@ def main(argv=None) -> int:
         outcome = "(evaluate)"
         published = False
         if not args.evaluate:
-            outcome = wp.apply_result(store, d, judged, gen, ring, f["properties"])["outcome"]
+            outcome = wp.apply_result(store, d, judged, gen, ring, f["properties"],
+                                     outline_method=m.get("outline"))["outcome"]
             st = store.load_state(did)
             published = bool(st and st.get("published"))
         rows.append(report_row(did, d["name"], latest, published))
@@ -251,8 +266,9 @@ def main(argv=None) -> int:
     if not args.evaluate:
         try:
             plan = wp.assemble(store, dams, write=True, prune_orphans=args.prune_orphans)
-            print(f"\n配信 {len(plan['published_ids'])} 基 / 索引版 {plan['index_version']} / "
+            print(f"\n公開索引版 {plan['index_version']} / "
                   f"ポリゴン版 {plan['basins_version']} / 書き換え: {plan['written'] or 'なし'}")
+            print(release_line(plan))
         except wp.PipelineError as e:
             print(f"\n組み立てを中止しました（索引・ポリゴンは書いていません）: {e}")
             rc = 3

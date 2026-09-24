@@ -520,7 +520,7 @@ class TestStoreAndAssemble(unittest.TestCase):
             self.publish(d)
         wp.assemble(self.store, self.dams)
         before = self.snapshot()
-        idx0 = json.loads((self.tmp / "docs/watershed/index.json").read_text(encoding="utf-8"))
+        idx0 = json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))
         self.assertEqual([x["id"] for x in idx0["dams"]], ["t-a1", "t-b2", "t-c3"])
 
         self.publish(self.dams[1], seed=1)                       # b2 だけ作り直す
@@ -528,9 +528,9 @@ class TestStoreAndAssemble(unittest.TestCase):
         after = self.snapshot()
         changed = sorted(k for k in set(before) | set(after)
                          if before.get(k) != after.get(k) and not k.endswith("index.local.json"))   # local は配信しない
-        self.assertEqual(changed, ["data/watershed/dams/t-b2.json", "docs/watershed/flow/t-b2.json",
-                                   "docs/watershed/index.json"])
-        idx1 = json.loads((self.tmp / "docs/watershed/index.json").read_text(encoding="utf-8"))
+        self.assertEqual(changed, ["data/watershed/dams/t-b2.json", "data/watershed/staged/flow/t-b2.json",
+                                   "data/watershed/staged/index.json"])
+        idx1 = json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))
         self.assertEqual([x["id"] for x in idx1["dams"]], ["t-a1", "t-b2", "t-c3"])      # 他のダムが消えない
         v0 = {x["id"]: x["v"] for x in idx0["dams"]}
         v1 = {x["id"]: x["v"] for x in idx1["dams"]}
@@ -539,27 +539,27 @@ class TestStoreAndAssemble(unittest.TestCase):
         self.assertNotEqual(v0["t-b2"], v1["t-b2"])
         self.assertNotEqual(idx0["version"], idx1["version"])                  # 索引の版は内容が変われば変わる
         self.assertEqual(idx0["basins_version"], idx1["basins_version"])       # ポリゴンは変えていない
-        self.assertNotIn("docs/watershed/basins.geojson", plan["written"])
+        self.assertNotIn("basins.geojson", plan["staged_written"])
 
     def test_no_change_means_no_write_and_same_version(self):
         for d in self.dams:
             self.publish(d)
         wp.assemble(self.store, self.dams)
-        idx_bytes = (self.tmp / "docs/watershed/index.json").read_bytes()
-        bas_bytes = (self.tmp / "docs/watershed/basins.geojson").read_bytes()
+        idx_bytes = (self.tmp / "data/watershed/staged/index.json").read_bytes()
+        bas_bytes = (self.tmp / "data/watershed/staged/basins.geojson").read_bytes()
         plan = wp.assemble(self.store, self.dams)
         self.assertEqual(plan["written"], [])
-        self.assertEqual(idx_bytes, (self.tmp / "docs/watershed/index.json").read_bytes())
-        self.assertEqual(bas_bytes, (self.tmp / "docs/watershed/basins.geojson").read_bytes())
+        self.assertEqual(idx_bytes, (self.tmp / "data/watershed/staged/index.json").read_bytes())
+        self.assertEqual(bas_bytes, (self.tmp / "data/watershed/staged/basins.geojson").read_bytes())
 
     def test_polygon_only_change_changes_basins_and_index_version(self):
         for d in self.dams:
             self.publish(d)
         wp.assemble(self.store, self.dams)
-        i0 = json.loads((self.tmp / "docs/watershed/index.json").read_text(encoding="utf-8"))
+        i0 = json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))
         self.publish(self.dams[0], ring_shift=0.3)               # 格子は同じ内容、輪だけ少し違う
         wp.assemble(self.store, self.dams)
-        i1 = json.loads((self.tmp / "docs/watershed/index.json").read_text(encoding="utf-8"))
+        i1 = json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))
         self.assertNotEqual(i0["basins_version"], i1["basins_version"])
         self.assertNotEqual(i0["version"], i1["version"])
         self.assertEqual({x["id"]: x["v"] for x in i0["dams"]}, {x["id"]: x["v"] for x in i1["dams"]})
@@ -568,8 +568,8 @@ class TestStoreAndAssemble(unittest.TestCase):
         for d in self.dams:
             self.publish(d)
         wp.assemble(self.store, self.dams)
-        flow_before = (self.tmp / "docs/watershed/flow/t-a1.json").read_bytes()
-        idx_before = (self.tmp / "docs/watershed/index.json").read_bytes()
+        flow_before = (self.tmp / "data/watershed/staged/flow/t-a1.json").read_bytes()
+        idx_before = (self.tmp / "data/watershed/staged/index.json").read_bytes()
         # a1 を、QA に落ちる結果（輪が大きくずれる）で作り直す
         gen = fake_gen(self.dams[0], seed=9)
         ring = ring_of(gen["rec"], dx=9)
@@ -578,9 +578,9 @@ class TestStoreAndAssemble(unittest.TestCase):
         out = wp.apply_result(self.store, self.dams[0], judged, gen, ring, {"id": "t-a1"})
         self.assertIn("held", out["outcome"])
         wp.assemble(self.store, self.dams)
-        self.assertEqual(flow_before, (self.tmp / "docs/watershed/flow/t-a1.json").read_bytes())   # 配信物は不変
-        self.assertEqual(idx_before, (self.tmp / "docs/watershed/index.json").read_bytes())
-        self.assertTrue((self.tmp / "docs/watershed/flow/_local/t-a1.json").exists())              # 退避先に残す
+        self.assertEqual(flow_before, (self.tmp / "data/watershed/staged/flow/t-a1.json").read_bytes())   # 公開候補は不変
+        self.assertEqual(idx_before, (self.tmp / "data/watershed/staged/index.json").read_bytes())
+        self.assertTrue((self.tmp / "data/watershed/staged/held/t-a1.json").exists())              # 退避先に残す
         st = self.store.load_state("t-a1")
         self.assertEqual(st["latest"]["status"], "hold")
         self.assertIsNotNone(st["published"])
@@ -593,6 +593,7 @@ class TestStoreAndAssemble(unittest.TestCase):
         wp.apply_result(self.store, d, judged, gen, ring, {"id": d["id"]})
         plan = wp.assemble(self.store, self.dams)
         self.assertEqual(plan["published_ids"], [])
+        self.assertFalse((self.tmp / "data/watershed/staged/flow" / f"{d['id']}.json").exists())
         self.assertFalse((self.tmp / "docs/watershed/flow" / f"{d['id']}.json").exists())
 
     def test_manual_hold_by_id(self):
@@ -610,7 +611,7 @@ class TestStoreAndAssemble(unittest.TestCase):
         for d in self.dams:
             self.publish(d)
         wp.assemble(self.store, self.dams)
-        p = self.tmp / "docs/watershed/flow/t-b2.json"
+        p = self.tmp / "data/watershed/staged/flow/t-b2.json"
         rec = json.loads(p.read_text(encoding="utf-8"))
         rec["area_km2"] = 999.0                                   # 版を更新せず中身だけ書き換え
         p.write_text(json.dumps(rec), encoding="utf-8")
@@ -623,12 +624,13 @@ class TestStoreAndAssemble(unittest.TestCase):
         for d in self.dams:
             self.publish(d)
         wp.assemble(self.store, self.dams)
-        (self.tmp / "docs/watershed/flow/legacy.json").write_text("{}", encoding="utf-8")
+        (self.tmp / "data/watershed/staged/flow/legacy.json").write_text("{}", encoding="utf-8")
         with self.assertRaises(wp.PipelineError):
             wp.assemble(self.store, self.dams)
-        self.assertTrue((self.tmp / "docs/watershed/flow/legacy.json").exists())      # 勝手に消さない
+        self.assertTrue((self.tmp / "data/watershed/staged/flow/legacy.json").exists())      # 勝手に消さない
         wp.assemble(self.store, self.dams, prune_orphans=True)
-        self.assertFalse((self.tmp / "docs/watershed/flow/legacy.json").exists())
+        self.assertFalse((self.tmp / "data/watershed/staged/flow/legacy.json").exists())
+        self.assertTrue((self.tmp / "data/watershed/staged/quarantine/staged_flow/legacy.json").exists())  # 消さずに隔離
 
     def test_state_for_unknown_dam_id_aborts(self):
         self.publish(self.dams[0])
@@ -645,7 +647,7 @@ class TestStoreAndAssemble(unittest.TestCase):
             self.publish(d)
         # b の位置は a の輪の中。a の D8 は全て中心へ向かうので、たどれば届く → downstream_reaches に入る
         wp.assemble(self.store, self.dams)
-        idx = {x["id"]: x for x in json.loads((self.tmp / "docs/watershed/index.json").read_text(encoding="utf-8"))["dams"]}
+        idx = {x["id"]: x for x in json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))["dams"]}
         self.assertIn("t-a1", idx["t-b2"]["downstream_candidates"])
         self.assertEqual(idx["t-b2"]["downstream_reaches"] + idx["t-b2"]["downstream_unverified"],
                          idx["t-b2"]["downstream_candidates"])
