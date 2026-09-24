@@ -885,6 +885,28 @@ class TestBuildFlowgridsCli(unittest.TestCase):
         self.assertEqual(self.run_cli("--offline"), 2)
 
 
+class TestRiverOutletOnly(unittest.TestCase):
+    """RIVER_OUTLET_ONLY: 水面を起点にせず、従来の河道スナップで出口を決める（スナップの方法は同じ）。"""
+
+    def test_reservoir_can_be_skipped(self):
+        n, mpp = 160, 7.7
+        ii, jj = np.mgrid[0:n, 0:n].astype(float)
+        dem = 100.0 + 0.8 * ii + 0.3 * np.abs(jj - 80)          # 下（i が小さい）へ向かって下る谷
+        dem[20:60, 60:100] = 110.0                              # 平らな水面（貯水池）
+        filled = bb.fill_sinks(dem)
+        fd = bb.flow_dir(filled)
+        acc = bb.flow_accum(fd)
+        lake, _, m1, _ = bb.pick_outlet(dem, fd, acc, 18, 80, mpp, None)
+        self.assertEqual(m1, "reservoir")
+        self.assertIsNotNone(lake)
+        lake2, _, m2, _ = bb.pick_outlet(dem, fd, acc, 18, 80, mpp, None, use_reservoir=False)
+        self.assertEqual((m2, lake2), ("snap", None))
+
+    def test_only_shiraiwagawa_is_listed_with_a_reason(self):
+        self.assertEqual(list(bb.RIVER_OUTLET_ONLY), ["toyama-shiraiwagawa"])
+        self.assertIn("人の判断", bb.RIVER_OUTLET_ONLY["toyama-shiraiwagawa"])
+
+
 # ------------------------------------------------------------------ app.js（実コード）との一致
 
 def _run_jscript(js: str) -> str:

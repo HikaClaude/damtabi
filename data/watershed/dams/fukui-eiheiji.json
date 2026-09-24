@@ -1,0 +1,288 @@
+{
+ "id": "fukui-eiheiji",
+ "name": "永平寺ダム",
+ "published": {
+  "flow_version": "2819084cbfad",
+  "index": {
+   "id": "fukui-eiheiji",
+   "name": "永平寺ダム",
+   "lat": 36.048659,
+   "lon": 136.363216,
+   "area_km2": 3.09,
+   "fine_area_km2": 3.09,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 3.1,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.0,
+   "lake_km2": 0.037,
+   "lake_inside_pct": 100.0,
+   "outlet_method": "reservoir",
+   "cell_m": 23.2,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    136.37149,
+    36.05534
+   ],
+   [
+    136.37338,
+    36.05437
+   ],
+   [
+    136.37398,
+    36.05298
+   ],
+   [
+    136.37836,
+    36.0509
+   ],
+   [
+    136.37861,
+    36.04938
+   ],
+   [
+    136.3799,
+    36.0482
+   ],
+   [
+    136.38265,
+    36.04778
+   ],
+   [
+    136.38411,
+    36.04709
+   ],
+   [
+    136.38127,
+    36.04459
+   ],
+   [
+    136.37887,
+    36.04334
+   ],
+   [
+    136.37784,
+    36.04188
+   ],
+   [
+    136.3763,
+    36.04119
+   ],
+   [
+    136.37578,
+    36.03952
+   ],
+   [
+    136.37432,
+    36.03911
+   ],
+   [
+    136.37286,
+    36.03799
+   ],
+   [
+    136.37183,
+    36.03702
+   ],
+   [
+    136.37192,
+    36.03633
+   ],
+   [
+    136.36994,
+    36.03439
+   ],
+   [
+    136.36823,
+    36.03348
+   ],
+   [
+    136.36376,
+    36.03459
+   ],
+   [
+    136.36273,
+    36.03418
+   ],
+   [
+    136.36085,
+    36.03425
+   ],
+   [
+    136.35999,
+    36.03376
+   ],
+   [
+    136.35921,
+    36.0348
+   ],
+   [
+    136.35904,
+    36.03612
+   ],
+   [
+    136.35947,
+    36.0364
+   ],
+   [
+    136.35939,
+    36.03952
+   ],
+   [
+    136.36024,
+    36.04105
+   ],
+   [
+    136.3599,
+    36.04299
+   ],
+   [
+    136.36067,
+    36.045
+   ],
+   [
+    136.35947,
+    36.04702
+   ],
+   [
+    136.36479,
+    36.04917
+   ],
+   [
+    136.36625,
+    36.05229
+   ],
+   [
+    136.36831,
+    36.0541
+   ],
+   [
+    136.37149,
+    36.05527
+   ],
+   [
+    136.37149,
+    36.05534
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-eiheiji",
+   "name": "永平寺ダム",
+   "computed_area_km2": 3.09,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.2,
+    "mask_cells": 5751,
+    "ring_cells": 5752,
+    "mask_area_km2": 3.1,
+    "ring_area_km2": 3.1,
+    "ring_vs_mask_area_pct": 0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.19,
+    "iou": 0.9775,
+    "mask_outside_pct": 1.13,
+    "ring_only_pct": 1.15,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.35,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 102,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:19:28+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   }
+  ],
+  "flow_version": "2819084cbfad",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 23.2,
+   "mask_cells": 5751,
+   "ring_cells": 5752,
+   "mask_area_km2": 3.1,
+   "ring_area_km2": 3.1,
+   "ring_vs_mask_area_pct": 0.02,
+   "raw_ring_vs_drawn_ring_pct": 0.19,
+   "iou": 0.9775,
+   "mask_outside_pct": 1.13,
+   "ring_only_pct": 1.15,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.35,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 102,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:19:28+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.03824257622171423,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "reservoir",
+   "fine_recompute_pct": 0.01,
+   "method_here": "reservoir"
+  }
+ }
+}

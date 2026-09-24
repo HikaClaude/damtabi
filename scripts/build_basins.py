@@ -238,7 +238,18 @@ LAKE_MAX_KM2 = 60.0       # これを超える「平ら」は湖ではない（�
 LAKE_BAND_M = 1.5         # 水位からこの範囲を水面とみなす（標高タイルのばらつき分）
 
 
-def pick_outlet(dem, fd, acc, oi: int, oj: int, mpp: float, official: float | None):
+# 貯水池の水面を起点にせず、河道起点（従来のスナップ）で集水域を作るダム（dam_id → 理由）。
+# スナップの方法・半径・判定は他のダムと同じ。面積を合わせるための調整はしない。
+RIVER_OUTLET_ONLY: dict[str, str] = {
+    "toyama-shiraiwagawa":
+        "2026-09-24 人の判断: 観光向けの概略として、水面起点（便覧比 +16.4%）ではなく既存の河道起点案"
+        "（便覧比 −6.5%）を表示する。水面起点では、河道起点の出口（堤体より下流・標高110.7m）を通らない"
+        "約5.5km²を含んでいた（作業保存 wsq/audit_shirai_shiraiwagawa.json）。",
+}
+
+
+def pick_outlet(dem, fd, acc, oi: int, oj: int, mpp: float, official: float | None,
+                use_reservoir: bool = True):
     """集水域の起点を決める。build_basins と build_flowgrids で同じものを使う。
 
     返り値: (起点セルの集合 seeds, 代表セル (i,j), 方式名, 使った探索半径)
@@ -248,7 +259,7 @@ def pick_outlet(dem, fd, acc, oi: int, oj: int, mpp: float, official: float | No
     公式の**直接流域**と桁が合った時点で採用する（合計を渡すと導水分まで
     地形から探しに行って出口が飛ぶ。有峰ダムで実測）。
     """
-    lake, level = find_reservoir(dem, oi, oj, mpp)
+    lake, level = find_reservoir(dem, oi, oj, mpp) if use_reservoir else (None, None)
     if lake is not None:
         li, lj = np.argwhere(lake)[int(np.argmin(dem[lake]))]
         return lake, (int(li), int(lj)), "reservoir", 0.0
@@ -417,7 +428,7 @@ def pick_zoom(area_km2: float | None) -> tuple[int, int]:
 
 
 def delineate(name: str, lat: float, lon: float, official: float | None,
-              verbose=True, sizing_area: float | None = None):
+              verbose=True, sizing_area: float | None = None, use_reservoir: bool = True):
     """1基の集水域。失敗は (None, {"error", "error_kind"}) か DemFetchError（通信障害）。"""
     z, pad = pick_zoom(sizing_area if sizing_area else official)
     outlet_ll = None      # 1回目で決めた出口を緯度経度で固定し、拡大後も同じ点を使う
@@ -444,7 +455,7 @@ def delineate(name: str, lat: float, lon: float, official: float | None,
         oj = int((px - x0) * 256); oi = int((py - y0) * 256)
 
         # --- まず貯水池を探す。見つかれば「水面に流れ込む範囲」を集水域とする。
-        lake, lake_lv = find_reservoir(dem, oi, oj, mpp)
+        lake, lake_lv = find_reservoir(dem, oi, oj, mpp) if use_reservoir else (None, None)
         if lake is not None:
             ws = upstream_of_set(fd, lake)
             area = float(ws.sum()) * mpp * mpp / 1e6
@@ -839,7 +850,11 @@ def main() -> int:
               f"合計 {total if total else '—'} / 川防 {kw if kw else '—'} km2）")
 
         try:
-            coords, meta = delineate(d["name"], d["lat"], d["lon"], official, sizing_area=sizing)
+            # 通常のダムは従来どおり呼ぶ。河道起点のダムだけ水面の検出を使わない
+            extra = {"use_reservoir": False} if d["id"] in RIVER_OUTLET_ONLY else {}
+            coords, meta = delineate(d["name"], d["lat"], d["lon"], official, sizing_area=sizing, **extra)
+            if coords and d["id"] in RIVER_OUTLET_ONLY:
+                meta["river_outlet_only"] = True       # 水面起点を使わず河道起点（RIVER_OUTLET_ONLY）
         except DemFetchError as e:
             coords, meta = None, {"error": str(e), "error_kind": "dem_fetch"}
         if not coords:

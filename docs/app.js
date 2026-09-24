@@ -1974,7 +1974,14 @@
           note += "参考として" + esc(String(d.reference_source || "別の公式資料")) +
             "の流域面積（約 " + km2(d.reference_area_km2) + " km²）" +
             (refDiff <= 15 ? "とは近い値になっています。" : "とは差があります。原因は特定できていません。");
+        } else {
+          note += "照合できる流域面積の資料も確認できていないため、計算した面積は照合できていません。";
         }
+      }
+      if (d.caution) {
+        // data/watershed/notes.json に記録した、データから自動では決められない注記（位置資料の制約など）
+        chips += '<span class="ws-chip is-warn">' + esc(String(d.caution_label || "注記")) + "</span>";
+        note += esc(String(d.caution));
       }
 
       box.innerHTML =

@@ -13,8 +13,9 @@
 - リポジトリの docs/・data/watershed/release.json には一切書かない。模擬承認は写しの中だけ
   （approved_by に「プレビュー（公開承認ではない）」と書く）
 - 配信は 127.0.0.1 のみ（同じ LAN の他の端末からは見えない）
-- 個別に保留したダム（data/watershed/holds.json）も既定で表示する（見て確かめるため）。
-  起動時に保留の理由を表示する。--exclude-held で公開時と同じく外せる
+- 個別に保留したダム（data/watershed/holds.json）は既定で表示しない（公開時と同じ）。
+  起動時に保留の理由を表示する。確かめるために見たいときは --include-held
+- 画面の注記（data/watershed/notes.json）は写しにも持ち込む
 - 写しを置いたフォルダには目印ファイルを置き、目印のあるフォルダだけを作り直す（消す）
 """
 
@@ -55,7 +56,7 @@ def _inside(child: Path, parent: Path) -> bool:
         return False
 
 
-def build(out: Path, exclude_held: bool = False) -> dict:
+def build(out: Path, include_held: bool = False) -> dict:
     out = out.resolve()
     if _inside(out, ROOT):
         raise PreviewError(f"プレビューはリポジトリの外に作ります（指定: {out}）")
@@ -73,7 +74,11 @@ def build(out: Path, exclude_held: bool = False) -> dict:
     holds_src = ROOT / wp.HOLDS_FILE
     store = wp.Store(out)
     holds = json.loads(holds_src.read_text(encoding="utf-8"))["holds"] if holds_src.exists() else {}
-    if exclude_held and holds_src.exists():
+    for extra in (wp.NOTES_FILE,):                      # 画面の注記は写しにも入れる
+        if (ROOT / extra).exists():
+            (out / extra).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / extra, out / extra)
+    if not include_held and holds_src.exists():
         (out / wp.HOLDS_FILE).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(holds_src, out / wp.HOLDS_FILE)
 
@@ -103,7 +108,7 @@ def build(out: Path, exclude_held: bool = False) -> dict:
         bs.DOCS = saved
     idx = out / "docs/index.html"
     idx.write_text(idx.read_text(encoding="utf-8").replace("</body>", BANNER + "\n</body>"), encoding="utf-8")
-    return {"out": out, "public_ids": plan["public_ids"], "holds": holds, "exclude_held": exclude_held,
+    return {"out": out, "public_ids": plan["public_ids"], "holds": holds, "include_held": include_held,
             "asset_version": ver}
 
 
@@ -132,17 +137,17 @@ def main(argv=None) -> int:
     ap.add_argument("--port", type=int, default=8790)
     ap.add_argument("--no-serve", action="store_true", help="作るだけで配信しない")
     ap.add_argument("--no-open", action="store_true", help="ブラウザを開かない")
-    ap.add_argument("--exclude-held", action="store_true", help="個別に保留したダムを外す（公開時と同じ）")
+    ap.add_argument("--include-held", action="store_true", help="個別に保留したダムも表示する（確かめるため。既定は外す）")
     args = ap.parse_args(argv)
     try:
-        r = build(args.out, args.exclude_held)
+        r = build(args.out, args.include_held)
     except (PreviewError, wp.PipelineError) as e:
         print(f"プレビューを作れませんでした: {e}")
         return 2
     print(f"プレビューを作りました: {r['out']}")
     print(f"表示する集水域: {len(r['public_ids'])} 基（プレビュー専用の模擬承認。公開承認ではありません）")
     if r["holds"]:
-        print("個別に保留しているダム" + ("（外しました）" if r["exclude_held"] else "（確認のため表示しています）") + ":")
+        print("個別に保留しているダム" + ("（確認のため表示しています）" if r["include_held"] else "（表示していません）") + ":")
         for did, h in r["holds"].items():
             print(f"  - {did}: {h['reason']}")
     if not args.no_serve:

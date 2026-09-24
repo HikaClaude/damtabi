@@ -1,0 +1,410 @@
+{
+ "id": "fukui-masutani",
+ "name": "桝谷ダム",
+ "published": {
+  "flow_version": "ba78b8df6ecc",
+  "index": {
+   "id": "fukui-masutani",
+   "name": "桝谷ダム",
+   "lat": 35.740912,
+   "lon": 136.248706,
+   "area_km2": 10.28,
+   "fine_area_km2": 10.29,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 10.2,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.1,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.3,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    136.27364,
+    35.76476
+   ],
+   [
+    136.27459,
+    35.76441
+   ],
+   [
+    136.2751,
+    35.76344
+   ],
+   [
+    136.2763,
+    35.76267
+   ],
+   [
+    136.27587,
+    35.761
+   ],
+   [
+    136.27656,
+    35.75926
+   ],
+   [
+    136.27793,
+    35.75787
+   ],
+   [
+    136.28016,
+    35.75766
+   ],
+   [
+    136.28171,
+    35.75801
+   ],
+   [
+    136.28557,
+    35.75661
+   ],
+   [
+    136.28592,
+    35.75522
+   ],
+   [
+    136.28574,
+    35.75341
+   ],
+   [
+    136.28514,
+    35.75278
+   ],
+   [
+    136.28531,
+    35.75132
+   ],
+   [
+    136.28798,
+    35.75062
+   ],
+   [
+    136.28514,
+    35.74658
+   ],
+   [
+    136.28351,
+    35.74533
+   ],
+   [
+    136.28059,
+    35.74512
+   ],
+   [
+    136.27931,
+    35.74393
+   ],
+   [
+    136.27939,
+    35.74289
+   ],
+   [
+    136.28008,
+    35.7424
+   ],
+   [
+    136.27948,
+    35.73787
+   ],
+   [
+    136.27742,
+    35.73766
+   ],
+   [
+    136.27544,
+    35.7353
+   ],
+   [
+    136.27467,
+    35.73571
+   ],
+   [
+    136.27278,
+    35.73557
+   ],
+   [
+    136.26763,
+    35.73328
+   ],
+   [
+    136.26609,
+    35.73328
+   ],
+   [
+    136.26437,
+    35.73146
+   ],
+   [
+    136.26308,
+    35.73146
+   ],
+   [
+    136.26248,
+    35.72986
+   ],
+   [
+    136.26274,
+    35.727
+   ],
+   [
+    136.2618,
+    35.72603
+   ],
+   [
+    136.25957,
+    35.72596
+   ],
+   [
+    136.25819,
+    35.7268
+   ],
+   [
+    136.25596,
+    35.72617
+   ],
+   [
+    136.25433,
+    35.72666
+   ],
+   [
+    136.25261,
+    35.72638
+   ],
+   [
+    136.25124,
+    35.72728
+   ],
+   [
+    136.25107,
+    35.72798
+   ],
+   [
+    136.24927,
+    35.72896
+   ],
+   [
+    136.24798,
+    35.73091
+   ],
+   [
+    136.24849,
+    35.73523
+   ],
+   [
+    136.24944,
+    35.73801
+   ],
+   [
+    136.24892,
+    35.73857
+   ],
+   [
+    136.24841,
+    35.74233
+   ],
+   [
+    136.24703,
+    35.74184
+   ],
+   [
+    136.24729,
+    35.74296
+   ],
+   [
+    136.25021,
+    35.7447
+   ],
+   [
+    136.25038,
+    35.74637
+   ],
+   [
+    136.25124,
+    35.74714
+   ],
+   [
+    136.25115,
+    35.75027
+   ],
+   [
+    136.25064,
+    35.75236
+   ],
+   [
+    136.24961,
+    35.75376
+   ],
+   [
+    136.25115,
+    35.75626
+   ],
+   [
+    136.2515,
+    35.75801
+   ],
+   [
+    136.25261,
+    35.75926
+   ],
+   [
+    136.25167,
+    35.76128
+   ],
+   [
+    136.25175,
+    35.7633
+   ],
+   [
+    136.25596,
+    35.76379
+   ],
+   [
+    136.2612,
+    35.76267
+   ],
+   [
+    136.26798,
+    35.76441
+   ],
+   [
+    136.27021,
+    35.764
+   ],
+   [
+    136.27364,
+    35.76469
+   ],
+   [
+    136.27364,
+    35.76476
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-masutani",
+   "name": "桝谷ダム",
+   "computed_area_km2": 10.29,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.8,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.3,
+    "mask_cells": 18990,
+    "ring_cells": 18965,
+    "mask_area_km2": 10.31,
+    "ring_area_km2": 10.3,
+    "ring_vs_mask_area_pct": -0.13,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9872,
+    "mask_outside_pct": 0.71,
+    "ring_only_pct": 0.58,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.29,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:20:24+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "ba78b8df6ecc",
+  "spatial": {
+   "grid": [
+    597,
+    597
+   ],
+   "cell_m": 23.3,
+   "mask_cells": 18990,
+   "ring_cells": 18965,
+   "mask_area_km2": 10.31,
+   "ring_area_km2": 10.3,
+   "ring_vs_mask_area_pct": -0.13,
+   "raw_ring_vs_drawn_ring_pct": 0.05,
+   "iou": 0.9872,
+   "mask_outside_pct": 0.71,
+   "ring_only_pct": 0.58,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.29,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 49,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:20:24+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.1069875965643119,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.02,
+   "method_here": "snap"
+  }
+ }
+}

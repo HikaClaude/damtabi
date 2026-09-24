@@ -69,14 +69,12 @@ EXCLUDED: dict[str, str] = {
     # **「2つに割れた」ことは下流の水面を巻き込んだ証拠にならない**（軸平行 161m 四方で
     # 切るため、曲がった細い貯水池では腕が切り落とされる）。この検査は手がかりであって
     # 判定ではない、と check_reservoirs.py 側の文言も直した。
-    "toyama-shiraiwagawa":
-        "貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、"
-        "誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、"
-        "この1基だけ逆に動いている。**原因は特定できていない。** "
-        "「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、"
-        "前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる"
-        "（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。"
-        "どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。",
+    # 2026-09-24: 白岩川の HOLD を人の判断で解除した。保留の理由は「水面起点で面積が便覧比 +16.4%（±15% 超）で、
+    # 原因が特定できない」ことで、別の河川につながる等の誤りの証拠は無かった。観光向けの概略として面積差は許容し、
+    # 既存の河道起点案（便覧比 −6.5%）を表示する（build_basins.RIVER_OUTLET_ONLY）。画面に
+    # 「地形から推定した概略で、実際の集水域と異なる場合があります」と注記する（data/watershed/notes.json）。
+    # 面積を合わせるための再計算・調整はしていない。公開承認ではない。
+
 }
 
 # 公開承認（人が1基ずつ記録する）。QA の pass や評価区分 G1〜G4 は承認ではない。
@@ -94,6 +92,11 @@ RELEASE_KEYS = ("flow_version", "ring_version", "outline_method", "approved_by",
 HOLDS_SCHEMA = "ws-holds/1"
 HOLDS_FILE = Path("data") / "watershed" / "holds.json"
 HOLD_KEYS = ("reason", "since", "by")
+# 画面に出す注記（人が記録する）。データから自動では決められない事実だけを書く（例: 位置資料の精度の制約）。
+# 面積の照合材料の有無・差は app.js が索引の値から自動で書くので、ここには書かない。
+NOTES_SCHEMA = "ws-notes/1"
+NOTES_FILE = Path("data") / "watershed" / "notes.json"
+NOTE_KEYS = ("text", "basis")
 
 HEADER_SOURCE = ("国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）を"
                  "DAM TABI が加工して作成")
@@ -146,7 +149,8 @@ def generate(dam: dict, meta: dict, spec_row: dict | None, dem: np.ndarray,
     ffd = bb.flow_dir(bb.fill_sinks(dem))
     facc = bb.flow_accum(ffd)
     # build_basins とまったく同じ起点の選び方を使う（別の実装を持たない）
-    lake, (li, lj), method, _r = bb.pick_outlet(dem, ffd, facc, fi0, fj0, mppf, official)
+    lake, (li, lj), method, _r = bb.pick_outlet(dem, ffd, facc, fi0, fj0, mppf, official,
+                                                  use_reservoir=dam["id"] not in bb.RIVER_OUTLET_ONLY)
     wf = (bb.upstream_of_set(ffd, lake) if lake is not None
           else bb.upstream_of(ffd, int(li), int(lj)))
     del ffd, facc
@@ -363,6 +367,24 @@ class Store:
         return holds
 
 
+    def load_notes(self) -> dict:
+        """画面に出す注記（dam_id → {text, basis}）。ファイルが無ければ注記なし。形が違えば PipelineError。"""
+        p = self.root / NOTES_FILE
+        if not p.exists():
+            return {}
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if doc.get("schema") != NOTES_SCHEMA:
+            raise PipelineError(f"{NOTES_FILE}: schema は {NOTES_SCHEMA!r}: {doc.get('schema')!r}")
+        notes = doc.get("notes")
+        if not isinstance(notes, dict):
+            raise PipelineError(f"{NOTES_FILE}: notes は dam_id をキーにした object")
+        for did, n in notes.items():
+            missing = [k for k in NOTE_KEYS if not (isinstance(n, dict) and n.get(k))]
+            if missing:
+                raise PipelineError(f"{NOTES_FILE}: {did} に {', '.join(missing)} がありません")
+        return notes
+
+
 def ring_version(ring) -> str:
     """輪（経緯度の列）の内容ハッシュ。承認を輪の形に結び付けるために使う。"""
     return wc.content_version({"ring": ring}, exclude=())
@@ -458,7 +480,7 @@ def _routing_reaches(fd, goal_cells, i, j) -> bool:
     return False
 
 
-def _index_records(ids, pub, flows, approvals, holds=None):
+def _index_records(ids, pub, flows, approvals, holds=None, notes=None):
     """ids のダムの索引レコードとポリゴンを作る。下流の案内は ids の中だけで探す
     （公開索引が、公開していないダムを下流として名指ししないように）。"""
     areas = {i: pub[i]["index"]["fine_area_km2"] for i in ids}
@@ -496,6 +518,10 @@ def _index_records(ids, pub, flows, approvals, holds=None):
         rec["release_status"] = release_status(pub[i], approvals.get(i), (holds or {}).get(i))
         if (holds or {}).get(i):
             rec["hold_reason"] = holds[i]["reason"]          # 公開索引には載らない（held は公開しない）
+        if (notes or {}).get(i):
+            rec["caution"] = notes[i]["text"]                # 画面の注記（根拠は notes.json の basis）
+            if notes[i].get("label"):
+                rec["caution_label"] = notes[i]["label"]      # 注記の見出し（無ければ画面側の既定）
         dams_out.append(rec)
     # ポリゴン: ids の輪だけ
     features = [{"type": "Feature", "properties": pub[i]["feature_properties"],
@@ -581,9 +607,10 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
     ids = sorted(pub, key=lambda i: order[i])
     approvals = store.load_release()
     holds = store.load_holds()
-    stray = [i for i in list(approvals) + list(holds) if i not in order]
+    notes = store.load_notes()
+    stray = [i for i in list(approvals) + list(holds) + list(notes) if i not in order]
     if stray:
-        raise PipelineError(f"{RELEASE_FILE} / {HOLDS_FILE} に dams.json に無い dam_id があります: " + ", ".join(stray))
+        raise PipelineError(f"{RELEASE_FILE} / {HOLDS_FILE} / {NOTES_FILE} に dams.json に無い dam_id があります: " + ", ".join(stray))
 
     # 公開候補の格子ファイルの整合
     flows, flow_bytes = {}, {}
@@ -603,12 +630,12 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
         raise PipelineError("状態の無い（または公開候補でない）格子ファイルがあります: "
                             + ", ".join(orphans) + "  → --prune-orphans で staged/quarantine/ へ移せます")
 
-    cand_dams, cand_features = _index_records(ids, pub, flows, approvals, holds)
+    cand_dams, cand_features = _index_records(ids, pub, flows, approvals, holds, notes)
     cand_index, cand_bv = _index_doc(cand_dams, cand_features,
                                      {k: v for k, v in EXCLUDED.items() if k in states})
     status = {d["id"]: d["release_status"] for d in cand_dams}
     public_ids = [i for i in ids if status[i] == "approved"]
-    pub_dams, pub_features = _index_records(public_ids, pub, flows, approvals)
+    pub_dams, pub_features = _index_records(public_ids, pub, flows, approvals, None, notes)
     # 公開索引には、公開しないダムの話（保留の理由など）を載せない
     pub_index, pub_bv = _index_doc(pub_dams, pub_features, {})
 

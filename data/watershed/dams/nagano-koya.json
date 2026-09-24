@@ -1,0 +1,456 @@
+{
+ "id": "nagano-koya",
+ "name": "古谷ダム",
+ "published": {
+  "flow_version": "3fdab168548b",
+  "index": {
+   "id": "nagano-koya",
+   "name": "古谷ダム",
+   "lat": 36.1252778,
+   "lon": 138.5938889,
+   "area_km2": 12.69,
+   "fine_area_km2": 12.66,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 13.0,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.2,
+   "lake_km2": 0.053,
+   "lake_inside_pct": 100.0,
+   "outlet_method": "reservoir",
+   "cell_m": 30.9,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    138.60875,
+    36.12678
+   ],
+   [
+    138.60935,
+    36.12644
+   ],
+   [
+    138.61081,
+    36.12658
+   ],
+   [
+    138.61313,
+    36.12512
+   ],
+   [
+    138.61656,
+    36.12463
+   ],
+   [
+    138.61733,
+    36.12283
+   ],
+   [
+    138.61828,
+    36.12214
+   ],
+   [
+    138.61854,
+    36.12034
+   ],
+   [
+    138.62248,
+    36.11999
+   ],
+   [
+    138.62369,
+    36.11916
+   ],
+   [
+    138.62643,
+    36.11888
+   ],
+   [
+    138.62669,
+    36.11832
+   ],
+   [
+    138.62944,
+    36.11888
+   ],
+   [
+    138.63193,
+    36.12131
+   ],
+   [
+    138.63356,
+    36.12089
+   ],
+   [
+    138.63484,
+    36.12304
+   ],
+   [
+    138.63673,
+    36.12422
+   ],
+   [
+    138.63776,
+    36.12359
+   ],
+   [
+    138.63948,
+    36.12373
+   ],
+   [
+    138.64008,
+    36.12255
+   ],
+   [
+    138.64205,
+    36.12158
+   ],
+   [
+    138.64506,
+    36.1211
+   ],
+   [
+    138.64549,
+    36.1193
+   ],
+   [
+    138.64411,
+    36.1195
+   ],
+   [
+    138.64017,
+    36.11728
+   ],
+   [
+    138.64223,
+    36.11548
+   ],
+   [
+    138.64283,
+    36.11396
+   ],
+   [
+    138.64231,
+    36.11188
+   ],
+   [
+    138.64643,
+    36.11007
+   ],
+   [
+    138.64652,
+    36.10737
+   ],
+   [
+    138.64746,
+    36.1064
+   ],
+   [
+    138.64703,
+    36.10522
+   ],
+   [
+    138.64489,
+    36.10342
+   ],
+   [
+    138.64514,
+    36.09877
+   ],
+   [
+    138.64128,
+    36.09766
+   ],
+   [
+    138.63879,
+    36.09613
+   ],
+   [
+    138.63725,
+    36.0969
+   ],
+   [
+    138.63536,
+    36.09468
+   ],
+   [
+    138.63493,
+    36.09253
+   ],
+   [
+    138.63364,
+    36.09204
+   ],
+   [
+    138.6321,
+    36.09211
+   ],
+   [
+    138.63064,
+    36.09142
+   ],
+   [
+    138.62935,
+    36.09183
+   ],
+   [
+    138.62815,
+    36.09288
+   ],
+   [
+    138.62703,
+    36.09475
+   ],
+   [
+    138.62274,
+    36.09523
+   ],
+   [
+    138.62145,
+    36.09482
+   ],
+   [
+    138.61957,
+    36.09496
+   ],
+   [
+    138.61579,
+    36.09613
+   ],
+   [
+    138.61424,
+    36.09607
+   ],
+   [
+    138.61107,
+    36.09745
+   ],
+   [
+    138.60772,
+    36.09627
+   ],
+   [
+    138.60497,
+    36.09718
+   ],
+   [
+    138.60197,
+    36.09731
+   ],
+   [
+    138.59905,
+    36.09828
+   ],
+   [
+    138.59991,
+    36.10002
+   ],
+   [
+    138.60163,
+    36.10141
+   ],
+   [
+    138.60154,
+    36.10272
+   ],
+   [
+    138.60206,
+    36.10362
+   ],
+   [
+    138.60171,
+    36.10792
+   ],
+   [
+    138.59982,
+    36.11229
+   ],
+   [
+    138.59862,
+    36.11264
+   ],
+   [
+    138.59794,
+    36.11354
+   ],
+   [
+    138.59579,
+    36.11368
+   ],
+   [
+    138.59485,
+    36.11458
+   ],
+   [
+    138.59459,
+    36.11943
+   ],
+   [
+    138.59322,
+    36.12068
+   ],
+   [
+    138.59347,
+    36.12151
+   ],
+   [
+    138.59296,
+    36.12248
+   ],
+   [
+    138.59519,
+    36.12498
+   ],
+   [
+    138.60137,
+    36.1254
+   ],
+   [
+    138.60266,
+    36.12623
+   ],
+   [
+    138.60429,
+    36.12623
+   ],
+   [
+    138.6048,
+    36.12664
+   ],
+   [
+    138.60695,
+    36.12623
+   ],
+   [
+    138.60755,
+    36.12671
+   ],
+   [
+    138.60875,
+    36.12671
+   ],
+   [
+    138.60875,
+    36.12678
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "nagano-koya",
+   "name": "古谷ダム",
+   "computed_area_km2": 12.66,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.9,
+    "mask_cells": 13315,
+    "ring_cells": 13268,
+    "mask_area_km2": 12.71,
+    "ring_area_km2": 12.67,
+    "ring_vs_mask_area_pct": -0.35,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9869,
+    "mask_outside_pct": 0.83,
+    "ring_only_pct": 0.48,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.41,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 78,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:24:43+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   }
+  ],
+  "flow_version": "3fdab168548b",
+  "spatial": {
+   "grid": [
+    576,
+    576
+   ],
+   "cell_m": 30.9,
+   "mask_cells": 13315,
+   "ring_cells": 13268,
+   "mask_area_km2": 12.71,
+   "ring_area_km2": 12.67,
+   "ring_vs_mask_area_pct": -0.35,
+   "raw_ring_vs_drawn_ring_pct": 0.03,
+   "iou": 0.9869,
+   "mask_outside_pct": 0.83,
+   "ring_only_pct": 0.48,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.41,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 78,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 81,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:24:43+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.22760246874065082,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "reservoir",
+   "fine_recompute_pct": 0.01,
+   "method_here": "reservoir"
+  }
+ }
+}

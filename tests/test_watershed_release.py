@@ -246,6 +246,24 @@ class TestPublicBoundary(unittest.TestCase):
                 self.assemble()
             self.assertEqual(public_files(self.tmp), before)
 
+    # ---- 画面の注記
+    def test_note_is_attached_to_candidate_and_public_index(self):
+        p = self.tmp / wp.NOTES_FILE
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps({"schema": wp.NOTES_SCHEMA, "notes": {"t-a1": {"text": "位置の資料に制約（試験）", "basis": "試験"}}},
+                                ensure_ascii=False), encoding="utf-8")
+        self.approve("t-a1")
+        self.assemble()
+        cand = json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))
+        self.assertEqual(next(d for d in cand["dams"] if d["id"] == "t-a1")["caution"], "位置の資料に制約（試験）")
+        self.assertNotIn("caution", next(d for d in cand["dams"] if d["id"] == "t-b2"))
+        self.assertEqual(self.public_index()["dams"][0]["caution"], "位置の資料に制約（試験）")
+        for bad in ({"schema": "x", "notes": {}}, {"schema": wp.NOTES_SCHEMA, "notes": {"t-a1": {"text": "根拠が無い"}}},
+                    {"schema": wp.NOTES_SCHEMA, "notes": {"t-zz": {"text": "x", "basis": "x"}}}):
+            p.write_text(json.dumps(bad, ensure_ascii=False), encoding="utf-8")
+            with self.assertRaises(wp.PipelineError):
+                self.assemble()
+
     def test_malformed_release_file_aborts_without_writing(self):
         self.assemble()
         before = public_files(self.tmp)
@@ -297,6 +315,8 @@ class TestRepoPublicBoundary(unittest.TestCase):
                 continue
             self.assertEqual(pub["outline_method"], "exact", i)
             self.assertEqual(s["latest"]["status"], "pass", i)
+            if not (arc / f"{i}.json").exists():
+                continue                                      # legacy 候補が無かった基（富山以外・久婦須川）
             leg = json.loads((arc / f"{i}.json").read_text(encoding="utf-8"))["published"]
             self.assertEqual(leg["outline_method"], "legacy", i)
             self.assertEqual(pub["flow_version"], leg["flow_version"], i)
@@ -310,13 +330,27 @@ class TestRepoPublicBoundary(unittest.TestCase):
     def test_candidates_are_kept_outside_docs(self):
         states = self.store.all_states()
         cands = sorted(i for i, s in states.items() if s.get("published"))
-        self.assertEqual(len(cands), 21)
         staged = sorted(p.stem for p in self.store.flow.glob("*.json"))
-        self.assertEqual(staged, cands)
-        wp.assemble(self.store, self.dams, write=False)      # 版の整合（食い違えば PipelineError）
-        for i in ("toyama-shiraiwagawa", "toyama-kubusugawa"):
-            self.assertIsNone(states[i]["published"])        # HOLD の2基は候補にもいない
-        self.assertIn("toyama-shiraiwagawa", wp.EXCLUDED)
+        self.assertEqual(staged, cands)                        # 候補 = 候補の格子（1対1）
+        plan = wp.assemble(self.store, self.dams, write=False)  # 版の整合（食い違えば PipelineError）
+        self.assertEqual(plan["published_ids"], [d["id"] for d in self.dams if d["id"] in set(cands)])
+        # 白岩川は 2026-09-24 に HOLD を解除し、河道起点で表示する（人の判断）
+        self.assertNotIn("toyama-shiraiwagawa", wp.EXCLUDED)
+        import build_basins as bb
+        self.assertIn("toyama-shiraiwagawa", bb.RIVER_OUTLET_ONLY)
+        shi = (states.get("toyama-shiraiwagawa") or {}).get("published")
+        if shi:
+            self.assertEqual(shi["index"].get("outlet_method"), "snap")
+        # 個別保留のダムは、候補であっても公開されない（held）。候補になっていなければ状態が無いか published が空
+        holds = self.store.load_holds()
+        for i in holds:
+            if i in cands:
+                self.assertIn(i, plan["release"]["held"], i)
+            else:
+                self.assertIsNone((states.get(i) or {}).get("published"), i)
+        # 公開物・承認は増えていない
+        self.assertEqual(plan["public_ids"], [])
+        self.assertEqual(json.loads((ROOT / wp.RELEASE_FILE).read_text(encoding="utf-8"))["approvals"], {})
 
     def test_legacy_21_cannot_be_published_even_with_matching_approvals(self):
         """exact へ作り直す前の legacy 候補21基（data/watershed/staged/legacy/ に保存）を候補に戻して試す。"""

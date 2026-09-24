@@ -1,0 +1,270 @@
+{
+ "id": "fukui-otsuro",
+ "name": "大津呂ダム",
+ "published": {
+  "flow_version": "253162bc84d8",
+  "index": {
+   "id": "fukui-otsuro",
+   "name": "大津呂ダム",
+   "lat": 35.454173,
+   "lon": 135.630591,
+   "area_km2": 1.58,
+   "fine_area_km2": 1.58,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 1.58,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.1,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.3,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    135.63523,
+    35.45703
+   ],
+   [
+    135.63927,
+    35.45613
+   ],
+   [
+    135.64133,
+    35.45641
+   ],
+   [
+    135.64347,
+    35.45536
+   ],
+   [
+    135.64399,
+    35.45431
+   ],
+   [
+    135.64648,
+    35.45277
+   ],
+   [
+    135.64716,
+    35.4513
+   ],
+   [
+    135.64716,
+    35.45011
+   ],
+   [
+    135.64467,
+    35.44955
+   ],
+   [
+    135.64407,
+    35.44829
+   ],
+   [
+    135.64141,
+    35.4476
+   ],
+   [
+    135.63995,
+    35.44767
+   ],
+   [
+    135.63944,
+    35.44683
+   ],
+   [
+    135.63875,
+    35.44669
+   ],
+   [
+    135.63832,
+    35.44725
+   ],
+   [
+    135.63635,
+    35.44711
+   ],
+   [
+    135.63189,
+    35.44459
+   ],
+   [
+    135.62768,
+    35.44564
+   ],
+   [
+    135.62742,
+    35.44606
+   ],
+   [
+    135.62888,
+    35.4476
+   ],
+   [
+    135.62965,
+    35.44955
+   ],
+   [
+    135.62922,
+    35.45221
+   ],
+   [
+    135.62974,
+    35.45263
+   ],
+   [
+    135.62983,
+    35.45375
+   ],
+   [
+    135.62888,
+    35.45445
+   ],
+   [
+    135.62905,
+    35.45515
+   ],
+   [
+    135.63051,
+    35.45668
+   ],
+   [
+    135.6342,
+    35.4562
+   ],
+   [
+    135.63523,
+    35.45696
+   ],
+   [
+    135.63523,
+    35.45703
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-otsuro",
+   "name": "大津呂ダム",
+   "computed_area_km2": 1.58,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.8,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.3,
+    "mask_cells": 2900,
+    "ring_cells": 2892,
+    "mask_area_km2": 1.57,
+    "ring_area_km2": 1.57,
+    "ring_vs_mask_area_pct": -0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.69,
+    "iou": 0.9721,
+    "mask_outside_pct": 1.55,
+    "ring_only_pct": 1.28,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.76,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:20:29+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "253162bc84d8",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 23.3,
+   "mask_cells": 2900,
+   "ring_cells": 2892,
+   "mask_area_km2": 1.57,
+   "ring_area_km2": 1.57,
+   "ring_vs_mask_area_pct": -0.28,
+   "raw_ring_vs_drawn_ring_pct": 0.69,
+   "iou": 0.9721,
+   "mask_outside_pct": 1.55,
+   "ring_only_pct": 1.28,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.76,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 9.1
+  },
+  "generated": "2026-09-24T23:20:29+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.06408417895227281,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.14,
+   "method_here": "snap"
+  }
+ }
+}

@@ -1,0 +1,470 @@
+{
+ "id": "nagano-katagiri",
+ "name": "片桐ダム",
+ "published": {
+  "flow_version": "7d19538627cc",
+  "index": {
+   "id": "nagano-katagiri",
+   "name": "片桐ダム",
+   "lat": 35.6183333,
+   "lon": 137.8533333,
+   "area_km2": 14.86,
+   "fine_area_km2": 14.84,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 15.1,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.2,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 31.1,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    137.83404,
+    35.65674
+   ],
+   [
+    137.83576,
+    35.65632
+   ],
+   [
+    137.83791,
+    35.65444
+   ],
+   [
+    137.83894,
+    35.6543
+   ],
+   [
+    137.83937,
+    35.65332
+   ],
+   [
+    137.84039,
+    35.65276
+   ],
+   [
+    137.84228,
+    35.65221
+   ],
+   [
+    137.8452,
+    35.65276
+   ],
+   [
+    137.84692,
+    35.65158
+   ],
+   [
+    137.84924,
+    35.65172
+   ],
+   [
+    137.85027,
+    35.65032
+   ],
+   [
+    137.85035,
+    35.6483
+   ],
+   [
+    137.8519,
+    35.64732
+   ],
+   [
+    137.85336,
+    35.64481
+   ],
+   [
+    137.85404,
+    35.64216
+   ],
+   [
+    137.85696,
+    35.64035
+   ],
+   [
+    137.85696,
+    35.63937
+   ],
+   [
+    137.85868,
+    35.63749
+   ],
+   [
+    137.85996,
+    35.63735
+   ],
+   [
+    137.85962,
+    35.6363
+   ],
+   [
+    137.86039,
+    35.63463
+   ],
+   [
+    137.86263,
+    35.6324
+   ],
+   [
+    137.86237,
+    35.62835
+   ],
+   [
+    137.8634,
+    35.62786
+   ],
+   [
+    137.86314,
+    35.62667
+   ],
+   [
+    137.86065,
+    35.62605
+   ],
+   [
+    137.85842,
+    35.62465
+   ],
+   [
+    137.85773,
+    35.6213
+   ],
+   [
+    137.85542,
+    35.62081
+   ],
+   [
+    137.85481,
+    35.61886
+   ],
+   [
+    137.8537,
+    35.6176
+   ],
+   [
+    137.85112,
+    35.61767
+   ],
+   [
+    137.85027,
+    35.61823
+   ],
+   [
+    137.84795,
+    35.61795
+   ],
+   [
+    137.84486,
+    35.6183
+   ],
+   [
+    137.84142,
+    35.62005
+   ],
+   [
+    137.83954,
+    35.61858
+   ],
+   [
+    137.83816,
+    35.61851
+   ],
+   [
+    137.83773,
+    35.61774
+   ],
+   [
+    137.83645,
+    35.6174
+   ],
+   [
+    137.83499,
+    35.61754
+   ],
+   [
+    137.83241,
+    35.61663
+   ],
+   [
+    137.82915,
+    35.61774
+   ],
+   [
+    137.82718,
+    35.61767
+   ],
+   [
+    137.82563,
+    35.61635
+   ],
+   [
+    137.82409,
+    35.61558
+   ],
+   [
+    137.82331,
+    35.61572
+   ],
+   [
+    137.82306,
+    35.61698
+   ],
+   [
+    137.82194,
+    35.6176
+   ],
+   [
+    137.82151,
+    35.61844
+   ],
+   [
+    137.82031,
+    35.61879
+   ],
+   [
+    137.81937,
+    35.62047
+   ],
+   [
+    137.81971,
+    35.62228
+   ],
+   [
+    137.81894,
+    35.6227
+   ],
+   [
+    137.81894,
+    35.62319
+   ],
+   [
+    137.81954,
+    35.625
+   ],
+   [
+    137.81954,
+    35.62744
+   ],
+   [
+    137.81877,
+    35.62912
+   ],
+   [
+    137.81954,
+    35.63198
+   ],
+   [
+    137.81799,
+    35.63365
+   ],
+   [
+    137.81851,
+    35.6354
+   ],
+   [
+    137.81748,
+    35.63616
+   ],
+   [
+    137.81713,
+    35.6377
+   ],
+   [
+    137.81636,
+    35.63777
+   ],
+   [
+    137.81525,
+    35.63909
+   ],
+   [
+    137.81319,
+    35.63993
+   ],
+   [
+    137.81224,
+    35.64181
+   ],
+   [
+    137.80855,
+    35.64139
+   ],
+   [
+    137.80761,
+    35.64202
+   ],
+   [
+    137.80769,
+    35.64272
+   ],
+   [
+    137.80864,
+    35.6437
+   ],
+   [
+    137.81001,
+    35.64837
+   ],
+   [
+    137.8113,
+    35.64935
+   ],
+   [
+    137.81499,
+    35.65025
+   ],
+   [
+    137.81825,
+    35.65297
+   ],
+   [
+    137.82228,
+    35.65409
+   ],
+   [
+    137.82666,
+    35.65444
+   ],
+   [
+    137.82769,
+    35.65555
+   ],
+   [
+    137.83404,
+    35.65667
+   ],
+   [
+    137.83404,
+    35.65674
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "nagano-katagiri",
+   "name": "片桐ダム",
+   "computed_area_km2": 14.84,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.8,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 31.1,
+    "mask_cells": 15400,
+    "ring_cells": 15382,
+    "mask_area_km2": 14.9,
+    "ring_area_km2": 14.88,
+    "ring_vs_mask_area_pct": -0.12,
+    "raw_ring_vs_drawn_ring_pct": -0.02,
+    "iou": 0.9911,
+    "mask_outside_pct": 0.51,
+    "ring_only_pct": 0.39,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.21,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:25:11+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "7d19538627cc",
+  "spatial": {
+   "grid": [
+    576,
+    576
+   ],
+   "cell_m": 31.1,
+   "mask_cells": 15400,
+   "ring_cells": 15382,
+   "mask_area_km2": 14.9,
+   "ring_area_km2": 14.88,
+   "ring_vs_mask_area_pct": -0.12,
+   "raw_ring_vs_drawn_ring_pct": -0.02,
+   "iou": 0.9911,
+   "mask_outside_pct": 0.51,
+   "ring_only_pct": 0.39,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.21,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 81,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:25:11+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.16687109551591917,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.0,
+   "method_here": "snap"
+  }
+ }
+}

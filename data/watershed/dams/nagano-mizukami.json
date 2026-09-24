@@ -1,0 +1,278 @@
+{
+ "id": "nagano-mizukami",
+ "name": "水上ダム",
+ "published": {
+  "flow_version": "ab9a77b563d7",
+  "index": {
+   "id": "nagano-mizukami",
+   "name": "水上ダム",
+   "lat": 36.3511111,
+   "lon": 138.04,
+   "area_km2": 2.44,
+   "fine_area_km2": 2.45,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 2.29,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.3,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.1,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    138.05094,
+    36.35578
+   ],
+   [
+    138.05223,
+    36.35571
+   ],
+   [
+    138.05386,
+    36.35474
+   ],
+   [
+    138.05626,
+    36.35481
+   ],
+   [
+    138.05858,
+    36.35412
+   ],
+   [
+    138.06235,
+    36.35454
+   ],
+   [
+    138.06467,
+    36.35302
+   ],
+   [
+    138.06596,
+    36.35267
+   ],
+   [
+    138.0681,
+    36.35288
+   ],
+   [
+    138.06982,
+    36.35094
+   ],
+   [
+    138.06948,
+    36.34956
+   ],
+   [
+    138.07016,
+    36.34728
+   ],
+   [
+    138.06922,
+    36.34638
+   ],
+   [
+    138.06544,
+    36.34507
+   ],
+   [
+    138.06175,
+    36.34534
+   ],
+   [
+    138.05592,
+    36.34811
+   ],
+   [
+    138.05368,
+    36.34686
+   ],
+   [
+    138.05154,
+    36.34638
+   ],
+   [
+    138.05025,
+    36.34541
+   ],
+   [
+    138.04742,
+    36.3459
+   ],
+   [
+    138.0421,
+    36.34534
+   ],
+   [
+    138.04012,
+    36.34652
+   ],
+   [
+    138.03815,
+    36.34908
+   ],
+   [
+    138.03755,
+    36.35039
+   ],
+   [
+    138.03815,
+    36.35212
+   ],
+   [
+    138.03849,
+    36.35246
+   ],
+   [
+    138.04038,
+    36.35239
+   ],
+   [
+    138.04167,
+    36.3535
+   ],
+   [
+    138.04373,
+    36.35371
+   ],
+   [
+    138.04544,
+    36.35322
+   ],
+   [
+    138.05094,
+    36.35571
+   ],
+   [
+    138.05094,
+    36.35578
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "nagano-mizukami",
+   "name": "水上ダム",
+   "computed_area_km2": 2.45,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.1,
+    "mask_cells": 4582,
+    "ring_cells": 4569,
+    "mask_area_km2": 2.45,
+    "ring_area_km2": 2.44,
+    "ring_vs_mask_area_pct": -0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.11,
+    "iou": 0.9705,
+    "mask_outside_pct": 1.64,
+    "ring_only_pct": 1.36,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.48,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:25:38+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "ab9a77b563d7",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 23.1,
+   "mask_cells": 4582,
+   "ring_cells": 4569,
+   "mask_area_km2": 2.45,
+   "ring_area_km2": 2.44,
+   "ring_vs_mask_area_pct": -0.28,
+   "raw_ring_vs_drawn_ring_pct": 0.11,
+   "iou": 0.9705,
+   "mask_outside_pct": 1.64,
+   "ring_only_pct": 1.36,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.48,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:25:38+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.32592464965753853,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.2,
+   "method_here": "snap"
+  }
+ }
+}

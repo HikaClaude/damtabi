@@ -1,0 +1,482 @@
+{
+ "id": "nagano-onikuma",
+ "name": "小仁熊ダム",
+ "published": {
+  "flow_version": "dd30d687f09d",
+  "index": {
+   "id": "nagano-onikuma",
+   "name": "小仁熊ダム",
+   "lat": 36.4191667,
+   "lon": 138.0005556,
+   "area_km2": 9.48,
+   "fine_area_km2": 9.46,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 20.8,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.3,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 30.8,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    137.99927,
+    36.42052
+   ],
+   [
+    138.00167,
+    36.41942
+   ],
+   [
+    138.00536,
+    36.41976
+   ],
+   [
+    138.00476,
+    36.41824
+   ],
+   [
+    138.00545,
+    36.4179
+   ],
+   [
+    138.00536,
+    36.41617
+   ],
+   [
+    138.00588,
+    36.41514
+   ],
+   [
+    138.00759,
+    36.41389
+   ],
+   [
+    138.00716,
+    36.41223
+   ],
+   [
+    138.00751,
+    36.4112
+   ],
+   [
+    138.00716,
+    36.40906
+   ],
+   [
+    138.00759,
+    36.4085
+   ],
+   [
+    138.00716,
+    36.40795
+   ],
+   [
+    138.00759,
+    36.40671
+   ],
+   [
+    138.00879,
+    36.40616
+   ],
+   [
+    138.0094,
+    36.40505
+   ],
+   [
+    138.00982,
+    36.40049
+   ],
+   [
+    138.01068,
+    36.40091
+   ],
+   [
+    138.0142,
+    36.39966
+   ],
+   [
+    138.01446,
+    36.39883
+   ],
+   [
+    138.01609,
+    36.398
+   ],
+   [
+    138.01738,
+    36.39648
+   ],
+   [
+    138.02133,
+    36.39531
+   ],
+   [
+    138.02218,
+    36.39337
+   ],
+   [
+    138.02218,
+    36.39206
+   ],
+   [
+    138.02442,
+    36.39061
+   ],
+   [
+    138.02459,
+    36.38978
+   ],
+   [
+    138.02613,
+    36.38861
+   ],
+   [
+    138.02648,
+    36.38757
+   ],
+   [
+    138.02785,
+    36.38771
+   ],
+   [
+    138.02939,
+    36.38294
+   ],
+   [
+    138.03214,
+    36.38121
+   ],
+   [
+    138.03377,
+    36.37866
+   ],
+   [
+    138.03214,
+    36.377
+   ],
+   [
+    138.02819,
+    36.37541
+   ],
+   [
+    138.02725,
+    36.37548
+   ],
+   [
+    138.0257,
+    36.37458
+   ],
+   [
+    138.02416,
+    36.37451
+   ],
+   [
+    138.02236,
+    36.37589
+   ],
+   [
+    138.01952,
+    36.37555
+   ],
+   [
+    138.01583,
+    36.37299
+   ],
+   [
+    138.0142,
+    36.37258
+   ],
+   [
+    138.01386,
+    36.36912
+   ],
+   [
+    138.01163,
+    36.36795
+   ],
+   [
+    138.01051,
+    36.36795
+   ],
+   [
+    138.00759,
+    36.37168
+   ],
+   [
+    138.00613,
+    36.37168
+   ],
+   [
+    138.00176,
+    36.3703
+   ],
+   [
+    137.99884,
+    36.37126
+   ],
+   [
+    137.99815,
+    36.37216
+   ],
+   [
+    137.99747,
+    36.37223
+   ],
+   [
+    137.99661,
+    36.37375
+   ],
+   [
+    137.99644,
+    36.37658
+   ],
+   [
+    137.99721,
+    36.37873
+   ],
+   [
+    137.99635,
+    36.38142
+   ],
+   [
+    137.99635,
+    36.38688
+   ],
+   [
+    137.99712,
+    36.38764
+   ],
+   [
+    137.99695,
+    36.38854
+   ],
+   [
+    137.99781,
+    36.38923
+   ],
+   [
+    137.99747,
+    36.39109
+   ],
+   [
+    138.0015,
+    36.39151
+   ],
+   [
+    138.0027,
+    36.39296
+   ],
+   [
+    138.00184,
+    36.39337
+   ],
+   [
+    138.0021,
+    36.39489
+   ],
+   [
+    138.00141,
+    36.39593
+   ],
+   [
+    138.0015,
+    36.39711
+   ],
+   [
+    138.00056,
+    36.398
+   ],
+   [
+    137.99867,
+    36.39849
+   ],
+   [
+    137.99772,
+    36.39987
+   ],
+   [
+    137.99875,
+    36.4007
+   ],
+   [
+    137.99841,
+    36.40408
+   ],
+   [
+    137.99918,
+    36.40498
+   ],
+   [
+    137.99875,
+    36.40692
+   ],
+   [
+    137.99935,
+    36.40788
+   ],
+   [
+    137.99892,
+    36.40899
+   ],
+   [
+    137.99824,
+    36.40933
+   ],
+   [
+    137.9997,
+    36.41141
+   ],
+   [
+    137.99995,
+    36.41279
+   ],
+   [
+    137.9985,
+    36.4141
+   ],
+   [
+    137.99678,
+    36.41817
+   ],
+   [
+    137.99704,
+    36.41969
+   ],
+   [
+    137.99927,
+    36.42045
+   ],
+   [
+    137.99927,
+    36.42052
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "nagano-onikuma",
+   "name": "小仁熊ダム",
+   "computed_area_km2": 9.46,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.8,
+    "mask_cells": 10027,
+    "ring_cells": 10021,
+    "mask_area_km2": 9.51,
+    "ring_area_km2": 9.51,
+    "ring_vs_mask_area_pct": -0.06,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9836,
+    "mask_outside_pct": 0.86,
+    "ring_only_pct": 0.8,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.86,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:25:56+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "dd30d687f09d",
+  "spatial": {
+   "grid": [
+    576,
+    576
+   ],
+   "cell_m": 30.8,
+   "mask_cells": 10027,
+   "ring_cells": 10021,
+   "mask_area_km2": 9.51,
+   "ring_area_km2": 9.51,
+   "ring_vs_mask_area_pct": -0.06,
+   "raw_ring_vs_drawn_ring_pct": 0.03,
+   "iou": 0.9836,
+   "mask_outside_pct": 0.86,
+   "ring_only_pct": 0.8,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.86,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 81,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:25:56+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.25137573334335084,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.02,
+   "method_here": "snap"
+  }
+ }
+}

@@ -13,9 +13,9 @@
   "mask_min_largest_pct": 95.0
  },
  "counts": {
-  "pass": 21,
-  "hold": 2,
-  "total": 23
+  "pass": 77,
+  "hold": 0,
+  "total": 77
  },
  "dams": [
   {
@@ -222,29 +222,11 @@
   {
    "id": "toyama-kubusugawa",
    "name": "久婦須川ダム",
-   "status": "hold",
-   "published": false,
-   "block_codes": [
-    "rain_outside_ring",
-    "path_leaves_ring"
-   ],
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
    "warn_codes": [],
-   "reasons": [
-    {
-     "code": "rain_outside_ring",
-     "severity": "block",
-     "message": "雨マスクの 3.1% が描画される輪の外（境界から2セル超）にある",
-     "value": 3.12,
-     "limit": 2.0
-    },
-    {
-     "code": "path_leaves_ring",
-     "severity": "block",
-     "message": "雨の経路の 3.5% が輪の外へ流れ出る",
-     "value": 3.54,
-     "limit": 2.0
-    }
-   ],
+   "reasons": [],
    "flow_version": "825a18c3dd73",
    "spatial": {
     "grid": [
@@ -253,18 +235,18 @@
     ],
     "cell_m": 61.4,
     "mask_cells": 15670,
-    "ring_cells": 14850,
+    "ring_cells": 15644,
     "mask_area_km2": 59.08,
-    "ring_area_km2": 55.98,
-    "ring_vs_mask_area_pct": -5.23,
-    "raw_ring_vs_drawn_ring_pct": 1.22,
-    "iou": 0.9225,
-    "mask_outside_pct": 6.54,
-    "ring_only_pct": 1.38,
-    "mask_far_outside_pct": 3.12,
-    "ring_far_only_pct": 0.05,
+    "ring_area_km2": 58.98,
+    "ring_vs_mask_area_pct": -0.17,
+    "raw_ring_vs_drawn_ring_pct": -0.03,
+    "iou": 0.9929,
+    "mask_outside_pct": 0.44,
+    "ring_only_pct": 0.27,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
     "unreached_pct": 1.58,
-    "path_outside_pct": 3.54,
+    "path_outside_pct": 0.0,
     "ring_self_intersections_raw": 0,
     "ring_self_intersections_drawn": 0,
     "mask_components": 1,
@@ -1045,60 +1027,44 @@
   {
    "id": "toyama-shiraiwagawa",
    "name": "白岩川ダム",
-   "status": "hold",
-   "published": false,
-   "block_codes": [
-    "manual_hold",
-    "area_error",
-    "path_leaves_ring"
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_reservoir_surface"
    ],
-   "warn_codes": [],
    "reasons": [
     {
-     "code": "manual_hold",
-     "severity": "block",
-     "message": "原因が特定できていないため保留: 貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、この1基だけ逆に動いている。**原因は特定できていない。** 「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。"
-    },
-    {
-     "code": "area_error",
-     "severity": "block",
-     "message": "便覧の直接流域と +16.5%（許容 ±15%）",
-     "value": 16.5,
-     "limit": 15.0
-    },
-    {
-     "code": "path_leaves_ring",
-     "severity": "block",
-     "message": "雨の経路の 80.5% が輪の外へ流れ出る",
-     "value": 80.46,
-     "limit": 2.0
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
     }
    ],
-   "flow_version": "16902b3218e6",
+   "flow_version": "8c3e32a89d02",
    "spatial": {
     "grid": [
      563,
      563
     ],
     "cell_m": 38.3,
-    "mask_cells": 19029,
-    "ring_cells": 18660,
-    "mask_area_km2": 27.91,
-    "ring_area_km2": 27.37,
-    "ring_vs_mask_area_pct": -1.94,
-    "raw_ring_vs_drawn_ring_pct": 0.14,
-    "iou": 0.9591,
-    "mask_outside_pct": 3.04,
-    "ring_only_pct": 1.12,
-    "mask_far_outside_pct": 1.18,
-    "ring_far_only_pct": 0.11,
-    "unreached_pct": 0.46,
-    "path_outside_pct": 80.46,
+    "mask_cells": 15274,
+    "ring_cells": 15277,
+    "mask_area_km2": 22.41,
+    "ring_area_km2": 22.41,
+    "ring_vs_mask_area_pct": 0.02,
+    "raw_ring_vs_drawn_ring_pct": -0.09,
+    "iou": 0.9894,
+    "mask_outside_pct": 0.52,
+    "ring_only_pct": 0.54,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.4,
+    "path_outside_pct": 0.0,
     "ring_self_intersections_raw": 0,
     "ring_self_intersections_drawn": 0,
     "mask_components": 1,
     "mask_largest_pct": 100.0,
-    "goal_cells": 59,
+    "goal_cells": 1,
     "goal_in_mask_pct": 100.0,
     "tol_cells": 2
    },
@@ -1114,13 +1080,13 @@
     "grid_nan_pct": 0.0
    },
    "facts": {
-    "area_error_pct": 16.5,
-    "grid_drift_pct": 0.043989735691396525,
+    "area_error_pct": -6.5,
+    "grid_drift_pct": 0.06457652624169974,
     "official_area_km2": 24.0,
     "diversion_status": "none",
-    "outlet_method": "reservoir",
+    "outlet_method": "snap",
     "fine_recompute_pct": -0.01,
-    "method_here": "reservoir"
+    "method_here": "snap"
    }
   },
   {
@@ -1526,6 +1492,4062 @@
     "diversion_status": "none",
     "outlet_method": "snap-fixed",
     "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "ishikawa-tedorigawa",
+   "name": "手取川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "b699ae69fe16",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 92.4,
+    "mask_cells": 28946,
+    "ring_cells": 28940,
+    "mask_area_km2": 247.13,
+    "ring_area_km2": 247.08,
+    "ring_vs_mask_area_pct": -0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.02,
+    "iou": 0.9977,
+    "mask_outside_pct": 0.12,
+    "ring_only_pct": 0.1,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.45,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 192,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 6.44
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.006236759175903828,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "ishikawa-dainichigawa",
+   "name": "大日川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "9c6506e61a30",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 61.6,
+    "mask_cells": 14927,
+    "ring_cells": 14885,
+    "mask_area_km2": 56.64,
+    "ring_area_km2": 56.48,
+    "ring_vs_mask_area_pct": -0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9932,
+    "mask_outside_pct": 0.48,
+    "ring_only_pct": 0.2,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.87,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 327,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 80,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 3.05
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.21485971384307412,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "ishikawa-uchikawa",
+   "name": "内川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "51e1633dcd80",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.1,
+    "mask_cells": 16507,
+    "ring_cells": 16512,
+    "mask_area_km2": 35.08,
+    "ring_area_km2": 35.09,
+    "ring_vs_mask_area_pct": 0.03,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9929,
+    "mask_outside_pct": 0.34,
+    "ring_only_pct": 0.37,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.48,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.51
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.028571155072987242,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "ishikawa-shin-uchikawa",
+   "name": "新内川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "50cafb31e8be",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.1,
+    "mask_cells": 18134,
+    "ring_cells": 18124,
+    "mask_area_km2": 38.54,
+    "ring_area_km2": 38.52,
+    "ring_vs_mask_area_pct": -0.06,
+    "raw_ring_vs_drawn_ring_pct": 0.06,
+    "iou": 0.9923,
+    "mask_outside_pct": 0.41,
+    "ring_only_pct": 0.36,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.86,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.51
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.005209589890986521,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "ishikawa-saigawa",
+   "name": "犀川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "1815d742600b",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.1,
+    "mask_cells": 26409,
+    "ring_cells": 26413,
+    "mask_area_km2": 56.12,
+    "ring_area_km2": 56.13,
+    "ring_vs_mask_area_pct": 0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.01,
+    "iou": 0.9949,
+    "mask_outside_pct": 0.25,
+    "ring_only_pct": 0.26,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.17,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 124,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.04828613752927424,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "ishikawa-tatsumi",
+   "name": "辰巳ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "14dbe5c91197",
+   "spatial": {
+    "grid": [
+     554,
+     554
+    ],
+    "cell_m": 92.2,
+    "mask_cells": 9179,
+    "ring_cells": 9168,
+    "mask_area_km2": 78.03,
+    "ring_area_km2": 77.94,
+    "ring_vs_mask_area_pct": -0.12,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9962,
+    "mask_outside_pct": 0.25,
+    "ring_only_pct": 0.13,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.98,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 143,
+     "missing": 26,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 19.11
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1748119159237893,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap-fixed",
+    "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "ishikawa-kitakawachi",
+   "name": "北河内ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "9fb512c9025d",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 22.8,
+    "mask_cells": 20590,
+    "ring_cells": 20605,
+    "mask_area_km2": 10.7,
+    "ring_area_km2": 10.71,
+    "ring_vs_mask_area_pct": 0.07,
+    "raw_ring_vs_drawn_ring_pct": 0.01,
+    "iou": 0.9831,
+    "mask_outside_pct": 0.82,
+    "ring_only_pct": 0.89,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.28,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 7.04
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.02343950280434548,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.03,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "ishikawa-akase",
+   "name": "赤瀬ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "d4325b05570f",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.2,
+    "mask_cells": 18959,
+    "ring_cells": 18935,
+    "mask_area_km2": 40.47,
+    "ring_area_km2": 40.42,
+    "ring_vs_mask_area_pct": -0.13,
+    "raw_ring_vs_drawn_ring_pct": -0.01,
+    "iou": 0.9926,
+    "mask_outside_pct": 0.43,
+    "ring_only_pct": 0.31,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.34,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 132,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 48,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 5.03
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.034294483008423526,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "ishikawa-kutani",
+   "name": "九谷ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "3352c6b2b6e7",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 61.7,
+    "mask_cells": 18723,
+    "ring_cells": 18677,
+    "mask_area_km2": 71.28,
+    "ring_area_km2": 71.1,
+    "ring_vs_mask_area_pct": -0.25,
+    "raw_ring_vs_drawn_ring_pct": 0.04,
+    "iou": 0.9957,
+    "mask_outside_pct": 0.34,
+    "ring_only_pct": 0.09,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.38,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 358,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 80,
+     "missing": 1,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 4.76
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.12710109370051015,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "ishikawa-wagatani",
+   "name": "我谷ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "a969f8ca99a9",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 61.7,
+    "mask_cells": 22726,
+    "ring_cells": 22693,
+    "mask_area_km2": 86.52,
+    "ring_area_km2": 86.39,
+    "ring_vs_mask_area_pct": -0.15,
+    "raw_ring_vs_drawn_ring_pct": 0.04,
+    "iou": 0.9962,
+    "mask_outside_pct": 0.26,
+    "ring_only_pct": 0.12,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.41,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 75,
+     "missing": 6,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 13.89
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1037789830814484,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "ishikawa-hakkagawa",
+   "name": "八ヶ川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "339f0fd2907a",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 22.8,
+    "mask_cells": 16912,
+    "ring_cells": 16898,
+    "mask_area_km2": 8.79,
+    "ring_area_km2": 8.78,
+    "ring_vs_mask_area_pct": -0.08,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9794,
+    "mask_outside_pct": 1.08,
+    "ring_only_pct": 1.0,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.33,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.17
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.09820926134015417,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-tokuyama",
+   "name": "徳山ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "c6b5f0da8ec1",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 93.2,
+    "mask_cells": 29502,
+    "ring_cells": 29499,
+    "mask_area_km2": 256.26,
+    "ring_area_km2": 256.24,
+    "ring_vs_mask_area_pct": -0.01,
+    "raw_ring_vs_drawn_ring_pct": -0.01,
+    "iou": 0.9985,
+    "mask_outside_pct": 0.08,
+    "ring_only_pct": 0.07,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.15,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 204,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.031509396083195806,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "gifu-agigawa",
+   "name": "阿木川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "9222a203a8fd",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 62.3,
+    "mask_cells": 21242,
+    "ring_cells": 21229,
+    "mask_area_km2": 82.45,
+    "ring_area_km2": 82.4,
+    "ring_vs_mask_area_pct": -0.06,
+    "raw_ring_vs_drawn_ring_pct": -0.03,
+    "iou": 0.9961,
+    "mask_outside_pct": 0.23,
+    "ring_only_pct": 0.16,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.57,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 347,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.048615597474799266,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "gifu-iwaya",
+   "name": "岩屋ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "71307149eb32",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 124.1,
+    "mask_cells": 17373,
+    "ring_cells": 17352,
+    "mask_area_km2": 267.56,
+    "ring_area_km2": 267.23,
+    "ring_vs_mask_area_pct": -0.12,
+    "raw_ring_vs_drawn_ring_pct": -0.03,
+    "iou": 0.9979,
+    "mask_outside_pct": 0.17,
+    "ring_only_pct": 0.05,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.71,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 116,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.22469465682708467,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "gifu-maruyama",
+   "name": "丸山ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "482a4be33dd6",
+   "spatial": {
+    "grid": [
+     608,
+     608
+    ],
+    "cell_m": 249.0,
+    "mask_cells": 39338,
+    "ring_cells": 39332,
+    "mask_area_km2": 2439.0,
+    "ring_area_km2": 2438.62,
+    "ring_vs_mask_area_pct": -0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9988,
+    "mask_outside_pct": 0.07,
+    "ring_only_pct": 0.05,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.72,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 19,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 359,
+     "missing": 2,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 2.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.002332808583949131,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "gifu-yokoyama",
+   "name": "横山ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "6ff530cf0d8f",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 124.3,
+    "mask_cells": 30504,
+    "ring_cells": 30482,
+    "mask_area_km2": 471.3,
+    "ring_area_km2": 470.96,
+    "ring_vs_mask_area_pct": -0.07,
+    "raw_ring_vs_drawn_ring_pct": -0.03,
+    "iou": 0.9987,
+    "mask_outside_pct": 0.1,
+    "ring_only_pct": 0.03,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.38,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 1.08
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.07658467940840907,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-origawa",
+   "name": "小里川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "8ceb7b975cf4",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.8,
+    "mask_cells": 25636,
+    "ring_cells": 25634,
+    "mask_area_km2": 56.15,
+    "ring_area_km2": 56.14,
+    "ring_vs_mask_area_pct": -0.01,
+    "raw_ring_vs_drawn_ring_pct": 0.01,
+    "iou": 0.9944,
+    "mask_outside_pct": 0.28,
+    "ring_only_pct": 0.28,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.5,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.05153464395226681,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-atagi",
+   "name": "阿多岐ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "57dc2554306c",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 31.0,
+    "mask_cells": 17030,
+    "ring_cells": 17004,
+    "mask_area_km2": 16.37,
+    "ring_area_km2": 16.34,
+    "ring_vs_mask_area_pct": -0.15,
+    "raw_ring_vs_drawn_ring_pct": 0.09,
+    "iou": 0.9899,
+    "mask_outside_pct": 0.58,
+    "ring_only_pct": 0.43,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.23,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1258107695959687,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.03,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-iwamura",
+   "name": "岩村ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "3d2ee7b8eacc",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.4,
+    "mask_cells": 3130,
+    "ring_cells": 3117,
+    "mask_area_km2": 1.71,
+    "ring_area_km2": 1.71,
+    "ring_vs_mask_area_pct": -0.42,
+    "raw_ring_vs_drawn_ring_pct": 0.26,
+    "iou": 0.975,
+    "mask_outside_pct": 1.47,
+    "ring_only_pct": 1.06,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.99,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.015273544590987953,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.02,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-ogahora",
+   "name": "大ヶ洞ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "6b83a916259a",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.2,
+    "mask_cells": 7860,
+    "ring_cells": 7851,
+    "mask_area_km2": 4.23,
+    "ring_area_km2": 4.23,
+    "ring_vs_mask_area_pct": -0.11,
+    "raw_ring_vs_drawn_ring_pct": 0.11,
+    "iou": 0.981,
+    "mask_outside_pct": 1.02,
+    "ring_only_pct": 0.9,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.33,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.07983832028611859,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.05,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-nakanoho",
+   "name": "中野方ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "b2a31863579f",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.3,
+    "mask_cells": 2835,
+    "ring_cells": 2828,
+    "mask_area_km2": 1.54,
+    "ring_area_km2": 1.54,
+    "ring_vs_mask_area_pct": -0.25,
+    "raw_ring_vs_drawn_ring_pct": 0.39,
+    "iou": 0.9773,
+    "mask_outside_pct": 1.27,
+    "ring_only_pct": 1.03,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.99,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1751393725057282,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.08,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "gifu-nyukawa",
+   "name": "丹生川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "d1b814e11712",
+   "spatial": {
+    "grid": [
+     554,
+     554
+    ],
+    "cell_m": 46.3,
+    "mask_cells": 10858,
+    "ring_cells": 10850,
+    "mask_area_km2": 23.28,
+    "ring_area_km2": 23.26,
+    "ring_vs_mask_area_pct": -0.07,
+    "raw_ring_vs_drawn_ring_pct": -0.08,
+    "iou": 0.989,
+    "mask_outside_pct": 0.59,
+    "ring_only_pct": 0.52,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.55,
+    "path_outside_pct": 0.01,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 169,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.03170563746894839,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap-fixed",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-ryugahana",
+   "name": "龍ヶ鼻ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "9d4d36f8fca0",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.3,
+    "mask_cells": 14468,
+    "ring_cells": 14454,
+    "mask_area_km2": 31.01,
+    "ring_area_km2": 30.98,
+    "ring_vs_mask_area_pct": -0.1,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9939,
+    "mask_outside_pct": 0.35,
+    "ring_only_pct": 0.26,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.21,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.5
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.06234182045758985,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-eiheiji",
+   "name": "永平寺ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "2819084cbfad",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.2,
+    "mask_cells": 5751,
+    "ring_cells": 5752,
+    "mask_area_km2": 3.1,
+    "ring_area_km2": 3.1,
+    "ring_vs_mask_area_pct": 0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.19,
+    "iou": 0.9775,
+    "mask_outside_pct": 1.13,
+    "ring_only_pct": 1.15,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.35,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 102,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.03824257622171423,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "fukui-sasogawa",
+   "name": "笹生川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "a6754a01a886",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 62.0,
+    "mask_cells": 18577,
+    "ring_cells": 18549,
+    "mask_area_km2": 71.41,
+    "ring_area_km2": 71.3,
+    "ring_vs_mask_area_pct": -0.15,
+    "raw_ring_vs_drawn_ring_pct": 0.02,
+    "iou": 0.9959,
+    "mask_outside_pct": 0.28,
+    "ring_only_pct": 0.13,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.78,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 427,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.15665699213787132,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "fukui-jodojigawa",
+   "name": "浄土寺川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "53f9e0c62b9f",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.2,
+    "mask_cells": 14894,
+    "ring_cells": 14935,
+    "mask_area_km2": 8.02,
+    "ring_area_km2": 8.04,
+    "ring_vs_mask_area_pct": 0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9849,
+    "mask_outside_pct": 0.62,
+    "ring_only_pct": 0.9,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.42,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.04459761901071113,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-hirono",
+   "name": "広野ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "e95af9b19c06",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.5,
+    "mask_cells": 19252,
+    "ring_cells": 19245,
+    "mask_area_km2": 41.63,
+    "ring_area_km2": 41.61,
+    "ring_vs_mask_area_pct": -0.04,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9945,
+    "mask_outside_pct": 0.3,
+    "ring_only_pct": 0.26,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.24,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 249,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.05
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.05151004978425355,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "fukui-masutani",
+   "name": "桝谷ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "ba78b8df6ecc",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.3,
+    "mask_cells": 18990,
+    "ring_cells": 18965,
+    "mask_area_km2": 10.31,
+    "ring_area_km2": 10.3,
+    "ring_vs_mask_area_pct": -0.13,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9872,
+    "mask_outside_pct": 0.71,
+    "ring_only_pct": 0.58,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.29,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.1069875965643119,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.02,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-otsuro",
+   "name": "大津呂ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "253162bc84d8",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.3,
+    "mask_cells": 2900,
+    "ring_cells": 2892,
+    "mask_area_km2": 1.57,
+    "ring_area_km2": 1.57,
+    "ring_vs_mask_area_pct": -0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.69,
+    "iou": 0.9721,
+    "mask_outside_pct": 1.55,
+    "ring_only_pct": 1.28,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.76,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 9.1
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.06408417895227281,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.14,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-kochigawa",
+   "name": "河内川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "b267f159b6d4",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 31.1,
+    "mask_cells": 15174,
+    "ring_cells": 15136,
+    "mask_area_km2": 14.68,
+    "ring_area_km2": 14.64,
+    "ring_vs_mask_area_pct": -0.25,
+    "raw_ring_vs_drawn_ring_pct": 0.19,
+    "iou": 0.9891,
+    "mask_outside_pct": 0.67,
+    "ring_only_pct": 0.42,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.36,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.16752397276473818,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.02,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-kuzuryu",
+   "name": "九頭竜ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "9323b47db9ad",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 123.9,
+    "mask_cells": 12085,
+    "ring_cells": 12057,
+    "mask_area_km2": 185.52,
+    "ring_area_km2": 185.09,
+    "ring_vs_mask_area_pct": -0.23,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9972,
+    "mask_outside_pct": 0.26,
+    "ring_only_pct": 0.02,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.09,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 224,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1522878886637935,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "fukui-managawa",
+   "name": "真名川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "0fa7beb92404",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 92.9,
+    "mask_cells": 25770,
+    "ring_cells": 25764,
+    "mask_area_km2": 222.41,
+    "ring_area_km2": 222.35,
+    "ring_vs_mask_area_pct": -0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9979,
+    "mask_outside_pct": 0.12,
+    "ring_only_pct": 0.09,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.65,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.054853266215393326,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-takinami",
+   "name": "滝波ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "f3d9968a37cf",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 2904,
+    "ring_cells": 2886,
+    "mask_area_km2": 6.25,
+    "ring_area_km2": 6.21,
+    "ring_vs_mask_area_pct": -0.62,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9815,
+    "mask_outside_pct": 1.24,
+    "ring_only_pct": 0.62,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 2.75,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 42,
+     "missing": 7,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 26.54
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.04828497275255472,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.06,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-kaitani",
+   "name": "開谷ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "3551cb86d60f",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 540,
+    "ring_cells": 544,
+    "mask_area_km2": 1.16,
+    "ring_area_km2": 1.17,
+    "ring_vs_mask_area_pct": 0.74,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9638,
+    "mask_outside_pct": 1.48,
+    "ring_only_pct": 2.21,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.85,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 46,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 15.1
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.3362095060533976,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.38,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "fukui-yoshinosegawa",
+   "name": "吉野瀬川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "12fd849c95d6",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 11025,
+    "ring_cells": 11004,
+    "mask_area_km2": 23.74,
+    "ring_area_km2": 23.69,
+    "ring_vs_mask_area_pct": -0.19,
+    "raw_ring_vs_drawn_ring_pct": 0.11,
+    "iou": 0.9914,
+    "mask_outside_pct": 0.53,
+    "ring_only_pct": 0.34,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.36,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 46,
+     "missing": 3,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 19.84
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.14105557080081876,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-omachi",
+   "name": "大町ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "6a2ca1c410fa",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 92.1,
+    "mask_cells": 22936,
+    "ring_cells": 22944,
+    "mask_area_km2": 194.55,
+    "ring_area_km2": 194.62,
+    "ring_vs_mask_area_pct": 0.03,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.998,
+    "mask_outside_pct": 0.08,
+    "ring_only_pct": 0.12,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.28,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.017235100093104805,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-miwa",
+   "name": "美和ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "145b75aa1295",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 124.0,
+    "mask_cells": 20204,
+    "ring_cells": 20181,
+    "mask_area_km2": 310.66,
+    "ring_area_km2": 310.3,
+    "ring_vs_mask_area_pct": -0.11,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9983,
+    "mask_outside_pct": 0.14,
+    "ring_only_pct": 0.03,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.25,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 62,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.10491206381542106,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "nagano-koshibu",
+   "name": "小渋ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "7d630f560a8a",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 93.2,
+    "mask_cells": 33273,
+    "ring_cells": 33281,
+    "mask_area_km2": 289.02,
+    "ring_area_km2": 289.09,
+    "ring_vs_mask_area_pct": 0.02,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9982,
+    "mask_outside_pct": 0.08,
+    "ring_only_pct": 0.1,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.23,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 151,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.027126041243241694,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "nagano-misogawa",
+   "name": "味噌川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "2e02d48d0340",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 25801,
+    "ring_cells": 25800,
+    "mask_area_km2": 55.55,
+    "ring_area_km2": 55.55,
+    "ring_vs_mask_area_pct": -0.0,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9942,
+    "mask_outside_pct": 0.29,
+    "ring_only_pct": 0.29,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.13,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 399,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.014028802209709035,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": -0.0,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "nagano-susobana",
+   "name": "裾花ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "f7df7be32118",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 92.0,
+    "mask_cells": 28803,
+    "ring_cells": 28804,
+    "mask_area_km2": 243.79,
+    "ring_area_km2": 243.8,
+    "ring_vs_mask_area_pct": 0.0,
+    "raw_ring_vs_drawn_ring_pct": -0.01,
+    "iou": 0.9982,
+    "mask_outside_pct": 0.09,
+    "ring_only_pct": 0.09,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.6,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.024354901675949225,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-matsukawa",
+   "name": "松川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "d184c8024917",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 62.2,
+    "mask_cells": 16058,
+    "ring_cells": 16023,
+    "mask_area_km2": 62.13,
+    "ring_area_km2": 61.99,
+    "ring_vs_mask_area_pct": -0.22,
+    "raw_ring_vs_drawn_ring_pct": 0.05,
+    "iou": 0.9942,
+    "mask_outside_pct": 0.4,
+    "ring_only_pct": 0.18,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.5,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.15964613490104806,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap-fixed",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-yukawa",
+   "name": "湯川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "a554b22de1d3",
+   "spatial": {
+    "grid": [
+     563,
+     563
+    ],
+    "cell_m": 77.0,
+    "mask_cells": 24846,
+    "ring_cells": 24852,
+    "mask_area_km2": 147.31,
+    "ring_area_km2": 147.35,
+    "ring_vs_mask_area_pct": 0.02,
+    "raw_ring_vs_drawn_ring_pct": -0.02,
+    "iou": 0.998,
+    "mask_outside_pct": 0.09,
+    "ring_only_pct": 0.11,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.71,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 121,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.014649334949889958,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-okususobana",
+   "name": "奥裾花ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "e23d83326871",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 61.3,
+    "mask_cells": 17119,
+    "ring_cells": 17094,
+    "mask_area_km2": 64.33,
+    "ring_area_km2": 64.23,
+    "ring_vs_mask_area_pct": -0.15,
+    "raw_ring_vs_drawn_ring_pct": -0.02,
+    "iou": 0.9964,
+    "mask_outside_pct": 0.25,
+    "ring_only_pct": 0.11,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.79,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1339847639885594,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-narai",
+   "name": "奈良井ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "434ae741eeb8",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 61.9,
+    "mask_cells": 12341,
+    "ring_cells": 12321,
+    "mask_area_km2": 47.29,
+    "ring_area_km2": 47.21,
+    "ring_vs_mask_area_pct": -0.16,
+    "raw_ring_vs_drawn_ring_pct": 0.01,
+    "iou": 0.9948,
+    "mask_outside_pct": 0.34,
+    "ring_only_pct": 0.18,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.55,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.22107265645687768,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap-fixed",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-koya",
+   "name": "古谷ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    }
+   ],
+   "flow_version": "3fdab168548b",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.9,
+    "mask_cells": 13315,
+    "ring_cells": 13268,
+    "mask_area_km2": 12.71,
+    "ring_area_km2": 12.67,
+    "ring_vs_mask_area_pct": -0.35,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9869,
+    "mask_outside_pct": 0.83,
+    "ring_only_pct": 0.48,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.41,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 78,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.22760246874065082,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "reservoir",
+    "fine_recompute_pct": 0.01,
+    "method_here": "reservoir"
+   }
+  },
+  {
+   "id": "nagano-yokokawa",
+   "name": "横川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "4a1a1094c438",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 16994,
+    "ring_cells": 17004,
+    "mask_area_km2": 36.59,
+    "ring_area_km2": 36.61,
+    "ring_vs_mask_area_pct": 0.06,
+    "raw_ring_vs_drawn_ring_pct": 0.01,
+    "iou": 0.9945,
+    "mask_outside_pct": 0.25,
+    "ring_only_pct": 0.31,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.25,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.014063257079888203,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.01,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-katagiri",
+   "name": "片桐ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "7d19538627cc",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 31.1,
+    "mask_cells": 15400,
+    "ring_cells": 15382,
+    "mask_area_km2": 14.9,
+    "ring_area_km2": 14.88,
+    "ring_vs_mask_area_pct": -0.12,
+    "raw_ring_vs_drawn_ring_pct": -0.02,
+    "iou": 0.9911,
+    "mask_outside_pct": 0.51,
+    "ring_only_pct": 0.39,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.21,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.16687109551591917,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-minowa",
+   "name": "箕輪ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "8a1cd8aac80f",
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 17699,
+    "ring_cells": 17698,
+    "mask_area_km2": 38.11,
+    "ring_area_km2": 38.1,
+    "ring_vs_mask_area_pct": -0.01,
+    "raw_ring_vs_drawn_ring_pct": 0.07,
+    "iou": 0.9928,
+    "mask_outside_pct": 0.36,
+    "ring_only_pct": 0.36,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.35,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 49,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.06976653993048254,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.0,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-kanabara",
+   "name": "金原ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "583ece34646b",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.1,
+    "mask_cells": 5688,
+    "ring_cells": 5663,
+    "mask_area_km2": 3.04,
+    "ring_area_km2": 3.02,
+    "ring_vs_mask_area_pct": -0.44,
+    "raw_ring_vs_drawn_ring_pct": 0.04,
+    "iou": 0.9775,
+    "mask_outside_pct": 1.35,
+    "ring_only_pct": 0.92,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 2.43,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.10014001078094692,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.03,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-kitayama",
+   "name": "北山ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "e051be99d4ae",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.0,
+    "mask_cells": 2357,
+    "ring_cells": 2338,
+    "mask_area_km2": 1.25,
+    "ring_area_km2": 1.24,
+    "ring_vs_mask_area_pct": -0.81,
+    "raw_ring_vs_drawn_ring_pct": 0.68,
+    "iou": 0.9661,
+    "mask_outside_pct": 2.12,
+    "ring_only_pct": 1.33,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.06,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.1616359226437325,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.21,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-mizukami",
+   "name": "水上ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "ab9a77b563d7",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.1,
+    "mask_cells": 4582,
+    "ring_cells": 4569,
+    "mask_area_km2": 2.45,
+    "ring_area_km2": 2.44,
+    "ring_vs_mask_area_pct": -0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.11,
+    "iou": 0.9705,
+    "mask_outside_pct": 1.64,
+    "ring_only_pct": 1.36,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.48,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.32592464965753853,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.2,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-onikuma",
+   "name": "小仁熊ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "dd30d687f09d",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.8,
+    "mask_cells": 10027,
+    "ring_cells": 10021,
+    "mask_area_km2": 9.51,
+    "ring_area_km2": 9.51,
+    "ring_vs_mask_area_pct": -0.06,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9836,
+    "mask_outside_pct": 0.86,
+    "ring_only_pct": 0.8,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.86,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.25137573334335084,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.02,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-yoji",
+   "name": "余地ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "a8c7cd609399",
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.1,
+    "mask_cells": 4705,
+    "ring_cells": 4717,
+    "mask_area_km2": 2.51,
+    "ring_area_km2": 2.52,
+    "ring_vs_mask_area_pct": 0.26,
+    "raw_ring_vs_drawn_ring_pct": 0.06,
+    "iou": 0.9761,
+    "mask_outside_pct": 1.08,
+    "ring_only_pct": 1.34,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.38,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 25,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": -0.00882781890670925,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": 0.05,
+    "method_here": "snap"
+   }
+  },
+  {
+   "id": "nagano-asakawa",
+   "name": "浅川ダム",
+   "status": "pass",
+   "published": true,
+   "block_codes": [],
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "reasons": [
+    {
+     "code": "no_official_direct_area",
+     "severity": "warn",
+     "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+    },
+    {
+     "code": "diversion_unknown",
+     "severity": "warn",
+     "message": "導水の有無が未確認"
+    },
+    {
+     "code": "no_reservoir_surface",
+     "severity": "warn",
+     "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+    }
+   ],
+   "flow_version": "7ef02a6f4399",
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 30.6,
+    "mask_cells": 16833,
+    "ring_cells": 16813,
+    "mask_area_km2": 15.76,
+    "ring_area_km2": 15.74,
+    "ring_vs_mask_area_pct": -0.12,
+    "raw_ring_vs_drawn_ring_pct": -0.08,
+    "iou": 0.9883,
+    "mask_outside_pct": 0.65,
+    "ring_only_pct": 0.53,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.64,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   },
+   "dem": {
+    "touches_edge": false,
+    "nodata_adjacent_cells": 0,
+    "tiles_touching_catchment": [],
+    "tile_counts": {
+     "ok": 81,
+     "missing": 0,
+     "legacy_empty": 0
+    },
+    "grid_nan_pct": 0.0
+   },
+   "facts": {
+    "area_error_pct": null,
+    "grid_drift_pct": 0.12138740257878755,
+    "official_area_km2": null,
+    "diversion_status": "unknown",
+    "outlet_method": "snap",
+    "fine_recompute_pct": -0.03,
     "method_here": "snap"
    }
   }

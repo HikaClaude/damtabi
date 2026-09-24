@@ -1,0 +1,318 @@
+{
+ "id": "nagano-yoji",
+ "name": "余地ダム",
+ "published": {
+  "flow_version": "a8c7cd609399",
+  "index": {
+   "id": "nagano-yoji",
+   "name": "余地ダム",
+   "lat": 36.1613889,
+   "lon": 138.5663889,
+   "area_km2": 2.52,
+   "fine_area_km2": 2.52,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 2.52,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.0,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.1,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    138.57107,
+    36.16934
+   ],
+   [
+    138.57433,
+    36.16878
+   ],
+   [
+    138.57511,
+    36.16816
+   ],
+   [
+    138.57682,
+    36.1683
+   ],
+   [
+    138.57862,
+    36.16788
+   ],
+   [
+    138.57974,
+    36.16671
+   ],
+   [
+    138.58034,
+    36.16664
+   ],
+   [
+    138.58034,
+    36.16574
+   ],
+   [
+    138.58111,
+    36.16511
+   ],
+   [
+    138.58,
+    36.16338
+   ],
+   [
+    138.58051,
+    36.16179
+   ],
+   [
+    138.58223,
+    36.16185
+   ],
+   [
+    138.58377,
+    36.16047
+   ],
+   [
+    138.58721,
+    36.16088
+   ],
+   [
+    138.58712,
+    36.15908
+   ],
+   [
+    138.58944,
+    36.15777
+   ],
+   [
+    138.59047,
+    36.15576
+   ],
+   [
+    138.59038,
+    36.15492
+   ],
+   [
+    138.58892,
+    36.15506
+   ],
+   [
+    138.58772,
+    36.15402
+   ],
+   [
+    138.58463,
+    36.15465
+   ],
+   [
+    138.58317,
+    36.15389
+   ],
+   [
+    138.58206,
+    36.15458
+   ],
+   [
+    138.58043,
+    36.15395
+   ],
+   [
+    138.57871,
+    36.15409
+   ],
+   [
+    138.57553,
+    36.15271
+   ],
+   [
+    138.5739,
+    36.15305
+   ],
+   [
+    138.57099,
+    36.15292
+   ],
+   [
+    138.56833,
+    36.15569
+   ],
+   [
+    138.56618,
+    36.15617
+   ],
+   [
+    138.56592,
+    36.1586
+   ],
+   [
+    138.56472,
+    36.15971
+   ],
+   [
+    138.56472,
+    36.16082
+   ],
+   [
+    138.56601,
+    36.16123
+   ],
+   [
+    138.56678,
+    36.16206
+   ],
+   [
+    138.56704,
+    36.16379
+   ],
+   [
+    138.56867,
+    36.16539
+   ],
+   [
+    138.56918,
+    36.16712
+   ],
+   [
+    138.57021,
+    36.16809
+   ],
+   [
+    138.57013,
+    36.1692
+   ],
+   [
+    138.57107,
+    36.16927
+   ],
+   [
+    138.57107,
+    36.16934
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "nagano-yoji",
+   "name": "余地ダム",
+   "computed_area_km2": 2.52,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.1,
+    "mask_cells": 4705,
+    "ring_cells": 4717,
+    "mask_area_km2": 2.51,
+    "ring_area_km2": 2.52,
+    "ring_vs_mask_area_pct": 0.26,
+    "raw_ring_vs_drawn_ring_pct": 0.06,
+    "iou": 0.9761,
+    "mask_outside_pct": 1.08,
+    "ring_only_pct": 1.34,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.38,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:26:02+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "a8c7cd609399",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 23.1,
+   "mask_cells": 4705,
+   "ring_cells": 4717,
+   "mask_area_km2": 2.51,
+   "ring_area_km2": 2.52,
+   "ring_vs_mask_area_pct": 0.26,
+   "raw_ring_vs_drawn_ring_pct": 0.06,
+   "iou": 0.9761,
+   "mask_outside_pct": 1.08,
+   "ring_only_pct": 1.34,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.38,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:26:02+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.00882781890670925,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.05,
+   "method_here": "snap"
+  }
+ }
+}

@@ -95,6 +95,13 @@ class TestAreaText(unittest.TestCase):
         self.assertEqual(_run_jscript(prog).strip().split("|"),
                          ["3.5", "3.4", "1.5", "1.5", "609", "13", "10", "9.9"])
 
+    def test_no_reference_and_caution_notes(self):
+        body = cut("var div = d.diversion || {};", "box.innerHTML =")
+        self.assertIn("照合できる流域面積の資料も確認できていない", body)   # 便覧も参考値も無いとき
+        self.assertIn("d.caution", body)                                     # notes.json の注記
+        self.assertIn("esc(String(d.caution))", body)                        # 注記はエスケープして出す
+        self.assertIn("原因は特定できていません", body)                       # 差の理由を決めつけない
+
     def test_unknown_diversion_is_shown(self):
         body = cut("var div = d.diversion || {};", "box.innerHTML =")
         self.assertIn('div.status === "unknown"', body)

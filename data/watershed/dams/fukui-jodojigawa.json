@@ -1,0 +1,434 @@
+{
+ "id": "fukui-jodojigawa",
+ "name": "浄土寺川ダム",
+ "published": {
+  "flow_version": "53f9e0c62b9f",
+  "index": {
+   "id": "fukui-jodojigawa",
+   "name": "浄土寺川ダム",
+   "lat": 36.063526,
+   "lon": 136.542479,
+   "area_km2": 8.0,
+   "fine_area_km2": 8.0,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 7.7,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.0,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.2,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    136.57147,
+    36.07553
+   ],
+   [
+    136.57259,
+    36.07533
+   ],
+   [
+    136.57371,
+    36.07449
+   ],
+   [
+    136.57465,
+    36.07484
+   ],
+   [
+    136.57662,
+    36.07477
+   ],
+   [
+    136.57817,
+    36.07415
+   ],
+   [
+    136.57954,
+    36.07449
+   ],
+   [
+    136.58152,
+    36.07283
+   ],
+   [
+    136.58521,
+    36.07179
+   ],
+   [
+    136.58924,
+    36.0722
+   ],
+   [
+    136.59096,
+    36.07193
+   ],
+   [
+    136.59156,
+    36.07137
+   ],
+   [
+    136.59576,
+    36.07144
+   ],
+   [
+    136.59628,
+    36.07061
+   ],
+   [
+    136.59585,
+    36.0688
+   ],
+   [
+    136.59688,
+    36.06645
+   ],
+   [
+    136.5992,
+    36.06575
+   ],
+   [
+    136.59911,
+    36.06506
+   ],
+   [
+    136.59739,
+    36.06346
+   ],
+   [
+    136.59534,
+    36.06395
+   ],
+   [
+    136.59319,
+    36.06388
+   ],
+   [
+    136.59122,
+    36.06318
+   ],
+   [
+    136.58667,
+    36.06256
+   ],
+   [
+    136.58366,
+    36.06041
+   ],
+   [
+    136.58023,
+    36.05909
+   ],
+   [
+    136.57946,
+    36.05708
+   ],
+   [
+    136.57748,
+    36.05493
+   ],
+   [
+    136.57474,
+    36.05479
+   ],
+   [
+    136.57225,
+    36.05333
+   ],
+   [
+    136.57199,
+    36.05271
+   ],
+   [
+    136.57027,
+    36.05472
+   ],
+   [
+    136.56916,
+    36.05493
+   ],
+   [
+    136.56873,
+    36.05548
+   ],
+   [
+    136.56787,
+    36.05514
+   ],
+   [
+    136.5665,
+    36.05548
+   ],
+   [
+    136.56281,
+    36.05437
+   ],
+   [
+    136.55637,
+    36.05326
+   ],
+   [
+    136.55414,
+    36.05486
+   ],
+   [
+    136.55371,
+    36.05632
+   ],
+   [
+    136.55199,
+    36.0568
+   ],
+   [
+    136.55045,
+    36.05826
+   ],
+   [
+    136.54564,
+    36.05888
+   ],
+   [
+    136.54418,
+    36.05805
+   ],
+   [
+    136.54221,
+    36.05833
+   ],
+   [
+    136.54092,
+    36.05763
+   ],
+   [
+    136.53989,
+    36.05763
+   ],
+   [
+    136.53946,
+    36.05861
+   ],
+   [
+    136.53972,
+    36.05992
+   ],
+   [
+    136.54135,
+    36.06166
+   ],
+   [
+    136.54083,
+    36.06277
+   ],
+   [
+    136.54195,
+    36.06665
+   ],
+   [
+    136.54315,
+    36.06714
+   ],
+   [
+    136.54375,
+    36.06832
+   ],
+   [
+    136.54461,
+    36.06867
+   ],
+   [
+    136.54624,
+    36.07234
+   ],
+   [
+    136.5477,
+    36.0722
+   ],
+   [
+    136.54744,
+    36.07151
+   ],
+   [
+    136.5489,
+    36.07082
+   ],
+   [
+    136.5495,
+    36.0695
+   ],
+   [
+    136.55354,
+    36.06887
+   ],
+   [
+    136.55422,
+    36.06943
+   ],
+   [
+    136.55628,
+    36.06943
+   ],
+   [
+    136.55731,
+    36.07012
+   ],
+   [
+    136.55963,
+    36.06971
+   ],
+   [
+    136.56057,
+    36.07068
+   ],
+   [
+    136.56057,
+    36.07137
+   ],
+   [
+    136.56341,
+    36.0738
+   ],
+   [
+    136.56504,
+    36.07449
+   ],
+   [
+    136.56856,
+    36.07442
+   ],
+   [
+    136.57147,
+    36.07546
+   ],
+   [
+    136.57147,
+    36.07553
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-jodojigawa",
+   "name": "浄土寺川ダム",
+   "computed_area_km2": 8.0,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.2,
+    "mask_cells": 14894,
+    "ring_cells": 14935,
+    "mask_area_km2": 8.02,
+    "ring_area_km2": 8.04,
+    "ring_vs_mask_area_pct": 0.28,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9849,
+    "mask_outside_pct": 0.62,
+    "ring_only_pct": 0.9,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.42,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:20:01+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "53f9e0c62b9f",
+  "spatial": {
+   "grid": [
+    597,
+    597
+   ],
+   "cell_m": 23.2,
+   "mask_cells": 14894,
+   "ring_cells": 14935,
+   "mask_area_km2": 8.02,
+   "ring_area_km2": 8.04,
+   "ring_vs_mask_area_pct": 0.28,
+   "raw_ring_vs_drawn_ring_pct": 0.03,
+   "iou": 0.9849,
+   "mask_outside_pct": 0.62,
+   "ring_only_pct": 0.9,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.42,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 49,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:20:01+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.04459761901071113,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.01,
+   "method_here": "snap"
+  }
+ }
+}

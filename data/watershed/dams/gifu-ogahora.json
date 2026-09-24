@@ -1,0 +1,322 @@
+{
+ "id": "gifu-ogahora",
+ "name": "大ヶ洞ダム",
+ "published": {
+  "flow_version": "6b83a916259a",
+  "index": {
+   "id": "gifu-ogahora",
+   "name": "大ヶ洞ダム",
+   "lat": 35.908052,
+   "lon": 137.243233,
+   "area_km2": 4.24,
+   "fine_area_km2": 4.24,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 4.4,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": -0.1,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.2,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    137.25735,
+    35.91609
+   ],
+   [
+    137.25941,
+    35.91512
+   ],
+   [
+    137.26155,
+    35.91498
+   ],
+   [
+    137.26516,
+    35.91366
+   ],
+   [
+    137.2649,
+    35.91241
+   ],
+   [
+    137.26542,
+    35.91095
+   ],
+   [
+    137.26499,
+    35.91067
+   ],
+   [
+    137.2649,
+    35.90873
+   ],
+   [
+    137.26421,
+    35.90838
+   ],
+   [
+    137.26404,
+    35.90567
+   ],
+   [
+    137.26336,
+    35.9049
+   ],
+   [
+    137.2637,
+    35.90087
+   ],
+   [
+    137.26464,
+    35.90024
+   ],
+   [
+    137.26473,
+    35.89837
+   ],
+   [
+    137.26645,
+    35.89684
+   ],
+   [
+    137.26576,
+    35.89517
+   ],
+   [
+    137.26627,
+    35.89343
+   ],
+   [
+    137.26447,
+    35.88995
+   ],
+   [
+    137.26499,
+    35.8887
+   ],
+   [
+    137.25881,
+    35.8894
+   ],
+   [
+    137.25632,
+    35.88919
+   ],
+   [
+    137.25443,
+    35.89107
+   ],
+   [
+    137.25228,
+    35.89134
+   ],
+   [
+    137.25057,
+    35.89274
+   ],
+   [
+    137.25022,
+    35.89336
+   ],
+   [
+    137.25108,
+    35.89461
+   ],
+   [
+    137.25022,
+    35.89503
+   ],
+   [
+    137.25031,
+    35.8976
+   ],
+   [
+    137.24911,
+    35.89823
+   ],
+   [
+    137.24653,
+    35.90129
+   ],
+   [
+    137.24516,
+    35.90212
+   ],
+   [
+    137.2443,
+    35.90212
+   ],
+   [
+    137.24353,
+    35.90296
+   ],
+   [
+    137.24284,
+    35.90532
+   ],
+   [
+    137.24301,
+    35.90664
+   ],
+   [
+    137.24181,
+    35.90914
+   ],
+   [
+    137.24216,
+    35.90963
+   ],
+   [
+    137.24619,
+    35.91019
+   ],
+   [
+    137.24833,
+    35.90998
+   ],
+   [
+    137.25014,
+    35.9106
+   ],
+   [
+    137.25237,
+    35.91269
+   ],
+   [
+    137.25735,
+    35.91603
+   ],
+   [
+    137.25735,
+    35.91609
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "gifu-ogahora",
+   "name": "大ヶ洞ダム",
+   "computed_area_km2": 4.24,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.7,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 23.2,
+    "mask_cells": 7860,
+    "ring_cells": 7851,
+    "mask_area_km2": 4.23,
+    "ring_area_km2": 4.23,
+    "ring_vs_mask_area_pct": -0.11,
+    "raw_ring_vs_drawn_ring_pct": 0.11,
+    "iou": 0.981,
+    "mask_outside_pct": 1.02,
+    "ring_only_pct": 0.9,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.33,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:18:17+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "6b83a916259a",
+  "spatial": {
+   "grid": [
+    597,
+    597
+   ],
+   "cell_m": 23.2,
+   "mask_cells": 7860,
+   "ring_cells": 7851,
+   "mask_area_km2": 4.23,
+   "ring_area_km2": 4.23,
+   "ring_vs_mask_area_pct": -0.11,
+   "raw_ring_vs_drawn_ring_pct": 0.11,
+   "iou": 0.981,
+   "mask_outside_pct": 1.02,
+   "ring_only_pct": 0.9,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.33,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 49,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:18:17+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": -0.07983832028611859,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.05,
+   "method_here": "snap"
+  }
+ }
+}

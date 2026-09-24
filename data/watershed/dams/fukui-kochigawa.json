@@ -1,0 +1,462 @@
+{
+ "id": "fukui-kochigawa",
+ "name": "河内川ダム",
+ "published": {
+  "flow_version": "b267f159b6d4",
+  "index": {
+   "id": "fukui-kochigawa",
+   "name": "河内川ダム",
+   "lat": 35.4325,
+   "lon": 135.895278,
+   "area_km2": 14.71,
+   "fine_area_km2": 14.69,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 14.5,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.2,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 31.1,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    135.87925,
+    35.44032
+   ],
+   [
+    135.88105,
+    35.43934
+   ],
+   [
+    135.88251,
+    35.43955
+   ],
+   [
+    135.88363,
+    35.43899
+   ],
+   [
+    135.885,
+    35.43976
+   ],
+   [
+    135.88637,
+    35.43858
+   ],
+   [
+    135.88775,
+    35.43816
+   ],
+   [
+    135.88998,
+    35.43941
+   ],
+   [
+    135.89024,
+    35.43746
+   ],
+   [
+    135.8923,
+    35.43641
+   ],
+   [
+    135.8923,
+    35.43473
+   ],
+   [
+    135.89358,
+    35.43326
+   ],
+   [
+    135.89564,
+    35.43396
+   ],
+   [
+    135.89908,
+    35.43403
+   ],
+   [
+    135.90311,
+    35.42962
+   ],
+   [
+    135.90131,
+    35.4276
+   ],
+   [
+    135.90105,
+    35.42585
+   ],
+   [
+    135.8983,
+    35.42466
+   ],
+   [
+    135.89796,
+    35.42368
+   ],
+   [
+    135.89667,
+    35.42312
+   ],
+   [
+    135.89616,
+    35.42186
+   ],
+   [
+    135.89478,
+    35.42158
+   ],
+   [
+    135.89307,
+    35.42004
+   ],
+   [
+    135.89384,
+    35.41508
+   ],
+   [
+    135.89333,
+    35.41277
+   ],
+   [
+    135.89358,
+    35.41032
+   ],
+   [
+    135.89264,
+    35.40913
+   ],
+   [
+    135.89247,
+    35.40696
+   ],
+   [
+    135.89067,
+    35.40325
+   ],
+   [
+    135.88706,
+    35.40283
+   ],
+   [
+    135.88354,
+    35.40164
+   ],
+   [
+    135.88277,
+    35.40087
+   ],
+   [
+    135.88045,
+    35.40073
+   ],
+   [
+    135.87891,
+    35.39948
+   ],
+   [
+    135.87745,
+    35.39913
+   ],
+   [
+    135.87547,
+    35.39731
+   ],
+   [
+    135.87264,
+    35.3971
+   ],
+   [
+    135.87152,
+    35.39598
+   ],
+   [
+    135.86964,
+    35.39605
+   ],
+   [
+    135.8674,
+    35.39472
+   ],
+   [
+    135.86457,
+    35.39437
+   ],
+   [
+    135.86294,
+    35.39514
+   ],
+   [
+    135.86114,
+    35.39493
+   ],
+   [
+    135.8602,
+    35.39542
+   ],
+   [
+    135.85925,
+    35.39682
+   ],
+   [
+    135.85805,
+    35.39696
+   ],
+   [
+    135.85728,
+    35.39759
+   ],
+   [
+    135.85642,
+    35.39934
+   ],
+   [
+    135.85427,
+    35.4008
+   ],
+   [
+    135.85436,
+    35.40213
+   ],
+   [
+    135.85522,
+    35.40325
+   ],
+   [
+    135.85462,
+    35.40633
+   ],
+   [
+    135.85539,
+    35.40703
+   ],
+   [
+    135.85565,
+    35.4085
+   ],
+   [
+    135.85505,
+    35.40983
+   ],
+   [
+    135.85316,
+    35.41144
+   ],
+   [
+    135.85359,
+    35.41403
+   ],
+   [
+    135.85427,
+    35.41508
+   ],
+   [
+    135.85642,
+    35.41703
+   ],
+   [
+    135.85745,
+    35.41738
+   ],
+   [
+    135.85779,
+    35.41808
+   ],
+   [
+    135.85779,
+    35.42221
+   ],
+   [
+    135.85856,
+    35.42298
+   ],
+   [
+    135.85865,
+    35.42613
+   ],
+   [
+    135.86037,
+    35.42857
+   ],
+   [
+    135.85942,
+    35.43039
+   ],
+   [
+    135.85925,
+    35.432
+   ],
+   [
+    135.86286,
+    35.43235
+   ],
+   [
+    135.86569,
+    35.43368
+   ],
+   [
+    135.8668,
+    35.43375
+   ],
+   [
+    135.8711,
+    35.4327
+   ],
+   [
+    135.87204,
+    35.43445
+   ],
+   [
+    135.8741,
+    35.43522
+   ],
+   [
+    135.87461,
+    35.43592
+   ],
+   [
+    135.87384,
+    35.4376
+   ],
+   [
+    135.87401,
+    35.43858
+   ],
+   [
+    135.87925,
+    35.44025
+   ],
+   [
+    135.87925,
+    35.44032
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-kochigawa",
+   "name": "河内川ダム",
+   "computed_area_km2": 14.69,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.8,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     576,
+     576
+    ],
+    "cell_m": 31.1,
+    "mask_cells": 15174,
+    "ring_cells": 15136,
+    "mask_area_km2": 14.68,
+    "ring_area_km2": 14.64,
+    "ring_vs_mask_area_pct": -0.25,
+    "raw_ring_vs_drawn_ring_pct": 0.19,
+    "iou": 0.9891,
+    "mask_outside_pct": 0.67,
+    "ring_only_pct": 0.42,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.36,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:20:47+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "b267f159b6d4",
+  "spatial": {
+   "grid": [
+    576,
+    576
+   ],
+   "cell_m": 31.1,
+   "mask_cells": 15174,
+   "ring_cells": 15136,
+   "mask_area_km2": 14.68,
+   "ring_area_km2": 14.64,
+   "ring_vs_mask_area_pct": -0.25,
+   "raw_ring_vs_drawn_ring_pct": 0.19,
+   "iou": 0.9891,
+   "mask_outside_pct": 0.67,
+   "ring_only_pct": 0.42,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.36,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 81,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:20:47+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.16752397276473818,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.02,
+   "method_here": "snap"
+  }
+ }
+}

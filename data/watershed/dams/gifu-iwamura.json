@@ -1,0 +1,294 @@
+{
+ "id": "gifu-iwamura",
+ "name": "岩村ダム",
+ "published": {
+  "flow_version": "3d2ee7b8eacc",
+  "index": {
+   "id": "gifu-iwamura",
+   "name": "岩村ダム",
+   "lat": 35.363165,
+   "lon": 137.474088,
+   "area_km2": 1.71,
+   "fine_area_km2": 1.71,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 1.7,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.0,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.4,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    137.47398,
+    35.3647
+   ],
+   [
+    137.47647,
+    35.36288
+   ],
+   [
+    137.47767,
+    35.36281
+   ],
+   [
+    137.47802,
+    35.36204
+   ],
+   [
+    137.47939,
+    35.36253
+   ],
+   [
+    137.48016,
+    35.36218
+   ],
+   [
+    137.48231,
+    35.36232
+   ],
+   [
+    137.48377,
+    35.36288
+   ],
+   [
+    137.48566,
+    35.36204
+   ],
+   [
+    137.48634,
+    35.36239
+   ],
+   [
+    137.48746,
+    35.36134
+   ],
+   [
+    137.4884,
+    35.36113
+   ],
+   [
+    137.48943,
+    35.35896
+   ],
+   [
+    137.48849,
+    35.35826
+   ],
+   [
+    137.48866,
+    35.35686
+   ],
+   [
+    137.4878,
+    35.35553
+   ],
+   [
+    137.48574,
+    35.35469
+   ],
+   [
+    137.48506,
+    35.35329
+   ],
+   [
+    137.48231,
+    35.35126
+   ],
+   [
+    137.48051,
+    35.35175
+   ],
+   [
+    137.47948,
+    35.35154
+   ],
+   [
+    137.47853,
+    35.35231
+   ],
+   [
+    137.4763,
+    35.35154
+   ],
+   [
+    137.47519,
+    35.35182
+   ],
+   [
+    137.47501,
+    35.35252
+   ],
+   [
+    137.47381,
+    35.35294
+   ],
+   [
+    137.47355,
+    35.35378
+   ],
+   [
+    137.47235,
+    35.3542
+   ],
+   [
+    137.47158,
+    35.35539
+   ],
+   [
+    137.47158,
+    35.3577
+   ],
+   [
+    137.47038,
+    35.3584
+   ],
+   [
+    137.47064,
+    35.35924
+   ],
+   [
+    137.47149,
+    35.3598
+   ],
+   [
+    137.47201,
+    35.364
+   ],
+   [
+    137.47398,
+    35.36463
+   ],
+   [
+    137.47398,
+    35.3647
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "gifu-iwamura",
+   "name": "岩村ダム",
+   "computed_area_km2": 1.71,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.8,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.4,
+    "mask_cells": 3130,
+    "ring_cells": 3117,
+    "mask_area_km2": 1.71,
+    "ring_area_km2": 1.71,
+    "ring_vs_mask_area_pct": -0.42,
+    "raw_ring_vs_drawn_ring_pct": 0.26,
+    "iou": 0.975,
+    "mask_outside_pct": 1.47,
+    "ring_only_pct": 1.06,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.99,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:18:06+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "3d2ee7b8eacc",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 23.4,
+   "mask_cells": 3130,
+   "ring_cells": 3117,
+   "mask_area_km2": 1.71,
+   "ring_area_km2": 1.71,
+   "ring_vs_mask_area_pct": -0.42,
+   "raw_ring_vs_drawn_ring_pct": 0.26,
+   "iou": 0.975,
+   "mask_outside_pct": 1.47,
+   "ring_only_pct": 1.06,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.99,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:18:06+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.015273544590987953,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.02,
+   "method_here": "snap"
+  }
+ }
+}

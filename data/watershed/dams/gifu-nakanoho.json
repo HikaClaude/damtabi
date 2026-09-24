@@ -1,0 +1,238 @@
+{
+ "id": "gifu-nakanoho",
+ "name": "中野方ダム",
+ "published": {
+  "flow_version": "b2a31863579f",
+  "index": {
+   "id": "gifu-nakanoho",
+   "name": "中野方ダム",
+   "lat": 35.529076,
+   "lon": 137.339864,
+   "area_km2": 1.54,
+   "fine_area_km2": 1.54,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": 1.6,
+   "reference_source": "川の防災情報",
+   "area_error_pct": null,
+   "grid_drift_pct": 0.2,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 23.3,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    137.34163,
+    35.54005
+   ],
+   [
+    137.34266,
+    35.53872
+   ],
+   [
+    137.34386,
+    35.53879
+   ],
+   [
+    137.34653,
+    35.53795
+   ],
+   [
+    137.34764,
+    35.53809
+   ],
+   [
+    137.34901,
+    35.53726
+   ],
+   [
+    137.35099,
+    35.53244
+   ],
+   [
+    137.35082,
+    35.53013
+   ],
+   [
+    137.34996,
+    35.52824
+   ],
+   [
+    137.34987,
+    35.52524
+   ],
+   [
+    137.34893,
+    35.52329
+   ],
+   [
+    137.34841,
+    35.52301
+   ],
+   [
+    137.34489,
+    35.52322
+   ],
+   [
+    137.34275,
+    35.52433
+   ],
+   [
+    137.33923,
+    35.5272
+   ],
+   [
+    137.3382,
+    35.52915
+   ],
+   [
+    137.3394,
+    35.53118
+   ],
+   [
+    137.33923,
+    35.53523
+   ],
+   [
+    137.34052,
+    35.53726
+   ],
+   [
+    137.34086,
+    35.53942
+   ],
+   [
+    137.34163,
+    35.53998
+   ],
+   [
+    137.34163,
+    35.54005
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "gifu-nakanoho",
+   "name": "中野方ダム",
+   "computed_area_km2": 1.54,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 7.8,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     426,
+     426
+    ],
+    "cell_m": 23.3,
+    "mask_cells": 2835,
+    "ring_cells": 2828,
+    "mask_area_km2": 1.54,
+    "ring_area_km2": 1.54,
+    "ring_vs_mask_area_pct": -0.25,
+    "raw_ring_vs_drawn_ring_pct": 0.39,
+    "iou": 0.9773,
+    "mask_outside_pct": 1.27,
+    "ring_only_pct": 1.03,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 0.99,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:18:23+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "b2a31863579f",
+  "spatial": {
+   "grid": [
+    426,
+    426
+   ],
+   "cell_m": 23.3,
+   "mask_cells": 2835,
+   "ring_cells": 2828,
+   "mask_area_km2": 1.54,
+   "ring_area_km2": 1.54,
+   "ring_vs_mask_area_pct": -0.25,
+   "raw_ring_vs_drawn_ring_pct": 0.39,
+   "iou": 0.9773,
+   "mask_outside_pct": 1.27,
+   "ring_only_pct": 1.03,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 0.99,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 25,
+    "missing": 0,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 0.0
+  },
+  "generated": "2026-09-24T23:18:23+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.1751393725057282,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.08,
+   "method_here": "snap"
+  }
+ }
+}

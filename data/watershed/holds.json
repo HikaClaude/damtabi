@@ -1,0 +1,24 @@
+{
+ "schema": "ws-holds/1",
+ "note": "誤りが具体的に疑われるため、個別に保留しているダム。保留は承認より優先し、公開しない（release_status=held）。プレビューにも既定では出さない。QA の判定は変えていない。出口の置き直し・出口探索のやり直しはしていない（参考面積に合わせるための変更をしない）。",
+ "holds": {
+  "nagano-uchimura": {
+   "reason": "出口が別の谷（支流）に乗っている疑い。exact で求めた集水域は 2.28 km² で、川の防災情報の流域面積 13.0 km² の約2割（−82.5%）。採用出口から下流へ約750 mで上流面積が 15.5 km² に増え（本流との合流）、出口候補を約900 m動かすと 17.5 km²。国土数値情報（ダム）W01-14 のダム位置（位置精度レベル1）は、この地図のダム座標から約620 m離れ、集水域の外（輪から約570 m）にある。",
+   "evidence": ["data/watershed/evaluations/national80_outline-exact.evidence.json", "作業保存 wsq/audit_snap_uchimura_*.json", "作業保存 survey/w01_vs_80.json"],
+   "since": "2026-09-24",
+   "by": "集水域の全基拡大（人の方針承認に基づく登録）"
+  },
+  "nagano-toyooka": {
+   "reason": "出口の位置違いの疑い。exact で求めた集水域は 10.36 km² で、川の防災情報の流域面積 13.1 km² と −20.9%。ダム座標から約500 mの出口候補では 13.09 km² で参考値と一致し、採用出口から下流へ約250〜500 mで上流面積が 12.5〜13.3 km² に増える。国土数値情報（ダム）W01-14 のダム位置（位置精度レベル1）は、この地図のダム座標から約420 m離れ、集水域の外（輪から約320 m）にある。",
+   "evidence": ["data/watershed/evaluations/national80_outline-exact.evidence.json", "作業保存 wsq/audit_snap_uchimura_*.json", "作業保存 survey/w01_vs_80.json"],
+   "since": "2026-09-24",
+   "by": "集水域の全基拡大（人の方針承認に基づく登録）"
+  },
+  "ishikawa-oya": {
+   "reason": "水面の誤検出で出口がずれている疑い。出口を面積 0.01 km² の小さな水面から決めており、集水域は 9.54 km²（川の防災情報の流域面積 12.8 km² と −25.5%）。探索範囲を 2〜16 km に広げても水面は 0.01 km² のまま。この地図のダム座標から約50〜150 mの河道を出口にすると 12.75〜12.77 km² で参考値と一致する。",
+   "evidence": ["data/watershed/evaluations/national80_outline-exact.evidence.json", "作業保存 wsq/audit_lake_kuzuryu_oya.json", "作業保存 wsq/audit_snap_oya_kuzuryu.json"],
+   "since": "2026-09-24",
+   "by": "集水域の全基拡大（人の方針承認に基づく登録）"
+  }
+ }
+}

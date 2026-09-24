@@ -1,0 +1,246 @@
+{
+ "id": "fukui-kaitani",
+ "name": "開谷ダム",
+ "published": {
+  "flow_version": "3551cb86d60f",
+  "index": {
+   "id": "fukui-kaitani",
+   "name": "開谷ダム",
+   "lat": 35.920303,
+   "lon": 136.100633,
+   "area_km2": 1.16,
+   "fine_area_km2": 1.16,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": null,
+   "reference_source": null,
+   "area_error_pct": null,
+   "grid_drift_pct": 0.3,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 46.4,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    136.0952,
+    35.92312
+   ],
+   [
+    136.09795,
+    35.9227
+   ],
+   [
+    136.09932,
+    35.92145
+   ],
+   [
+    136.10138,
+    35.92159
+   ],
+   [
+    136.10275,
+    35.91922
+   ],
+   [
+    136.10224,
+    35.91603
+   ],
+   [
+    136.10413,
+    35.91505
+   ],
+   [
+    136.10464,
+    35.9138
+   ],
+   [
+    136.10413,
+    35.91213
+   ],
+   [
+    136.10275,
+    35.91199
+   ],
+   [
+    136.10052,
+    35.91033
+   ],
+   [
+    136.09554,
+    35.91019
+   ],
+   [
+    136.09348,
+    35.91074
+   ],
+   [
+    136.09262,
+    35.91172
+   ],
+   [
+    136.09262,
+    35.9138
+   ],
+   [
+    136.09314,
+    35.91464
+   ],
+   [
+    136.0928,
+    35.91561
+   ],
+   [
+    136.09331,
+    35.91616
+   ],
+   [
+    136.0928,
+    35.91714
+   ],
+   [
+    136.09331,
+    35.91811
+   ],
+   [
+    136.09297,
+    35.92089
+   ],
+   [
+    136.094,
+    35.9227
+   ],
+   [
+    136.0952,
+    35.92298
+   ],
+   [
+    136.0952,
+    35.92312
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-kaitani",
+   "name": "開谷ダム",
+   "computed_area_km2": 1.16,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 15.5,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 540,
+    "ring_cells": 544,
+    "mask_area_km2": 1.16,
+    "ring_area_km2": 1.17,
+    "ring_vs_mask_area_pct": 0.74,
+    "raw_ring_vs_drawn_ring_pct": 0.0,
+    "iou": 0.9638,
+    "mask_outside_pct": 1.48,
+    "ring_only_pct": 2.21,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 1.85,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:21:40+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "3551cb86d60f",
+  "spatial": {
+   "grid": [
+    597,
+    597
+   ],
+   "cell_m": 46.4,
+   "mask_cells": 540,
+   "ring_cells": 544,
+   "mask_area_km2": 1.16,
+   "ring_area_km2": 1.17,
+   "ring_vs_mask_area_pct": 0.74,
+   "raw_ring_vs_drawn_ring_pct": 0.0,
+   "iou": 0.9638,
+   "mask_outside_pct": 1.48,
+   "ring_only_pct": 2.21,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 1.85,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 46,
+    "missing": 3,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 15.1
+  },
+  "generated": "2026-09-24T23:21:40+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.3362095060533976,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": 0.38,
+   "method_here": "snap"
+  }
+ }
+}

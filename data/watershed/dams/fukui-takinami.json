@@ -1,0 +1,486 @@
+{
+ "id": "fukui-takinami",
+ "name": "滝波ダム",
+ "published": {
+  "flow_version": "f3d9968a37cf",
+  "index": {
+   "id": "fukui-takinami",
+   "name": "滝波ダム",
+   "lat": 36.022487,
+   "lon": 136.092159,
+   "area_km2": 6.24,
+   "fine_area_km2": 6.24,
+   "official_area_km2": null,
+   "official_total_km2": null,
+   "official_indirect_km2": null,
+   "official_source": null,
+   "reference_area_km2": null,
+   "reference_source": null,
+   "area_error_pct": null,
+   "grid_drift_pct": 0.0,
+   "lake_km2": 0.0,
+   "lake_inside_pct": null,
+   "outlet_method": "snap",
+   "cell_m": 46.4,
+   "diversion": {
+    "status": "unknown",
+    "note": "ダム便覧に該当記載を確認できず、導水の有無は未確認"
+   }
+  },
+  "ring": [
+   [
+    136.07975,
+    36.05007
+   ],
+   [
+    136.08232,
+    36.04952
+   ],
+   [
+    136.08284,
+    36.04813
+   ],
+   [
+    136.08353,
+    36.04785
+   ],
+   [
+    136.08301,
+    36.04646
+   ],
+   [
+    136.08541,
+    36.04396
+   ],
+   [
+    136.08541,
+    36.04313
+   ],
+   [
+    136.08473,
+    36.04271
+   ],
+   [
+    136.08473,
+    36.04202
+   ],
+   [
+    136.08353,
+    36.04049
+   ],
+   [
+    136.08164,
+    36.0398
+   ],
+   [
+    136.08147,
+    36.03827
+   ],
+   [
+    136.08044,
+    36.03702
+   ],
+   [
+    136.08078,
+    36.03383
+   ],
+   [
+    136.08112,
+    36.03341
+   ],
+   [
+    136.0825,
+    36.03383
+   ],
+   [
+    136.08335,
+    36.03258
+   ],
+   [
+    136.08438,
+    36.03216
+   ],
+   [
+    136.08438,
+    36.03161
+   ],
+   [
+    136.0861,
+    36.03022
+   ],
+   [
+    136.08644,
+    36.02842
+   ],
+   [
+    136.08782,
+    36.02828
+   ],
+   [
+    136.08971,
+    36.02883
+   ],
+   [
+    136.09091,
+    36.02786
+   ],
+   [
+    136.09383,
+    36.02758
+   ],
+   [
+    136.09348,
+    36.02508
+   ],
+   [
+    136.09383,
+    36.02272
+   ],
+   [
+    136.09262,
+    36.0212
+   ],
+   [
+    136.09245,
+    36.01925
+   ],
+   [
+    136.09331,
+    36.01828
+   ],
+   [
+    136.0964,
+    36.01842
+   ],
+   [
+    136.0976,
+    36.01689
+   ],
+   [
+    136.09657,
+    36.01537
+   ],
+   [
+    136.09743,
+    36.01217
+   ],
+   [
+    136.09692,
+    36.01217
+   ],
+   [
+    136.09606,
+    36.01078
+   ],
+   [
+    136.09606,
+    36.00967
+   ],
+   [
+    136.09486,
+    36.00981
+   ],
+   [
+    136.09365,
+    36.01078
+   ],
+   [
+    136.09142,
+    36.00926
+   ],
+   [
+    136.09074,
+    36.00926
+   ],
+   [
+    136.09056,
+    36.01051
+   ],
+   [
+    136.08971,
+    36.01064
+   ],
+   [
+    136.08868,
+    36.01189
+   ],
+   [
+    136.08644,
+    36.01259
+   ],
+   [
+    136.08456,
+    36.01203
+   ],
+   [
+    136.08353,
+    36.01231
+   ],
+   [
+    136.08267,
+    36.01273
+   ],
+   [
+    136.0825,
+    36.01356
+   ],
+   [
+    136.08181,
+    36.01356
+   ],
+   [
+    136.08164,
+    36.01412
+   ],
+   [
+    136.08078,
+    36.01425
+   ],
+   [
+    136.07958,
+    36.01537
+   ],
+   [
+    136.07786,
+    36.01467
+   ],
+   [
+    136.07615,
+    36.0155
+   ],
+   [
+    136.0734,
+    36.01537
+   ],
+   [
+    136.07323,
+    36.01911
+   ],
+   [
+    136.07529,
+    36.02092
+   ],
+   [
+    136.07512,
+    36.02189
+   ],
+   [
+    136.07426,
+    36.02272
+   ],
+   [
+    136.0734,
+    36.02259
+   ],
+   [
+    136.07185,
+    36.02397
+   ],
+   [
+    136.07185,
+    36.02467
+   ],
+   [
+    136.07014,
+    36.02592
+   ],
+   [
+    136.07014,
+    36.02842
+   ],
+   [
+    136.06911,
+    36.02911
+   ],
+   [
+    136.06962,
+    36.03105
+   ],
+   [
+    136.07014,
+    36.03119
+   ],
+   [
+    136.06997,
+    36.03258
+   ],
+   [
+    136.06705,
+    36.03647
+   ],
+   [
+    136.06808,
+    36.03799
+   ],
+   [
+    136.06808,
+    36.04063
+   ],
+   [
+    136.06962,
+    36.04133
+   ],
+   [
+    136.06979,
+    36.0423
+   ],
+   [
+    136.07117,
+    36.04313
+   ],
+   [
+    136.0722,
+    36.04452
+   ],
+   [
+    136.0722,
+    36.04577
+   ],
+   [
+    136.07271,
+    36.04632
+   ],
+   [
+    136.0722,
+    36.04785
+   ],
+   [
+    136.07443,
+    36.04868
+   ],
+   [
+    136.07494,
+    36.04841
+   ],
+   [
+    136.07855,
+    36.04868
+   ],
+   [
+    136.07975,
+    36.04993
+   ],
+   [
+    136.07975,
+    36.05007
+   ]
+  ],
+  "outline_method": "exact",
+  "feature_properties": {
+   "id": "fukui-takinami",
+   "name": "滝波ダム",
+   "computed_area_km2": 6.24,
+   "official_area_km2": null,
+   "area_error_pct": null,
+   "resolution_m": 15.5,
+   "diversion": "unknown"
+  },
+  "qa": {
+   "warn_codes": [
+    "no_official_direct_area",
+    "diversion_unknown",
+    "no_reservoir_surface"
+   ],
+   "spatial": {
+    "grid": [
+     597,
+     597
+    ],
+    "cell_m": 46.4,
+    "mask_cells": 2904,
+    "ring_cells": 2886,
+    "mask_area_km2": 6.25,
+    "ring_area_km2": 6.21,
+    "ring_vs_mask_area_pct": -0.62,
+    "raw_ring_vs_drawn_ring_pct": 0.03,
+    "iou": 0.9815,
+    "mask_outside_pct": 1.24,
+    "ring_only_pct": 0.62,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "unreached_pct": 2.75,
+    "path_outside_pct": 0.0,
+    "ring_self_intersections_raw": 0,
+    "ring_self_intersections_drawn": 0,
+    "mask_components": 1,
+    "mask_largest_pct": 100.0,
+    "goal_cells": 1,
+    "goal_in_mask_pct": 100.0,
+    "tol_cells": 2
+   }
+  },
+  "generated": "2026-09-24T23:21:31+09:00",
+  "pipeline": "ws-pipeline/2"
+ },
+ "latest": {
+  "status": "pass",
+  "block_codes": [],
+  "reasons": [
+   {
+    "code": "no_official_direct_area",
+    "severity": "warn",
+    "message": "ダム便覧の直接流域が無く、面積の誤差を検証できていない"
+   },
+   {
+    "code": "diversion_unknown",
+    "severity": "warn",
+    "message": "導水の有無が未確認"
+   },
+   {
+    "code": "no_reservoir_surface",
+    "severity": "warn",
+    "message": "貯水池の水面を検出できず、河道スナップで出口を決めている"
+   }
+  ],
+  "flow_version": "f3d9968a37cf",
+  "spatial": {
+   "grid": [
+    597,
+    597
+   ],
+   "cell_m": 46.4,
+   "mask_cells": 2904,
+   "ring_cells": 2886,
+   "mask_area_km2": 6.25,
+   "ring_area_km2": 6.21,
+   "ring_vs_mask_area_pct": -0.62,
+   "raw_ring_vs_drawn_ring_pct": 0.03,
+   "iou": 0.9815,
+   "mask_outside_pct": 1.24,
+   "ring_only_pct": 0.62,
+   "mask_far_outside_pct": 0.0,
+   "ring_far_only_pct": 0.0,
+   "unreached_pct": 2.75,
+   "path_outside_pct": 0.0,
+   "ring_self_intersections_raw": 0,
+   "ring_self_intersections_drawn": 0,
+   "mask_components": 1,
+   "mask_largest_pct": 100.0,
+   "goal_cells": 1,
+   "goal_in_mask_pct": 100.0,
+   "tol_cells": 2
+  },
+  "dem": {
+   "touches_edge": false,
+   "nodata_adjacent_cells": 0,
+   "tiles_touching_catchment": [],
+   "tile_counts": {
+    "ok": 42,
+    "missing": 7,
+    "legacy_empty": 0
+   },
+   "grid_nan_pct": 26.54
+  },
+  "generated": "2026-09-24T23:21:31+09:00",
+  "pipeline": "ws-pipeline/2",
+  "facts": {
+   "area_error_pct": null,
+   "grid_drift_pct": 0.04828497275255472,
+   "official_area_km2": null,
+   "diversion_status": "unknown",
+   "outlet_method": "snap",
+   "fine_recompute_pct": -0.06,
+   "method_here": "snap"
+  }
+ }
+}
