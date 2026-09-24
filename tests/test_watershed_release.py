@@ -256,6 +256,25 @@ class TestRepoPublicBoundary(unittest.TestCase):
         self.assertEqual(plan["public_ids"], ids)
         self.assertEqual(plan["index_version"], idx["version"])
 
+    def test_exact_candidates_keep_legacy_grids_and_archive(self):
+        """exact 候補は legacy と同じ格子（版が同じ）で、輪だけが変わる。legacy 候補は保存してある。"""
+        arc = ROOT / "data/watershed/staged/legacy"
+        for i, s in self.store.all_states().items():
+            pub = s.get("published")
+            if not pub:
+                continue
+            self.assertEqual(pub["outline_method"], "exact", i)
+            self.assertEqual(s["latest"]["status"], "pass", i)
+            leg = json.loads((arc / f"{i}.json").read_text(encoding="utf-8"))["published"]
+            self.assertEqual(leg["outline_method"], "legacy", i)
+            self.assertEqual(pub["flow_version"], leg["flow_version"], i)
+            self.assertNotEqual(wp.ring_version(pub["ring"]), wp.ring_version(leg["ring"]), i)
+            self.assertEqual((arc / "flow" / f"{i}.json").read_bytes(),
+                             self.store.flow_path(i, True).read_bytes(), i)
+            # 承認は ring_version に結び付くので、legacy の輪への承認は exact 候補に通らない
+            legacy_approval = approval_for(self.store, i, ring_version=wp.ring_version(leg["ring"]))
+            self.assertEqual(wp.release_status(pub, legacy_approval), "stale", i)
+
     def test_candidates_are_kept_outside_docs(self):
         states = self.store.all_states()
         cands = sorted(i for i, s in states.items() if s.get("published"))
@@ -268,12 +287,17 @@ class TestRepoPublicBoundary(unittest.TestCase):
         self.assertIn("toyama-shiraiwagawa", wp.EXCLUDED)
 
     def test_legacy_21_cannot_be_published_even_with_matching_approvals(self):
+        """exact へ作り直す前の legacy 候補21基（data/watershed/staged/legacy/ に保存）を候補に戻して試す。"""
         tmp = Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
-        shutil.copytree(ROOT / "data/watershed/dams", tmp / "data/watershed/dams")
-        shutil.copytree(ROOT / "data/watershed/staged/flow", tmp / "data/watershed/staged/flow")
+        arc = ROOT / "data/watershed/staged/legacy"
         store = wp.Store(tmp)
+        for p in sorted(arc.glob("toyama-*.json")):
+            a = json.loads(p.read_text(encoding="utf-8"))
+            store.write_state(a["id"], {"id": a["id"], "name": a["name"], "published": a["published"]})
+        shutil.copytree(arc / "flow", tmp / "data/watershed/staged/flow")
         cands = [i for i, s in store.all_states().items() if s.get("published")]
+        self.assertEqual(len(cands), 21)
         self.assertEqual({store.load_state(i)["published"]["outline_method"] for i in cands}, {"legacy"})
         for claim in ("legacy", "exact"):
             write_release(tmp, {i: approval_for(store, i, outline_method=claim) for i in cands})

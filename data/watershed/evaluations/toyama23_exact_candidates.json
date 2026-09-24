@@ -1,0 +1,1722 @@
+{
+ "generated": "2026-09-24",
+ "base_commit": "13e5c94",
+ "note": "富山23基を build_basins --outline exact で作り直した評価。DEM は手元キャッシュのみ（--offline --max-fetch 0、新規取得 0）。QA は現行ゲート（平滑化した輪 smoothRing(...,2)・閾値不変）。raw_reference は生の輪での参考値で、判定には使わない。白岩川（HOLD）・久婦須川（QA hold）は evaluate-only で、候補にはしていない。公開承認は0件。",
+ "dams": [
+  {
+   "id": "toyama-unazuki",
+   "name": "宇奈月ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap-fixed",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 126,
+    "snap_radius_m": 0.0,
+    "zoom": 12,
+    "resolution_m": 30.6
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 608.76,
+    "exact": 608.76,
+    "official": 617.5,
+    "err_legacy": -1.4,
+    "err_exact": -1.4,
+    "kawabou_err_exact": -1.4
+   },
+   "vertices": {
+    "legacy": 1216,
+    "exact": 1000
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "1a6924950186",
+    "smoothed": {
+     "iou": 0.936,
+     "mask_far_outside_pct": 0.94,
+     "ring_far_only_pct": 1.47,
+     "path_outside_pct": 1.05,
+     "unreached_pct": 0.81
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "1a6924950186",
+    "smoothed": {
+     "iou": 0.9976,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.81
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9964,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.81,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-unazuki.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-muromaki",
+   "name": "室牧ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap-fixed",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 151,
+    "snap_radius_m": 0.0,
+    "zoom": 13,
+    "resolution_m": 15.4
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 84.17,
+    "exact": 84.17,
+    "official": 85.2,
+    "err_legacy": -1.2,
+    "err_exact": -1.2,
+    "kawabou_err_exact": -34.4
+   },
+   "vertices": {
+    "legacy": 508,
+    "exact": 301
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "62b388bca61c",
+    "smoothed": {
+     "iou": 0.9689,
+     "mask_far_outside_pct": 0.55,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.43,
+     "unreached_pct": 0.7
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "diversion_yes",
+     "no_reservoir_surface"
+    ],
+    "flow_version": "62b388bca61c",
+    "smoothed": {
+     "iou": 0.9952,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.7
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9958,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.7,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-muromaki.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-kumanogawa",
+   "name": "熊野川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 142,
+    "snap_radius_m": 150.0,
+    "zoom": 13,
+    "resolution_m": 15.3
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 39.75,
+    "exact": 39.75,
+    "official": 39.8,
+    "err_legacy": -0.1,
+    "err_exact": -0.1,
+    "kawabou_err_exact": -0.1
+   },
+   "vertices": {
+    "legacy": 294,
+    "exact": 188
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "eecec879de82",
+    "smoothed": {
+     "iou": 0.9747,
+     "mask_far_outside_pct": 0.3,
+     "ring_far_only_pct": 0.02,
+     "path_outside_pct": 0.27,
+     "unreached_pct": 0.26
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "eecec879de82",
+    "smoothed": {
+     "iou": 0.9936,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.26
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.994,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.26,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-kumanogawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-kubusugawa",
+   "name": "久婦須川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.14,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 339.4,
+    "outlet_distance_m": 503,
+    "snap_radius_m": 0.0,
+    "zoom": 13,
+    "resolution_m": 15.4
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 59.01,
+    "exact": 59.01,
+    "official": 58.7,
+    "err_legacy": 0.5,
+    "err_exact": 0.5,
+    "kawabou_err_exact": 0.5
+   },
+   "vertices": {
+    "legacy": 509,
+    "exact": 288
+   },
+   "legacy": {
+    "status": "hold",
+    "block_codes": [
+     "rain_outside_ring",
+     "path_leaves_ring"
+    ],
+    "flow_version": "825a18c3dd73",
+    "smoothed": {
+     "iou": 0.9225,
+     "mask_far_outside_pct": 3.12,
+     "ring_far_only_pct": 0.05,
+     "path_outside_pct": 3.54,
+     "unreached_pct": 1.58
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "flow_version": "825a18c3dd73",
+    "smoothed": {
+     "iou": 0.9929,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 1.58
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9936,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.58,
+    "grid_file": "data/watershed/staged/held/toyama-kubusugawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": false,
+    "outline_method": null,
+    "state_latest": "hold",
+    "state_block_codes": [
+     "rain_outside_ring",
+     "path_leaves_ring"
+    ]
+   },
+   "exact_evaluate_only": true
+  },
+  {
+   "id": "toyama-wadagawa",
+   "name": "和田川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.247,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 29.9,
+    "outlet_distance_m": 1991,
+    "snap_radius_m": 0.0,
+    "zoom": 13,
+    "resolution_m": 15.3
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 32.15,
+    "exact": 32.15,
+    "official": 34.0,
+    "err_legacy": -5.4,
+    "err_exact": -5.4,
+    "kawabou_err_exact": -5.4
+   },
+   "vertices": {
+    "legacy": 257,
+    "exact": 175
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "a33cbe453e6e",
+    "smoothed": {
+     "iou": 0.9834,
+     "mask_far_outside_pct": 0.08,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.05,
+     "unreached_pct": 0.71
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "flow_version": "a33cbe453e6e",
+    "smoothed": {
+     "iou": 0.9929,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.71
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9939,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.71,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-wadagawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-togagawa",
+   "name": "利賀川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 139,
+    "snap_radius_m": 150.0,
+    "zoom": 13,
+    "resolution_m": 15.4
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 38.54,
+    "exact": 38.54,
+    "official": 38.0,
+    "err_legacy": 1.4,
+    "err_exact": 1.4,
+    "kawabou_err_exact": 1.4
+   },
+   "vertices": {
+    "legacy": 427,
+    "exact": 235
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "c027e2748313",
+    "smoothed": {
+     "iou": 0.9631,
+     "mask_far_outside_pct": 0.63,
+     "ring_far_only_pct": 0.07,
+     "path_outside_pct": 0.6,
+     "unreached_pct": 0.46
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "c027e2748313",
+    "smoothed": {
+     "iou": 0.9921,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.46
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9929,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.46,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-togagawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-sakaigawa",
+   "name": "境川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.987,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 555.0,
+    "outlet_distance_m": 770,
+    "snap_radius_m": 0.0,
+    "zoom": 13,
+    "resolution_m": 15.4
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 37.6,
+    "exact": 37.6,
+    "official": 37.7,
+    "err_legacy": -0.3,
+    "err_exact": -0.3,
+    "kawabou_err_exact": -0.3
+   },
+   "vertices": {
+    "legacy": 165,
+    "exact": 136
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "0bca111bfadf",
+    "smoothed": {
+     "iou": 0.988,
+     "mask_far_outside_pct": 0.12,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.11,
+     "unreached_pct": 0.15
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "flow_version": "0bca111bfadf",
+    "smoothed": {
+     "iou": 0.9945,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.15
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9955,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.15,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-sakaigawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-tori",
+   "name": "刀利ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 504,
+    "snap_radius_m": 400.0,
+    "zoom": 13,
+    "resolution_m": 15.4
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 45.65,
+    "exact": 45.65,
+    "official": 45.9,
+    "err_legacy": -0.6,
+    "err_exact": -0.6,
+    "kawabou_err_exact": -0.5
+   },
+   "vertices": {
+    "legacy": 225,
+    "exact": 160
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "06178bc0eefd",
+    "smoothed": {
+     "iou": 0.9855,
+     "mask_far_outside_pct": 0.09,
+     "ring_far_only_pct": 0.01,
+     "path_outside_pct": 0.15,
+     "unreached_pct": 0.41
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "06178bc0eefd",
+    "smoothed": {
+     "iou": 0.9938,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.41
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9944,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.41,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-tori.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-goi",
+   "name": "五位ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 185,
+    "snap_radius_m": 150.0,
+    "zoom": 14,
+    "resolution_m": 7.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 13.24,
+    "exact": 13.24,
+    "official": 13.8,
+    "err_legacy": -4.1,
+    "err_exact": -4.1,
+    "kawabou_err_exact": -4.1
+   },
+   "vertices": {
+    "legacy": 184,
+    "exact": 101
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "e51785c2c718",
+    "smoothed": {
+     "iou": 0.9815,
+     "mask_far_outside_pct": 0.01,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.01,
+     "unreached_pct": 0.66
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "e51785c2c718",
+    "smoothed": {
+     "iou": 0.9876,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.66
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9899,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.66,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-goi.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-konadegawa",
+   "name": "子撫川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 158,
+    "snap_radius_m": 150.0,
+    "zoom": 13,
+    "resolution_m": 15.3
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 32.08,
+    "exact": 32.08,
+    "official": 31.8,
+    "err_legacy": 0.9,
+    "err_exact": 0.9,
+    "kawabou_err_exact": 0.9
+   },
+   "vertices": {
+    "legacy": 221,
+    "exact": 179
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "b9e9c167ec5a",
+    "smoothed": {
+     "iou": 0.9843,
+     "mask_far_outside_pct": 0.05,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.03,
+     "unreached_pct": 0.73
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "b9e9c167ec5a",
+    "smoothed": {
+     "iou": 0.9932,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.73
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.994,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.73,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-konadegawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-johana",
+   "name": "城端ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.108,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 259.2,
+    "outlet_distance_m": 306,
+    "snap_radius_m": 0.0,
+    "zoom": 14,
+    "resolution_m": 7.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 10.31,
+    "exact": 10.31,
+    "official": 10.8,
+    "err_legacy": -4.6,
+    "err_exact": -4.6,
+    "kawabou_err_exact": -4.5
+   },
+   "vertices": {
+    "legacy": 164,
+    "exact": 81
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "d60ae78f6ffa",
+    "smoothed": {
+     "iou": 0.9569,
+     "mask_far_outside_pct": 0.94,
+     "ring_far_only_pct": 0.17,
+     "path_outside_pct": 0.98,
+     "unreached_pct": 0.23
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "flow_version": "d60ae78f6ffa",
+    "smoothed": {
+     "iou": 0.9842,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.23
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9883,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.23,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-johana.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-usunaka",
+   "name": "臼中ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.126,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 336.0,
+    "outlet_distance_m": 300,
+    "snap_radius_m": 0.0,
+    "zoom": 14,
+    "resolution_m": 7.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 13.12,
+    "exact": 13.12,
+    "official": 13.5,
+    "err_legacy": -2.8,
+    "err_exact": -2.8,
+    "kawabou_err_exact": -72.8
+   },
+   "vertices": {
+    "legacy": 93,
+    "exact": 82
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "853436252b77",
+    "smoothed": {
+     "iou": 0.985,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.22
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "flow_version": "853436252b77",
+    "smoothed": {
+     "iou": 0.9893,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.22
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9913,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.22,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-usunaka.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-asahiogawa",
+   "name": "朝日小川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 205,
+    "snap_radius_m": 150.0,
+    "zoom": 14,
+    "resolution_m": 7.6
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 29.18,
+    "exact": 29.18,
+    "official": 28.3,
+    "err_legacy": 3.1,
+    "err_exact": 3.1,
+    "kawabou_err_exact": -57.2
+   },
+   "vertices": {
+    "legacy": 135,
+    "exact": 107
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "3cb670daf710",
+    "smoothed": {
+     "iou": 0.991,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.34
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "3cb670daf710",
+    "smoothed": {
+     "iou": 0.993,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.34
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9947,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.34,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-asahiogawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-kadokawa",
+   "name": "角川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 168,
+    "snap_radius_m": 150.0,
+    "zoom": 14,
+    "resolution_m": 7.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 16.03,
+    "exact": 16.03,
+    "official": 16.2,
+    "err_legacy": -1.1,
+    "err_exact": -1.1,
+    "kawabou_err_exact": -1.0
+   },
+   "vertices": {
+    "legacy": 147,
+    "exact": 95
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "3ab707ac4977",
+    "smoothed": {
+     "iou": 0.9849,
+     "mask_far_outside_pct": 0.01,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.6
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "3ab707ac4977",
+    "smoothed": {
+     "iou": 0.9881,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.6
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9906,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.6,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-kadokawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-kamiichigawa",
+   "name": "上市川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 195,
+    "snap_radius_m": 150.0,
+    "zoom": 13,
+    "resolution_m": 15.3
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 45.91,
+    "exact": 45.91,
+    "official": 44.7,
+    "err_legacy": 2.7,
+    "err_exact": 2.7,
+    "kawabou_err_exact": 2.7
+   },
+   "vertices": {
+    "legacy": 296,
+    "exact": 185
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "8ab15eb9c38e",
+    "smoothed": {
+     "iou": 0.9761,
+     "mask_far_outside_pct": 0.57,
+     "ring_far_only_pct": 0.06,
+     "path_outside_pct": 0.57,
+     "unreached_pct": 0.4
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "8ab15eb9c38e",
+    "smoothed": {
+     "iou": 0.993,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.4
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.995,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.4,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-kamiichigawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-kamiichigawa-daini",
+   "name": "上市川第二ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 138,
+    "snap_radius_m": 150.0,
+    "zoom": 13,
+    "resolution_m": 15.3
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 39.57,
+    "exact": 39.57,
+    "official": 38.7,
+    "err_legacy": 2.3,
+    "err_exact": 2.3,
+    "kawabou_err_exact": 2.2
+   },
+   "vertices": {
+    "legacy": 240,
+    "exact": 163
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "81ca63a280e4",
+    "smoothed": {
+     "iou": 0.976,
+     "mask_far_outside_pct": 0.68,
+     "ring_far_only_pct": 0.06,
+     "path_outside_pct": 0.69,
+     "unreached_pct": 0.36
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "81ca63a280e4",
+    "smoothed": {
+     "iou": 0.9932,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.36
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9941,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.36,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-kamiichigawa-daini.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-shiraiwagawa",
+   "name": "白岩川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": true,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.049,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 120.3,
+    "outlet_distance_m": 542,
+    "snap_radius_m": 0.0,
+    "zoom": 14,
+    "resolution_m": 7.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 27.95,
+    "exact": 27.95,
+    "official": 24.0,
+    "err_legacy": 16.4,
+    "err_exact": 16.4,
+    "kawabou_err_exact": 16.5
+   },
+   "vertices": {
+    "legacy": 355,
+    "exact": 149
+   },
+   "legacy": {
+    "status": "hold",
+    "block_codes": [
+     "manual_hold",
+     "area_error",
+     "path_leaves_ring"
+    ],
+    "flow_version": "16902b3218e6",
+    "smoothed": {
+     "iou": 0.9591,
+     "mask_far_outside_pct": 1.18,
+     "ring_far_only_pct": 0.11,
+     "path_outside_pct": 80.46,
+     "unreached_pct": 0.46
+    }
+   },
+   "exact": {
+    "status": "hold",
+    "block_codes": [
+     "manual_hold",
+     "area_error"
+    ],
+    "warn_codes": [],
+    "flow_version": "16902b3218e6",
+    "smoothed": {
+     "iou": 0.9906,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.46
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "hold",
+    "block_codes": [
+     "manual_hold",
+     "area_error"
+    ],
+    "iou": 0.9935,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.46,
+    "grid_file": "data/watershed/staged/held/toyama-shiraiwagawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": false,
+    "outline_method": null,
+    "state_latest": "hold",
+    "state_block_codes": [
+     "manual_hold",
+     "area_error",
+     "path_leaves_ring"
+    ]
+   },
+   "exact_evaluate_only": true
+  },
+  {
+   "id": "toyama-funagawa",
+   "name": "舟川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "unconfirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 195,
+    "snap_radius_m": 150.0,
+    "zoom": 14,
+    "resolution_m": 7.6
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 3.51,
+    "exact": 3.51,
+    "official": null,
+    "err_legacy": null,
+    "err_exact": null,
+    "kawabou_err_exact": 2.0
+   },
+   "vertices": {
+    "legacy": 51,
+    "exact": 46
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "1b0d5abe15ad",
+    "smoothed": {
+     "iou": 0.974,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.49
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_official_direct_area",
+     "diversion_unknown",
+     "no_reservoir_surface"
+    ],
+    "flow_version": "1b0d5abe15ad",
+    "smoothed": {
+     "iou": 0.9778,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.49
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9828,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.49,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-funagawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-fusegawa",
+   "name": "布施川ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 0.072,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 288.5,
+    "outlet_distance_m": 146,
+    "snap_radius_m": 0.0,
+    "zoom": 14,
+    "resolution_m": 7.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 13.21,
+    "exact": 13.21,
+    "official": 13.0,
+    "err_legacy": 1.7,
+    "err_exact": 1.7,
+    "kawabou_err_exact": 1.6
+   },
+   "vertices": {
+    "legacy": 103,
+    "exact": 77
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "24f25f846b49",
+    "smoothed": {
+     "iou": 0.9835,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.37
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [],
+    "flow_version": "24f25f846b49",
+    "smoothed": {
+     "iou": 0.9858,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.37
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9902,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.37,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-fusegawa.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-otani",
+   "name": "大谷ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "unconfirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 148,
+    "snap_radius_m": 150.0,
+    "zoom": 14,
+    "resolution_m": 7.6
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 1.48,
+    "exact": 1.48,
+    "official": null,
+    "err_legacy": null,
+    "err_exact": null,
+    "kawabou_err_exact": -1.3
+   },
+   "vertices": {
+    "legacy": 52,
+    "exact": 37
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "ad0cde7174d5",
+    "smoothed": {
+     "iou": 0.9521,
+     "mask_far_outside_pct": 0.07,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.07,
+     "unreached_pct": 1.14
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_official_direct_area",
+     "diversion_unknown",
+     "no_reservoir_surface"
+    ],
+    "flow_version": "ad0cde7174d5",
+    "smoothed": {
+     "iou": 0.9638,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 1.14
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.976,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 1.14,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-otani.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-kurobe",
+   "name": "黒部ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 1.14,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 1435.0,
+    "outlet_distance_m": 223,
+    "snap_radius_m": 0.0,
+    "zoom": 12,
+    "resolution_m": 30.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 181.09,
+    "exact": 181.09,
+    "official": 184.5,
+    "err_legacy": -1.8,
+    "err_exact": -1.8,
+    "kawabou_err_exact": null
+   },
+   "vertices": {
+    "legacy": 390,
+    "exact": 407
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "050798c308ba",
+    "smoothed": {
+     "iou": 0.982,
+     "mask_far_outside_pct": 0.13,
+     "ring_far_only_pct": 0.29,
+     "path_outside_pct": 0.12,
+     "unreached_pct": 0.37
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "diversion_yes"
+    ],
+    "flow_version": "050798c308ba",
+    "smoothed": {
+     "iou": 0.998,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.37
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9977,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.37,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-kurobe.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-arimine",
+   "name": "有峰ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "reservoir",
+    "lake_km2": 1.545,
+    "lake_inside_pct": 100.0,
+    "lake_level_m": 1075.0,
+    "outlet_distance_m": 31,
+    "snap_radius_m": 0.0,
+    "zoom": 12,
+    "resolution_m": 30.7
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 50.44,
+    "exact": 50.44,
+    "official": 49.9,
+    "err_legacy": 1.1,
+    "err_exact": 1.1,
+    "kawabou_err_exact": null
+   },
+   "vertices": {
+    "legacy": 209,
+    "exact": 220
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "9fa5afd5df96",
+    "smoothed": {
+     "iou": 0.9727,
+     "mask_far_outside_pct": 0.45,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.45,
+     "unreached_pct": 0.54
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "diversion_yes"
+    ],
+    "flow_version": "9fa5afd5df96",
+    "smoothed": {
+     "iou": 0.9971,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.54
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9955,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.54,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-arimine.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  },
+  {
+   "id": "toyama-dashidaira",
+   "name": "出し平ダム",
+   "generated": true,
+   "failure": null,
+   "basin_status": "confirmed",
+   "excluded": false,
+   "outlet": {
+    "outlet_method": "snap-fixed",
+    "lake_km2": 0.0,
+    "lake_inside_pct": null,
+    "lake_level_m": null,
+    "outlet_distance_m": 126,
+    "snap_radius_m": 0.0,
+    "zoom": 12,
+    "resolution_m": 30.6
+   },
+   "outlet_same_as_legacy": true,
+   "area": {
+    "legacy": 459.82,
+    "exact": 459.82,
+    "official": 461.2,
+    "err_legacy": -0.3,
+    "err_exact": -0.3,
+    "kawabou_err_exact": null
+   },
+   "vertices": {
+    "legacy": 975,
+    "exact": 799
+   },
+   "legacy": {
+    "status": "pass(候補)",
+    "block_codes": [],
+    "flow_version": "22589471dfa4",
+    "smoothed": {
+     "iou": 0.9524,
+     "mask_far_outside_pct": 0.87,
+     "ring_far_only_pct": 0.45,
+     "path_outside_pct": 0.87,
+     "unreached_pct": 0.72
+    }
+   },
+   "exact": {
+    "status": "pass",
+    "block_codes": [],
+    "warn_codes": [
+     "no_reservoir_surface"
+    ],
+    "flow_version": "22589471dfa4",
+    "smoothed": {
+     "iou": 0.9982,
+     "mask_far_outside_pct": 0.0,
+     "ring_far_only_pct": 0.0,
+     "path_outside_pct": 0.0,
+     "unreached_pct": 0.72
+    }
+   },
+   "raw_reference": {
+    "status_if_gate_used_raw": "pass",
+    "block_codes": [],
+    "iou": 0.9966,
+    "mask_far_outside_pct": 0.0,
+    "ring_far_only_pct": 0.0,
+    "path_outside_pct": 0.0,
+    "unreached_pct": 0.72,
+    "grid_file": "data/watershed/staged/legacy/flow/toyama-dashidaira.json"
+   },
+   "candidate_now": {
+    "is_candidate": true,
+    "outline_method": "exact",
+    "state_latest": "pass",
+    "state_block_codes": []
+   }
+  }
+ ]
+}

@@ -853,6 +853,12 @@ python -m unittest discover -s tests -v
 `--outline exact`（輪郭を画素の辺に沿ってたどる）は画素単位で一致する。既存の輪を黙って変えないため、
 既定は `legacy` のまま。切り替えは、影響（輪の形が変わる）を確認してから。
 
+**2026-09-24: 富山の公開候補21基を exact に切り替えた**（`data/basins/` の該当行を `--outline exact` で作り直し、
+`build_flowgrids --id` で候補へ反映。DEM は手元キャッシュのみ）。格子・出口・面積は legacy と同一で、
+変わったのは輪だけ。白岩川（HOLD）・久婦須川（QA hold）は evaluate-only で、入力も legacy のまま。
+legacy の候補は `data/watershed/staged/legacy/` に保存。一覧は `data/watershed/evaluations/toyama23_exact_candidates.md`。
+公開承認は別（`data/watershed/release.json`。この時点で0件）。
+
 ### 証拠層と評価区分（全国化に向けた、人手監査への振り分け）
 
 品質ゲート（上）は「配信してよいか」を止める仕組みで、「集水域そのものが正しいか」は保証しない

@@ -1,12 +1,12 @@
 {
- "version": "265bf955a2c8",
+ "version": "ea114884cedc",
  "generated": "2026-09-24",
  "source": "国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）をDAM TABI が加工して作成",
  "note": "地形から計算した概略の集水域。公式に確定した集水区域や実測の流域界ではない。",
  "pipeline": "ws-pipeline/2",
- "basins_version": "98ffd546b1be",
+ "basins_version": "467cbccb7e2f",
  "release_schema": "ws-release/1",
- "outline_method": "legacy",
+ "outline_method": "exact",
  "excluded": {
   "toyama-shiraiwagawa": "貯水池シードにすると 22.43km²（便覧直接比 −6.5%）から 27.95km²（+16.5%）へ、誤差が 23pt 悪化する。水面を起点にした他の20基では誤差が縮むか変わらないので、この1基だけ逆に動いている。**原因は特定できていない。** 「堤体で切ると水面が3つに割れる」「堤体(120.1m)が水位(120.3m)より低い」ことは確認したが、前者は曲がった貯水池でも起きる（臼中で確認）、後者は正常な20基でも起きる（徳山 −130.0m など。dams.json の座標が堤体下流側を指すため）。どちらも下流混入の証拠にならないので、根拠不足のまま公開しない。"
  },
@@ -36,15 +36,15 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
-   "unreached_pct": 0.8,
    "downstream_candidates": [],
    "downstream_reaches": [],
    "downstream_unverified": [],
+   "unreached_pct": 0.8,
    "v": "1a6924950186",
    "file": "flow/toyama-unazuki.json?v=1a6924950186",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-muromaki",
@@ -71,15 +71,15 @@
     "indirect_km2": 43.1,
     "note": "他の河川からの導水があり、地形上の集水域と実際の集水範囲は一致しない"
    },
-   "unreached_pct": 0.7,
    "downstream_candidates": [],
    "downstream_reaches": [],
    "downstream_unverified": [],
+   "unreached_pct": 0.7,
    "v": "62b388bca61c",
    "file": "flow/toyama-muromaki.json?v=62b388bca61c",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-kumanogawa",
@@ -113,8 +113,8 @@
    "v": "eecec879de82",
    "file": "flow/toyama-kumanogawa.json?v=eecec879de82",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-wadagawa",
@@ -148,8 +148,8 @@
    "v": "a33cbe453e6e",
    "file": "flow/toyama-wadagawa.json?v=a33cbe453e6e",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-togagawa",
@@ -183,8 +183,8 @@
    "v": "c027e2748313",
    "file": "flow/toyama-togagawa.json?v=c027e2748313",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-sakaigawa",
@@ -218,8 +218,8 @@
    "v": "0bca111bfadf",
    "file": "flow/toyama-sakaigawa.json?v=0bca111bfadf",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-tori",
@@ -253,8 +253,8 @@
    "v": "06178bc0eefd",
    "file": "flow/toyama-tori.json?v=06178bc0eefd",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-goi",
@@ -292,8 +292,8 @@
    "v": "e51785c2c718",
    "file": "flow/toyama-goi.json?v=e51785c2c718",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-konadegawa",
@@ -327,8 +327,8 @@
    "v": "b9e9c167ec5a",
    "file": "flow/toyama-konadegawa.json?v=b9e9c167ec5a",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-johana",
@@ -362,8 +362,8 @@
    "v": "d60ae78f6ffa",
    "file": "flow/toyama-johana.json?v=d60ae78f6ffa",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-usunaka",
@@ -397,8 +397,8 @@
    "v": "853436252b77",
    "file": "flow/toyama-usunaka.json?v=853436252b77",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-asahiogawa",
@@ -425,15 +425,15 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
-   "unreached_pct": 0.3,
    "downstream_candidates": [],
    "downstream_reaches": [],
    "downstream_unverified": [],
+   "unreached_pct": 0.3,
    "v": "3cb670daf710",
    "file": "flow/toyama-asahiogawa.json?v=3cb670daf710",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-kadokawa",
@@ -460,15 +460,15 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
-   "unreached_pct": 0.6,
    "downstream_candidates": [],
    "downstream_reaches": [],
    "downstream_unverified": [],
+   "unreached_pct": 0.6,
    "v": "3ab707ac4977",
    "file": "flow/toyama-kadokawa.json?v=3ab707ac4977",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-kamiichigawa",
@@ -495,15 +495,15 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
-   "unreached_pct": 0.4,
    "downstream_candidates": [],
    "downstream_reaches": [],
    "downstream_unverified": [],
+   "unreached_pct": 0.4,
    "v": "8ab15eb9c38e",
    "file": "flow/toyama-kamiichigawa.json?v=8ab15eb9c38e",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-kamiichigawa-daini",
@@ -530,7 +530,6 @@
     "indirect_km2": 0.0,
     "note": "全て直接流域（ダム便覧）"
    },
-   "unreached_pct": 0.4,
    "downstream_candidates": [
     "toyama-kamiichigawa"
    ],
@@ -538,11 +537,12 @@
     "toyama-kamiichigawa"
    ],
    "downstream_unverified": [],
+   "unreached_pct": 0.4,
    "v": "81ca63a280e4",
    "file": "flow/toyama-kamiichigawa-daini.json?v=81ca63a280e4",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-funagawa",
@@ -574,8 +574,8 @@
    "v": "1b0d5abe15ad",
    "file": "flow/toyama-funagawa.json?v=1b0d5abe15ad",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-fusegawa",
@@ -609,8 +609,8 @@
    "v": "24f25f846b49",
    "file": "flow/toyama-fusegawa.json?v=24f25f846b49",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-otani",
@@ -642,8 +642,8 @@
    "v": "ad0cde7174d5",
    "file": "flow/toyama-otani.json?v=ad0cde7174d5",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-kurobe",
@@ -683,8 +683,8 @@
    "v": "050798c308ba",
    "file": "flow/toyama-kurobe.json?v=050798c308ba",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-arimine",
@@ -718,8 +718,8 @@
    "v": "9fa5afd5df96",
    "file": "flow/toyama-arimine.json?v=9fa5afd5df96",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   },
   {
    "id": "toyama-dashidaira",
@@ -757,8 +757,8 @@
    "v": "22589471dfa4",
    "file": "flow/toyama-dashidaira.json?v=22589471dfa4",
    "qa_status": "pass",
-   "outline_method": "legacy",
-   "release_status": "not_exact"
+   "outline_method": "exact",
+   "release_status": "unapproved"
   }
  ]
 }
