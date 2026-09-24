@@ -214,6 +214,38 @@ class TestPublicBoundary(unittest.TestCase):
         self.assertIn("flow/t-a1.json", plan["written"])
         self.assertEqual(self.pub_bytes("flow/t-a1.json"), self.staged_bytes("t-a1"))
 
+    # ---- 個別の保留
+    def write_holds(self, holds):
+        p = self.tmp / wp.HOLDS_FILE
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps({"schema": wp.HOLDS_SCHEMA, "holds": holds}, ensure_ascii=False), encoding="utf-8")
+
+    def test_hold_overrides_a_valid_approval(self):
+        self.approve("t-a1")
+        self.approve("t-b2")
+        self.write_holds({"t-a1": {"reason": "出口が別の沢に乗っている疑い（試験）", "since": "2026-09-24", "by": "試験"}})
+        plan = self.assemble()
+        self.assertEqual(plan["public_ids"], ["t-b2"])
+        self.assertEqual(plan["release"]["held"], ["t-a1"])
+        self.assertEqual(public_files(self.tmp), ["basins.geojson", "flow/t-b2.json", "index.json"])
+        cand = json.loads((self.tmp / "data/watershed/staged/index.json").read_text(encoding="utf-8"))
+        a1 = next(d for d in cand["dams"] if d["id"] == "t-a1")
+        self.assertEqual((a1["release_status"], a1["hold_reason"]), ("held", "出口が別の沢に乗っている疑い（試験）"))
+        self.assertNotIn("hold_reason", json.dumps(self.public_index(), ensure_ascii=False))   # 公開索引には載らない
+
+    def test_malformed_or_unknown_hold_aborts(self):
+        self.assemble()
+        before = public_files(self.tmp)
+        p = self.tmp / wp.HOLDS_FILE
+        for doc in ({"schema": "other", "holds": {}},
+                    {"schema": wp.HOLDS_SCHEMA, "holds": []},
+                    {"schema": wp.HOLDS_SCHEMA, "holds": {"t-a1": {"reason": "理由だけ"}}},
+                    {"schema": wp.HOLDS_SCHEMA, "holds": {"t-zz": dict.fromkeys(wp.HOLD_KEYS, "x")}}):
+            p.write_text(json.dumps(doc), encoding="utf-8")
+            with self.assertRaises(wp.PipelineError):
+                self.assemble()
+            self.assertEqual(public_files(self.tmp), before)
+
     def test_malformed_release_file_aborts_without_writing(self):
         self.assemble()
         before = public_files(self.tmp)

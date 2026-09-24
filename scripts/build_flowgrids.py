@@ -87,7 +87,7 @@ def release_line(plan) -> str:
     r = plan["release"]
     out = (f"公開 {len(plan['public_ids'])} 基（docs/watershed/） / 公開候補 {len(plan['published_ids'])} 基"
            f"（data/watershed/staged/）: 承認済み {len(r['approved'])} / 承認後に作り直し {len(r['stale'])} / "
-           f"未承認 {len(r['unapproved'])} / 輪郭が exact でない {len(r['not_exact'])}")
+           f"未承認 {len(r['unapproved'])} / 輪郭が exact でない {len(r['not_exact'])} / 個別に保留 {len(r['held'])}")
     if plan.get("removed") or plan.get("quarantined"):
         out += (f"\n公開側から取り除いた: {len(plan.get('removed', []))} 件（候補と同一） / "
                 f"隔離した: {', '.join(plan.get('quarantined', [])) or 'なし'}")

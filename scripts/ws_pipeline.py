@@ -89,6 +89,11 @@ RELEASE_SCHEMA = "ws-release/1"
 RELEASABLE_OUTLINE = "exact"
 RELEASE_FILE = Path("data") / "watershed" / "release.json"
 RELEASE_KEYS = ("flow_version", "ring_version", "outline_method", "approved_by", "approved_on")
+# 個別の保留（人が記録する）。誤りが具体的に疑われる基を、理由を付けて公開から外す。
+# 保留は承認より優先する（承認が書かれていても release_status は held）。QA の判定は変えない。
+HOLDS_SCHEMA = "ws-holds/1"
+HOLDS_FILE = Path("data") / "watershed" / "holds.json"
+HOLD_KEYS = ("reason", "since", "by")
 
 HEADER_SOURCE = ("国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）を"
                  "DAM TABI が加工して作成")
@@ -340,20 +345,41 @@ class Store:
         return approvals
 
 
+    def load_holds(self) -> dict:
+        """個別の保留（dam_id → {reason, since, by}）。ファイルが無ければ保留なし。形が違えば PipelineError。"""
+        p = self.root / HOLDS_FILE
+        if not p.exists():
+            return {}
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if doc.get("schema") != HOLDS_SCHEMA:
+            raise PipelineError(f"{HOLDS_FILE}: schema は {HOLDS_SCHEMA!r}: {doc.get('schema')!r}")
+        holds = doc.get("holds")
+        if not isinstance(holds, dict):
+            raise PipelineError(f"{HOLDS_FILE}: holds は dam_id をキーにした object")
+        for did, h in holds.items():
+            missing = [k for k in HOLD_KEYS if not (isinstance(h, dict) and h.get(k))]
+            if missing:
+                raise PipelineError(f"{HOLDS_FILE}: {did} に {', '.join(missing)} がありません")
+        return holds
+
+
 def ring_version(ring) -> str:
     """輪（経緯度の列）の内容ハッシュ。承認を輪の形に結び付けるために使う。"""
     return wc.content_version({"ring": ring}, exclude=())
 
 
-def release_status(pub: dict, approval: dict | None) -> str:
+def release_status(pub: dict, approval: dict | None, held: dict | None = None) -> str:
     """公開候補1基の公開可否。approved だけが公開可能。
 
+    held      : 人が個別に保留している（data/watershed/holds.json）。承認より優先する
     not_exact : 輪郭方式が exact でない（legacy・不明）。承認があっても公開しない
     unapproved: 承認の記録が無い
     stale     : 承認後に作り直した（格子版・輪の版・輪郭方式のどれかが承認時と違う）
     approved  : 承認が今の格子・輪・輪郭方式（exact）と一致
     qa は pass が前提（公開候補は QA 合格の版だけ）。
     """
+    if held:
+        return "held"
     if pub.get("outline_method") != RELEASABLE_OUTLINE:
         return "not_exact"
     if not approval:
@@ -364,7 +390,7 @@ def release_status(pub: dict, approval: dict | None) -> str:
     return "approved" if same else "stale"
 
 
-RELEASE_STATUSES = ("approved", "stale", "unapproved", "not_exact")
+RELEASE_STATUSES = ("approved", "stale", "unapproved", "not_exact", "held")
 
 
 def apply_result(store: Store, dam: dict, judged: dict, gen: dict, ring, feature_props: dict,
@@ -432,7 +458,7 @@ def _routing_reaches(fd, goal_cells, i, j) -> bool:
     return False
 
 
-def _index_records(ids, pub, flows, approvals):
+def _index_records(ids, pub, flows, approvals, holds=None):
     """ids のダムの索引レコードとポリゴンを作る。下流の案内は ids の中だけで探す
     （公開索引が、公開していないダムを下流として名指ししないように）。"""
     areas = {i: pub[i]["index"]["fine_area_km2"] for i in ids}
@@ -467,7 +493,9 @@ def _index_records(ids, pub, flows, approvals):
         # 公開してよいかは release_status が決める（QA 合格・評価区分とは別）。
         rec["qa_status"] = "pass"
         rec["outline_method"] = pub[i].get("outline_method")
-        rec["release_status"] = release_status(pub[i], approvals.get(i))
+        rec["release_status"] = release_status(pub[i], approvals.get(i), (holds or {}).get(i))
+        if (holds or {}).get(i):
+            rec["hold_reason"] = holds[i]["reason"]          # 公開索引には載らない（held は公開しない）
         dams_out.append(rec)
     # ポリゴン: ids の輪だけ
     features = [{"type": "Feature", "properties": pub[i]["feature_properties"],
@@ -552,9 +580,10 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
         raise PipelineError("dams.json に無い dam_id の状態があります: " + ", ".join(unknown))
     ids = sorted(pub, key=lambda i: order[i])
     approvals = store.load_release()
-    stray = [i for i in approvals if i not in order]
+    holds = store.load_holds()
+    stray = [i for i in list(approvals) + list(holds) if i not in order]
     if stray:
-        raise PipelineError(f"{RELEASE_FILE} に dams.json に無い dam_id があります: " + ", ".join(stray))
+        raise PipelineError(f"{RELEASE_FILE} / {HOLDS_FILE} に dams.json に無い dam_id があります: " + ", ".join(stray))
 
     # 公開候補の格子ファイルの整合
     flows, flow_bytes = {}, {}
@@ -574,7 +603,7 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
         raise PipelineError("状態の無い（または公開候補でない）格子ファイルがあります: "
                             + ", ".join(orphans) + "  → --prune-orphans で staged/quarantine/ へ移せます")
 
-    cand_dams, cand_features = _index_records(ids, pub, flows, approvals)
+    cand_dams, cand_features = _index_records(ids, pub, flows, approvals, holds)
     cand_index, cand_bv = _index_doc(cand_dams, cand_features,
                                      {k: v for k, v in EXCLUDED.items() if k in states})
     status = {d["id"]: d["release_status"] for d in cand_dams}
@@ -628,7 +657,8 @@ def assemble(store: Store, dams: list[dict], write: bool = True, prune_orphans: 
         entry = {"id": i, "name": s.get("name"), "candidate": bool(s.get("published")),
                  "latest_status": lat.get("status"), "latest_flow_version": lat.get("flow_version"),
                  "block_codes": lat.get("block_codes"), "excluded_reason": EXCLUDED.get(i),
-                 "release_status": status.get(i), "approval_recorded": i in approvals}
+                 "release_status": status.get(i), "approval_recorded": i in approvals,
+                 "hold_reason": (holds.get(i) or {}).get("reason")}
         local["dams"].append(entry)
     dem_tiles.atomic_write_bytes(store.stage / "index.local.json",
                                  (json.dumps(local, ensure_ascii=False, indent=1) + "\n").encode("utf-8"))
