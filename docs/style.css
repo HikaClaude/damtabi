@@ -381,6 +381,15 @@ html, body {
 
 .panel-inner { padding: 16px 18px 32px; overflow-wrap: anywhere; word-break: normal; }
 
+/* --- 共有リンクが解決できない・複数候補があるときの案内（A2） -------------- */
+.panel-msg p { margin: 0 0 10px; }
+.panel-msg__note { font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
+.panel-candidates { list-style: none; margin: 0; padding: 0; }
+.panel-candidates li { padding: 8px 0; border-top: 1px solid var(--line); }
+.panel-candidates li:first-child { border-top: none; }
+.panel-candidates a { text-decoration: none; }
+.panel-candidates a:hover { text-decoration: underline; }
+
 .dam-name {
   margin: 0 0 2px;
   font-size: 20px;

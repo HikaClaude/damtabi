@@ -15,22 +15,21 @@
  * CSS / JS / 画像 / アイコンのように古くても害のないものだけキャッシュ優先。
  */
 
-// style.css / app.js / watershed/ を更新したら上げる（旧キャッシュを破棄させるため）。
-// watershed/ は /data/ の外なので下の「キャッシュ優先」側に入り、保存先は
-// shell-<VERSION>。VERSION を上げれば activate で旧世代ごと消えるため、
-// 新しい app.js と新しい索引・格子が必ず同じ世代で揃う。
-// 索引が指す格子のファイル名は dam_id そのものなので、索引だけ古くても
-// 別のダムの領域を読むことはない（未知IDは404になり画面に理由が出る）。
-var VERSION = "v17";
+var VERSION = "v3962475fdc";   // scripts/build_site.py の asset_version() が内容から自動生成する。
+                                // 手で編集しても次の実行で上書きされる（app.js/style.css/page.css/
+                                // sw.js自身の内容と、集水域の索引の生成版 watershed/index.json の version
+                                // が変わるたびに値が変わり、旧キャッシュを破棄させる）。
+// watershed/ は /data/ の外なので「キャッシュ優先」側に入り、保存先は shell-<VERSION>。
+// VERSION が変われば activate で旧世代ごと消えるため、新しい app.js と新しい索引・格子が同じ世代で揃う。
 var SHELL = "shell-" + VERSION;
 var PAGES = "pages-" + VERSION;
 var DATA = "data-" + VERSION;
 
 /* 値を含まない静的アセットだけ。HTML はここに入れない（値が埋まっているため） */
 var SHELL_FILES = [
-  "./style.css",
-  "./app.js",
-  "./page.css",
+  "./style.css?v=3962475fdc",
+  "./app.js?v=3962475fdc",
+  "./page.css?v=3962475fdc",
   "./manifest.json",
   "./favicon.ico",
   "./img/favicon-96.png"

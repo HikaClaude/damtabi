@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import html
 import io
 import json
@@ -32,6 +33,7 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
@@ -387,7 +389,7 @@ def fact_row(label: str, item: dict | None, unit: str, digits: int) -> str:
 
 # ---------------------------------------------------------------- ダムページ
 
-def dam_page(dam: dict, data: dict, base: str) -> str:
+def dam_page(dam: dict, data: dict, base: str, ver: str) -> str:
     th = data["thresholds"]["bases"]
     slug = dam["slug"]
     url = f"{base}/dam/{dam['pref']}/{slug}/"
@@ -620,12 +622,12 @@ def dam_page(dam: dict, data: dict, base: str) -> str:
         )
     body.append("</section>")
 
-    body.append(f'<p class="backlink"><a href="{e(base)}/#dam={e(name)}">地図でこのダムの位置を見る →</a></p>')
+    body.append(f'<p class="backlink"><a href="{e(base)}/#dam_id={quote(dam["id"])}">地図でこのダムの位置を見る →</a></p>')
     body.append("</article>")
 
     return page_shell(
         title=title, desc=desc, url=url, og_image=og_img,
-        rel_root="../../../", body="\n".join(body), base=base,
+        rel_root="../../../", body="\n".join(body), base=base, ver=ver,
         extra_head=(
             f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n'
             f'<script type="application/ld+json">{json.dumps(crumbs, ensure_ascii=False)}</script>'
@@ -701,7 +703,7 @@ FRESHNESS_JS = """
 """
 
 
-def page_shell(title, desc, url, og_image, rel_root, body, base, extra_head="", updated=None) -> str:
+def page_shell(title, desc, url, og_image, rel_root, body, base, ver, extra_head="", updated=None) -> str:
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -719,7 +721,7 @@ def page_shell(title, desc, url, og_image, rel_root, body, base, extra_head="", 
 <meta name="twitter:title" content="{e(title)}">
 <meta name="twitter:description" content="{e(desc)}">
 <meta name="twitter:image" content="{e(og_image)}">
-<link rel="stylesheet" href="{rel_root}page.css">
+<link rel="stylesheet" href="{rel_root}page.css?v={ver}">
 {extra_head}
 </head>
 <body class="doc">
@@ -744,7 +746,7 @@ def page_shell(title, desc, url, og_image, rel_root, body, base, extra_head="", 
 
 # ---------------------------------------------------------------- 一覧ページ
 
-def index_page(data: dict, base: str) -> str:
+def index_page(data: dict, base: str, ver: str) -> str:
     dams = data["dams"]
     ok = data["summary"]["by_status"].get("ok", 0)
     region = region_label(data)
@@ -797,7 +799,7 @@ def index_page(data: dict, base: str) -> str:
     )
     return page_shell(
         title=title, desc=desc, url=f"{base}/dam/", og_image=f"{base}/img/og/site.png",
-        rel_root="../", body="\n".join(body), base=base, updated=data["generated_at"],
+        rel_root="../", body="\n".join(body), base=base, ver=ver, updated=data["generated_at"],
     )
 
 
@@ -885,6 +887,153 @@ def write_index_meta(base: str, data: dict) -> bool:
     return True
 
 
+# ---------------------------------------------------------------- 資産の版付け（A2）
+#
+# app.js / style.css / page.css の内容が変わるたびに、参照URLと Service Worker の
+# キャッシュバケット名を自動的に切り替える。手で VERSION を上げる運用はやめる
+# （上げ忘れを構造的に無くすため）。sw.js 自身の処理（fetch ハンドラ等）が変わった
+# ときも版が変わるよう、sw.js の中身も版の計算対象に含める。
+#
+# ただし sw.js には、この仕組み自身が書き込む VERSION の値と各エントリの ?v=... が
+# 含まれる。そのまま丸ごとハッシュすると「書いた値で次回のハッシュが変わる」循環に
+# なるため、ハッシュ対象にする前に、書き込み対象になる部分だけ正規化してから使う。
+
+ASSET_VERSIONED_FILES = ("app.js", "style.css", "page.css")
+
+INDEX_ASSET_CSS_BEGIN = "<!-- BEGIN generated-asset-css -->"
+INDEX_ASSET_CSS_END = "<!-- END generated-asset-css -->"
+INDEX_ASSET_JS_BEGIN = "<!-- BEGIN generated-asset-js -->"
+INDEX_ASSET_JS_END = "<!-- END generated-asset-js -->"
+
+SW_VERSION_RE = re.compile(r'var VERSION = "[^"]*";')
+
+
+def _canonicalize_sw_source(src: str) -> str:
+    """sw.js のうち、この仕組み自身が書き込む値だけを正規化する。
+
+    正規化しないと、書き込んだ結果を次回読み直すたびにハッシュが変わってしまい、
+    「内容が変わっていないのに版が変わり続ける」循環になる。
+    """
+    src = SW_VERSION_RE.sub('var VERSION = "";', src)
+    for name in ASSET_VERSIONED_FILES:
+        src = re.sub(
+            rf'"\./{re.escape(name)}(?:\?v=[0-9a-f]+)?"',
+            f'"./{name}"',
+            src)
+    return src
+
+
+def asset_version() -> str:
+    """app.js・style.css・page.css の内容、および sw.js 自身の処理（版付け部分を
+    除く）から、内容が変わるたびに変わる短い版文字列を作る。
+
+    同じ入力（app.js 等を一切変更していない状態）で繰り返し呼んでも同じ値になる
+    （sw.js 側は _canonicalize_sw_source() で版付け済みの値を正規化してから使うため）。
+    """
+    h = hashlib.sha256()
+    for name in ASSET_VERSIONED_FILES:
+        h.update((DOCS / name).read_bytes())
+    sw_path = DOCS / "sw.js"
+    if sw_path.exists():
+        h.update(_canonicalize_sw_source(sw_path.read_text(encoding="utf-8")).encode("utf-8"))
+    # 集水域を作り直すと SW の版も変わるように、索引の生成版（中身のハッシュ）を入れる。
+    # index.json 全体ではなく version の値だけ（generated の日付で無関係に版が変わらないように）。
+    # 索引の version は索引自身の中身から作られ、ここで書く値には依存しないので循環しない。
+    h.update(_watershed_version().encode("utf-8"))
+    return h.hexdigest()[:10]
+
+
+def _watershed_version() -> str:
+    """docs/watershed/index.json の version。データが無い環境では空文字（版に影響させない）。"""
+    p = DOCS / "watershed" / "index.json"
+    if not p.exists():
+        return ""
+    try:
+        return str(json.loads(p.read_text(encoding="utf-8")).get("version") or "")
+    except ValueError:
+        return ""
+
+
+def _replace_between(src: str, begin: str, end: str, inner: str) -> tuple[str, bool]:
+    """begin/end マーカーの間（マーカー自身を含む）を作り直す。
+
+    マーカーが見つからない・順序がおかしい場合は (元のsrc, False) を返す。
+    呼び出し側はこれを見て、部分的な成功として扱わないこと。
+    """
+    i, j = src.find(begin), src.find(end)
+    if i < 0 or j < 0 or j < i:
+        return src, False
+    return src[:i] + begin + "\n" + inner + "\n" + end + src[j + len(end):], True
+
+
+def write_index_assets(ver: str) -> bool:
+    """docs/index.html の CSS/JS 参照へ ?v=<ver> を付ける。
+
+    マーカーが片方でも見つからなければ False を返す。黙って部分的な更新を
+    成功扱いにしない（呼び出し側で致命的エラーとして扱う）。
+    """
+    f = DOCS / "index.html"
+    src = f.read_text(encoding="utf-8")
+    ok_all = True
+
+    new, ok = _replace_between(
+        src, INDEX_ASSET_CSS_BEGIN, INDEX_ASSET_CSS_END,
+        f'<link rel="stylesheet" href="./style.css?v={ver}">')
+    if not ok:
+        print(f"[build_site] エラー: docs/index.html に {INDEX_ASSET_CSS_BEGIN} マーカーがありません",
+              file=sys.stderr)
+        ok_all = False
+    else:
+        src = new
+
+    new, ok = _replace_between(
+        src, INDEX_ASSET_JS_BEGIN, INDEX_ASSET_JS_END,
+        f'<script src="./app.js?v={ver}"></script>')
+    if not ok:
+        print(f"[build_site] エラー: docs/index.html に {INDEX_ASSET_JS_BEGIN} マーカーがありません",
+              file=sys.stderr)
+        ok_all = False
+    else:
+        src = new
+
+    if ok_all:
+        f.write_text(src, encoding="utf-8", newline="\n")
+    return ok_all
+
+
+def write_sw_version(ver: str) -> bool:
+    """docs/sw.js の VERSION と、SHELL_FILES 内の版付き資産の参照を書き換える。
+
+    VERSION 行・各ファイル名の参照が1つでも見つからなければ False を返す。
+    黙って部分的な更新を成功扱いにしない。
+    """
+    f = DOCS / "sw.js"
+    src = f.read_text(encoding="utf-8")
+    ok_all = True
+
+    new_src, n = SW_VERSION_RE.subn(f'var VERSION = "v{ver}";', src)
+    if n != 1:
+        print(f"[build_site] エラー: docs/sw.js の VERSION 行が見つかりません（一致{n}件）",
+              file=sys.stderr)
+        ok_all = False
+    else:
+        src = new_src
+
+    for name in ASSET_VERSIONED_FILES:
+        pattern = rf'"\./{re.escape(name)}(?:\?v=[0-9a-f]+)?"'
+        new_src, n = re.subn(pattern, f'"./{name}?v={ver}"', src)
+        if n != 1:
+            print(f'[build_site] エラー: docs/sw.js の SHELL_FILES に "./{name}" が見つかりません（一致{n}件）',
+                  file=sys.stderr)
+            ok_all = False
+        else:
+            src = new_src
+
+    if ok_all:
+        f.write_text(src, encoding="utf-8", newline="\n")
+    return ok_all
+
+
 def manifest(base: str) -> str:
     return json.dumps({
         "name": SITE_NAME,
@@ -929,6 +1078,11 @@ def main() -> int:
         return 1
     data = json.loads(DATA.read_text(encoding="utf-8"))
 
+    # app.js・style.css・page.css・sw.js の「今の中身」から版を1回だけ計算する。
+    # 書き込みより前に計算すること（書いた後の値を読み直すと循環するため。
+    # asset_version() 内部で正規化もしているので、書き込み後に再実行しても同じ値になる）。
+    ver = asset_version()
+
     n = 0
     for dam in data["dams"]:
         slug = dam.get("slug")
@@ -938,16 +1092,26 @@ def main() -> int:
             continue
         out = DOCS / "dam" / dam["pref"] / slug / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(dam_page(dam, data, base), encoding="utf-8", newline="\n")
+        out.write_text(dam_page(dam, data, base, ver), encoding="utf-8", newline="\n")
         n += 1
 
-    (DOCS / "dam" / "index.html").write_text(index_page(data, base), encoding="utf-8", newline="\n")
+    (DOCS / "dam" / "index.html").write_text(index_page(data, base, ver), encoding="utf-8", newline="\n")
     (DOCS / "sitemap.xml").write_text(sitemap(data, base), encoding="utf-8", newline="\n")
     (DOCS / "robots.txt").write_text(robots(base), encoding="utf-8", newline="\n")
     (DOCS / "manifest.json").write_text(manifest(base), encoding="utf-8", newline="\n")
     write_index_meta(base, data)
 
-    print(f"[build_site] ダムページ {n} 枚 / 一覧 / sitemap.xml / robots.txt / manifest.json / index.html のメタ を生成")
+    # 資産の版付け。マーカーや置換対象が見つからない場合は、黙って部分的な
+    # 更新を成功扱いにせず、ビルド全体を失敗として止める（放置すると、
+    # 版のずれた古いJS/CSSが配信され続けるリスクがあるため）。
+    assets_ok = write_index_assets(ver)
+    sw_ok = write_sw_version(ver)
+    if not (assets_ok and sw_ok):
+        print("[build_site] 致命的: 資産の版付けに失敗しました（上記のエラーを確認してください）。"
+              "生成済みのページは書き出し済みですが、版付けは中途半端な状態です。", file=sys.stderr)
+        return 1
+
+    print(f"[build_site] ダムページ {n} 枚 / 一覧 / sitemap.xml / robots.txt / manifest.json / index.html のメタ / 資産版付け（v={ver}）を生成")
     print(f"[build_site] base-url = {base}")
     return 0
 

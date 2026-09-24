@@ -28,6 +28,7 @@
     markers: {},   // id -> {marker, el, dam}
     activeId: null
   };
+  var hashchangeWired = false; // selectFromHash() を hashchange に一度だけ繋ぐためのフラグ
 
   var $ = function (sel) { return document.querySelector(sel); };
 
@@ -551,41 +552,126 @@
   function closePanel() {
     ws.stop(false);
     $("#panel").classList.add("is-hidden");
+    deselectMarker();
+    writeHash();
+  }
+
+  /** 選択中のピンの強調表示と state.activeId だけを解除する。
+   *  パネルの表示/非表示や URL には触れない（closePanel() と違い、これから
+   *  「見つかりません」「候補一覧」を表示する直前に、直前の選択の見た目だけを
+   *  消すために使う。closePanel() をそのまま使うと writeHash() が hash を
+   *  書き換えてしまい、読み取ったばかりの dam_id/dam を消してしまう）。 */
+  function deselectMarker() {
     if (state.activeId && state.markers[state.activeId]) {
       state.markers[state.activeId].el.classList.remove("is-active");
     }
     state.activeId = null;
-    writeHash();
   }
 
-  /** 表示状態を共有できる URL にしておく: #basis=effective&dam=宇奈月ダム */
+  /** location.hash を URLSearchParams として読む。壊れた%エンコードでも例外を投げない
+   *  （decodeURIComponent の直接呼び出しは URIError を送出しうるため、これに統一する）。 */
+  function hashParams() {
+    return new URLSearchParams((location.hash || "").replace(/^#/, ""));
+  }
+
+  /** 同じキーの値をすべて調べ、矛盾（異なる値が複数）かどうかを区別して返す。
+   *  同じ値の重複（例: dam_id=a&dam_id=a）は矛盾として扱わない。 */
+  function singleParam(params, key) {
+    var vals = params.getAll(key);
+    var uniq = vals.filter(function (v, i) { return vals.indexOf(v) === i; });
+    if (uniq.length === 0) return { present: false, value: null, ambiguous: false };
+    if (uniq.length === 1) return { present: true, value: uniq[0], ambiguous: false };
+    return { present: true, value: null, ambiguous: true };
+  }
+
+  /** 表示状態を共有できる URL にしておく: #basis=effective&dam_id=toyama-unazuki
+   *  新しく書き出すリンクには dam（名前）を併記しない。IDが指すダムを旧app.jsが
+   *  正しく選べる保証にはならないため（詳細は plans/ の A2 仕様書 §2.1）。 */
   function writeHash() {
-    var parts = [];
-    if (state.basis !== state.data.thresholds.default_basis) parts.push("basis=" + state.basis);
+    var params = new URLSearchParams();
+    if (state.basis !== state.data.thresholds.default_basis) params.set("basis", state.basis);
     if (state.activeId && state.markers[state.activeId]) {
-      parts.push("dam=" + encodeURIComponent(state.markers[state.activeId].dam.name));
+      params.set("dam_id", state.markers[state.activeId].dam.id);
     }
-    var h = parts.length ? "#" + parts.join("&") : location.pathname + location.search;
+    var qs = params.toString();
+    var h = qs ? "#" + qs : location.pathname + location.search;
     history.replaceState(null, "", h);
   }
 
   /** #basis=effective があれば色分けの基準を切り替える（起動時のみ）。 */
   function basisFromHash() {
-    var m = /[#&]basis=([a-z]+)/.exec(location.hash || "");
-    if (m && state.data.thresholds.bases[m[1]]) {
-      state.basis = m[1];
-      var r = document.querySelector('input[name="basis"][value="' + m[1] + '"]');
+    var b = hashParams().get("basis");
+    if (b && state.data.thresholds.bases[b]) {
+      state.basis = b;
+      var r = document.querySelector('input[name="basis"][value="' + b + '"]');
       if (r) r.checked = true;
     }
   }
 
-  /** #dam=<ダム名> があればそのダムを開く。 */
+  /** 県key→県名。renderRegions() と同じデータ源。 */
+  function prefName(key) {
+    var prefs = (state.data && state.data.prefectures) || [];
+    var hit = prefs.filter(function (p) { return p.key === key; })[0];
+    return hit ? hit.name : key;
+  }
+
+  /** リンク解決に失敗したときの案内。どのマーカーも選択状態にしない。
+   *  直前まで選択していたダムがあれば、その強調表示も解除する（誤って
+   *  「前のダムが今回の指定の結果」に見えないようにするため）。 */
+  function showDamNotFound() {
+    ws.stop(false);            // 集水域の輪と雨を残したまま案内を出さない（closePanel を通らないため）
+    deselectMarker();
+    $("#panel-body").innerHTML =
+      '<div class="panel-inner panel-msg">' +
+      "<p>指定されたダムが見つかりませんでした。</p>" +
+      '<p class="panel-msg__note">表示中のデータが古い可能性があります。' +
+      'オンラインで再度お試しいただくか、<a href="./dam/">ダム一覧</a>からお探しください。</p>' +
+      "</div>";
+    $("#panel").classList.remove("is-hidden");
+  }
+
+  /** 同名ダムが複数あるときの候補一覧。どれも自動選択しない。
+   *  直前まで選択していたダムがあれば、その強調表示も解除する（showDamNotFound()
+   *  と同じ理由）。 */
+  function showDamCandidates(matches) {
+    ws.stop(false);            // 集水域の輪と雨を残したまま案内を出さない（closePanel を通らないため）
+    deselectMarker();
+    var html = '<div class="panel-inner panel-msg">' +
+      "<p>同じ名前のダムが複数あります。</p>" +
+      '<ul class="panel-candidates">';
+    matches.forEach(function (d) {
+      html += '<li><a href="#dam_id=' + encodeURIComponent(d.id) + '">' +
+        esc(d.name) + "（" + esc(prefName(d.pref)) + "）</a></li>";
+    });
+    html += "</ul></div>";
+    $("#panel-body").innerHTML = html;
+    $("#panel").classList.remove("is-hidden");
+  }
+
+  /** #dam_id=<ID>（優先）または #dam=<ダム名> があればそのダムを開く。
+   *  未知ID・矛盾する指定からは、どちらのダムへも絶対にフォールバックしない。 */
   function selectFromHash() {
-    var m = /[#&]dam=([^&]+)/.exec(location.hash || "");
-    if (!m) return;
-    var name = decodeURIComponent(m[1]);
-    var hit = state.data.dams.filter(function (d) { return d.name === name; })[0];
-    if (hit) select(hit.id, false);
+    try {
+      var params = hashParams();
+      var idP = singleParam(params, "dam_id");
+      if (idP.present) {
+        if (idP.ambiguous) { showDamNotFound(); return; }
+        var hit = state.markers[idP.value];
+        if (hit) { select(idP.value, false); return; }
+        showDamNotFound(); // 未知ID。dam= が併記されていても使わない
+        return;
+      }
+      var nameP = singleParam(params, "dam");
+      if (!nameP.present) return; // 指定なし：現状維持
+      if (nameP.ambiguous) { showDamNotFound(); return; }
+      var matches = state.data.dams.filter(function (d) { return d.name === nameP.value; });
+      if (matches.length === 1) { select(matches[0].id, false); return; }
+      if (matches.length === 0) { showDamNotFound(); return; }
+      showDamCandidates(matches);
+    } catch (e) {
+      // 想定外の例外でも地図全体を巻き込まない。原因の違いは利用者に見せなくてよい。
+      showDamNotFound();
+    }
   }
 
   // ------------------------------------------------------------ ヘッダ
@@ -746,6 +832,15 @@
         state.markers[dam.id] = { marker: marker, el: el, dam: dam };
       });
       selectFromHash();
+      // 候補一覧のクリックや戻る/進むで hash だけが変わる場合にも追従する。
+      // state.data・state.markers が揃ったこの時点で初めて繋ぐ（起動処理の途中で
+      // hashchange が来ても未初期化の state を参照しないようにするため）。
+      // writeHash() は history.replaceState を使っており hashchange を発生させない
+      // ため、ここから select() → writeHash() を呼んでも自己ループにはならない。
+      if (!hashchangeWired) {
+        window.addEventListener("hashchange", selectFromHash);
+        hashchangeWired = true;
+      }
       // 地図のクリック。パネルが開いていて雨を降らせていないときは、これまでどおり閉じる。
       // それ以外は「ここに降った雨はどこへ行くか」を1滴で見せる（集水域データがある場合のみ）。
       map.on("click", function (ev) {
@@ -1899,8 +1994,8 @@
               km2(d.reference_area_km2) + " km²</td></tr>" : "") +
           "</table>" +
           (chips ? chips + '<p class="ws-note">' + note + "</p>" : "") +
-          '<p class="ws-note">地理院の標高データから計算した概略です。' +
-            "輪の中のどこを押しても、雨の行き先を確かめられます。</p>" +
+          '<p class="ws-note">国土地理院の標高データ（DEM10B）から DAM TABI が推定した<strong>概略</strong>です。' +
+            "公式に確定した集水区域ではありません。輪の中のどこを押しても、雨の行き先を確かめられます。</p>" +
           '<div class="ws-actions">' +
             '<button type="button" class="ws-btn" id="ws-again">もう一度 雨を降らせる</button>' +
             '<button type="button" class="ws-btn is-ghost" id="ws-stop">集水域を閉じる</button>' +
