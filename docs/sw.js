@@ -15,7 +15,7 @@
  * CSS / JS / 画像 / アイコンのように古くても害のないものだけキャッシュ優先。
  */
 
-var VERSION = "vc7faa270cb";   // scripts/build_site.py の asset_version() が内容から自動生成する。
+var VERSION = "v65e82017a2";   // scripts/build_site.py の asset_version() が内容から自動生成する。
                                 // 手で編集しても次の実行で上書きされる（app.js/style.css/page.css/
                                 // sw.js自身の内容と、集水域の索引の生成版 watershed/index.json の version
                                 // が変わるたびに値が変わり、旧キャッシュを破棄させる）。
@@ -27,9 +27,9 @@ var DATA = "data-" + VERSION;
 
 /* 値を含まない静的アセットだけ。HTML はここに入れない（値が埋まっているため） */
 var SHELL_FILES = [
-  "./style.css?v=c7faa270cb",
-  "./app.js?v=c7faa270cb",
-  "./page.css?v=c7faa270cb",
+  "./style.css?v=65e82017a2",
+  "./app.js?v=65e82017a2",
+  "./page.css?v=65e82017a2",
   "./manifest.json",
   "./favicon.ico",
   "./img/favicon-96.png"

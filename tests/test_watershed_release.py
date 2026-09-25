@@ -348,12 +348,13 @@ class TestRepoPublicBoundary(unittest.TestCase):
                 self.assertIn(i, plan["release"]["held"], i)
             else:
                 self.assertIsNone((states.get(i) or {}).get("published"), i)
-        # 公開物・承認は増えていない
-        self.assertEqual(plan["public_ids"], [])
-        self.assertEqual(json.loads((ROOT / wp.RELEASE_FILE).read_text(encoding="utf-8"))["approvals"], {})
+        # 公開物は release.json の承認と一致する（2026-09-25 に本番準備の77基を公開承認へ移した）
+        approvals = self.store.load_release()
+        self.assertEqual(sorted(plan["public_ids"]), sorted(approvals))
+        self.assertFalse(set(plan["public_ids"]) & set(holds))
 
-    def test_release_ready_list_matches_candidates_and_is_not_a_release(self):
-        """本番準備の一覧: 候補から保留を除いた全基で、版は今の候補と一致。release.json・docs は変えていない。"""
+    def test_release_ready_list_matches_candidates_and_release(self):
+        """本番準備の一覧: 候補から保留を除いた全基で、版は今の候補と一致。公開承認（release.json）も同じ77基。"""
         ready = self.store.load_release(wp.RELEASE_READY_FILE)
         states = self.store.all_states()
         cands = {i for i, s in states.items() if s.get("published")}
@@ -363,10 +364,14 @@ class TestRepoPublicBoundary(unittest.TestCase):
         for i, a in ready.items():
             self.assertEqual(wp.release_status(states[i]["published"], a), "approved", i)
             self.assertIn("利用条件", a["approved_by"], i)          # 体験の承認であって利用条件の確認は含まない
-        self.assertEqual(json.loads((ROOT / wp.RELEASE_FILE).read_text(encoding="utf-8"))["approvals"], {})
-        self.assertEqual(json.loads((ROOT / "docs/watershed/index.json").read_text(encoding="utf-8"))["dams"], [])
-        # assemble は本番準備の一覧を読まない（公開物は0のまま）
-        self.assertEqual(wp.assemble(self.store, self.dams, write=False)["public_ids"], [])
+        release = self.store.load_release()
+        self.assertEqual(set(release), set(ready))
+        for i, a in release.items():
+            self.assertEqual(wp.release_status(states[i]["published"], a), "approved", i)
+            self.assertNotIn("使用承認", a["approved_by"], i)    # 国土地理院の「使用承認を取得」とは書かない
+        pub = [d["id"] for d in json.loads((ROOT / "docs/watershed/index.json").read_text(encoding="utf-8"))["dams"]]
+        self.assertEqual(sorted(pub), sorted(ready))
+        self.assertEqual(sorted(wp.assemble(self.store, self.dams, write=False)["public_ids"]), sorted(ready))
 
     def test_legacy_21_cannot_be_published_even_with_matching_approvals(self):
         """exact へ作り直す前の legacy 候補21基（data/watershed/staged/legacy/ に保存）を候補に戻して試す。"""

@@ -1,6 +1,6 @@
 {
- "version": "5423a53eae38",
- "generated": "2026-09-24",
+ "version": "6dbe6726218c",
+ "generated": "2026-09-25",
  "source": "国土地理院 地理院タイル（標高タイル DEM10B・テキスト形式）をDAM TABI が加工して作成",
  "note": "地形から計算した概略の集水域。公式に確定した集水区域や実測の流域界ではない。",
  "pipeline": "ws-pipeline/2",
@@ -42,7 +42,7 @@
    "file": "flow/toyama-unazuki.json?v=1a6924950186",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-muromaki",
@@ -77,7 +77,7 @@
    "file": "flow/toyama-muromaki.json?v=62b388bca61c",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-kumanogawa",
@@ -112,7 +112,7 @@
    "file": "flow/toyama-kumanogawa.json?v=eecec879de82",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-kubusugawa",
@@ -147,7 +147,7 @@
    "file": "flow/toyama-kubusugawa.json?v=825a18c3dd73",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-wadagawa",
@@ -182,7 +182,7 @@
    "file": "flow/toyama-wadagawa.json?v=a33cbe453e6e",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-togagawa",
@@ -217,7 +217,7 @@
    "file": "flow/toyama-togagawa.json?v=c027e2748313",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-sakaigawa",
@@ -252,7 +252,7 @@
    "file": "flow/toyama-sakaigawa.json?v=0bca111bfadf",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-tori",
@@ -287,7 +287,7 @@
    "file": "flow/toyama-tori.json?v=06178bc0eefd",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-goi",
@@ -326,7 +326,7 @@
    "file": "flow/toyama-goi.json?v=e51785c2c718",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-konadegawa",
@@ -361,7 +361,7 @@
    "file": "flow/toyama-konadegawa.json?v=b9e9c167ec5a",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-johana",
@@ -396,7 +396,7 @@
    "file": "flow/toyama-johana.json?v=d60ae78f6ffa",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-usunaka",
@@ -431,7 +431,7 @@
    "file": "flow/toyama-usunaka.json?v=853436252b77",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-asahiogawa",
@@ -466,7 +466,7 @@
    "file": "flow/toyama-asahiogawa.json?v=3cb670daf710",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-kadokawa",
@@ -501,7 +501,7 @@
    "file": "flow/toyama-kadokawa.json?v=3ab707ac4977",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-kamiichigawa",
@@ -536,7 +536,7 @@
    "file": "flow/toyama-kamiichigawa.json?v=8ab15eb9c38e",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-kamiichigawa-daini",
@@ -575,7 +575,7 @@
    "file": "flow/toyama-kamiichigawa-daini.json?v=81ca63a280e4",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-shiraiwagawa",
@@ -610,7 +610,7 @@
    "file": "flow/toyama-shiraiwagawa.json?v=8c3e32a89d02",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved",
+   "release_status": "approved",
    "caution": "地形から推定した概略で、実際の集水域と異なる場合があります。",
    "caution_label": "概略"
   },
@@ -645,7 +645,7 @@
    "file": "flow/toyama-funagawa.json?v=1b0d5abe15ad",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-fusegawa",
@@ -680,7 +680,7 @@
    "file": "flow/toyama-fusegawa.json?v=24f25f846b49",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-otani",
@@ -713,7 +713,7 @@
    "file": "flow/toyama-otani.json?v=ad0cde7174d5",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-kurobe",
@@ -754,7 +754,7 @@
    "file": "flow/toyama-kurobe.json?v=050798c308ba",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-arimine",
@@ -789,7 +789,7 @@
    "file": "flow/toyama-arimine.json?v=9fa5afd5df96",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "toyama-dashidaira",
@@ -828,7 +828,7 @@
    "file": "flow/toyama-dashidaira.json?v=22589471dfa4",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-tedorigawa",
@@ -861,7 +861,7 @@
    "file": "flow/ishikawa-tedorigawa.json?v=b699ae69fe16",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-dainichigawa",
@@ -894,7 +894,7 @@
    "file": "flow/ishikawa-dainichigawa.json?v=9c6506e61a30",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-uchikawa",
@@ -931,7 +931,7 @@
    "file": "flow/ishikawa-uchikawa.json?v=51e1633dcd80",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-shin-uchikawa",
@@ -964,7 +964,7 @@
    "file": "flow/ishikawa-shin-uchikawa.json?v=50cafb31e8be",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-saigawa",
@@ -1001,7 +1001,7 @@
    "file": "flow/ishikawa-saigawa.json?v=1815d742600b",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-tatsumi",
@@ -1034,7 +1034,7 @@
    "file": "flow/ishikawa-tatsumi.json?v=14dbe5c91197",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-kitakawachi",
@@ -1067,7 +1067,7 @@
    "file": "flow/ishikawa-kitakawachi.json?v=9fb512c9025d",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-akase",
@@ -1100,7 +1100,7 @@
    "file": "flow/ishikawa-akase.json?v=d4325b05570f",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-kutani",
@@ -1137,7 +1137,7 @@
    "file": "flow/ishikawa-kutani.json?v=3352c6b2b6e7",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-wagatani",
@@ -1170,7 +1170,7 @@
    "file": "flow/ishikawa-wagatani.json?v=a969f8ca99a9",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "ishikawa-hakkagawa",
@@ -1203,7 +1203,7 @@
    "file": "flow/ishikawa-hakkagawa.json?v=339f0fd2907a",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-tokuyama",
@@ -1240,7 +1240,7 @@
    "file": "flow/gifu-tokuyama.json?v=c6b5f0da8ec1",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-agigawa",
@@ -1277,7 +1277,7 @@
    "file": "flow/gifu-agigawa.json?v=9222a203a8fd",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-iwaya",
@@ -1310,7 +1310,7 @@
    "file": "flow/gifu-iwaya.json?v=71307149eb32",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-maruyama",
@@ -1343,7 +1343,7 @@
    "file": "flow/gifu-maruyama.json?v=482a4be33dd6",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-yokoyama",
@@ -1376,7 +1376,7 @@
    "file": "flow/gifu-yokoyama.json?v=6ff530cf0d8f",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-origawa",
@@ -1409,7 +1409,7 @@
    "file": "flow/gifu-origawa.json?v=8ceb7b975cf4",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-atagi",
@@ -1442,7 +1442,7 @@
    "file": "flow/gifu-atagi.json?v=57dc2554306c",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-iwamura",
@@ -1481,7 +1481,7 @@
    "file": "flow/gifu-iwamura.json?v=3d2ee7b8eacc",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-ogahora",
@@ -1514,7 +1514,7 @@
    "file": "flow/gifu-ogahora.json?v=6b83a916259a",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-nakanoho",
@@ -1551,7 +1551,7 @@
    "file": "flow/gifu-nakanoho.json?v=b2a31863579f",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "gifu-nyukawa",
@@ -1584,7 +1584,7 @@
    "file": "flow/gifu-nyukawa.json?v=d1b814e11712",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-ryugahana",
@@ -1617,7 +1617,7 @@
    "file": "flow/fukui-ryugahana.json?v=9d4d36f8fca0",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-eiheiji",
@@ -1650,7 +1650,7 @@
    "file": "flow/fukui-eiheiji.json?v=2819084cbfad",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-sasogawa",
@@ -1687,7 +1687,7 @@
    "file": "flow/fukui-sasogawa.json?v=a6754a01a886",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-jodojigawa",
@@ -1720,7 +1720,7 @@
    "file": "flow/fukui-jodojigawa.json?v=53f9e0c62b9f",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-hirono",
@@ -1753,7 +1753,7 @@
    "file": "flow/fukui-hirono.json?v=e95af9b19c06",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-masutani",
@@ -1786,7 +1786,7 @@
    "file": "flow/fukui-masutani.json?v=ba78b8df6ecc",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-otsuro",
@@ -1819,7 +1819,7 @@
    "file": "flow/fukui-otsuro.json?v=253162bc84d8",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-kochigawa",
@@ -1852,7 +1852,7 @@
    "file": "flow/fukui-kochigawa.json?v=b267f159b6d4",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-kuzuryu",
@@ -1885,7 +1885,7 @@
    "file": "flow/fukui-kuzuryu.json?v=9323b47db9ad",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-managawa",
@@ -1918,7 +1918,7 @@
    "file": "flow/fukui-managawa.json?v=0fa7beb92404",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-takinami",
@@ -1951,7 +1951,7 @@
    "file": "flow/fukui-takinami.json?v=f3d9968a37cf",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-kaitani",
@@ -1984,7 +1984,7 @@
    "file": "flow/fukui-kaitani.json?v=3551cb86d60f",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "fukui-yoshinosegawa",
@@ -2017,7 +2017,7 @@
    "file": "flow/fukui-yoshinosegawa.json?v=12fd849c95d6",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved",
+   "release_status": "approved",
    "caution": "ダムの位置を照合できる資料の精度が低く（推測による位置）、この地図のダムの位置と約1.6 km離れています。集水域の出口の位置は資料で確かめられていません。",
    "caution_label": "位置の資料に制約"
   },
@@ -2052,7 +2052,7 @@
    "file": "flow/nagano-omachi.json?v=6a2ca1c410fa",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-miwa",
@@ -2085,7 +2085,7 @@
    "file": "flow/nagano-miwa.json?v=145b75aa1295",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-koshibu",
@@ -2118,7 +2118,7 @@
    "file": "flow/nagano-koshibu.json?v=7d630f560a8a",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-misogawa",
@@ -2155,7 +2155,7 @@
    "file": "flow/nagano-misogawa.json?v=2e02d48d0340",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-susobana",
@@ -2188,7 +2188,7 @@
    "file": "flow/nagano-susobana.json?v=f7df7be32118",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-matsukawa",
@@ -2221,7 +2221,7 @@
    "file": "flow/nagano-matsukawa.json?v=d184c8024917",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-yukawa",
@@ -2254,7 +2254,7 @@
    "file": "flow/nagano-yukawa.json?v=a554b22de1d3",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-okususobana",
@@ -2291,7 +2291,7 @@
    "file": "flow/nagano-okususobana.json?v=e23d83326871",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-narai",
@@ -2324,7 +2324,7 @@
    "file": "flow/nagano-narai.json?v=434ae741eeb8",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-koya",
@@ -2357,7 +2357,7 @@
    "file": "flow/nagano-koya.json?v=3fdab168548b",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-yokokawa",
@@ -2390,7 +2390,7 @@
    "file": "flow/nagano-yokokawa.json?v=4a1a1094c438",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-katagiri",
@@ -2423,7 +2423,7 @@
    "file": "flow/nagano-katagiri.json?v=7d19538627cc",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-minowa",
@@ -2456,7 +2456,7 @@
    "file": "flow/nagano-minowa.json?v=8a1cd8aac80f",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-kanabara",
@@ -2489,7 +2489,7 @@
    "file": "flow/nagano-kanabara.json?v=583ece34646b",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-kitayama",
@@ -2522,7 +2522,7 @@
    "file": "flow/nagano-kitayama.json?v=e051be99d4ae",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-mizukami",
@@ -2555,7 +2555,7 @@
    "file": "flow/nagano-mizukami.json?v=ab9a77b563d7",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-onikuma",
@@ -2588,7 +2588,7 @@
    "file": "flow/nagano-onikuma.json?v=dd30d687f09d",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-yoji",
@@ -2621,7 +2621,7 @@
    "file": "flow/nagano-yoji.json?v=a8c7cd609399",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   },
   {
    "id": "nagano-asakawa",
@@ -2654,7 +2654,7 @@
    "file": "flow/nagano-asakawa.json?v=7ef02a6f4399",
    "qa_status": "pass",
    "outline_method": "exact",
-   "release_status": "unapproved"
+   "release_status": "approved"
   }
  ]
 }
