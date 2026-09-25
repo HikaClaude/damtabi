@@ -928,6 +928,24 @@ python scripts/preview_watershed.py --port 8791 --no-open
 リポジトリの `docs/` と `data/watershed/release.json` には書かない。画面下に「プレビュー（公開していません・承認前）」と出る。
 個別に保留したダムは公開時と同じく表示しない（起動時に理由を出す）。確かめるときだけ `--include-held` で表示できる。画面の注記（`data/watershed/notes.json`）も写しに入れる。
 
+### 本番への組み込み（準備）
+
+2026-09-25 に人が、77基のローカルプレビューでデザイン・操作体験・注記を承認した（白岩川の河道起点を含む）。
+これは**体験と実装の承認**で、国土地理院の回答に照らした利用条件の確認は含まない。
+
+- `data/watershed/release_ready.json`（`release.json` と同じ形式）: 承認した77基を、その時の格子・輪の版に結び付けて記録した**本番準備の一覧**。
+  `assemble` は読まないので、`docs/watershed/` は空のまま（公開されない）
+- 本番相当の確認: `python scripts/build_release_candidate.py`（`--serve` で 127.0.0.1:8792 に配信）。
+  リポジトリの写しの中でだけ一覧を `release.json` として使い、通常の公開用ビルド（`build_flowgrids.py --assemble-only` → `build_site.py`）を実行する。
+  公開物が77基だけで保留が混ざらないこと、索引・輪・格子の ID と版が揃うこと、もう一度ビルドしても変わらないことを確かめる
+- 公開する手順（利用条件を確認したあと、人が行う）:
+  1. `release_ready.json` の `approvals` を `release.json` へ移す（版が変わったダムは `stale` になり公開されない）
+  2. `python scripts/build_flowgrids.py --assemble-only` → `python scripts/build_site.py`
+  3. `docs/watershed/`・`docs/sw.js`・`docs/index.html`・`docs/dam/` をまとめて commit する。
+     集水域の版は Service Worker の版に入るので、`sw.js` を一緒に入れないと旧世代のキャッシュが残る。
+     貯水率の定期更新（`scripts/update_and_publish.py`）はこれらを commit しない（許可リスト外）ので、集水域の公開と混ざらない
+- 公開用の集水域データは77基で約 21 MB（格子は押したときだけ読む）
+
 ### 個別の保留（`data/watershed/holds.json`）
 
 誤りが具体的に疑われるダムは、理由を付けてここに記録する（`schema: ws-holds/1`、各項目 `reason`・`since`・`by`）。

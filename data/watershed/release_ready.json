@@ -1,0 +1,545 @@
+{
+ "schema": "ws-release/1",
+ "note": "本番準備の一覧。2026-09-25 に人が、77基のローカルプレビューでデザイン・操作体験・注記（白岩川の河道起点を含む）を承認した記録。**release.json の公開承認ではない**（国土地理院の回答に照らした利用条件の確認は含まない）。assemble はこのファイルを読まず、docs/watershed/ は変わらない。scripts/build_release_candidate.py がリポジトリの写しの中でだけ release.json として使い、通常の公開用ビルドを本番相当で作る。利用条件を確認したら、人がこの approvals を release.json へ移す（版が変わったダムは stale になり公開されない）。",
+ "approvals": {
+  "toyama-unazuki": {
+   "flow_version": "1a6924950186",
+   "ring_version": "3dd2d5975daa",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-muromaki": {
+   "flow_version": "62b388bca61c",
+   "ring_version": "aec93a9182bc",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-kumanogawa": {
+   "flow_version": "eecec879de82",
+   "ring_version": "4ccd53e90fd0",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-kubusugawa": {
+   "flow_version": "825a18c3dd73",
+   "ring_version": "d3bfd5d0e6e6",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-wadagawa": {
+   "flow_version": "a33cbe453e6e",
+   "ring_version": "9c0973e69b3b",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-togagawa": {
+   "flow_version": "c027e2748313",
+   "ring_version": "f63a4ba1df00",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-sakaigawa": {
+   "flow_version": "0bca111bfadf",
+   "ring_version": "9bf7eec6a661",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-tori": {
+   "flow_version": "06178bc0eefd",
+   "ring_version": "24a1ea4d112f",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-goi": {
+   "flow_version": "e51785c2c718",
+   "ring_version": "06a7aec6add8",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-konadegawa": {
+   "flow_version": "b9e9c167ec5a",
+   "ring_version": "38fcfa582afd",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-johana": {
+   "flow_version": "d60ae78f6ffa",
+   "ring_version": "dd5b82caecc6",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-usunaka": {
+   "flow_version": "853436252b77",
+   "ring_version": "e7bc3fb4cfe8",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-asahiogawa": {
+   "flow_version": "3cb670daf710",
+   "ring_version": "07afc8856cb4",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-kadokawa": {
+   "flow_version": "3ab707ac4977",
+   "ring_version": "cdf67501fb7a",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-kamiichigawa": {
+   "flow_version": "8ab15eb9c38e",
+   "ring_version": "20df3b558086",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-kamiichigawa-daini": {
+   "flow_version": "81ca63a280e4",
+   "ring_version": "d919b9f216c0",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-shiraiwagawa": {
+   "flow_version": "8c3e32a89d02",
+   "ring_version": "780d2cd9cc45",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-funagawa": {
+   "flow_version": "1b0d5abe15ad",
+   "ring_version": "e89851ab8c86",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-fusegawa": {
+   "flow_version": "24f25f846b49",
+   "ring_version": "a4c1194d89a4",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-otani": {
+   "flow_version": "ad0cde7174d5",
+   "ring_version": "36e53a468250",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-kurobe": {
+   "flow_version": "050798c308ba",
+   "ring_version": "690bcfae2d13",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-arimine": {
+   "flow_version": "9fa5afd5df96",
+   "ring_version": "535da84598e2",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "toyama-dashidaira": {
+   "flow_version": "22589471dfa4",
+   "ring_version": "495a2455ab4d",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-tedorigawa": {
+   "flow_version": "b699ae69fe16",
+   "ring_version": "c58c7156c3e0",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-dainichigawa": {
+   "flow_version": "9c6506e61a30",
+   "ring_version": "2e2a3a431281",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-uchikawa": {
+   "flow_version": "51e1633dcd80",
+   "ring_version": "1b95cc590139",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-shin-uchikawa": {
+   "flow_version": "50cafb31e8be",
+   "ring_version": "2a6d6ae33148",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-saigawa": {
+   "flow_version": "1815d742600b",
+   "ring_version": "e5c42301f293",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-tatsumi": {
+   "flow_version": "14dbe5c91197",
+   "ring_version": "e35a1ff45294",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-kitakawachi": {
+   "flow_version": "9fb512c9025d",
+   "ring_version": "0c75772119fb",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-akase": {
+   "flow_version": "d4325b05570f",
+   "ring_version": "7fd9afaf99db",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-kutani": {
+   "flow_version": "3352c6b2b6e7",
+   "ring_version": "24aa37895f25",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-wagatani": {
+   "flow_version": "a969f8ca99a9",
+   "ring_version": "35d8bd79b0c7",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "ishikawa-hakkagawa": {
+   "flow_version": "339f0fd2907a",
+   "ring_version": "00cfc9a2792b",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-tokuyama": {
+   "flow_version": "c6b5f0da8ec1",
+   "ring_version": "388a443d809a",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-agigawa": {
+   "flow_version": "9222a203a8fd",
+   "ring_version": "3c100ed58bbc",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-iwaya": {
+   "flow_version": "71307149eb32",
+   "ring_version": "9ff347fa04dc",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-maruyama": {
+   "flow_version": "482a4be33dd6",
+   "ring_version": "2822e633c1e8",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-yokoyama": {
+   "flow_version": "6ff530cf0d8f",
+   "ring_version": "430663a351b3",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-origawa": {
+   "flow_version": "8ceb7b975cf4",
+   "ring_version": "af8ac4d92e2b",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-atagi": {
+   "flow_version": "57dc2554306c",
+   "ring_version": "6b238845cc26",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-iwamura": {
+   "flow_version": "3d2ee7b8eacc",
+   "ring_version": "72adf0438a16",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-ogahora": {
+   "flow_version": "6b83a916259a",
+   "ring_version": "d1176193d599",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-nakanoho": {
+   "flow_version": "b2a31863579f",
+   "ring_version": "50fe01283fe0",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "gifu-nyukawa": {
+   "flow_version": "d1b814e11712",
+   "ring_version": "a2261b797341",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-ryugahana": {
+   "flow_version": "9d4d36f8fca0",
+   "ring_version": "905f40683c0d",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-eiheiji": {
+   "flow_version": "2819084cbfad",
+   "ring_version": "4fc948e51924",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-sasogawa": {
+   "flow_version": "a6754a01a886",
+   "ring_version": "684336ff1bc9",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-jodojigawa": {
+   "flow_version": "53f9e0c62b9f",
+   "ring_version": "a1faab882374",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-hirono": {
+   "flow_version": "e95af9b19c06",
+   "ring_version": "f4fcba9c1f67",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-masutani": {
+   "flow_version": "ba78b8df6ecc",
+   "ring_version": "a5628e6b792d",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-otsuro": {
+   "flow_version": "253162bc84d8",
+   "ring_version": "a0b8b3f93c02",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-kochigawa": {
+   "flow_version": "b267f159b6d4",
+   "ring_version": "d79490c5d988",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-kuzuryu": {
+   "flow_version": "9323b47db9ad",
+   "ring_version": "718ac21cbcaf",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-managawa": {
+   "flow_version": "0fa7beb92404",
+   "ring_version": "a4d37f4b723b",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-takinami": {
+   "flow_version": "f3d9968a37cf",
+   "ring_version": "748cc98ca90c",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-kaitani": {
+   "flow_version": "3551cb86d60f",
+   "ring_version": "cb37a37e587d",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "fukui-yoshinosegawa": {
+   "flow_version": "12fd849c95d6",
+   "ring_version": "908d923499e0",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-omachi": {
+   "flow_version": "6a2ca1c410fa",
+   "ring_version": "900e2774c0ed",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-miwa": {
+   "flow_version": "145b75aa1295",
+   "ring_version": "8a167c0939fd",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-koshibu": {
+   "flow_version": "7d630f560a8a",
+   "ring_version": "611025815942",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-misogawa": {
+   "flow_version": "2e02d48d0340",
+   "ring_version": "faf99adaea6f",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-susobana": {
+   "flow_version": "f7df7be32118",
+   "ring_version": "ad8a7f86e408",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-matsukawa": {
+   "flow_version": "d184c8024917",
+   "ring_version": "0104247c022d",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-yukawa": {
+   "flow_version": "a554b22de1d3",
+   "ring_version": "fbaedb10ee9c",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-okususobana": {
+   "flow_version": "e23d83326871",
+   "ring_version": "d9fdd0773d91",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-narai": {
+   "flow_version": "434ae741eeb8",
+   "ring_version": "423c37c1c66c",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-koya": {
+   "flow_version": "3fdab168548b",
+   "ring_version": "5d10ad35e55c",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-yokokawa": {
+   "flow_version": "4a1a1094c438",
+   "ring_version": "eb3257a77a08",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-katagiri": {
+   "flow_version": "7d19538627cc",
+   "ring_version": "f534d36abb2e",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-minowa": {
+   "flow_version": "8a1cd8aac80f",
+   "ring_version": "fa43725dc9bf",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-kanabara": {
+   "flow_version": "583ece34646b",
+   "ring_version": "6bdf22a35ca1",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-kitayama": {
+   "flow_version": "e051be99d4ae",
+   "ring_version": "f1f2ad59eacb",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-mizukami": {
+   "flow_version": "ab9a77b563d7",
+   "ring_version": "f37effc9ae09",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-onikuma": {
+   "flow_version": "dd30d687f09d",
+   "ring_version": "06e3cb653965",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-yoji": {
+   "flow_version": "a8c7cd609399",
+   "ring_version": "fc8a24253b5d",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  },
+  "nagano-asakawa": {
+   "flow_version": "7ef02a6f4399",
+   "ring_version": "8668bc8e973b",
+   "outline_method": "exact",
+   "approved_by": "体験・実装の承認（人、ローカルプレビューで確認）。利用条件（国土地理院の回答）の確認は含まない",
+   "approved_on": "2026-09-25"
+  }
+ }
+}

@@ -87,6 +87,11 @@ RELEASE_SCHEMA = "ws-release/1"
 RELEASABLE_OUTLINE = "exact"
 RELEASE_FILE = Path("data") / "watershed" / "release.json"
 RELEASE_KEYS = ("flow_version", "ring_version", "outline_method", "approved_by", "approved_on")
+# 本番準備の一覧（人が体験・実装を承認したダム）。release.json と同じ形式・同じ版の結び付け。
+# **release.json の公開承認ではない**（利用条件の確認は含まない）。assemble は読まない。
+# scripts/build_release_candidate.py が、リポジトリの写しの中でだけ release.json として使い、
+# 通常の公開用ビルドを本番相当で試す。利用条件を確認したあと、人が release.json へ移すと公開の手順に乗る。
+RELEASE_READY_FILE = Path("data") / "watershed" / "release_ready.json"
 # 個別の保留（人が記録する）。誤りが具体的に疑われる基を、理由を付けて公開から外す。
 # 保留は承認より優先する（承認が書かれていても release_status は held）。QA の判定は変えない。
 HOLDS_SCHEMA = "ws-holds/1"
@@ -331,21 +336,23 @@ class Store:
         return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
 
     # ---- 公開承認
-    def load_release(self) -> dict:
-        """承認記録（dam_id → 承認）。ファイルが無ければ「承認なし」。形が違えば PipelineError。"""
-        p = self.root / RELEASE_FILE
+    def load_release(self, path: Path | None = None) -> dict:
+        """承認記録（dam_id → 承認）。ファイルが無ければ「承認なし」。形が違えば PipelineError。
+        path を渡すと、同じ形式の別ファイル（本番準備の一覧 RELEASE_READY_FILE など）を読む。"""
+        rel = path or RELEASE_FILE
+        p = self.root / rel
         if not p.exists():
             return {}
         doc = json.loads(p.read_text(encoding="utf-8"))
         if doc.get("schema") != RELEASE_SCHEMA:
-            raise PipelineError(f"{RELEASE_FILE}: schema は {RELEASE_SCHEMA!r}: {doc.get('schema')!r}")
+            raise PipelineError(f"{rel}: schema は {RELEASE_SCHEMA!r}: {doc.get('schema')!r}")
         approvals = doc.get("approvals")
         if not isinstance(approvals, dict):
-            raise PipelineError(f"{RELEASE_FILE}: approvals は dam_id をキーにした object")
+            raise PipelineError(f"{rel}: approvals は dam_id をキーにした object")
         for did, a in approvals.items():
             missing = [k for k in RELEASE_KEYS if not (isinstance(a, dict) and a.get(k))]
             if missing:
-                raise PipelineError(f"{RELEASE_FILE}: {did} に {', '.join(missing)} がありません")
+                raise PipelineError(f"{rel}: {did} に {', '.join(missing)} がありません")
         return approvals
 
 

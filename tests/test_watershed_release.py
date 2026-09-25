@@ -352,6 +352,22 @@ class TestRepoPublicBoundary(unittest.TestCase):
         self.assertEqual(plan["public_ids"], [])
         self.assertEqual(json.loads((ROOT / wp.RELEASE_FILE).read_text(encoding="utf-8"))["approvals"], {})
 
+    def test_release_ready_list_matches_candidates_and_is_not_a_release(self):
+        """本番準備の一覧: 候補から保留を除いた全基で、版は今の候補と一致。release.json・docs は変えていない。"""
+        ready = self.store.load_release(wp.RELEASE_READY_FILE)
+        states = self.store.all_states()
+        cands = {i for i, s in states.items() if s.get("published")}
+        holds = self.store.load_holds()
+        self.assertEqual(set(ready), cands - set(holds))
+        self.assertFalse(set(ready) & set(holds))
+        for i, a in ready.items():
+            self.assertEqual(wp.release_status(states[i]["published"], a), "approved", i)
+            self.assertIn("利用条件", a["approved_by"], i)          # 体験の承認であって利用条件の確認は含まない
+        self.assertEqual(json.loads((ROOT / wp.RELEASE_FILE).read_text(encoding="utf-8"))["approvals"], {})
+        self.assertEqual(json.loads((ROOT / "docs/watershed/index.json").read_text(encoding="utf-8"))["dams"], [])
+        # assemble は本番準備の一覧を読まない（公開物は0のまま）
+        self.assertEqual(wp.assemble(self.store, self.dams, write=False)["public_ids"], [])
+
     def test_legacy_21_cannot_be_published_even_with_matching_approvals(self):
         """exact へ作り直す前の legacy 候補21基（data/watershed/staged/legacy/ に保存）を候補に戻して試す。"""
         tmp = Path(tempfile.mkdtemp())
