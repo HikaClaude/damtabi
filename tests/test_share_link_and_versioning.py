@@ -83,6 +83,74 @@ class TestAssetVersionIncludesWatershed(unittest.TestCase):
         self.assertEqual(v, bs.asset_version())
 
 
+class TestAssetVersionIgnoresLineEndings(unittest.TestCase):
+    """同じ内容なら LF / CRLF の違いだけで資産の版が変わらない（作業場所の core.autocrlf に依らない）。"""
+
+    def copy_docs(self, crlf: bool) -> Path:
+        d = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, d, ignore_errors=True)
+        for n in ("app.js", "style.css", "page.css", "sw.js"):
+            t = (ROOT / "docs" / n).read_bytes().replace(b"\r\n", b"\n")
+            (d / n).write_bytes(t.replace(b"\n", b"\r\n") if crlf else t)
+        (d / "watershed").mkdir()
+        shutil.copy(ROOT / "docs/watershed/index.json", d / "watershed/index.json")
+        return d
+
+    def version_of(self, docs: Path) -> str:
+        saved = bs.DOCS
+        bs.DOCS = docs
+        try:
+            return bs.asset_version()
+        finally:
+            bs.DOCS = saved
+
+    def test_lf_and_crlf_give_the_same_version(self):
+        lf, crlf = self.copy_docs(False), self.copy_docs(True)
+        self.assertNotEqual((lf / "app.js").read_bytes(), (crlf / "app.js").read_bytes())
+        self.assertEqual(self.version_of(lf), self.version_of(crlf))
+        self.assertEqual(self.version_of(lf), bs.asset_version())       # リポジトリの作業場所とも同じ
+
+    def test_real_change_changes_the_version(self):
+        d = self.copy_docs(True)
+        v0 = self.version_of(d)
+        with open(d / "style.css", "ab") as f:
+            f.write(b"\r\n/* change */\r\n")
+        self.assertNotEqual(v0, self.version_of(d))
+
+    def test_files_are_not_rewritten(self):
+        d = self.copy_docs(True)
+        before = (d / "app.js").read_bytes()
+        self.version_of(d)
+        self.assertEqual(before, (d / "app.js").read_bytes())
+
+
+class TestUpdateToolPublishesSw(unittest.TestCase):
+    """貯水率の定期更新（update_and_publish.py）が、作り直した sw.js をページと一緒に公開対象にする。"""
+
+    def test_sw_is_in_publish_paths_and_change_is_detected(self):
+        import subprocess
+        import update_and_publish as up
+        self.assertIn("docs/sw.js", up.PUBLISH_PATHS)
+        tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        (tmp / "docs/dam").mkdir(parents=True)
+        for rel in ("docs/sw.js", "docs/index.html", "docs/dam/index.html", "docs/app.js"):
+            (tmp / rel).write_text("v1\n", encoding="utf-8")
+        g = lambda *a: subprocess.run(["git", *a], cwd=tmp, capture_output=True, text=True, check=True)
+        g("init", "-q"); g("add", "-A"); g("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "init")
+        saved = up.ROOT
+        up.ROOT = tmp
+        try:
+            before = up.hashes_of(up.PUBLISH_PATHS)
+            for rel in ("docs/sw.js", "docs/index.html", "docs/app.js"):          # build_site が書き直した想定
+                (tmp / rel).write_text("v2\n", encoding="utf-8")
+            after = up.hashes_of(up.PUBLISH_PATHS)
+        finally:
+            up.ROOT = saved
+        changed = sorted(n for n, h in after.items() if before.get(n) != h)
+        self.assertEqual(changed, ["docs/index.html", "docs/sw.js"])       # app.js など許可リスト外は巻き込まない
+
+
 class TestRepoIsBuilt(unittest.TestCase):
     """リポジトリの docs が build_site の版付けと揃っている（生成し忘れの検出）。"""
 

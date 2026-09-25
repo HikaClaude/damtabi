@@ -923,19 +923,30 @@ def _canonicalize_sw_source(src: str) -> str:
     return src
 
 
+def _text_for_hash(data: bytes) -> bytes:
+    """版の計算に入れるテキスト。改行を LF にそろえる（CRLF と単独の CR を LF に）。"""
+    return data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+
+
 def asset_version() -> str:
     """app.js・style.css・page.css の内容、および sw.js 自身の処理（版付け部分を
     除く）から、内容が変わるたびに変わる短い版文字列を作る。
 
     同じ入力（app.js 等を一切変更していない状態）で繰り返し呼んでも同じ値になる
     （sw.js 側は _canonicalize_sw_source() で版付け済みの値を正規化してから使うため）。
+
+    改行コード（LF / CRLF）の違いだけでは版を変えない。git の core.autocrlf で作業場所ごとに
+    改行が変わるため、バイト列をそのままハッシュすると、同じ内容でも作業場所によって版が変わる
+    （2026-09-25 に damtabi-live で実測）。正規化するのはハッシュに入れるテキストだけで、
+    ファイルそのものは書き換えない。
     """
     h = hashlib.sha256()
     for name in ASSET_VERSIONED_FILES:
-        h.update((DOCS / name).read_bytes())
+        h.update(_text_for_hash((DOCS / name).read_bytes()))
     sw_path = DOCS / "sw.js"
     if sw_path.exists():
-        h.update(_canonicalize_sw_source(sw_path.read_text(encoding="utf-8")).encode("utf-8"))
+        sw_src = _text_for_hash(sw_path.read_bytes()).decode("utf-8")
+        h.update(_canonicalize_sw_source(sw_src).encode("utf-8"))
     # 集水域を作り直すと SW の版も変わるように、索引の生成版（中身のハッシュ）を入れる。
     # index.json 全体ではなく version の値だけ（generated の日付で無関係に版が変わらないように）。
     # 索引の version は索引自身の中身から作られ、ここで書く値には依存しないので循環しない。

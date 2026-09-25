@@ -53,6 +53,9 @@ PUBLISH_PATHS = [
     "docs/sitemap.xml",
     "docs/robots.txt",
     "docs/manifest.json",
+    # build_site.py は資産の版（sw.js の VERSION と index.html・ダムページの ?v=）をまとめて書き直す。
+    # ページだけ公開して sw.js を残すと、ページが参照する版と Service Worker の版が食い違うので一緒に出す。
+    "docs/sw.js",
 ]
 
 LINE = "─" * 62
