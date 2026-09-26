@@ -132,7 +132,23 @@ html, body {
    外側の .dam-pin は MapLibre が transform を毎フレーム書き換えるので、
    ここに transition を付けてはいけない（付けると地図に追従できなくなる）。
    見た目の変化はすべて内側の .dam-pin__inner 以下に持たせる。 */
+
+/* ピンの大きさ（押せる範囲も同じ）。ズームが --pin-zoom-from 以下なら --pin-min、
+   --pin-zoom-to 以上なら --pin-max、その間はズームに合わせて連続的に変わる。
+   --map-zoom は app.js が地図のズームを書き込む（無ければ --pin-min のまま）。
+   スマホ幅の上限は下の narrow で上書きする。数値の調整はここだけで済む */
+#map {
+  --pin-min: 48px;
+  --pin-max: 115px;
+  --pin-zoom-from: 11;
+  --pin-zoom-to: 14;
+}
+
 .dam-pin {
+  --pin-size: calc(var(--pin-min) + (var(--pin-max) - var(--pin-min)) *
+    clamp(0, (var(--map-zoom, 0) - var(--pin-zoom-from)) / (var(--pin-zoom-to) - var(--pin-zoom-from)), 1));
+  width: var(--pin-size);
+  height: var(--pin-size);
   padding: 0;
   border: 0;
   background: none;
@@ -625,6 +641,8 @@ details.help > summary:focus-visible {
 
 @media (max-width: 720px) {
   :root { --topbar-h: 52px; }
+
+  #map { --pin-max: 72px; }   /* スマホ幅ではピンを大きくしすぎない */
 
   /* 高さを固定しない。行が増えても切り落とさない */
   #topbar {

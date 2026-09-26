@@ -86,6 +86,39 @@ class TestCompactSheetCss(unittest.TestCase):
         self.assertNotIn("#panel.is-ws-compact", STYLE[block_end:])
 
 
+class TestRestoreViewOnClose(unittest.TestCase):
+    """「集水域を閉じる」でだけ開く直前の見え方へ戻す。実際の見え方は tests/test_browser_pin_ws.py で確かめる。"""
+
+    def test_saved_at_press_and_kept_only_until_stop(self):
+        start = cut("api.start = function (dam) {", "api.stop = function (rerender) {")
+        # 押した時点（読み込みを待つ前）に覚え、読み込み後の api.stop(false) で消えないよう、その後に入れる
+        self.assertLess(start.index("var before = panelView(dam.id);"), start.index("Promise.all("))
+        self.assertLess(start.index("api.stop(false);"), start.index("restore = before;"))
+
+    def test_only_explicit_close_restores(self):
+        stop = cut("api.stop = function (rerender) {", "function panelView(id)")
+        self.assertIn("restore = null;", stop)                   # どの終わり方でも持ち越さない
+        a = stop.index("if (rerender !== false && was")
+        self.assertIn("pnl.scrollTop += now.y - view.y", stop[a:])   # 戻すのは rerender（閉じる）のときだけ
+        self.assertNotIn("setTimeout", stop)                      # 固定時間の待ちに頼らない
+        self.assertNotIn("scrollTop = 0", APP_JS)                 # 先頭へ戻すだけの仕様にしない
+        self.assertEqual(APP_JS.count("api.stop(true)"), 1)      # 呼ぶのは「集水域を閉じる」だけ
+
+
+class TestPinSizeCss(unittest.TestCase):
+    """ピンの大きさは CSS の変数だけで調整できる（JS は地図のズームを渡すだけ）。"""
+
+    def test_pin_size_from_css_variables(self):
+        for v in ("--pin-min: 48px", "--pin-max: 115px", "--pin-zoom-from: 11", "--pin-zoom-to: 14"):
+            self.assertIn(v, STYLE)
+        a = STYLE.index("@media (max-width: 720px)")
+        self.assertIn("#map { --pin-max: 72px; }", STYLE[a:STYLE.index("\n}\n", a)])   # スマホ幅の上限
+        self.assertIn("width: var(--pin-size);", STYLE)
+        self.assertNotIn("PIN_SIZE", APP_JS)                      # 大きさを JS に直書きしない
+        self.assertIn('style.setProperty("--map-zoom"', APP_JS)
+        self.assertIn('map.on("zoom", syncPinZoom)', APP_JS)
+
+
 @unittest.skipUnless(os.name == "nt" and shutil.which("cscript"), "Windows の cscript がある環境のみ")
 class TestAreaText(unittest.TestCase):
     def test_km2_digits(self):

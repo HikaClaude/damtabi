@@ -180,7 +180,10 @@
     return map;
   }
 
-  var PIN_SIZE = 48;          // ゲージのぶん、塗りつぶし円より少し大きくする
+  // ピンの大きさは style.css の --pin-* で決める（ズームに合わせて変わる。数値の調整はそちらだけで済む）。
+  // 数字の大きさはピンの大きさに対する比。48px のとき従来と同じ 13px / 16px になる
+  var PIN_NUM_ILLUST = "13 / 48";   // イラストの上に重ねる数字
+  var PIN_NUM_CENTER = "16 / 48";   // イラストが無いピンの中央の数字
   var GAUGE_R = 43;           // viewBox 100 基準
   var GAUGE_W = 11;
 
@@ -199,7 +202,6 @@
     var el = document.createElement("button");
     el.type = "button";
     el.className = "dam-pin";
-    el.style.width = el.style.height = PIN_SIZE + "px";
     el.title = dam.name;
     el.setAttribute("aria-label", dam.name);
 
@@ -268,17 +270,17 @@
       body = '<img src="' + esc(illust) + '" alt=""><span class="dam-pin__scrim"></span>';
       numCls = "dam-pin__num";
       numColor = "#fff";
-      fs = Math.round(PIN_SIZE * 0.27);
+      fs = PIN_NUM_ILLUST;
     } else if (v === null) {
       body = '<span class="dam-pin__fill is-nodata"></span>';
       numCls = "dam-pin__num is-center";
       numColor = "#5b6875";
-      fs = Math.round(PIN_SIZE * 0.34);
+      fs = PIN_NUM_CENTER;
     } else {
       body = '<span class="dam-pin__fill" style="background:' + hexA(color, 0.2) + '"></span>';
       numCls = "dam-pin__num is-center";
       numColor = shade(color, -0.28);
-      fs = Math.round(PIN_SIZE * 0.34);
+      fs = PIN_NUM_CENTER;
     }
 
     var num = v === null ? "—" : String(Math.round(v)) +
@@ -286,7 +288,7 @@
     el.firstChild.innerHTML =
       svg +
       '<span class="dam-pin__disc" style="inset:' + (GAUGE_W * 0.6) + '%">' + body +
-      '<span class="' + numCls + '" style="font-size:' + fs + "px;color:" + numColor + '">' +
+      '<span class="' + numCls + '" style="font-size:calc(var(--pin-size) * ' + fs + ");color:" + numColor + '">' +
       num + "</span></span>";
   }
 
@@ -812,6 +814,12 @@
 
       var map = buildMap();
       state.map = map;
+      // ピンの大きさはズームで決まる（計算は style.css）。拡大縮小の途中も毎フレーム追従させる
+      var syncPinZoom = function () {
+        map.getContainer().style.setProperty("--map-zoom", map.getZoom().toFixed(3));
+      };
+      syncPinZoom();
+      map.on("zoom", syncPinZoom);
       // 地図を動かしている間は、指の下のピンが拡大して見えるのを防ぐ
       map.on("movestart", function () { document.body.classList.add("is-moving"); });
       map.on("moveend", function () { document.body.classList.remove("is-moving"); });
@@ -1594,6 +1602,7 @@
     var drops = [];          // 流下中の雨つぶ
     var ripples = [];        // 到着の波紋
     var sheetMode = false;   // パネルが下部シートとして地図に重なっている（スマホ幅）
+    var restore = null;      // 開く直前のパネルの見え方 {id, y}。「集水域を閉じる」でだけ使い、他の終了では捨てる
     var ridge = null;        // 尾根が描かれるアニメーション
     var ambient = 0;         // 降り続ける雨のタイマー
     var framing = false;
@@ -2025,12 +2034,16 @@
       if (!api.enabled || !index[dam.id]) {
         return Promise.resolve({ ok: false, reason: "nodata" });
       }
+      // 押した時点の見え方を覚える。スクロール量ではなく「入口がパネル上端から何 px に見えていたか」
+      // で持つので、写真の読み込みなどで上の高さが変わっても同じ見え方に戻せる
+      var before = panelView(dam.id);
       return Promise.all([loadGrid(dam.id), loadBasins()]).then(function (r) {
         var g = r[0];
         // 読み込み中に別のダムへ移った／パネルを閉じた。前の応答で上書きしない。
         if (state.activeId !== dam.id) return { ok: false, reason: "stale" };
         if (!ensureLayers()) return { ok: false, reason: "layer" };
         api.stop(false);
+        restore = before;
         api.activeId = dam.id;
         epoch++;
         startFrames();
@@ -2099,6 +2112,8 @@
       ridge = null;
       epoch++;                 // 進行中の応答をすべて無効にする
       var was = api.activeId;
+      var view = restore;
+      restore = null;          // どの終わり方でも持ち越さない（復元するのは下の「閉じる」だけ）
       api.activeId = null;
       sheetMode = false;
       var pnl = $("#panel");
@@ -2118,8 +2133,21 @@
       if (card) card.hidden = true;
       if (rerender !== false && was && state.activeId && state.markers[state.activeId]) {
         api.renderEntry(state.markers[state.activeId].dam);
+        // 「集水域を閉じる」を押したときだけ、開く直前の見え方へ戻す。
+        // シートの高さと入口の中身は上で元に戻っており、位置の読み取りで配置が確定するので待たない
+        if (view && view.id === was && view.id === state.activeId) {
+          var now = panelView(view.id);
+          if (now) pnl.scrollTop += now.y - view.y;
+        }
       }
     };
+
+    /** パネルの見え方: 集水域の入口がパネル上端から何 px に見えているか。パネルが閉じていれば null。 */
+    function panelView(id) {
+      var p = $("#panel"), en = $("#ws-entry");
+      if (!p || !en || p.classList.contains("is-hidden")) return null;
+      return { id: id, y: en.getBoundingClientRect().top - p.getBoundingClientRect().top };
+    }
 
     // ---------------------------------------- 雨つぶ
 
