@@ -40,6 +40,8 @@ import time
 import urllib.request
 from pathlib import Path
 
+import rate_coverage
+
 ROOT = Path(__file__).resolve().parent.parent
 DAMS_JSON = ROOT / "docs" / "data" / "dams.json"
 SITE_JSON = ROOT / "site.json"
@@ -348,8 +350,7 @@ def main() -> int:
     new = load_json(DAMS_JSON, "docs/data/dams.json")
     counts = check_data(new, old)
     n_total = len(new["dams"])
-    n_ok = counts.get("ok", 0)
-    n_nodata = n_total - n_ok
+    cov = rate_coverage.summarize(new["dams"])
     say(f"    {n_total}基ぶんのデータが揃っています。")
 
     # ---- 3. サイトを作り直す
@@ -382,9 +383,8 @@ def main() -> int:
     say("  今回の結果")
     say(LINE)
     say(f"    観測時刻     {new.get('base_obs_time', '不明')}")
-    say(f"    収録         {n_total}基")
-    say(f"    値が取れた   {n_ok}基")
-    say(f"    値がない     {n_nodata}基（欠測・未提供・データ提供なし）")
+    for line in rate_coverage.result_lines(cov):
+        say(line)
     say(f"    前回から     {'変化なし' if not changed else str(len(changed)) + ' ファイルを更新'}")
     say(LINE)
 
@@ -451,7 +451,7 @@ def main() -> int:
         say(LINE)
         say()
         say(f"    {base_url} に {new.get('base_obs_time')} 観測の値が出ています。")
-        say(f"    {n_total}基のうち {n_ok}基に値があり、{n_nodata}基は値なしです。")
+        say(f"    {rate_coverage.done_line(cov)}")
     else:
         # push の成功と、実際に公開サイトへ反映されたことは別。
         # ここは反映を確認できていないだけで、原因（GitHub Pages 側の遅延なのか、

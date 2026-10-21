@@ -430,13 +430,177 @@
     );
   }
 
-  function factRow(label, item, unit, digits) {
+  function factRow(label, item, fmt) {
     var v = val(item);
     if (v === null) {
       return "<tr><th>" + esc(label) + '</th><td class="muted">—<br><small>' +
         esc(reasonOf(item)) + "</small></td></tr>";
     }
-    return "<tr><th>" + esc(label) + "</th><td>" + fmtNum(v, digits) + " " + esc(unit) + "</td></tr>";
+    return "<tr><th>" + esc(label) + "</th><td>" + esc(fmt(v)) + "</td></tr>";
+  }
+
+  // ------------------------------------------------------------ 観測値（貯水量・流量・水位）
+
+  /** 観測値の項目。label は利用者向けの言い方、raw は川の防災情報での項目名。
+   *  並びは貯水率が出せないときに上へ出す優先順（貯水量 → 流入・放流 → 水位）。 */
+  var OBS_ITEMS = [
+    { key: "storage_capacity_1000m3", label: "貯まっている水の量", raw: "貯水量", fmt: fmtStorage },
+    { key: "inflow_m3s", label: "ダムに入ってくる水", raw: "全流入量", fmt: fmtFlow },
+    { key: "outflow_m3s", label: "ダムから出ていく水", raw: "全放流量", fmt: fmtFlow },
+    { key: "storage_level_m", label: "水面の高さ（標高）", raw: "貯水位", fmt: fmtLevel }
+  ];
+
+  /** 小数の桁数（元データ以上の精度を付けないために使う）。 */
+  function decimalsOf(v) {
+    var s = String(v);
+    var i = s.indexOf(".");
+    return i < 0 ? 0 : s.length - i - 1;
+  }
+
+  function groupDigits(v, maxDigits) {
+    return v.toLocaleString("ja-JP", { maximumFractionDigits: Math.max(0, maxDigits) });
+  }
+
+  /** 流量 m³/s。0 は 0 のまま、桁は元データのまま。 */
+  function fmtFlow(v) { return "毎秒 " + groupDigits(v, decimalsOf(v)) + " m³"; }
+
+  /** 水位は標高（海面からの高さ）。水深ではない。 */
+  function fmtLevel(v) { return "標高 " + groupDigits(v, decimalsOf(v)) + " m"; }
+
+  /** 貯水量（元データは千m³）。1万m³以上は万m³、それ未満は m³ で出す。
+   *  単位を変えるだけで桁は丸めないので、小さな値が 0 に化けることはない。 */
+  function fmtStorage(v) {
+    var d = decimalsOf(v);
+    if (Math.abs(v) >= 10) {
+      return groupDigits(Number((v / 10).toFixed(d + 1)), d + 1) + "万 m³";
+    }
+    return groupDigits(Number((v * 1000).toFixed(Math.max(0, d - 3))), d - 3) + " m³";
+  }
+
+  /** 値が無い理由を、その項目に限って短く言う。status ごとに意味が違うので混ぜない。 */
+  function statusPhrase(item) {
+    var st = item && item.status;
+    if (st === "not_provided") return "現在の取得先では提供されていません";
+    if (st === "missing") return "欠測です（この観測時刻の値が届いていません）";
+    if (st === "closed") return "取得先の観測所が「閉局」扱いのため受け取れていません（ダムの運用状況を示すものではありません）";
+    if (st === "no_source") return "取得元が未設定です";
+    if (st === "fetch_failed") return "取得に失敗しました";
+    return "値がありません";
+  }
+
+  /** 貯水率が出せないダム用: 取得できている観測値を先に見せる。値が1つも無ければ理由だけ。 */
+  function obsBlock(dam) {
+    var have = OBS_ITEMS.filter(function (it) { return val(dam[it.key]) !== null; });
+    var lacking = OBS_ITEMS.filter(function (it) { return val(dam[it.key]) === null; });
+    var html = '<section class="obs">';
+    if (!have.length) {
+      html += '<p class="obs-none">貯水量・流量・水位の観測値はありません。</p>';
+    }
+    have.forEach(function (it) {
+      var v = val(dam[it.key]);
+      var cls = it.key === "storage_capacity_1000m3" ? " is-main" :
+        (it.key === "inflow_m3s" || it.key === "outflow_m3s") ? " is-flow" : "";
+      html += '<div class="obs-card' + cls + '">' +
+        '<div class="k">' + esc(it.label) + '<span class="raw">' + esc(it.raw) + "</span></div>" +
+        '<div class="v">' + esc(it.fmt(v)) + "</div>" +
+        (it.key === "storage_capacity_1000m3" && Math.abs(v) >= 10
+          ? '<div class="sub">元データ ' + esc(groupDigits(v, decimalsOf(v))) + " 千m³</div>" : "") +
+        (it.key === "storage_level_m" ? '<div class="sub">海面からの高さです。水の深さではありません</div>' : "") +
+      "</div>";
+    });
+    if (lacking.length) {
+      html += '<ul class="obs-lack">';
+      lacking.forEach(function (it) {
+        html += "<li><b>" + esc(it.label) + "</b>：" + esc(statusPhrase(dam[it.key])) + "</li>";
+      });
+      html += "</ul>";
+    }
+    return html + "</section>";
+  }
+
+  /** 貯水率が出せないときの貯水率欄。値のある率は通常のカード、無い率は理由だけにする。
+   *  有効貯水率を利水貯水率の代わりにはしない（それぞれ自分の名前で出す）。 */
+  function rateParts(dam) {
+    var cards = "", lacking = [];
+    var add = function (label, item, key) {
+      if (val(item) !== null) cards += rateCard(label, item, key);
+      else lacking.push({ label: label, key: key, item: item });
+    };
+    add("利水貯水率", dam.rate_irrigation, "irrigation");
+    cards += calcRateCard(dam.rate_irrigation_calculated);
+    add("有効貯水率", dam.rate_effective, "effective");
+    return { cards: cards ? '<div class="rates">' + cards + "</div>" : "", lacking: lacking };
+  }
+
+  function compactRates(dam) {
+    var p = rateParts(dam), lines = "";
+    p.lacking.forEach(function (l) {
+      lines += "<li><b>" + esc(l.label) + "</b>" + helpToggle(l.key, l.label) +
+        '<span class="why">' + esc(statusPhrase(l.item)) + "</span></li>";
+    });
+    return p.cards + (lines ? '<ul class="rate-lack">' + lines + "</ul>" : "");
+  }
+
+  // ------------------------------------------------------------ 水の出入り（試作）
+
+  /** 短い理由（カードの中で使う）。0 と欠測を取り違えないための語。 */
+  function statusShort(item) {
+    var st = item && item.status;
+    return st === "not_provided" ? "未提供" : st === "missing" ? "欠測" : st === "closed" ? "閉局" :
+      st === "no_source" ? "取得元未設定" : st === "fetch_failed" ? "取得失敗" : "値なし";
+  }
+
+  /** 水の出入り（入る → 貯まる → 出る）。貯水量・流入量・放流量のどれかに正常値があるときだけ作る。
+   *  配置だけの表現で、矢印や大きさで量の関係は表さない。水位はここに入れない（補足情報へ）。 */
+  function flowBlock(dam) {
+    var items = { store: OBS_ITEMS[0], inflow: OBS_ITEMS[1], outflow: OBS_ITEMS[2] };
+    if (!Object.keys(items).some(function (k) { return val(dam[items[k].key]) !== null; })) return "";
+    var cell = function (cls, badge, it) {
+      var item = dam[it.key], v = val(item);
+      return '<div class="flow-cell ' + cls + (v === null ? " is-lack" : "") + '">' +
+        '<div class="k"><span class="badge">' + esc(badge) + "</span>" + esc(it.label) + "</div>" +
+        '<div class="v">' + esc(v === null ? statusShort(item) : it.fmt(v)) + "</div>" +
+      "</div>";
+    };
+    var src = "";
+    OBS_ITEMS.forEach(function (it) {
+      var v = val(dam[it.key]);
+      if (v === null) return;
+      src += "<li>" + esc(it.label) + "＝川の防災情報の「" + esc(it.raw) + "」" +
+        (it.key === "storage_capacity_1000m3" ? "：" + esc(groupDigits(v, decimalsOf(v))) + " 千m³" :
+         it.key === "storage_level_m" ? "（標高。水の深さではありません）" : "：毎秒 " + esc(groupDigits(v, decimalsOf(v))) + " m³") +
+        "</li>";
+    });
+    var lack = OBS_ITEMS.slice(0, 3).filter(function (it) { return val(dam[it.key]) === null && dam[it.key]; });
+    lack.forEach(function (it) {
+      src += "<li>" + esc(it.label) + "：" + esc(statusPhrase(dam[it.key])) + "</li>";
+    });
+    return '<section class="flow">' +
+      '<h3 class="flow-title">水の出入り<small>入る → 貯まる → 出る</small></h3>' +
+      cell("is-store", "貯まる", items.store) +
+      '<div class="flow-row">' +
+        cell("is-in", "入る", items.inflow) + cell("is-out", "出る", items.outflow) +
+      "</div>" +
+      '<details class="flow-src"><summary>元データの名前と単位</summary><ul>' + src + "</ul></details>" +
+    "</section>";
+  }
+
+  /** 貯水率がない理由を、対象の率を明記して短くまとめる。理由が違うときは詳細で区別する。 */
+  function rateLackNote(lacking) {
+    if (!lacking.length) return "";
+    var line = function (l) {
+      return "<li><b>" + esc(l.label) + "</b>" + helpToggle(l.key, l.label) +
+        '<span class="why">' + esc(statusPhrase(l.item)) + "</span></li>";
+    };
+    if (lacking.length === 1) return '<ul class="rate-lack">' + line(lacking[0]) + "</ul>";
+    var same = lacking.every(function (l) { return (l.item && l.item.status) === (lacking[0].item && lacking[0].item.status); });
+    if (same) {
+      return '<ul class="rate-lack"><li><b>利水貯水率・有効貯水率</b>' +
+        '<span class="why">' + esc(statusPhrase(lacking[0].item)) + "</span></li></ul>";
+    }
+    return '<details class="rate-lack rate-lack--diff"><summary><b>利水貯水率・有効貯水率</b>' +
+      '<span class="why">は表示できません（理由はそれぞれ違います）</span></summary><ul>' +
+      lacking.map(line).join("") + "</ul></details>";
   }
 
   function renderPanel(dam) {
@@ -455,19 +619,41 @@
               "/" + encodeURIComponent(dam.slug) + '/">' + esc(dam.name) + "の詳細ページ →</a>";
     }
 
-    html += '<div class="rates">';
-    html += rateCard("利水貯水率", dam.rate_irrigation, "irrigation");
-    html += calcRateCard(dam.rate_irrigation_calculated);
-    html += rateCard("有効貯水率", dam.rate_effective, "effective");
-    html += "</div>";
+    // 選んでいる基準で貯水率を出せるか（地図ピンと同じ判定）。
+    // 出せるときは従来どおり貯水率が主役。出せないときは大きな「—」を並べず、
+    // 取得できている観測値を先に見せ、貯水率は項目ごとの短い理由にとどめる。
+    var rateShown = pinValueInfo(dam).value !== null;
+    if (rateShown) {
+      html += '<div class="rates">';
+      html += rateCard("利水貯水率", dam.rate_irrigation, "irrigation");
+      html += calcRateCard(dam.rate_irrigation_calculated);
+      html += rateCard("有効貯水率", dam.rate_effective, "effective");
+      html += "</div>";
+    }
+    // 水の出入りがあるときだけ「出入り → 集水域ボタン → 観測時刻・出典」の並びにする（試作）
+    var flow = rateShown ? "" : flowBlock(dam);
+    var parts = null;
+    if (!rateShown) {
+      if (flow) {
+        parts = rateParts(dam);
+        html += parts.cards + flow;
+      } else {
+        html += obsBlock(dam);
+        html += compactRates(dam);
+      }
+    }
 
     // 値のすぐ下に観測時刻を出す。古い値を現在値と誤読させないため。
-    html += '<p class="panel-freshness">' +
-      (dam.obs_time ? "<strong>" + esc(fmtObsTime(dam.obs_time)) + "</strong> 観測の値です"
+    var ob0 = dam.observation || {};
+    var fresh = '<p class="panel-freshness">' +
+      (dam.obs_time ? "<strong>" + esc(fmtObsTime(dam.obs_time)) + "</strong> 観測の値です" +
+        (flow && ob0.provider ? "（出典：" + esc(ob0.provider) + "）" : "")
                     : "観測値の配信がありません") + "</p>";
+    if (!flow) html += fresh;
 
     // 「雨の行き先」の入口。集水域データが無い環境では中身を空のままにする
     html += '<div id="ws-entry" class="ws-entry"></div>';
+    if (flow) html += fresh + rateLackNote(parts.lacking);
 
     html += '<div id="trip-slot" class="trip-slot"></div>';
     html += spotsBlock(dam);
@@ -477,10 +663,14 @@
     html += "<tr><th>観測日時</th><td>" +
       (dam.obs_time ? esc(fmtObsTime(dam.obs_time)) : '<span class="muted">—<br><small>観測値の配信がありません</small></span>') +
       "</td></tr>";
-    html += factRow("貯水位", dam.storage_level_m, "m", 2);
-    html += factRow("貯水量", dam.storage_capacity_1000m3, "千m³", 0);
-    html += factRow("全流入量", dam.inflow_m3s, "m³/s", 2);
-    html += factRow("全放流量", dam.outflow_m3s, "m³/s", 2);
+    // 貯水率を出せないときは、観測値は上の欄に移してあるので、ここには重ねて出さない
+    if (rateShown) {
+      OBS_ITEMS.forEach(function (it) { html += factRow(it.label, dam[it.key], it.fmt); });
+    } else if (flow && val(dam.storage_level_m) !== null) {
+      // 水位は補足情報。水の出入りには入れず、ここで「水面の標高」と簡潔に出す
+      var lv = val(dam.storage_level_m);
+      html += "<tr><th>水面の標高</th><td>" + esc(groupDigits(lv, decimalsOf(lv)) + " m") + "</td></tr>";
+    }
     if (dam.manager_office) {
       html += "<tr><th>管理事務所</th><td>" + esc(dam.manager_office) + "</td></tr>";
     }
@@ -738,25 +928,50 @@
       $("#obs-time").appendChild(st);
     }
 
-    var by = d.summary.by_status || {};
-    var total = d.summary.total;
-    var ok = by.ok || 0;
-    var missing = total - ok;
-    var parts = [];
-    Object.keys(by).forEach(function (k) {
-      if (k === "ok") return;
-      parts.push((d.status_labels[k] || k) + " " + by[k] + "基");
-    });
+    renderCoverage();
+  }
 
+  /** 貯水率を表示できるダムの数え方。scripts/rate_coverage.py と同じ規則（同じ入力なら同じ件数）。
+   *  選んでいる基準の pinValueInfo と同じ判定: 利水は公式値 → 参考値、有効は有効貯水率のみ。 */
+  var COVERAGE_REASONS = [
+    ["not_provided", "未提供"], ["missing", "欠測"], ["closed", "閉局"],
+    ["no_source", "取得元未設定"], ["fetch_failed", "取得失敗"]
+  ];
+
+  function coverageFor(dams, basis) {
+    var field = basis === "effective" ? "rate_effective" : "rate_irrigation";
+    var c = { total: dams.length, shown: 0, official: 0, reference: 0, dash: 0, reasons: {}, field: field };
+    dams.forEach(function (dam) {
+      if (val(dam[field]) !== null) { c.official++; return; }
+      if (field === "rate_irrigation" && val(dam.rate_irrigation_calculated) !== null) { c.reference++; return; }
+      var st = (dam[field] || {}).status;
+      var key = COVERAGE_REASONS.some(function (r) { return r[0] === st; }) ? st : "other";
+      c.reasons[key] = (c.reasons[key] || 0) + 1;
+      c.dash++;
+    });
+    c.shown = c.official + c.reference;
+    return c;
+  }
+
+  /** サイト上部の件数。地図の表示基準に追従する。「貯水率の表示なし」は
+   *  観測データが一切ないという意味ではない（水位や流量だけ出ているダムもある）。 */
+  function renderCoverage() {
     var el = $("#status-summary");
+    if (!el || !state.data) return;
+    var c = coverageFor(state.data.dams || [], state.basis);
+    var name = c.field === "rate_effective" ? "有効貯水率" : "利水貯水率";
     el.innerHTML = "";
     var span = document.createElement("span");
-    span.textContent = "全" + total + "基中 " + ok + "基が取得済み";
+    span.textContent = name + "を表示：" + c.shown + "／" + c.total + "基" +
+      (c.reference ? "（参考値" + c.reference + "基を含む）" : "");
     el.appendChild(span);
-    if (missing > 0) {
+    if (c.dash > 0) {
+      var parts = COVERAGE_REASONS.filter(function (r) { return c.reasons[r[0]]; })
+        .map(function (r) { return r[1] + c.reasons[r[0]]; });
+      if (c.reasons.other) parts.push("その他" + c.reasons.other);
       var w = document.createElement("span");
       w.className = "warn";
-      w.textContent = "／数値なし " + missing + "基（" + parts.join("・") + "）";
+      w.textContent = "／表示なし " + c.dash + "基（" + name + "の内訳：" + parts.join("・") + "）";
       el.appendChild(w);
     }
   }
@@ -810,6 +1025,7 @@
 
       renderMeta();
       basisFromHash();
+      renderCoverage();       // 共有リンクの #basis=effective を読んだあとの基準で数え直す
       renderLegend();
 
       var map = buildMap();
@@ -862,6 +1078,15 @@
         r.addEventListener("change", function () {
           state.basis = r.value;
           repaintAll();
+          renderCoverage();
+          // 詳細パネルの並び（貯水率が主役か、観測値が先か）も基準で変わるので描き直す。
+          // 読んでいた位置はそのまま保つ
+          var pnl = $("#panel");
+          if (state.activeId && state.markers[state.activeId] && !pnl.classList.contains("is-hidden")) {
+            var top = pnl.scrollTop;
+            renderPanel(state.markers[state.activeId].dam);
+            pnl.scrollTop = top;
+          }
           writeHash();
         });
       });
@@ -2009,6 +2234,7 @@
               "<tr><th>" + esc(String(d.reference_source)) + "の流域面積</th><td>約 " +
               km2(d.reference_area_km2) + " km²</td></tr>" : "") +
           "</table>" +
+          inflowNote(dam) +
           (chips ? chips + '<p class="ws-note">' + note + "</p>" : "") +
           '<p class="ws-note">国土地理院の標高データ（DEM10B）から DAM TABI が推定した<strong>概略</strong>です。' +
             "公式に確定した集水区域ではありません。輪の中のどこを押しても、雨の行き先を確かめられます。</p>" +
@@ -2027,6 +2253,19 @@
         api.stop(true);
       });
     };
+
+    /** 集水域の説明に添える「観測時点の流入量」。正常な値と観測時刻がそろうときだけ出す。
+     *  渡された dam だけから作るので、ダムを切り替えても前のダムの値は残らない。
+     *  雨つぶの数や速さはこの値と連動していない（演出は地形の流れ方を見せるためのもの）。 */
+    function inflowNote(dam) {
+      var v = val(dam.inflow_m3s);
+      if (v === null || !dam.obs_time) return "";
+      var ob = dam.observation || {};
+      return '<p class="ws-inflow">観測時点でダムに入ってくる水：<strong>' + esc(fmtFlow(v)) + "</strong>" +
+        "<small>" + esc(fmtObsTime(dam.obs_time)) + " 観測" +
+        (ob.provider ? "（" + esc(ob.provider) + "）" : "") +
+        "。雨つぶの動きはこの量とは連動しておらず、実際の雨や流入を再現したものではありません。</small></p>";
+    }
 
     // ---------------------------------------- 開始と終了
 

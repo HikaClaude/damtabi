@@ -35,6 +35,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
+import rate_coverage
+
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DATA = DOCS / "data" / "dams.json"
@@ -242,7 +244,8 @@ def e(s: Any) -> str:
 # ---------------------------------------------------------------- 値
 
 def val(item: dict | None):
-    if item and item.get("status") == "ok" and isinstance(item.get("value"), (int, float)):
+    if (item and item.get("status") == "ok" and isinstance(item.get("value"), (int, float))
+            and not isinstance(item.get("value"), bool)):
         return item["value"]
     return None
 
@@ -387,6 +390,157 @@ def fact_row(label: str, item: dict | None, unit: str, digits: int) -> str:
     return f"<tr><th>{e(label)}</th><td>{fmt(v, digits)} {e(unit)}</td></tr>"
 
 
+
+# ---------------------------------------------------------------- 水の出入り（地図パネルと同じ見せ方）
+#
+# docs/app.js の flowBlock / fmtFlow / fmtStorage / statusPhrase と意味・書式を揃えている。
+# 表示の違い（数字の丸め・単位）が出ないよう、桁は元データのまま、単位だけを変える。
+
+from decimal import Decimal
+
+FLOW_ITEMS = (
+    ("storage_capacity_1000m3", "貯まっている水の量", "貯水量"),
+    ("inflow_m3s", "ダムに入ってくる水", "全流入量"),
+    ("outflow_m3s", "ダムから出ていく水", "全放流量"),
+)
+LEVEL_LABEL = "水面の高さ（標高）"
+
+
+def _dec(v) -> Decimal:
+    """JS の String(v) と同じ桁になるよう、整数値の float は整数として扱う。"""
+    if isinstance(v, float) and v.is_integer():
+        v = int(v)
+    return Decimal(str(v))
+
+
+def _plain(d: Decimal) -> str:
+    """千区切り・末尾の 0 なし（JS の toLocaleString("ja-JP", {maximumFractionDigits}) と同じ）。"""
+    d = d.normalize() if d != 0 else Decimal(0)
+    return format(d, ",f")
+
+
+def fmt_flow(v) -> str:
+    return "毎秒 " + _plain(_dec(v)) + " m³"
+
+
+def fmt_level(v) -> str:
+    return "標高 " + _plain(_dec(v)) + " m"
+
+
+def fmt_storage(v) -> str:
+    """元データは千m³。1万m³以上は万m³、それ未満は m³。桁は丸めず、小さな値が 0 に化けない。"""
+    d = _dec(v)
+    if abs(d) >= 10:
+        return _plain(d.scaleb(-1)) + "万 m³"
+    return _plain(d.scaleb(3)) + " m³"
+
+
+def status_phrase(item: dict | None) -> str:
+    st = (item or {}).get("status")
+    return {
+        "not_provided": "現在の取得先では提供されていません",
+        "missing": "欠測です（この観測時刻の値が届いていません）",
+        "closed": "取得先の観測所が「閉局」扱いのため受け取れていません（ダムの運用状況を示すものではありません）",
+        "no_source": "取得元が未設定です",
+        "fetch_failed": "取得に失敗しました",
+    }.get(st, "値がありません")
+
+
+def status_short(item: dict | None) -> str:
+    st = (item or {}).get("status")
+    return {"not_provided": "未提供", "missing": "欠測", "closed": "閉局",
+            "no_source": "取得元未設定", "fetch_failed": "取得失敗"}.get(st, "値なし")
+
+
+def rate_shown(dam: dict) -> bool:
+    """標準の利水基準で貯水率が出るか（地図ピンと同じ: 公式値 → 参考値）。"""
+    return val(dam.get("rate_irrigation")) is not None or val(dam.get("rate_irrigation_calculated")) is not None
+
+
+def has_flow(dam: dict) -> bool:
+    return any(val(dam.get(k)) is not None for k, _, _ in FLOW_ITEMS)
+
+
+def _load_ws_ids() -> set[str]:
+    try:
+        idx = json.loads((DOCS / "watershed" / "index.json").read_text(encoding="utf-8"))
+        return {d["id"] for d in idx.get("dams", [])}
+    except (OSError, ValueError, KeyError, TypeError):
+        return set()
+
+
+WS_IDS = _load_ws_ids()      # 集水域に対応しているダム。無い環境では入口を出さない
+
+
+def flow_block(dam: dict) -> str:
+    cells = []
+    fmts = (fmt_storage, fmt_flow, fmt_flow)
+    cls = ("is-store", "is-in", "is-out")
+    badge = ("貯まる", "入る", "出る")
+    for (key, label, _), f, c, b in zip(FLOW_ITEMS, fmts, cls, badge):
+        item = dam.get(key)
+        v = val(item)
+        cells.append(
+            f'<div class="flow-cell {c}{"" if v is not None else " is-lack"}">'
+            f'<div class="k"><span class="badge">{b}</span>{e(label)}</div>'
+            f'<div class="v">{e(f(v) if v is not None else status_short(item))}</div></div>'
+        )
+    src = []
+    for key, label, raw in FLOW_ITEMS + (("storage_level_m", LEVEL_LABEL, "貯水位"),):
+        item = dam.get(key)
+        v = val(item)
+        if v is None:
+            if key != "storage_level_m" and item:
+                src.append(f"<li>{e(label)}：{e(status_phrase(item))}</li>")
+            continue
+        d = _plain(_dec(v))
+        tail = (f"：{d} 千m³" if key == "storage_capacity_1000m3"
+                else "（標高。水の深さではありません）" if key == "storage_level_m"
+                else f"：毎秒 {d} m³")
+        src.append(f"<li>{e(label)}＝川の防災情報の「{e(raw)}」{e(tail)}</li>")
+    return (
+        '<section class="flow"><h2 class="flow-title">水の出入り<small>入る → 貯まる → 出る</small></h2>'
+        + cells[0] + '<div class="flow-row">' + cells[1] + cells[2] + "</div>"
+        '<details class="flow-src"><summary>元データの名前と単位</summary><ul>' + "".join(src) + "</ul></details>"
+        "</section>"
+    )
+
+
+def rate_lack_note(lacking: list[tuple[str, str, dict | None]]) -> str:
+    """貯水率がない理由。対象の率を明記し、理由が違うときは詳細で区別する。"""
+    if not lacking:
+        return ""
+
+    def line(label, key, item):
+        return (f"<li><b>{e(label)}</b>{help_toggle(key, label)}"
+                f'<span class="why">{e(status_phrase(item))}</span></li>')
+
+    if len(lacking) == 1:
+        return '<ul class="rate-lack">' + line(*lacking[0]) + "</ul>"
+    sts = {(it or {}).get("status") for _, _, it in lacking}
+    if len(sts) == 1:
+        return ('<ul class="rate-lack"><li><b>利水貯水率・有効貯水率</b>'
+                f'<span class="why">{e(status_phrase(lacking[0][2]))}</span></li></ul>')
+    return ('<details class="rate-lack rate-lack--diff"><summary><b>利水貯水率・有効貯水率</b>'
+            '<span class="why">は表示できません（理由はそれぞれ違います）</span></summary><ul>'
+            + "".join(line(*x) for x in lacking) + "</ul></details>")
+
+
+def level_fact_row(dam: dict, simple: bool) -> str:
+    v = val(dam.get("storage_level_m"))
+    if simple:      # 水の出入りがあるときの補足情報
+        return (f"<tr><th>水面の標高</th><td>{e(_plain(_dec(v)) + ' m')}</td></tr>" if v is not None else "")
+    return fact_row2(LEVEL_LABEL, dam.get("storage_level_m"), fmt_level)
+
+
+def fact_row2(label: str, item: dict | None, f) -> str:
+    v = val(item)
+    if v is None:
+        return (f"<tr><th>{e(label)}</th>"
+                f'<td class="muted">—<br><small>{e(reason(item))}</small></td></tr>')
+    return f"<tr><th>{e(label)}</th><td>{e(f(v))}</td></tr>"
+
+
 # ---------------------------------------------------------------- ダムページ
 
 def dam_page(dam: dict, data: dict, base: str, ver: str) -> str:
@@ -509,15 +663,39 @@ def dam_page(dam: dict, data: dict, base: str, ver: str) -> str:
             f'<div class="placeholder">イラスト準備中<br>{e(name)}</div></div>'
         )
 
-    body.append('<div class="rates">')
-    body.append(rate_card("利水貯水率", dam.get("rate_irrigation"),
-                          th["irrigation"]["bins"], "irrigation"))
-    calc_card = calc_rate_card(dam.get("rate_irrigation_calculated"), th["irrigation"]["bins"])
-    if calc_card:
-        body.append(calc_card)
-    body.append(rate_card("有効貯水率", dam.get("rate_effective"),
-                          th["effective"]["bins"], "effective"))
-    body.append("</div>")
+    # 標準の利水基準で貯水率を出せるときは貯水率が主役（従来どおり）。
+    # 出せず、貯水量・流量があるときは「水の出入り」を主役にし、直後に地図への入口を置く。
+    # 出せず、水の出入りも無いときは従来の並びのまま（空の「水の出入り」は作らない）。
+    flow_dam = (not rate_shown(dam)) and has_flow(dam)
+    lacking: list = []
+    if flow_dam:
+        cards = []
+        for label, key, bk in (("利水貯水率", "rate_irrigation", "irrigation"),
+                               ("有効貯水率", "rate_effective", "effective")):
+            item = dam.get(key)
+            if val(item) is not None:
+                cards.append(rate_card(label, item, th[bk]["bins"], bk))
+            else:
+                lacking.append((label, bk, item))
+        if cards:
+            body.append('<div class="rates">' + "".join(cards) + "</div>")
+        body.append(flow_block(dam))
+        if dam["id"] in WS_IDS:
+            body.append(
+                '<p class="ws-cta"><a class="ws-cta__btn" href="'
+                f'{e(base)}/#dam_id={quote(dam["id"])}">地図で、このダムに水が集まる範囲を見る'
+                '<span class="ws-cta__sub">地図のパネルから、集水域に雨を降らせて地形の流れを見られます（概略）</span></a></p>'
+            )
+    else:
+        body.append('<div class="rates">')
+        body.append(rate_card("利水貯水率", dam.get("rate_irrigation"),
+                              th["irrigation"]["bins"], "irrigation"))
+        calc_card = calc_rate_card(dam.get("rate_irrigation_calculated"), th["irrigation"]["bins"])
+        if calc_card:
+            body.append(calc_card)
+        body.append(rate_card("有効貯水率", dam.get("rate_effective"),
+                              th["effective"]["bins"], "effective"))
+        body.append("</div>")
 
     # 貯水率は変わる値なので、「いつの値か」を数値のすぐ下に必ず出す。
     # JS なしでも読めるように、観測時刻とページ生成時刻を本文に埋め込む。
@@ -536,14 +714,20 @@ def dam_page(dam: dict, data: dict, base: str, ver: str) -> str:
             f' data-warn-days="{e(fr.get("warn_days", 14))}"'
             + (f' data-live="{e(live)}"' if live else "") + ">"
             f'<strong>{e(when)}</strong> 観測の値です'
-            f'<span class="gen">（このページの生成: {e(gen_jp)} JST）</span></p>'
+            + (f'（出典：{e((dam.get("observation") or {}).get("provider"))}）'
+               if flow_dam and (dam.get("observation") or {}).get("provider") else "")
+            + f'<span class="gen">（このページの生成: {e(gen_jp)} JST）</span></p>'
         )
     else:
         body.append(
             f'<p class="freshness"><span class="gen">このページの生成: {e(gen_jp)} JST</span></p>'
         )
 
-    if dam["data_status"] not in ("ok", "partial"):
+    if flow_dam:
+        body.append(rate_lack_note(lacking))
+        body.append('<p class="nodata-note nodata-note--slim">値を推定して埋めることはしていません。'
+                    "下の「このページの情報について」に、確認した情報源を記載しています。</p>")
+    elif dam["data_status"] not in ("ok", "partial"):
         if val(dam.get("rate_irrigation_calculated")) is not None:
             body.append(
                 '<p class="nodata-note">'
@@ -570,10 +754,15 @@ def dam_page(dam: dict, data: dict, base: str, ver: str) -> str:
     off = dam.get("official") or {}
     body.append(f"<tr><th>水系 / 河川</th><td>{e(ows(dam))}水系 {e(oriv(dam))}</td></tr>")
     body.append(f"<tr><th>管理者</th><td>{e(dam.get('manager_office') or dam.get('manager') or '—')}</td></tr>")
-    body.append(fact_row("貯水位", dam.get("storage_level_m"), "m", 2))
-    body.append(fact_row("貯水量", dam.get("storage_capacity_1000m3"), "千m³", 0))
-    body.append(fact_row("全流入量", dam.get("inflow_m3s"), "m³/s", 2))
-    body.append(fact_row("全放流量", dam.get("outflow_m3s"), "m³/s", 2))
+    if flow_dam:
+        # 水量・流量は上の「水の出入り」に出している。ここには重ねず、水位だけ補足として出す
+        body.append(level_fact_row(dam, simple=True))
+    else:
+        # 地図パネルと同じ項目名・単位（貯水位=標高。水深ではない）
+        body.append(level_fact_row(dam, simple=False))
+        for key, label, _ in FLOW_ITEMS:
+            body.append(fact_row2(label, dam.get(key),
+                                  fmt_storage if key == "storage_capacity_1000m3" else fmt_flow))
     body.append(f'<tr><th>緯度 / 経度</th><td>{dam["lat"]:.6f} / {dam["lon"]:.6f}</td></tr>')
     body.append("</table>")
 
@@ -748,7 +937,8 @@ def page_shell(title, desc, url, og_image, rel_root, body, base, ver, extra_head
 
 def index_page(data: dict, base: str, ver: str) -> str:
     dams = data["dams"]
-    ok = data["summary"]["by_status"].get("ok", 0)
+    cov = rate_coverage.summarize(dams)      # 標準の利水基準で貯水率が出る数（地図・更新結果と同じ数え方）
+    ref_note = f"（参考値{cov['reference']}基を含む）。" if cov["reference"] else "。"
     region = region_label(data)
 
     body = [
@@ -757,8 +947,9 @@ def index_page(data: dict, base: str, ver: str) -> str:
         f"<h1>ダム一覧（現在{len(dams)}基を収録）</h1>",
         f'<p class="lead">ダム旅が現在収録している{e(region)}の{len(dams)}基です。'
         "このほかにも未収録のダムがあります。<br>"
-        f"観測 {e(obs_time_jp(data['base_obs_time']))} 時点で{ok}基の数値を取得できています。"
-        "残りは欠測・未提供・データなしで、推定値では埋めず「—」と理由を表示しています。<br>"
+        f"観測 {e(obs_time_jp(data['base_obs_time']))} 時点で、標準の利水貯水率を表示できるのは"
+        f"{cov['shown']}基です{ref_note}"
+        "それ以外は、貯水率が未提供・欠測・取得元未設定などのため推定値では埋めず、理由を添えて表示しています（水位や流量だけ出ているダムもあります）。<br>"
         "<small>このアプリは自動更新ではありません。表示中の値がいつのものかは、"
         "各ダムのページで確認できます。</small></p>",
         '<p class="backlink"><a href="' + e(base) + '/">地図で見る →</a></p>',

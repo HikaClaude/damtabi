@@ -521,6 +521,110 @@ html, body {
   color: var(--ink-soft);
 }
 
+/* --- 貯水率を出せないダム: 取得できている観測値を先に見せる --- */
+
+.obs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.obs-card {
+  grid-column: 1 / -1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 11px 10px;
+  background: #fbfcfd;
+  min-width: 0;
+}
+.obs-card.is-flow { grid-column: auto; }
+
+.obs-card .k {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+}
+.obs-card .k .raw { font-size: 10px; font-weight: 400; color: var(--ink-faint); }
+
+.obs-card .v {
+  margin-top: 2px;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+.obs-card.is-main .v { font-size: 25px; }
+.obs-card.is-flow .v { font-size: 17px; }
+.obs-card .sub { margin-top: 2px; font-size: 10.5px; color: var(--ink-faint); }
+
+.obs-none,
+.obs-lack {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.obs-lack { list-style: none; padding: 0; }
+.obs-lack b, .rate-lack b { font-weight: 600; }
+
+.rate-lack {
+  position: relative;      /* 用語ヘルプの本文の基準 */
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #f4f6f8;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.rate-lack li { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; }
+.rate-lack li + li { margin-top: 3px; }
+.rate-lack .why { color: var(--ink-faint); }
+
+/* --- 水の出入り（入る → 貯まる → 出る）。配置だけで量の関係は表さない --- */
+.flow {
+  margin: 0 0 8px;
+  padding: 10px 10px 8px;
+  border: 1px solid #cfdded;
+  border-radius: 12px;
+  background: #f3f8fc;
+}
+.flow-title { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: var(--ink); display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.flow-title small { font-size: 10.5px; font-weight: 400; color: var(--ink-soft); }
+.flow-cell {
+  min-width: 0;
+  padding: 8px 10px 9px;
+  border-radius: 9px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.flow-cell .k { font-size: 11.5px; font-weight: 600; color: var(--ink-soft); display: flex; align-items: center; gap: 6px; }
+.flow-cell .badge {
+  flex: none; font-size: 10px; font-weight: 700; line-height: 1;
+  padding: 3px 6px; border-radius: 999px; background: #e3edf6; color: var(--accent);
+}
+.flow-cell .v { margin-top: 3px; font-size: 17px; font-weight: 700; line-height: 1.25; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.flow-cell.is-store { text-align: center; }
+.flow-cell.is-store .k { justify-content: center; }
+.flow-cell.is-store .v { font-size: 26px; }
+.flow-cell.is-lack .v { font-size: 13px; font-weight: 500; color: var(--ink-faint); }
+.flow-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 8px; position: relative; }
+.flow-src { margin-top: 7px; font-size: 11px; color: var(--ink-soft); }
+.flow-src summary { cursor: pointer; padding: 4px 0; }
+.flow-src ul { margin: 2px 0 0; padding-left: 1.2em; line-height: 1.6; }
+
+details.rate-lack > summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 2px 6px; padding: 2px 0; }
+details.rate-lack ul { list-style: none; margin: 6px 0 0; padding: 0; }
+details.rate-lack li + li { margin-top: 5px; }
+.panel-freshness + .rate-lack { margin-top: 0; }
+
 
 /* --- 用語ヘルプ（〇で囲んだ「?」） --------------------------------
    details/summary なので JS が無くても開閉できる。
@@ -1114,6 +1218,18 @@ details.help > summary:focus-visible {
 .ws-facts td { padding: 3px 0; border-top: 1px solid #e2ecf4; text-align: left; }
 .ws-facts th { font-weight: 400; color: var(--ink-soft); width: 11em; }
 
+/* 集水域の説明に添える、観測時点の流入量 */
+.ws-inflow {
+  margin: 8px 0 0;
+  padding: 7px 9px;
+  border-radius: 7px;
+  background: #e6f0f8;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.ws-inflow strong { color: var(--accent); }
+.ws-inflow small { display: block; font-size: 10.5px; color: var(--ink-soft); }
+
 .ws-chip {
   display: inline-block;
   margin: 6px 4px 0 0;
@@ -1182,3 +1298,6 @@ details.help > summary:focus-visible {
 
 /* 取得に失敗したことを画面に出す（黙って終わらせない） */
 .ws-error { color: #9a3b1c; }
+
+/* 集水域ボタンの直下に置いた観測時刻・出典（水の出入りの試作）。ボタンに詰めない */
+.ws-entry + .panel-freshness { margin: 8px 0 10px; }

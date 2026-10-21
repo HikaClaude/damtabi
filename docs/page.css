@@ -408,10 +408,52 @@ details.help > summary:focus-visible {
 
 .updated { font-size: 11px; color: var(--ink-faint); margin-top: 12px; }
 
+/* --- 水の出入り（入る → 貯まる → 出る）。docs/style.css の同名ルールと同じ見せ方。
+   配置だけの表現で、矢印や大きさで量の関係は表さない。 --- */
+.flow {
+  margin: 0 0 14px;
+  padding: 14px 14px 10px;
+  border: 1px solid #cfdded;
+  border-radius: 14px;
+  background: #f3f8fc;
+}
+.flow-title { margin: 0 0 10px; font-size: 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; border: 0; padding: 0; }
+.flow-title small { font-size: 12px; font-weight: 400; color: var(--ink-soft); }
+.flow-cell { min-width: 0; padding: 11px 14px 12px; border-radius: 11px; background: var(--surface); border: 1px solid var(--line); }
+.flow-cell .k { font-size: 13px; font-weight: 600; color: var(--ink-soft); display: flex; align-items: center; gap: 7px; }
+.flow-cell .badge { flex: none; font-size: 11px; font-weight: 700; line-height: 1; padding: 4px 8px; border-radius: 999px; background: #e3edf6; color: var(--accent); }
+.flow-cell .v { margin-top: 4px; font-size: 24px; font-weight: 700; line-height: 1.25; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.flow-cell.is-store { text-align: center; }
+.flow-cell.is-store .k { justify-content: center; }
+.flow-cell.is-store .v { font-size: 36px; }
+.flow-cell.is-lack .v { font-size: 15px; font-weight: 500; color: var(--ink-faint); }
+.flow-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.flow-src { margin-top: 9px; font-size: 13px; color: var(--ink-soft); }
+.flow-src summary { cursor: pointer; padding: 6px 0; }
+.flow-src ul { margin: 2px 0 0; padding-left: 1.3em; line-height: 1.7; }
+
+/* 水の出入りの直後の、地図（集水域）への入口 */
+.ws-cta { margin: 0 0 14px; }
+.ws-cta__btn { display: block; padding: 14px 16px; border-radius: 12px; background: #14507d; color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; line-height: 1.5; }
+.ws-cta__btn:hover { background: #0f3f64; }
+.ws-cta__sub { display: block; margin-top: 3px; font-size: 12.5px; font-weight: 400; opacity: .88; }
+
+/* 貯水率がない理由（対象の率を明記した短い表示） */
+.rate-lack { position: relative; list-style: none; margin: 0 0 14px; padding: 9px 12px; border-radius: 10px; background: #f4f6f8; font-size: 13.5px; line-height: 1.7; color: var(--ink-soft); }
+.rate-lack li { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+.rate-lack li + li { margin-top: 5px; }
+.rate-lack .why { color: var(--ink-faint); }
+details.rate-lack > summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 2px 8px; padding: 2px 0; }
+details.rate-lack ul { list-style: none; margin: 8px 0 0; padding: 0; }
+.nodata-note--slim { margin-top: 0; }
+.freshness + .rate-lack { margin-top: 0; }
+
 @media (max-width: 560px) {
   .wrap { padding: 16px 14px 44px; }
   h1 { font-size: 22px; }
   .rate .v { font-size: 32px; }
+  .flow-cell .v { font-size: 20px; }
+  .flow-cell.is-store .v { font-size: 30px; }
   .facts th, .facts td { padding: 10px 12px; }
 }
 
